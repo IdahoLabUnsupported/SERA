@@ -9,6 +9,8 @@
 #include "color.h"
 #include "commonfcns.h"
 
+XImage global_image;
+
 /*
  * MAX_LENGTH_CONTOUR_LEVEL_STRING - used by check_contour_level_values.
  * This same constant must also be defined in callbacks.c
@@ -110,7 +112,8 @@ void load_imageEH (Widget w, caddr_t client_data, XEvent *event)
                 draw_contours (dose_data, doseFlag, 1, view_contour_lines,
                                view_contour_colorwash, 
                                view_large_image_contour_labels,
-                               view_preview_image_contour_labels, scale_font);
+                               view_preview_image_contour_labels, scale_font,
+			       &global_image);
                 contours_are_current = 1;
             }else {
                 draw_preview (active);

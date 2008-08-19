@@ -38,4 +38,5 @@ typedef struct value_color_record_struct
 void draw_contours (floyd_data_ptr data, int whichDose, 
                     Boolean recalculate_contours, Boolean draw_lines,
                     Boolean draw_colorwash, Boolean draw_large_labels,
-                    Boolean draw_preview_labels, Boolean scale_font);
+                    Boolean draw_preview_labels, Boolean scale_font,
+		    XImage * image);
