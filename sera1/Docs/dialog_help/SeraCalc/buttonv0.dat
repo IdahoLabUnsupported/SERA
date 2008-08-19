@@ -1,0 +1,19 @@
+The File button has the following options:
+
+Load Bodies
+   Allows the user to decide which of the defined bodies to display, and in what manner.
+
+Open
+   Allows a user to open a previously saved view.
+
+Save
+   Saves an "Open'ed" view with the same name.
+
+Save As
+   Saves a view with a new name.
+
+Render
+   Produces a display of the loaded bodies which appears to be a volumetric surface.
+
+Exit View
+   Closes the Reconstruction Window.

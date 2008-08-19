@@ -1,0 +1,37 @@
+The Edit menu provides the following controls to create and manipulate body slices:
+
+New Body
+   After selecting this option to define a new body, an input window at the bottom right corner of the Slice Viewer window requests the name of the body (skull, brain, tumor, sinus, etc.) being defined.  After pressing "Done," select a body color that the curve is to be drawn in.  To define a point, move the cursor to a point on the boundary of the object and press the left mouse button.  Enter the rest of the points in the same way (in a clockwise manner) until the closed boundary of the object is reasonably described.  Note that the number of points describing a body must be the same in each slice.  If you want to define additional bodies, enter them in the same way ensuring that bodies may not intersect.
+   
+Edit Points
+   If the curve defining a body is not in the desired location, this option can be used to move the control points to make the curve conform better to the actual shape of the body.  The edit procedure has several steps:
+   1.  Select "Edit Body" from the "Edit" menu.
+   2.  Using the left mouse button, select and hold a point in the curve to be edited.
+   3.  While holding down the left mouse button, drag the point to the desired location.  As you move the point, the curve will be updated.  
+   4.  Repeat steps 2 and 3 for all desired points on all slices and then click the "Done" button at the bottom of hte image window.  
+   
+Copy Body
+   This option allows the user to copy body definitions from one image to another.  To copy bodies, first ensure that the destination image slices are viewable on the screen.  Then:
+   1.  Select "Copy Body" from the "Edit" menu.
+   2.  Select the body that you wish to copy from the Local Bodies list.
+   3.  Now, click on the images you want the body copied into.  Press the "Done" button when you have the body copied to all of the desired images.  
+   4.  Repeat steps 1, 2, and 3 for as many bodies as desired. 
+Copying should be used for all slices with the same body and the points should then by adjusted to match bodies in successive slices.  
+
+Add Flex
+   After tracing several slices in a single body, you may realize that the next slice will require more points than previous slices to represent bodies accurately.  Add Flex allows additional points to bodies.  To do so:
+   1.  Select "Add Flex" from the "Edit" menu.
+   2.  Select an area where additional points are to be added.  First, click on a point in a body.  
+   3.  Click on another point in the body.  The new points will be added between these two points.  The chosen points must be adjacent and must be chosen in a clockwise manner.
+   4.  After selecting the second point, the system will display a slider where the number of points to add is selected.  Move the slider to the correct number of points and select "OK." 
+   5.  The points will be added to the body in a distinct color and a popup asking for confirmation will appear.    
+
+Automatic Edge
+   This option automatically finds the edges of the selected body in the image and sets the control points for that body.  After selecting "Automatic Edge" a control window will appear.  Select "New Body" at the bottom left of the window and enter the body name and number of control points desired.  Then click the left mouse button in the center of hte image.  Next, adjust the threshold slider so that the desired edge is obtained.  Finally, press the "Done" button for defining the body on this slice.  After choosing a body color, select other images to set the control points for this object by clicking in the center of them on other slices and adjusting the thresholds.  When the body has been defined on all slices desired, select "Exit CPGen" from the "File" menu.  
+   To define the outer edge of bodies, use an external ray with positive edge detection.  Internal objects should be defined with internal rays.  
+
+Remove Body In Selected Slice
+   This option can be used to remove a defined body in the currently selected slice.  After choosing this option, select the body to remove in the "Local Bodies" list.  This body will be highlighted in the current slice and a confirmation popup will appear.  Pressing "OK" completes the removal of this body in the current slice.  
+
+Remove Body In All Slices
+   This option can be used to remove a defined body in all slices.  After choosing this option, select the body to remove in the "All Bodies" list.  This body will be highlighted on all slices that it was defined on and a confirmation popup will appear.  Pressing "OK" completes teh removal of this body in the current slice.  

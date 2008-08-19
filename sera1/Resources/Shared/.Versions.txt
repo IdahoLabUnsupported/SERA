@@ -1,0 +1,13 @@
+sera3d := 1C0
+seraCalc := 1C0
+seraDose := 1C0
+seraImage := 1C0
+seraMC := 1C0
+seraMenu := 1C0
+seraModel := 1C0
+seraPlan := 1C0
+seraPlot := 1C0
+DVall := 1C0
+runSimplot := 1C0
+seraConvert := 1C0
+

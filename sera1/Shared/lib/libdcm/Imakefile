@@ -1,0 +1,14 @@
+SRCS = libdcm.c
+OBJS = libdcm.o
+
+LOCAL_LIBRARIES = -lcommon $(DEFAULT_X_LIBS) 
+SYS_LIBRARIES   = $(EXTRA_X_LIBS) MathLibrary
+DEPLIBS         = $(DEFAULT_DEP_X_LIBS) $(EXTRA_DEP_X_LIBS)
+
+LIBLOCATION     = $(SERA_LIB_LOCATION)
+LIB_NAME        = dcm
+
+NormalLibraryObjectRule()
+NormalLibraryTarget($(LIB_NAME),$(OBJS))
+InstallLibrary($(LIB_NAME),$(LIBLOCATION))
+DependTarget()

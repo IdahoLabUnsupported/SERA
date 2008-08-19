@@ -1,0 +1,14 @@
+Treatment Date
+
+       __________________________________________________
+
+The treatment date text widget is used to set and display a date
+identifier for the treatment files.  This date is not used for
+any comparisons or computation, merely as an identifier for the
+treatment plan.  The preferred format for the date is:
+
+   Weekday Day Month 4-digit-year Time Timezone
+
+with a total of 26 characters allowed - three each for the
+Weekday, Month and Timezone, two for the day, and 5 for the
+time.

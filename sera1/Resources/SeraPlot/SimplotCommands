@@ -1,0 +1,276 @@
+# ACE/gr parameter file
+#
+#
+@page 5
+@page inout 5
+@link page off
+@with g0
+@g0 on
+@g0 label off
+@g0 hidden false
+#@g0 type logy
+@g0 autoscale type AUTO
+@g0 fixedpoint off
+@g0 fixedpoint type 0
+@g0 fixedpoint xy 0.000000, 0.000000
+@g0 fixedpoint format general general
+@g0 fixedpoint prec 6, 6
+@    default linestyle 1
+@    default linewidth 1
+@    default color 1
+@    default char size 1.000000
+@    default font 2
+@    default font source 0
+@    default symbol size 1.000000
+@    world xmin 0
+@    world xmax 10
+@    world ymin 0
+@    world ymax 10000000000
+@    view xmin 0.150000
+@    view xmax 0.850000
+@    view ymin 0.150000
+@    view ymax 0.850000
+@    title "Ellipsoid Phantom Dosimetry at BMRR"
+@    title font 4
+@    title size 1.500000
+@    title color 1
+@    title linewidth 2
+@    s0 type xy
+@    s0 symbol 2
+@    s0 symbol size 0.420000
+@    s0 symbol fill 1
+@    s0 symbol center false
+@    s0 symbol char 0
+@    s0 skip 0
+@    s0 linestyle 1
+@    s0 linewidth 1
+@    s0 color 1
+@    s0 fill 0
+@    s0 fill with color
+@    s0 fill color 0
+@    s0 fill pattern 0
+@    s1 type xy
+@    s1 symbol 3
+@    s1 symbol size 0.750000
+@    s1 symbol fill 1
+@    s1 symbol center false
+@    s1 symbol char 0
+@    s1 skip 0
+@    s1 linestyle 2
+@    s1 linewidth 1
+@    s1 color 2
+@    s1 fill 0
+@    s1 fill with color
+@    s1 fill color 0
+@    s1 fill pattern 0
+@    s2 type xy
+@    s2 symbol 4
+@    s2 symbol size 0.750000
+@    s2 symbol fill 1
+@    s2 symbol center false
+@    s2 symbol char 0
+@    s2 skip 0
+@    s2 linestyle 3
+@    s2 linewidth 1
+@    s2 color 3
+@    s2 fill 0
+@    s2 fill with color
+@    s2 fill color 0
+@    s2 fill pattern 0
+@    s3 type xy
+@    s3 symbol 5
+@    s3 symbol size 0.750000
+@    s3 symbol fill 1
+@    s3 symbol center false
+@    s3 symbol char 0
+@    s3 skip 0
+@    s3 linestyle 4
+@    s3 linewidth 1
+@    s3 color 4
+@    s3 fill 0
+@    s3 fill with color
+@    s3 fill color 0
+@    s3 fill pattern 0
+@    s4 type xy
+@    s4 symbol 6
+@    s4 symbol size 0.750000
+@    s4 symbol fill 1
+@    s4 symbol center false
+@    s4 symbol char 0
+@    s4 skip 0
+@    s4 linestyle 5
+@    s4 linewidth 1
+@    s4 color 10
+@    s4 fill 0
+@    s4 fill with color
+@    s4 fill color 0
+@    s4 fill pattern 0
+@    s5 type xy
+@    s5 symbol 7
+@    s5 symbol size 0.750000
+@    s5 symbol fill 1
+@    s5 symbol center false
+@    s5 symbol char 0
+@    s5 skip 0
+@    s5 linestyle 1
+@    s5 linewidth 1
+@    s5 color 11
+@    s5 fill 0
+@    s5 fill with color
+@    s5 fill color 0
+@    s5 fill pattern 0
+@    s6 type xy
+@    s6 symbol 8
+@    s6 symbol size 0.750000
+@    s6 symbol fill 1
+@    s6 symbol center false
+@    s6 symbol char 0
+@    s6 skip 0
+@    s6 linestyle 2
+@    s6 linewidth 1
+@    s6 color 2
+@    s6 fill 0
+@    s6 fill with color
+@    s6 fill color 0
+@    s6 fill pattern 0
+@    s7 type xy
+@    s7 symbol 9
+@    s7 symbol size 0.750000
+@    s7 symbol fill 1
+@    s7 symbol center false
+@    s7 symbol char 0
+@    s7 skip 0
+@    s7 linestyle 3
+@    s7 linewidth 1
+@    s7 color 3
+@    s7 fill 0
+@    s7 fill with color
+@    s7 fill color 0
+@    s7 fill pattern 0
+@    s8 type xy
+@    s8 symbol 10
+@    s8 symbol size 0.750000
+@    s8 symbol fill 1
+@    s8 symbol center false
+@    s8 symbol char 0
+@    s8 skip 0
+@    s8 linestyle 4
+@    s8 linewidth 1
+@    s8 color 4
+@    s8 fill 0
+@    s8 fill with color
+@    s8 fill color 0
+@    s8 fill pattern 0
+@    s9 type xy
+@    s9 symbol 11
+@    s9 symbol size 0.750000
+@    s9 symbol fill 1
+@    s9 symbol center false
+@    s9 symbol char 0
+@    s9 skip 0
+@    s9 linestyle 3
+@    s9 linewidth 1
+@    s9 color 1
+@    s9 fill 0
+@    s9 fill with color
+@    s9 fill color 0
+@    s9 fill pattern 0
+@    s10 type xy
+@    s10 symbol 12
+@    s10 symbol size 0.750000
+@    s10 symbol fill 1
+@    s10 symbol center false
+@    s10 symbol char 0
+@    s10 skip 0
+@    s10 linestyle 4
+@    s10 linewidth 1
+@    s10 color 10
+@    s10 fill 0
+@    s10 fill with color
+@    s10 fill color 0
+@    s10 fill pattern 0
+@    s11 type xy
+@    s11 symbol 12
+@    s11 symbol size 0.750000
+@    s11 symbol fill 1
+@    s11 symbol center false
+@    s11 symbol char 0
+@    s11 skip 0
+@    s11 linestyle 4
+@    s11 linewidth 1
+@    s11 color 10
+@    s11 fill 0
+@    s11 fill with color
+@    s11 fill color 0
+@    s11 fill pattern 0
+@    s12 type xy
+@    s12 symbol 12
+@    s12 symbol size 0.750000
+@    s12 symbol fill 1
+@    s12 symbol center false
+@    s12 symbol char 0
+@    s12 skip 0
+@    s12 linestyle 4
+@    s12 linewidth 1
+@    s12 color 10
+@    s12 fill 0
+@    s12 fill with color
+@    s12 fill color 0
+@    s12 fill pattern 0
+@    xaxis  tick on
+@    xaxis  tick major 1
+@    xaxis  tick minor 0.1
+@    xaxis  ticklabel prec 0
+@    xaxis  ticklabel format decimal
+@    xaxis  ticklabel layout horizontal
+@    yaxis  tick on
+@    yaxis  tick major 1
+@    yaxis  tick minor 1
+@    yaxis  label "Thermal neutron flux (n/cm2 s @ 3 MW)"
+@    yaxis  ticklabel on
+@    yaxis  ticklabel prec 0
+@    yaxis  ticklabel format decimal 
+@    yaxis  ticklabel layout horizontal
+@    legend on
+@    legend loctype view
+@    legend layout 0
+@    legend vgap 2
+@    legend hgap 1
+@    legend length 4
+@    legend box off
+@    legend box fill off
+@    legend box fill with color
+@    legend box fill color 0
+@    legend box fill pattern 1
+@    legend box color 1
+@    legend box linewidth 1
+@    legend box linestyle 1
+@    legend x1 0.6
+@    legend y1 0.8
+@    legend font 4
+@    legend char size 1.000000
+@    legend linestyle 1
+@    legend linewidth 1
+@    legend color 1
+@    legend string 0 "total dose"
+@    legend string 1 "B-10 dose"
+@    legend string 2 "gamma dose"
+@    legend string 3 "N-14 dose"
+@    legend string 4 "hydrogen dose"
+@    legend string 5 "other dose"
+@    legend string 6 "Gp 1 fluence"
+@    legend string 7 "Gp 2 fluence"
+@    legend string 8 "thermal fluence"
+@    legend string 9 "gamma production"
+@    legend string 10 "ultra-fast gamma production"
+@    legend string 11 "reaction rate 1"
+@    legend string 12 "reaction rate 2"
+@    frame on
+@    frame type 0
+@    frame linestyle 1
+@    frame linewidth 1
+@    frame color 1
+@    frame fill off
+@    frame background color 0
+
+

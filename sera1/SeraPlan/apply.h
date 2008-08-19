@@ -1,0 +1,21 @@
+extern plan_data    data;
+extern panel_data   *panel;
+
+void ApplyCallback ( Widget, Widget, XtPointer );
+int write_data ( Widget, char * );
+void ErrCallback ( Widget, XtPointer, XtPointer );
+void set_up_dose_mem ( dose_struct *, int );
+void read_rst_file ( dose_struct *, FILE *, int * );
+float sum_dose ( dose_struct *, dose_struct *, float, float, float, float, float, int );
+void write_rst_file ( dose_struct *, FILE *, int );
+int initialize_rst ( Widget, dose_struct *, dose_struct *, int, int );
+void set_rst ( dose_struct *, dose_struct *, double );
+int file_error ( Widget, int, int, int, char *, char * );
+void message_dialog ( Widget, Widget, String );
+void error_dialog ( Widget, Widget, String );
+int warn_dialog ( Widget, Widget, String );
+void StopApplyCB ( Widget, int *, XtPointer );
+void norm_dose ( dose_struct *, float, float, int );
+void SaveDirSelectCallback ( Widget, XtPointer, XmFileSelectionBoxCallbackStruct * );
+void DoneCallback ( Widget, Widget, XtPointer );
+int combine_fields ( int, Widget );

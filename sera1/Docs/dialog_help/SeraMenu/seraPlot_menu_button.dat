@@ -1,0 +1,9 @@
+Sera Plot
+__________________________________________________
+
+The Sera Plot button provides for the integrated 
+control of dose-depth and dose-volume histogram
+plotting utilities which post processes the 
+results of the treatment simulation and display 
+the results as dose-volume histograms or 
+depth-dose plots.

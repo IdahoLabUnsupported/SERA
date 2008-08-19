@@ -1,0 +1,23 @@
+The Options menu has tools for changing the appearance of the image.  If an image has poor contrast or has distracting noise, these tools may be used to remedy the problems.  The options are:
+
+Image Size
+   Doubles the size of the image, 1st time.  Reduces size back to original, 2nd time.
+
+Contour
+   Starts dose contouring package.
+
+Enhance
+   Leads to a cascade menu of tools that will enhance the contrast of an image.
+
+Bump
+
+Smooth
+
+Complement
+   Displays the complementary or negative image.
+
+Outline
+   Allows user to select a threshold point for the image colormap.  All colors darker than this value will be changed to a single color.  If the important regions are dark, use Complement before outlining.
+
+Restore
+   Restores the image to the appearance it had before and enhancement was done.

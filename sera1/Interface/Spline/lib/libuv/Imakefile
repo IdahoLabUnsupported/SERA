@@ -1,0 +1,33 @@
+# sources taken out:  nurb_plot.c nurb_c2 nurb_ray nurb_xsplit
+SRCS = 	libuv.c read_rs_for_univels.c
+
+OBJS = 	libuv.o read_rs_for_univels.o
+
+
+machine=i386
+
+TOP = $(BNCT_HOME)/Interface/Spline
+
+# 
+# The DSINGLE flag triggers single precision usage for the "fastest
+# float" (fastf_t) data type defined by the ARL libraries.
+#
+DEFINES = -DTWO_UNDERSCORE
+# -DONE_UNDERSCORE  --> Fortran Single Underscore, SGI
+# -DTWO_UNDERSCORE  --> Fortran Double Underscore, Linux
+
+INCLUDES = -I$(TOP)/include/libnurb_includes
+LIBLOCATION = .
+USRLIBDIR = /usr/lib
+INCROOT = /usr/include
+SYS_LIBRARIES = -lm 
+CCOPTIONS = 
+DEPLIBS = 
+#CDEBUGFLAGS=  -Aa -D_HPUX_SOURCE -g
+#CDEBUGFLAGS= -g -cckr -common -prototypes 
+CDEBUGFLAGS = 	-O2
+NormalLibraryTarget(uv,$(OBJS))
+InstallLibrary(uv, $(LIBLOCATION));
+DependTarget()
+LintTarget()
+all::

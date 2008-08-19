@@ -1,0 +1,33 @@
+SRCS = \
+glmf.c get_info_from_files.c graphics_routines.c \
+mouse_control.c sera3d_gui.c build_bodies.c \
+view_style.c lighting.c messages.c clipping.c \
+clipping_gui.c axis.c particle_gui.c particles.c \
+color.c preferences.c preferences_io.c slice.c \
+ray_track.c contours.c texture.c beam.c tools.c font.c \
+select_color.c colorwash_legend.c surface_tracer.c \
+8cell.c data_block.c marching_cubes.c mcubes_extended.c
+
+
+OBJS = \
+glmf.o get_info_from_files.o graphics_routines.o \
+mouse_control.o sera3d_gui.o build_bodies.o \
+view_style.o lighting.o messages.o clipping.o \
+clipping_gui.o axis.o particle_gui.o particles.o \
+color.o preferences.o preferences_io.o slice.o \
+ray_track.o contours.o texture.o beam.o tools.o font.o \
+select_color.o colorwash_legend.o surface_tracer.o \
+8cell.o data_block.o marching_cubes.o mcubes_extended.o
+
+SERA_DEPS = $(D_COMMON) $(D_QSH) $(D_UV) $(D_SZ)
+
+LOCAL_LIBRARIES = -lcommon -lqsh -luv -lsz $(DEFAULT_X_LIBS)
+SYS_LIBRARIES   = $(EXTRA_X_LIBS) $(GL_LIBS) MathLibrary
+DEPLIBS         = $(DEFAULT_DEP_X_LIBS) $(EXTRA_DEP_X_LIBS) $(SERA_DEPS)
+
+EXTRA_INCLUDES = $(GL_INCLUDES)
+DEFINES         = -DNO_NURBS
+
+
+ComplexProgramTarget(sera3d)
+

@@ -1,0 +1,4 @@
+   The Slice Viewer provides access to the tools that control the visual appearance of the slice and, most importantly, the ability to create body slices.  
+   The far right column of the Slice Viewer contains windows listing "Local Bodies," "All Bodies," and "Z Values."  By clicking the left mouse button on a particular z-value in the list, the corresponding image will be centered in the Slice viewers. 
+   The Slice Viewer has various buttons located at the bottom of the window that provide convenience features used in body slice construction.  
+   Note:  The "Done" button is used to comple control point entries for a particular body and trigger the computation of the spline curve for that body.  

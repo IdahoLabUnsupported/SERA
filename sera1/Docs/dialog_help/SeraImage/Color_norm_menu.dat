@@ -1,0 +1,10 @@
+Color Normalization Menu
+
+---------------------------------------------------
+
+Select the type of color normalization you would
+prefer. Your choices are none, local, and global.
+Local normalization uses color values for each
+individual image. Global normalization uses the 
+color values of the entire image set to do the
+normalization.

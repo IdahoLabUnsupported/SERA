@@ -1,0 +1,167 @@
+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    RAFL 5 LIBRARY (OCT 83 FORMAT)
+
+
+
+
+                              03/06/84
+
+                      GAMMA CS LIB FROM DLC99HUGO LIB         
+
+                           100  MATERIALS
+
+                             0  FISSION SPECTRA
+
+                            70  ENERGY GROUPS
+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    RAFL 5 LIBRARY (OCT 83 FORMAT)
+
+
+
+
+                              03/06/84
+
+                      GAMMA CS LIB FROM DLC99HUGO LIB         
+
+                           100  MATERIALS
+
+                             0  FISSION SPECTRA
+
+                            70  ENERGY GROUPS
+1
+
+                              ISOTOPE LIST
+
+      ID          TITLE           MAT  TAPE VERS  IWR     AWR     SIG-POT     TAPE
+
+       1   HYDROGEN    RAFFLE       1    0    4    0       .0000       .0000         9
+       2   HELIUM      RAFFLE       2    0    4    0       .0000       .0000         9
+       3   LITHIUM     RAFFLE       3    0    4    0       .0000       .0000         9
+       4   BERYLIUM    RAFFLE       4    0    4    0       .0000       .0000         9
+       5   BORON       RAFFLE       5    0    4    0       .0000       .0000         9
+       6   CARBON      RAFFLE       6    0    4    0       .0000       .0000         9
+       7   NITROGEN    RAFFLE       7    0    4    0       .0000       .0000         9
+       8   OXYGEN      RAFFLE       8    0    4    0       .0000       .0000         9
+       9   FLUORINE    RAFFLE       9    0    4    0       .0000       .0000         9
+      10   NEON        RAFFLE      10    0    4    0       .0000       .0000         9
+      11   SODIUM      RAFFLE      11    0    4    0       .0000       .0000         9
+      12   MAGNESIUM   RAFFLE      12    0    4    0       .0000       .0000         9
+      13   ALUMINUM    RAFFLE      13    0    4    0       .0000       .0000         9
+      14   SILICON     RAFFLE      14    0    4    0       .0000       .0000         9
+      15   PHOSPHORUS  RAFFLE      15    0    4    0       .0000       .0000         9
+      16   SULPHUR     RAFFLE      16    0    4    0       .0000       .0000         9
+      17   CLORINE     RAFFLE      17    0    4    0       .0000       .0000         9
+      18   ARGON       RAFFLE      18    0    4    0       .0000       .0000         9
+      19   POTASSIUM   RAFFLE      19    0    4    0       .0000       .0000         9
+      20   CALCIUM     RAFFLE      20    0    4    0       .0000       .0000         9
+      21   SCANDIUM    RAFFLE      21    0    4    0       .0000       .0000         9
+      22   TITANIUM    RAFFLE      22    0    4    0       .0000       .0000         9
+      23   VANADIUM    RAFFLE      23    0    4    0       .0000       .0000         9
+      24   CHROMIUM    RAFFLE      24    0    4    0       .0000       .0000         9
+      25   MANGANESE   RAFFLE      25    0    4    0       .0000       .0000         9
+      26   IRON        RAFFLE      26    0    4    0       .0000       .0000         9
+      27   COBALT      RAFFLE      27    0    4    0       .0000       .0000         9
+      28   NICKLE      RAFFLE      28    0    4    0       .0000       .0000         9
+      29   COPPER      RAFFLE      29    0    4    0       .0000       .0000         9
+      30   ZINC        RAFFLE      30    0    4    0       .0000       .0000         9
+      31   GALLIUM     RAFFLE      31    0    4    0       .0000       .0000         9
+      32   GERMANIUM   RAFFLE      32    0    4    0       .0000       .0000         9
+      33   ARSENIC     RAFFLE      33    0    4    0       .0000       .0000         9
+      34   SELENIUM    RAFFLE      34    0    4    0       .0000       .0000         9
+      35   BROMINE     RAFFLE      35    0    4    0       .0000       .0000         9
+      36   KRYPTON     RAFFLE      36    0    4    0       .0000       .0000         9
+      37   RUBIDIUM    RAFFLE      37    0    4    0       .0000       .0000         9
+      38   STRONTIUM   RAFFLE      38    0    4    0       .0000       .0000         9
+      39   YTTRIUM     RAFFLE      39    0    4    0       .0000       .0000         9
+      40   ZIRCONIUM   RAFFLE      40    0    4    0       .0000       .0000         9
+      41   NIOBIUM     RAFFLE      41    0    4    0       .0000       .0000         9
+      42   MOLYBDENUM  RAFFLE      42    0    4    0       .0000       .0000         9
+      43   TECHNETIUM  RAFFLE      43    0    4    0       .0000       .0000         9
+      44   RUTHENIUM   RAFFLE      44    0    4    0       .0000       .0000         9
+      45   RHODIUM     RAFFLE      45    0    4    0       .0000       .0000         9
+      46   PALLADIUM   RAFFLE      46    0    4    0       .0000       .0000         9
+      47   SILVER      RAFFLE      47    0    4    0       .0000       .0000         9
+      48   CADMIUM     RAFFLE      48    0    4    0       .0000       .0000         9
+      49   INDIUM      RAFFLE      49    0    4    0       .0000       .0000         9
+      50   TIN         RAFFLE      50    0    4    0       .0000       .0000         9
+      51   ANTIMONY    RAFFLE      51    0    4    0       .0000       .0000         9
+      52   TELLURIUM   RAFFLE      52    0    4    0       .0000       .0000         9
+      53   IODINE      RAFFLE      53    0    4    0       .0000       .0000         9
+      54   XENON       RAFFLE      54    0    4    0       .0000       .0000         9
+      55   CESIUM      RAFFLE      55    0    4    0       .0000       .0000         9
+      56   BARIUM      RAFFLE      56    0    4    0       .0000       .0000         9
+      57   LANTHANUM   RAFFLE      57    0    4    0       .0000       .0000         9
+      58   CERIUM      RAFFLE      58    0    4    0       .0000       .0000         9
+      59   PRASEODYMIUMRAFFLE      59    0    4    0       .0000       .0000         9
+      60   NEODYMIUM   RAFFLE      60    0    4    0       .0000       .0000         9
+      61   PROMETHIUM  RAFFLE      61    0    4    0       .0000       .0000         9
+      62   SAMARIUM    RAFFLE      62    0    4    0       .0000       .0000         9
+      63   EUROPIUM    RAFFLE      63    0    4    0       .0000       .0000         9
+      64   GADOLINIUM  RAFFLE      64    0    4    0       .0000       .0000         9
+      65   TERBIUM     RAFFLE      65    0    4    0       .0000       .0000         9
+      66   DYSPROSIUM  RAFFLE      66    0    4    0       .0000       .0000         9
+      67   HOLMIUM     RAFFLE      67    0    4    0       .0000       .0000         9
+      68   ERBIUM      RAFFLE      68    0    4    0       .0000       .0000         9
+      69   THULIUM     RAFFLE      69    0    4    0       .0000       .0000         9
+      70   YTTERBIUM   RAFFLE      70    0    4    0       .0000       .0000         9
+      71   LUTETIUM    RAFFLE      71    0    4    0       .0000       .0000         9
+      72   HAFNIUM     RAFFLE      72    0    4    0       .0000       .0000         9
+      73   TANTALUM    RAFFLE      73    0    4    0       .0000       .0000         9
+      74   TUNGSTEN    RAFFLE      74    0    4    0       .0000       .0000         9
+      75   RHENIUM     RAFFLE      75    0    4    0       .0000       .0000         9
+      76   OSMIUM      RAFFLE      76    0    4    0       .0000       .0000         9
+      77   IRRIDIUM    RAFFLE      77    0    4    0       .0000       .0000         9
+      78   PLATINUM    RAFFLE      78    0    4    0       .0000       .0000         9
+      79   GOLD        RAFFLE      79    0    4    0       .0000       .0000         9
+      80   MERCURY     RAFFLE      80    0    4    0       .0000       .0000         9
+      81   THALLIUM    RAFFLE      81    0    4    0       .0000       .0000         9
+      82   LEAD        RAFFLE      82    0    4    0       .0000       .0000         9
+      83   BISMUTH     RAFFLE      83    0    4    0       .0000       .0000         9
+      84   POLONIUM    RAFFLE      84    0    4    0       .0000       .0000         9
+      85   ASTATINE    RAFFLE      85    0    4    0       .0000       .0000         9
+      86   RADON       RAFFLE      86    0    4    0       .0000       .0000         9
+      87   FRANCIUM    RAFFLE      87    0    4    0       .0000       .0000         9
+      88   RADIUM      RAFFLE      88    0    4    0       .0000       .0000         9
+      89   ACTINIUM    RAFFLE      89    0    4    0       .0000       .0000         9
+      90   THORIUM     RAFFLE      90    0    4    0       .0000       .0000         9
+      91   PROTACTINIUMRAFFLE      91    0    4    0       .0000       .0000         9
+      92   URANIUM     RAFFLE      92    0    4    0       .0000       .0000         9
+      93   NEPTUNIUM   RAFFLE      93    0    4    0       .0000       .0000         9
+      94   PLUTONIUM   RAFFLE      94    0    4    0       .0000       .0000         9
+      95   AMERICIUM   RAFFLE      95    0    4    0       .0000       .0000         9
+      96   CURIUM      RAFFLE      96    0    4    0       .0000       .0000         9
+      97   BERKELIUM   RAFFLE      97    0    4    0       .0000       .0000         9
+      98   CALIFORNIUM RAFFLE      98    0    4    0       .0000       .0000         9
+      99   EINSTINIUM  RAFFLE      99    0    4    0       .0000       .0000         9
+     100   FERMIUM     RAFFLE     100    0    4    0       .0000       .0000         9
+1
+
+            100  ISOTOPES READ FROM BCD TAPE 9 0            100  ISOTOPES WRITTEN TO BINARY TAPE 15

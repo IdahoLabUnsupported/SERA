@@ -1,0 +1,18 @@
+libnurb2_aux contains routines that I wrote to complement the libnurb
+library and the bnct data structures.
+
+surface_refinement.c :	
+		Refines knot vectors to prevent subdivision past surface
+		refinement.  Kind of weird, due to ARL idiosyncracy.
+
+brl_surface_routines.c :	
+		Goes through the slice list and creates whole surfaces.
+		Also does capping.
+
+file_routines.c :
+		reads in slice data from a bnct data file.
+
+memory_routines.c :
+		malloc and free routines for data structures.
+
+

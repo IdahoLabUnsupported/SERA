@@ -1,0 +1,13 @@
+SRCS = libuv.c
+OBJS = libuv.o
+
+DEFINES     = $(LIBUV_FLAGS) -DNO_NURBS
+LIBLOCATION = $(SERA_LIB_LOCATION)
+LIB_NAME    = uv
+
+SYS_LIBRARIES = MathLibrary
+
+NormalLibraryObjectRule()
+NormalLibraryTarget($(LIB_NAME),$(OBJS))
+InstallLibrary($(LIB_NAME),$(LIBLOCATION))
+DependTarget()

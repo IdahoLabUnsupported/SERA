@@ -1,0 +1,93 @@
+Clipping
+
+	Clipping allows portions of the bodies to be 
+	"cut" away along a plane, allowing the bodies 
+	along the "cut" to be viewed.  
+     	________________________________________________
+
+	Clipped Bodies:
+
+	  The clipped bodies box gives a list of the
+         bodies each with a check box.  If the bodies
+         check box is checked, it means that the body
+         WILL be clipped.  The bodies can be enabled/
+         disabled from clipping at any point.
+     	________________________________________________
+  
+	Setting the Clipping:
+
+	  By pressing the Set Clipping button at the 
+	bottom of the clipping control panel, the clipping 
+	dialog appears.  
+	  The clipping dialog box is fairly complex.
+     	________________________________________________
+	
+	Interactive Clipping Toggle
+		 
+	First, at the top of the window is a check box
+	for turning interactive clipping on and off.  
+	When interactive clipping is on all changes being
+	made to the clipping will be redrawn as they are
+	changed.  Also when the interactive clipping is
+	enabled, a second toggle button will appear below
+	it.  
+     	________________________________________________
+
+	Drawing the Clipping Planes:
+
+	  Draw clipping planes toggle will draw the
+	clipping planes as large square polygons in the
+	rendering window.  When Draw Clipping planes is 
+	checked the planes will move, but the bodies will
+	not be clipped until the "done" button is checked.
+     	________________________________________________
+
+	Direction Toggle Buttons:
+
+	  Below the toggle buttons is the direction buttons.
+	The direction buttons switch the rest of the controls
+	to the current direction.
+     	________________________________________________
+
+	  Below the direction buttons is the current direction
+   	box.  At the top of the box is a toggle button which
+	enables the clipping planes for the current direciton.
+     	________________________________________________
+	
+	Clipping Position labels:
+
+	  The clipping position labels give the locations 
+	of the slider settings, for the given slice 
+	directions.
+     	________________________________________________
+
+	The Clipping Sliders:
+
+	   The two sliders control the 2 clipping planes
+	for the current direction.  
+     	________________________________________________
+
+	Capping:
+
+	  When the clipping plane cuts through the bodies,
+	the bodies are hollow and they are not capped.  
+	Capping can be done with the medical image data,
+	through the texturing process.  To cap the clipping,
+	a check box below the clipping plane slider will 
+	toggle the capping on and off. 
+
+	 NOTE:  the raw images must be loaded in order
+	        to utilize the capping.
+      	________________________________________________
+
+	Specific Value Clipping Box:
+
+	  Below the sliders and capping buttons is a text
+	box for entering a specific value.  Once the value
+	in entered, the two buttons underneath the text box
+	represent which clipping plane the entered value
+	should be applied to.  By pressing the button
+	the value will be applied to that clipping plane.
+      	________________________________________________
+
+

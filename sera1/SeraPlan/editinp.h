@@ -1,0 +1,23 @@
+extern edit_data_struct    edit_data;
+extern edit_panel_struct  *edit_panel;
+
+void PointEdit ( Widget, XtPointer, XtPointer );
+void LineEdit ( Widget, XtPointer, XtPointer );
+void BoxEdit ( Widget, XtPointer, XtPointer );
+void ContourEdit ( Widget, XtPointer, XtPointer );
+void create_edit_panel_num_inp ( Widget, inp_struct *, char *, char *, int );
+void numPointsCB ( Widget, point_panel_struct *, XtPointer );
+void numLinesCB ( Widget, line_panel_struct *, XtPointer );
+void numBoxesCB ( Widget, box_panel_struct *, XtPointer );
+void numSurfacesCB ( Widget, contour_panel_struct *, XtPointer );
+void make_point_inp ( point_inp *, Widget, Widget, int, char *, int, int );
+void base_widgets ( base_struct *, inp_struct *, Widget );
+void doneButtonCallback ( Widget, inp_struct *, XtPointer );
+void SavePointsCB ( Widget, inp_struct *, XtPointer );
+void save_points ( Widget );
+void SaveLinesCB ( Widget, inp_struct *, XtPointer );
+void save_lines ( Widget );
+void SaveBoxesCB ( Widget, inp_struct *, XtPointer );
+void save_boxes ( Widget );
+void SaveSurfacesCB ( Widget, inp_struct *, XtPointer );
+void save_contours ( Widget );

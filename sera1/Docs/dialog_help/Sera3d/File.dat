@@ -1,0 +1,27 @@
+The File Menu
+
+     The file menu has three options : open, close, 
+   and exit.
+
+     Open :
+           The open option will bring up the file 
+         selection dialog.  The files that you are
+         currently allowed to select are the univel
+         file (.uv),  univel header file (.uvh), or
+         the gzipped univel file (.uv.gz).  
+           No matter which file is selected, both a 
+         univel file (uv or gz) and a univel header
+         file (uvh) must be present in the same 
+         directory under the same prefix.  
+         When open the files are processed and the
+         3d image is displayed as the default view
+         stlye of points.
+
+     Close : 
+           The close option simply removes the loaded
+         file from the Bnct3d application.
+
+     Exit :
+           The exit option removes the loaded file 
+         (if one is loaded) and exits the Bnct3d
+         program.

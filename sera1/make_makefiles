@@ -1,0 +1,8 @@
+#!/bin/sh
+
+touch $SERA_HOME/config/Local.def
+imake -I./config
+make Makefile
+make Makefiles
+make includes
+make depend

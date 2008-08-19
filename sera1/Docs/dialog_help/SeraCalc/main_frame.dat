@@ -1,0 +1,11 @@
+BNCT_Rtpe is the graphical, geometric reconstruction, and execution interface for developing the Boron Neutron Capture Therapy (BNCT) radiation treatment plans.  In typical use BNCT_Rtpe consists of three main components:
+
+*  Semi-automated geometry modeling of treatment objects (brain, tumor, eyes, sinus) derived from NMRI, CT, and other medical imaging modalities.
+
+*  Dose computation for these geometric models with rtt_MC, the INEEL radiation transport computer code.
+
+*  Dose contouring that overlays dose contours derived from the dose computation onto the original image planes to determine healthy tissue limits.
+
+   Digitized data produced from medical imaging devices are used as a template to draw regions of interest from user-entered control points in each image plane.  These control points are fit to a quadratic B-spline curve in each plane describing the region of interest.  The curves are in turn fit to a B-spline surface forming a solid model description of the region of interest.
+   Using the solid model desciptions of the regions of interests, a three dimensional Monte Carlo radiation transport model, rtt_MC, developed at the INEEL is used to calculate the complex radiation fields present in BNCT treatment.  These radiation fields are then related to radiation doses delivered to the treatment and surrounding areas.
+   When the dose calculations are complete, the radiation dose fields are displayed in the original image spaces as dose contours giving the clinician or researcher an accurate and convenient way to view the radiation fields so that the beam location and treatment time can be quickly determined, balancing tumor cell kill against healthy tissue sparing.   

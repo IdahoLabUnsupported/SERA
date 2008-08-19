@@ -1,0 +1,543 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.75 [en] (X11; U; SunOS 5.6 sun4u) [Netscape]">
+   <meta name="Description" content="This is the SERA Manual Appendix D page.">
+   <title>SERA Manual - Appendix D</title>
+</head>
+<body text="#274342" bgcolor="#C0C0C0" link="#0000EE" vlink="#551A8B" alink="#FF0000" background="mainbackground.gif" nosave>
+
+<center><a href="appC.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><a href="appC.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="SeraConvert/convert.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="SeraConvert/convert.html">Next</a></b>
+<p><b><font color="#274342"><font size=+2>SERA:</font></font></b>
+<br><b><font color="#274342"><font size=+2>Simulation Environment for Radiotherapy
+Applications</font></font></b>
+<br><b><font color="#274342"><font size=+2>User's Manual</font></font></b>
+<br><b><font color="#274342"><font size=+2>Version 1C0</font></font></b>
+<p><img SRC="marblebar.jpg" NOSAVE height=6 width=460></center>
+
+<center>
+<h1>
+<font size=+2>Appendix D.&nbsp; seraMC Edit Directives</font></h1></center>
+<a NAME="D.1"></a><b><font size=+1>D.1.&nbsp; Introduction</font></b>
+<p><b>The seraMC edit directives provide user control over the quantities
+calculated from the transport calculation results.&nbsp;&nbsp; Various
+integral quantities for dose and flux may be computed and printed, without
+any influence on the transport calculation.&nbsp; This capability&nbsp;
+is a result of the implicit assumption in seraMC that the boron level in
+BNCT is not sufficient to cause significant depressions in the local thermal
+flux.&nbsp; Thus, a single approximate value for the boron concentration
+is included in the materials for the transport calculation, and the tally
+results are calculated per ppm <sup>10</sup>B.&nbsp; This characterization
+allows the edit doses to be computed, by post-processing, for nearly any
+boron concentration observed thus far in clinical application.</b>
+<p><b>There are four different levels of edit directives in the seraMC
+input.&nbsp; The passive directives have no active role in the seraMC edits,
+but merely provide a means for the user to provide information to be used
+by <a href="sec10.html">seraPlot</a> to label plots.&nbsp; The reference
+dose parameters influence the determination of the reference dose values,
+and thus they must precede any active edit directives.&nbsp; The general
+parameters provide information that is used by individual active edits.&nbsp;
+These directives may make multiple appearances, with subsequent values
+overriding earlier specifications.&nbsp; These directives may appear anywhere
+in the edit input block.&nbsp; The fourth level is the active edits themselves,
+which perform the actual edit calculations.&nbsp; Most of the active edits
+print directly to the standard output file, but some create additional
+files for their results.</b>
+<p><b>The edit input block must appear after all other data in the seraMC
+input file.&nbsp; The beginning of the edit block is denoted by the string
+<font color="#FF0000">edit_dir</font>,
+which must start in column 1.&nbsp; All subsequent edit directives must
+start in column 2, with the values beginning after column 10.&nbsp; Edit
+directives are specified in the following general keyword-value format:</b>
+<p><b><font color="#000000">&nbsp;keyword&nbsp;&nbsp; value<sub>1 </sub>value<sub>2
+</sub>....
+value<sub>n</sub></font></b>
+<p><b>where the values are space-delimited.&nbsp; Note that the keyword
+is case-sensitive, and it must be specified exactly as shown in the subsection
+headings below.&nbsp; Comment lines are allowed, and they must begin with
+a
+<font color="#FF0000">#</font> character in column 1, with the comment
+text starting after column 3.</b>
+<p><b><font color="#990000"><font size=+1>The edit capability has been
+shifted to the <a href="sec08.html#8.4">seraPlan</a> edit module, which
+is much simpler and more user-friendly.&nbsp; The edit capability in seraMC
+is no longer being supported for all applications.&nbsp; This section of
+the manual is retained for historical and reference purposes only.&nbsp;
+It is expected that future versions of seraMC will not retain the edit
+capability.</font></font></b>
+<br>&nbsp;
+<p><a NAME="D.2"></a><b><font size=+1>D.2.&nbsp; Passive Directives</font></b>
+<p><a NAME="D.2.1"></a><b>D.2.1.&nbsp; patient</b>
+<p><b>The <font color="#008007">patient</font><font color="#006600"> </font><font color="#274342">directive
+allows the user to specify an identifying name for the edit run, which
+is usually the patient's name or initials.&nbsp; This directive begins
+with a </font><font color="#FF0000">#</font><font color="#274342"> character
+in column 1, and the keyword begins in column 2.</font></b>
+<p><a NAME="D.2.2"></a><b>D.2.2.&nbsp; date</b>
+<p><b>The <font color="#008007">date </font><font color="#274342">directive
+allows the user to specify an identifying date for the edit run, which
+is usually the treatment date.&nbsp; The format is the same as that for
+the </font><font color="#008007">patient</font><font color="#274342"> directive.</font></b>
+<p><a NAME="D.2.3"></a><b>D.2.3.&nbsp; beam</b>
+<p><b>The <font color="#008007">beam </font><font color="#274342">directive
+allows the user to identify the particular beam source used for the calculation.&nbsp;
+The format is the same as that for the </font><font color="#008007">patient</font><font color="#274342">
+directive.</font></b>
+<br>&nbsp;
+<p><a NAME="D.3"></a><b><font size=+1>D.3.&nbsp; Reference Dose Parameters</font></b>
+<p><b>The first three directives are used to specify the reference volume
+<font color="#000000">(</font><font color="#006600">refvol</font><font color="#000000">),
+the reference point (</font><font color="#006600">refpoint</font><font color="#000000">),
+or the reference depth (</font><font color="#006600">refdepth</font><font color="#000000">).</font></b>
+<p><b><font size=+1><font color="#990000">Note that only one of </font><font color="#008007">refvol/refpoint/refdepth</font><font color="#990000">
+may be used in any one problem, and the chosen option may only be used
+once in any one problem.</font></font></b>
+<p><a NAME="D.3.1"></a><b>D.3.1.&nbsp; refvol</b>
+<p><b>The <font color="#008007">refvol </font><font color="#274342">directive
+specifies the volume over which the reference dose is defined, and it also
+provides a flag defining the search method employed to find the reference
+voxel(s).&nbsp; The reference dose will be defined as the volume-averaged
+dose from </font><font color="#008007">nvox</font><font color="#274342">
+voxels, where </font><font color="#008007">nvox </font><font color="#274342">is
+the ratio of </font><font color="#008007">refvol </font><font color="#274342">to
+the voxel volume.&nbsp; If </font><font color="#008007">refvol </font><font color="#274342">is
+not a multiple of the voxel volume, then the calculation of </font><font color="#008007">nvox
+</font><font color="#274342">serves
+to truncate the value of </font><font color="#008007">refvol
+</font><font color="#274342">specified.&nbsp;
+The default value for </font><font color="#008007">refvol
+</font><font color="#274342">is
+</font><font color="#FF0000">1.0</font><font color="#274342">.</font></b>
+<p><b><font color="#274342">The flag, in its default value of </font><font color="#FF0000">0</font><font color="#274342">,
+forces seraMC to define the reference voxel as the voxel with maximum thermal
+neutron flux.&nbsp; A flag value of </font><font color="#FF0000">1</font><font color="#274342">
+defines the reference voxel as the voxel with the maximum total boron-
+and RBE-weighted dose, where the boron concentration is set by the </font><font color="#008007">ref_b10
+</font><font color="#274342">directive,
+and the RBE values are set by the
+</font><font color="#008007">ref_rbe</font><font color="#274342">
+directive.</font></b>
+<p><b><font color="#274342">&nbsp; </font><font color="#000000">Example:&nbsp;&nbsp;&nbsp;
+refvol&nbsp; 15.0&nbsp; 1</font></b>
+<br><b><font color="#000000">&nbsp; Default:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+refvol&nbsp; 1.0&nbsp; 0</font></b>
+<p><a NAME="D.3.2"></a><b>D.3.2.&nbsp; refpoint</b>
+<p><b>The <font color="#008007">refpoint </font><font color="#274342">directive
+specifies the x, y, and z coordinates, in centimeters, of a spatial point
+in patient geometry where the reference dose value is to be defined.&nbsp;
+The reference dose will then be the dose in the voxel that contains the
+defined point.&nbsp; The default value for
+</font><font color="#008007">refpoint
+</font><font color="#274342">is
+the center of the reference voxel.</font></b>
+<p><b><font color="#274342">&nbsp;</font><font color="#000000">Example:&nbsp;&nbsp;&nbsp;
+refpoint&nbsp; 2.0 1.3 4.5</font></b>
+<p><a NAME="D.3.3"></a><b>D.3.3.&nbsp; refdepth</b>
+<p><b>The <font color="#008007">refdepth </font><font color="#274342">directive
+specifies a depth, in centimeters, along the beam centerline from the skin
+surface to the reference point.&nbsp; The reference voxel will then be
+the voxel containing this point.</font></b>
+<p><b><font color="#274342">&nbsp;</font><font color="#000000">Example:&nbsp;&nbsp;&nbsp;&nbsp;
+refdepth&nbsp; 2.5</font></b>
+<br>&nbsp;
+<p><a NAME="D.3.4"></a><b>D.3.4.&nbsp; ref_reg and more_ref</b>
+<p><b>These directives specify a list of acceptance regions for determination
+of the reference dose.&nbsp; Only regions on the defined list will be considered
+for inclusion in the reference voxel search procedure.&nbsp; The<font color="#008007">
+ref_reg </font><font color="#274342">directive provides the beginning of
+the list, and it may only be used once, but multiple </font><font color="#008007">more_ref
+</font><font color="#274342">directives,
+which provide continuation of the region list, may be used.&nbsp; For both
+directives, regions may be specified by either their region names from
+the geometry files, or by their region indices.</font></b>
+<p><b><font color="#274342">&nbsp;</font><font color="#000000">Examples:&nbsp;&nbsp;
+ref_reg&nbsp;&nbsp;&nbsp;&nbsp; brain</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ref_reg&nbsp;&nbsp;&nbsp;&nbsp; 7 8</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ref_reg&nbsp;&nbsp;&nbsp;&nbsp; brain left-eye right-eye thalamus</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+more_ref&nbsp; optical-chiasm</font></b>
+<p><b><font color="#274342">The default is to use all regions.</font></b>
+<p><b><font color="#990000">These directives are active only with the </font><font color="#008007">refvol</font><font color="#990000">
+directive.</font></b>
+<p><a NAME="D.3.5"></a><b>D.3.5.&nbsp; ref_b10</b>
+<p><b>This directive provides the boron (<sup>10</sup>B) concentration
+to use for the reference dose determination when the flag on the <font color="#008007">refvol
+</font><font color="#274342">directive
+is </font><font color="#FF0000">1</font><font color="#274342">.&nbsp; The
+boron concentration is given in parts per million (ppm) by weight.</font></b>
+<p><b><font color="#000000">&nbsp;Example:&nbsp;&nbsp; ref_b10&nbsp;&nbsp;
+15.1</font></b>
+<p><b><font color="#990000">This directive is active only with the </font><font color="#008007">refvol</font><font color="#990000">
+directive.</font></b>
+<p><a NAME="D.3.6"></a><b>D.3.6.&nbsp; ref_rbe</b>
+<p><b>This directive provides the set of RBE values to use for the reference
+dose determination when the flag on the <font color="#008007">refvol </font><font color="#274342">directive
+is </font><font color="#FF0000">1</font><font color="#274342">.&nbsp; There
+are six RBE values in use for conventional energies (below 16.9MeV), and
+eight for ultrafast applications.&nbsp; The eight values modify, respectively,
+the boron, gamma, nitrogen, hydrogen, other, gamma production, proton recoil
+(E > 16.9MeV), and ultrafast dose components.&nbsp; Default values for
+all are </font><font color="#FF0000">1.0</font><font color="#274342">.</font></b>
+<p><b><font color="#274342">&nbsp;</font><font color="#000000">Example:&nbsp;&nbsp;
+ref_rbe&nbsp;&nbsp;&nbsp; 1.3 1.0 3.2 3.2</font></b>
+<p><b><font color="#990000">This directive is active only with the </font><font color="#008007">refvol</font><font color="#990000">
+directive.</font></b>
+<br>&nbsp;
+<p><a NAME="D.4"></a><b><font size=+1>D.4.&nbsp; General Parameters</font></b>
+<p><b>All of the directives in this section apply until overridden by a
+subsequent occurrence of the directive.</b>
+<p><a NAME="D.4.1"></a><b>D.4.1.&nbsp; mw_min</b>
+<p><b>This provides a multiplication factor for the output edits, and is
+meant to allow the user to specify the total energy delivered by the reactor
+in MW-minutes.</b>
+<p><b>&nbsp;<font color="#000000">Example:&nbsp;&nbsp;&nbsp; mw_min&nbsp;&nbsp;
+100.0</font></b>
+<br><b><font color="#000000">&nbsp;Default:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mw_min&nbsp;&nbsp; 1.0</font></b>
+<p><b><font color="#990000">It is advised that</font> <font color="#008007">mw_min
+</font><font color="#990000">be
+left at its default value to avoid confusion, and that the scaling factor
+be applied in</font> <a href="sec10.html">seraPlot</a>.</b>
+<p><a NAME="D.4.2"></a><b>D.4.2.&nbsp; mw</b>
+<p><b>This provides a multiplication factor for the output edits, and it
+is meant to allow the user to specify a reactor power in MW.</b>
+<p><b>&nbsp;<font color="#000000">Example:&nbsp;&nbsp;&nbsp; mw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+10.0</font></b>
+<br><b><font color="#000000">&nbsp;Default:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.0</font></b>
+<p><b><font color="#990000">It is advised that</font> <font color="#008007">mw
+</font><font color="#990000">be
+left at its default value to avoid confusion, and that the scaling factor
+be applied in</font> <a href="sec10.html">seraPlot</a>.</b>
+<p><a NAME="D.4.3"></a><b>D.4.3.&nbsp; b10_blood</b>
+<p><b>This directive sets the blood boron concentration in parts per million
+(ppm) by weight for the set of edits following it.</b>
+<p><b>&nbsp;<font color="#000000">Example:&nbsp;&nbsp; b10_blood&nbsp;&nbsp;&nbsp;
+15.1</font></b>
+<br><b><font color="#000000">&nbsp;Default:&nbsp;&nbsp;&nbsp;&nbsp; b10_blood&nbsp;&nbsp;&nbsp;&nbsp;
+1.0</font></b>
+<p><b><font color="#990000">This directive is active until superseded by
+another </font><font color="#008007">b10_blood</font><font color="#990000">
+directive, and it applies to all edits that follow it.</font></b>
+<p><a NAME="D.4.4"></a><b>D.4.4.&nbsp; b10_ratio</b>
+<p><b>This directive sets the ratio of the tissue boron concentration to
+the blood boron concentration for specified regions.</b>
+<p><b>&nbsp;<font color="#000000">Examples:&nbsp;&nbsp; b10_ratio&nbsp;&nbsp;
+1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.0&nbsp;&nbsp;&nbsp; 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1.5&nbsp;&nbsp;&nbsp; 4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3.5</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+b10_ratio&nbsp;&nbsp; brain&nbsp;&nbsp; 1.0&nbsp;&nbsp;&nbsp; tumor&nbsp;
+3.5</font></b>
+<p><b><font color="#274342">Either region names or region indices may be
+used to specify the regions.&nbsp; The default is 1.0 for all regions.</font></b>
+<p><a NAME="D.4.5"></a><b>D.4.5.&nbsp; delta</b>
+<p><b>The <font color="#008007">delta </font><font color="#274342">directive
+defines the distance between edit points for </font><font color="#008007">line</font><font color="#274342">
+edits.&nbsp; For the dose-volume integrations, </font><font color="#008007">delta
+</font><font color="#274342">provides
+a starting spacing between points, which is halved until convergence on
+the volume is achieved.</font></b>
+<p><b><font color="#274342">&nbsp;</font><font color="#000000">Example:&nbsp;&nbsp;
+delta&nbsp;&nbsp;&nbsp; 0.25</font></b>
+<br><b><font color="#000000">&nbsp;Default:&nbsp;&nbsp;&nbsp;&nbsp; delta&nbsp;&nbsp;&nbsp;
+1.0</font></b>
+<p><b><font color="#990000">This directive is active only with the </font><font color="#008007">line</font><font color="#990000">,
+</font><font color="#008007">box</font><font color="#990000">,
+and </font><font color="#008007">DVbs</font><font color="#990000"> edit
+directives.</font></b>
+<p><a NAME="D.4.6"></a><b>D.4.6.&nbsp; eps</b>
+<p><b>This directive specifies the volume convergence criterion for the
+dose-volume integrations.&nbsp; An approximation to the size of the volume
+elements for the integrations is <font color="#008007">delta<sup>3</sup></font>.</b>
+<p><b>&nbsp;<font color="#000000">Example:&nbsp;&nbsp;&nbsp; eps&nbsp;&nbsp;&nbsp;&nbsp;
+0.05</font></b>
+<br><b><font color="#000000">&nbsp;Default:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+eps&nbsp;&nbsp;&nbsp;&nbsp; 0.01</font></b>
+<p><b>It is often much faster to set <font color="#008007">delta</font>
+relatively low, say <font color="#FF0000">0.2</font> or less, and set <font color="#008007">eps</font>
+to <font color="#FF0000">1.0</font>.</b>
+<p><b><font color="#990000">This directive is active only with the </font><font color="#008007">box
+</font><font color="#990000">and</font><font color="#008007">
+DVbs</font><font color="#990000"> edit directives, and it should only be
+specified once, before any dose-volume edits are performed.</font></b>
+<p><a NAME="D.4.7"></a><b>D.4.7.&nbsp; in_reg and more_reg</b>
+<p><b>These directives very closely resemble the <a href="#D.3.4">ref_reg/more_ref</a>
+directives.&nbsp; The <font color="#008007">in_reg</font> and <font color="#008007">more_reg</font>
+directives specify a restricted set of regions to be used for a subsequent
+edit.&nbsp; The regions may be specified either by their names or indices.&nbsp;
+The default is to use all regions.</b>
+<p><b><font color="#990000">These directives may be used with the </font><font color="#008007">point</font><font color="#990000">,</font><font color="#008007">
+line</font><font color="#990000">, </font><font color="#008007">contour</font><font color="#990000">,</font><font color="#008007">
+box</font><font color="#990000">, and </font><font color="#008007">DVbs</font><font color="#990000">
+directives, and they are active until another </font><font color="#008007">in_reg/more_reg</font><font color="#990000">
+directive is encountered.</font></b>
+<p><a NAME="D.4.8"></a><b>D.4.8.&nbsp; nbin_DV</b>
+<p><b>This directive divides the dose/volume edit results into a number
+of equal width bins.</b>
+<p><b>&nbsp;<font color="#000000">Example:&nbsp;&nbsp; nbin_DV&nbsp;&nbsp;&nbsp;
+20</font></b>
+<br><b><font color="#000000">&nbsp;Default:&nbsp;&nbsp;&nbsp;&nbsp; nbin_DV&nbsp;&nbsp;&nbsp;
+10</font></b>
+<p><b>The default value results in data bins from <font color="#990000">0-10%,
+10-20%, ... 90-100%</font>, and <font color="#990000">>100%</font>.</b>
+<p><b><font color="#990000">This directive is active only with the </font><font color="#008007">DVbs
+</font><font color="#990000">directive.</font></b>
+<p><a NAME="D.4.9"></a><b>D.4.9.&nbsp; rbe</b>
+<p><b>This directive provides the set of RBE values to use for scaling
+the dose results<font color="#274342">.&nbsp; There are six RBE values
+in use for conventional energies (below 16.9MeV), and eight for ultrafast
+applications.&nbsp; The eight values modify, respectively, the </font><font color="#008007">boron,
+gamma, nitrogen, hydrogen, other, gamma production, proton recoil </font><font color="#274342">(E
+> 16.9MeV), and </font><font color="#008007">ultrafast dose</font><font color="#274342">
+components.&nbsp; Default values for all are 1.0.</font></b>
+<p><b><font color="#274342">&nbsp;</font><font color="#000000">Example:&nbsp;&nbsp;
+rbe&nbsp;&nbsp;&nbsp; 1.3 1.0 3.2 3.2</font></b>
+<p><b><font color="#990000">This directive applies to all edit directives
+that follow, and it is active until superseded.</font></b>
+<p><a NAME="D.4.10"></a><b>D.4.10.&nbsp; images</b>
+<p><b>This directive defines the field of view (<font color="#008007">FOV</font>),
+coordinate axis mapping (<font color="#008007">in_x, in_y, in_z</font>),
+and the number of x- and y-grid points to be written to a contour data
+file by a <font color="#008007">contour</font> directive.&nbsp; The field
+of view, which is the height and width of the image, is specified in centimeters.&nbsp;
+The axis mapping values map the coordinate axes from model space to image
+space.&nbsp; Generally, this mapping is not necessary, as seraModel automatically
+makes the default transformation for human images.&nbsp; However, for other
+image sets, such as dogs, the model coordinates do not map the same as
+for humans, making the mapping necessary.&nbsp; The number of points in
+the x- and y-directions should be the same, as the performance of non-square
+contour data arrays is not guaranteed.&nbsp; An example of the <font color="#008007">images</font>
+directive is shown in <a href="#D.4.11">Section D.4.11</a>.</b>
+<p><a NAME="D.4.11"></a><b>D.4.11.&nbsp; ap, bp, and cp</b>
+<p><b>These three directives, which, when used, must always be used together,
+specify a geometric transformation from image (patient) space to model
+space in the seraMC edits.&nbsp; These directives are used in conjunction
+with the <font color="#008007"><a href="#D.4.10">images</a></font><font color="#274342">
+and </font><font color="#008007"><a href="#D.5.4">contour</a></font><font color="#274342">
+directives.&nbsp; The </font><font color="#008007">ap, bp, </font><font color="#274342">and</font><font color="#008007">
+cp </font><font color="#274342">directives define the transformation of
+a vector </font><font color="#FF0000">xb</font><font color="#274342"> in
+image space to a vector </font><font color="#FF0000">x</font><font color="#274342">
+in model space, as given by:</font></b>
+<p><b><font color="#274342">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <tt><font size=+1>x(i)
+= ap(i) + bp(i) * {xb(in(i)) + cp(i)}</font></tt></font></b>
+<p><b><font color="#274342">where the vector </font><font color="#FF0000">in</font><font color="#274342">
+is given on the </font><font color="#008007">images</font><font color="#274342">
+card as </font><font color="#008007">in_x</font><font color="#274342">,</font><font color="#008007">
+in_y</font><font color="#274342">,</font><font color="#008007"> </font><font color="#274342">and</font><font color="#008007">
+in_z</font><font color="#274342">.&nbsp; These directives are rarely used,
+unless a non-default configuration for a contour data set is desired.&nbsp;
+Use of the </font><font color="#008007"><a href="#D.5.5">ottocon</a></font><font color="#274342">
+directive is recommended instead.</font></b>
+<p><b><font color="#274342">&nbsp;</font><font color="#000000">Example:&nbsp;&nbsp;
+images&nbsp;&nbsp;&nbsp;&nbsp; 26.0&nbsp; 2&nbsp; 1&nbsp; 3&nbsp; 40&nbsp;
+40</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ap&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.0</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+bp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.076923&nbsp; 0.076923&nbsp; 0.076923</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.0</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+contour&nbsp;&nbsp;&nbsp;&nbsp; "AX_1.014"&nbsp;&nbsp; -7.25</font></b>
+<p><b><font color="#274342">Usually, the </font><font color="#008007">ap</font><font color="#274342">
+and </font><font color="#008007">cp</font><font color="#274342"> vectors
+are zero, and the </font><font color="#008007">bp</font><font color="#274342">
+vector provides a scaling factor for the transformation.&nbsp; This scaling
+factor is 2.0/</font><font color="#008007">FOV</font><font color="#274342">.</font></b>
+<p><a NAME="D.4.12"></a><b>D.4.12.&nbsp; skinentry</b>
+<p><b>This directive provides additional information needed by the <a href="#D.5.12">crosshair</a>
+edit directive.&nbsp; It gives the distance along the beam centerline from
+the beam exit plane to the entry point on the skin, in centimeters.&nbsp;
+This directive may be useful for patient positioning.</b>
+<p><b>&nbsp;<font color="#000000">Example:&nbsp;&nbsp;&nbsp; skinentry&nbsp;&nbsp;&nbsp;&nbsp;
+30.0</font></b>
+<br><b><font color="#000000">&nbsp;Default:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+skinentry&nbsp;&nbsp;&nbsp;&nbsp; 0.1</font></b>
+<br>&nbsp;
+<p><a NAME="D.5"></a><b><font size=+1>D.5.&nbsp; Active Edits</font></b>
+<p><a NAME="D.5.1"></a><b>D.5.1.&nbsp; point</b>
+<p><b>This directive generates dose and flux results at the specified spatial
+point.&nbsp; All dose and flux components are edited.&nbsp; The point is
+specified by its coordinates in centimeters.</b>
+<p><b>&nbsp;<font color="#000000">Example:&nbsp;&nbsp; point&nbsp;&nbsp;&nbsp;
+1.0 1.0 3.5</font></b>
+<p><b><font color="#274342">Other required directives:&nbsp; none</font></b>
+<p><b><font color="#274342">Other useful directives:&nbsp; <a href="#D.4.3">b10_blood</a>,
+<a href="#D.4.9">rbe</a></font></b>
+<p><a NAME="D.5.2"></a><b>D.5.2.&nbsp; line</b>
+<p><b>The <font color="#008007">line</font> edit directive defines two
+points, and performs a dose edit along the line between these points.&nbsp;
+The spacing between edit points is defined on the <font color="#008007">delta</font>
+directive.&nbsp; All locations are given in centimeters.</b>
+<p><b>&nbsp;<font color="#000000">Example:&nbsp;&nbsp; line&nbsp;&nbsp;&nbsp;&nbsp;
+1.0 1.0 10.0&nbsp;&nbsp; 1.0 1.0 2.0</font></b>
+<p><b>Other required directives:&nbsp; <a href="#D.4.5">delta</a></b>
+<p><b>Other useful directives:&nbsp; <a href="#D.4.7">in_reg</a></b>
+<p><a NAME="D.5.3"></a><b>D.5.3.&nbsp; px, py, and pz</b>
+<p><b>These directives generate 20x20 grids of dose and flux edits for
+the specified plane.&nbsp; The <font color="#008007">px</font> directive
+holds <font color="#FF0000">x</font> constant, <font color="#008007">py</font>
+holds <font color="#FF0000">y</font> constant, and <font color="#008007">pz</font>
+holds <font color="#FF0000">z</font> constant.&nbsp; The information is
+written to the file <font color="#CC6600">sur.plot</font><font color="#274342">.</font></b>
+<p><b><font color="#000000">&nbsp;Example:&nbsp;&nbsp; px&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1.0&nbsp;&nbsp; -10.0 10.0&nbsp;&nbsp;&nbsp; -20.0 0.0</font></b>
+<p><b>This example would generate data for the plane defined by x=1.0,
+-10.0 &lt; y &lt; 10.0, -20.0 &lt; z &lt; 0.0.&nbsp; These directives have
+been largely superseded by the <a href="#D.5.5">ottocon</a> directive.</b>
+<p><b>Other required directives:&nbsp; <a href="#D.4.5">delta</a></b>
+<p><b>Other useful directives:&nbsp; <a href="#D.4.7">in_reg</a></b>
+<p><a NAME="D.5.4"></a><b>D.5.4.&nbsp; contour</b>
+<p><b>The <font color="#008007">contour</font> edit directive creates a
+set of files to provide information to <a href="sec09.html">seraDose</a>
+and <a href="sec06.html">sera3d</a> for isodose contour generation.&nbsp;
+Three files are generated for each contour directive - a contour header
+file <font color="#CC6600">.chd</font><font color="#274342">, a contour
+data file </font><font color="#CC6600">.cdf.szip</font><font color="#274342">,
+and a mask file </font><font color="#CC6600">.cmf.szip</font><font color="#274342">.&nbsp;
+The data and mask files are both compressed after generation.&nbsp; The
+number of points generated is determined by the <a href="#D.4.10">images</a>
+directive.&nbsp; An example contour edit directive is shown in <a href="#D.4.11">Section
+D.4.11</a>.</font></b>
+<p><b>The first parameter on the <font color="#008007">contour</font> directive
+provides the name of the file to which the dose information is written.&nbsp;
+The second parameter gives the axial position, in cm, for which the dose
+information is calculated.</b>
+<p><b><font color="#274342">Other useful directives:&nbsp; <a href="#D.4.7">in_reg</a></font></b>
+<p><a NAME="D.5.5"></a><b>D.5.5.&nbsp; ottocon</b>
+<p><b>This directive generates contour information for all image slices
+within a specified region, and writes these to a single set of contour
+files.</b>
+<p><b>&nbsp;<font color="#000000">Example:&nbsp;&nbsp; ottocon&nbsp;&nbsp;&nbsp;
+40 40 target</font></b>
+<p><b>The first two values define the number of grid points to generate
+for the contour data file, and the third values specifies the region.&nbsp;
+Contour information is generated for all image slices that intersect this
+region.&nbsp; The files created are the same as those from the <font color="#008007">contour</font>
+directive, and all bear the prefix "ottocon".&nbsp; These files are renamed
+in the seraMC run script to correspond to the requested univel filename.</b>
+<p><b>Other required directives:&nbsp; none</b>
+<p><b>Other useful directives:&nbsp; none</b>
+<p><a NAME="D.5.6"></a><b>D.5.6.&nbsp; box</b>
+<p><b>This directive performs a dose-volume edit, with the integration
+restricted to the space enveloped by the box, in the regions specified
+on the <a href="#D.4.7">in_reg</a> acceptance list.&nbsp; The box dimensions
+are all given in centimeters.&nbsp; The values are respectively the upper
+and lower boundaries of the x, y, and z coordinates of the box.</b>
+<p><b>&nbsp;<font color="#000000">Example:&nbsp;&nbsp; box&nbsp;&nbsp;&nbsp;&nbsp;
+1.0&nbsp; 5.0&nbsp; 3.0&nbsp; 6.0&nbsp; 3.5&nbsp; 7.5</font></b>
+<p><b>If a dose-volume edit for an entire region is desired, it is simplest
+to use the <a href="#D.5.7">DVbs</a> edit directive, which finds and defines
+the bounding box automatically.</b>
+<p><b>Other required directives:&nbsp; <a href="#D.4.5">delta</a>, <a href="#D.4.6">eps</a></b>
+<p><b>Other useful directives:&nbsp; <a href="#D.4.3">b10_blood</a>, <a href="#D.4.4">b10_ratio</a>,
+<a href="#D.4.7">in_reg</a>,
+<a href="#D.4.9">rbe</a></b>
+<p><a NAME="D.5.7"></a><b>D.5.7.&nbsp; DVbs</b>
+<p><b>This directive performs a dose-volume integration over all regions
+defined in the <a href="#D.4.7">in_reg</a> acceptance list.&nbsp; Dose-volume
+histogram data are calculated for all dose components, and for the total
+dose, using the previously specified RBE values, isotope densities, and
+boron concentrations.&nbsp; Bins for the histogram results are determined
+by the <a href="#D.4.8">nbin_DV</a> directive.&nbsp; Note that, if multiple
+regions are specified in the acceptance list, the integration is performed
+over the entire volume defined by these regions, and not over each region
+separately.</b>
+<p><b>Other required directives:&nbsp; <a href="#D.4.5">delta</a>, <a href="#D.4.6">eps</a></b>
+<p><b>Other useful directives:&nbsp; <a href="#D.4.3">b10_blood</a>, <a href="#D.4.4">b10_ratio</a>,
+<a href="#D.4.7">in_reg</a>,
+<a href="#D.4.8">nbin_DV</a>,
+<a href="#D.4.9">rbe</a>,
+<a href="#D.5.11">N_avg</a></b>
+<br><a NAME="D.5.8"></a><b>D.5.8.&nbsp; fiducial</b>
+<p><b>This directive specifies the location of a fiducial marker in the
+model space and calculates the three directional offsets (left-right, anterior-posterior,
+inferior-superior) to the skin entry point.&nbsp; This directive may be
+useful for patient positioning.</b>
+<p><b>&nbsp;<font color="#000000">Example:&nbsp;&nbsp; fiducial&nbsp;&nbsp;&nbsp;
+-4.5 5.0 9.2</font></b>
+<p><b><font color="#274342">Other required directives:&nbsp; none</font></b>
+<p><b><font color="#274342">Other useful directives:&nbsp; none</font></b>
+<p><a NAME="D.5.9"></a><b>D.5.9.&nbsp; ras</b>
+<p><b>This directive generates a raster image file on a specified plane,
+for a uniform grid, with the distance between points determined by the
+<font color="#008007">delta</font>
+directive.&nbsp; The data are written to a file <font color="#CC6600">raster.n</font><font color="#274342">,
+where </font><font color="#CC6600">n</font><font color="#274342"> indicates
+the number of </font><font color="#008007">ras</font><font color="#274342">
+directives executed.</font></b>
+<p><b><font color="#274342">&nbsp;</font><font color="#000000">Example:&nbsp;&nbsp;
+ras&nbsp;&nbsp;&nbsp;&nbsp; -4.0 5.0&nbsp;&nbsp; 3.0 12.0&nbsp;&nbsp; 7.0
+7.0</font></b>
+<p><b><font color="#274342">This example would generate data for the plane
+-4.0 &lt; x &lt; 5.0, 3.0 &lt; y &lt; 12.0 at z=7.0.&nbsp; Note that one
+of the coordinate pairs must be degenerate.</font></b>
+<p><b><font color="#274342">Other required directives:&nbsp; <a href="#D.4.5">delta</a></font></b>
+<p><b><font color="#274342">Other useful directives:&nbsp; none</font></b>
+<p><a NAME="D.5.10"></a><b>D.5.10.&nbsp; beamplt</b>
+<p><b>The <font color="#008007">beamplt</font> directive causes edits to
+be generated for a plane through the beam line.&nbsp; A set of <a href="#D.5.4">contour</a>
+data is created for the plane, and two <a href="#D.5.2">line</a> edits
+parallel to the beam line are also created.&nbsp; The directive input is
+given as follows:</b>
+<p><b>&nbsp;<font color="#000000">Example:&nbsp;&nbsp; beamplt&nbsp;&nbsp;&nbsp;&nbsp;
+nx ny maxis fov rbeam imname</font></b>
+<p><b>where <font color="#008007">nx</font> and <font color="#008007">ny</font>
+specify the grid for the contour data, <font color="#008007">maxis</font>
+defines the axis normal to the plane, <font color="#008007">fov</font>
+gives the desired field of view in centimeters, <font color="#008007">rbeam</font>
+specifies the distance in centimeters from the beam line for the line edits,
+and <font color="#008007">imname</font> is the prefix for the the contour
+files.&nbsp; The <font color="#008007">maxis</font> parameter forces the
+values normal to the plane to have constant value on the axis specified,
+with <font color="#FF0000">1</font>, <font color="#FF0000">2</font>, and
+<font color="#FF0000">3</font>,
+denoting the x-, y-, and z-directions, respectively, as possible values.</b>
+<p><b>Other required directives:&nbsp; <a href="#D.4.5">delta</a></b>
+<p><b>Other useful directives:&nbsp; <a href="#D.4.7">in_reg</a></b>
+<p><a NAME="D.5.11"></a><b>D.5.11.&nbsp; N_avg</b>
+<p><b>This directive induces the dose-volume integrations to provide additional
+information.&nbsp; The dose-volume integration will, in addition to the
+total dose-volume integral, produce volume-averaged doses for <font color="#008007">N_avg</font>
+equal volume intervals within the region.&nbsp; These subregions are determined
+by ordering the dose values within the region, then dividing the list into
+<font color="#008007">N_avg</font>
+equal volume intervals and averaging the dose over each of these subvolumes.&nbsp;
+Note that these subvolumes will not necessarily be contiguous spatial regions.&nbsp;
+The results are then ordered by average dose.</b>
+<p><b>&nbsp;<font color="#000000">Example:&nbsp;&nbsp; N_avg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+3</font></b>
+<br><b><font color="#000000">&nbsp;Default:&nbsp;&nbsp;&nbsp;&nbsp; N_avg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1</font></b>
+<p><b>Other required directives:&nbsp; <a href="#D.5.7">DVbs</a></b>
+<p><b>Other useful directives:&nbsp; none</b>
+<p><a NAME="D.5.12"></a><b>D.5.12.&nbsp; crosshair</b>
+<p><b>This directive calculates the distance from the entry point, defined
+by the <font color="#008007">skinentry</font> directive, to the targeting
+laser crosshair location.</b>
+<p><b>&nbsp;<font color="#000000">Example:&nbsp;&nbsp; crosshair&nbsp;&nbsp;&nbsp;&nbsp;
+12.0</font></b>
+<br><b><font color="#000000">&nbsp;Default:&nbsp;&nbsp;&nbsp;&nbsp; crosshair&nbsp;&nbsp;&nbsp;&nbsp;
+10.0</font></b>
+<p><b>The value specified is the distance from the beam exit plane to the
+laser crosshair location, in centimeters.</b>
+<p><b>Other required directives:&nbsp; <a href="#D.4.12">skinentry</a></b>
+<p><b>Other useful directives:&nbsp; none</b>
+<br>&nbsp;
+<br>&nbsp;
+<br>
+<center>
+<p><img SRC="marblebar.jpg" NOSAVE height=6 width=460>
+<p><a href="appC.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><a href="appC.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="SeraConvert/convert.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="SeraConvert/convert.html">Next</a></b></center>
+
+</body>
+</html>

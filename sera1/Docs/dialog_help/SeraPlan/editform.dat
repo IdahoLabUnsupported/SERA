@@ -1,0 +1,25 @@
+
+SeraPlan Edit Module
+
+       __________________________________________________
+
+The Edit Module is an interactive tool to perform various edits
+of dose results from the Combination Utility, or directly from
+SeraMC.  Among the edits that may be performed are point, line,
+contour, and dose-volume histogram edits.  Boron concentrations
+in tissue and RBE and compound factors may be taken into account.
+A large number of standard edits (DV histograms for all defined
+bodies, point edits for all target points, etc.) relieve the
+user of the need to interact extensively with the code.
+
+A comprehensive list of the standard edits follows below.
+
+   - point edits at the target points for each field
+   - point edits at all defined constraint markers
+   - line edits along the beam line for each field
+   - contour edits on all defined image planes
+   - dose-volume histograms for each defined body
+
+In addition, standard dose-volume histogram edits for body
+combinations may be defined with the Preferences file, and
+these are edits are also automatically performed.

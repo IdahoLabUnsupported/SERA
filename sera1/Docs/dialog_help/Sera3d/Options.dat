@@ -1,0 +1,75 @@
+The Options Menu
+
+    Axis Types:
+
+	    The axis coloring is : 
+                       X - Red
+                       Y - Yellow
+                       Z - Blue
+         
+         Thin Line:
+	         The three positive axis (X, Y, Z) are 
+               drawn as a thin line.
+
+         Thick Line:
+	         The three positive axis (X, Y, Z) are 
+               drawn as a thick line.	
+
+         Full:
+	         All the positive and negative axis are
+               displayed.
+
+         Off :
+                 No axis are drawn.
+
+
+    Axis Labels:
+	      The axis that are drawn will have its
+           label drawn at its end.  For example the 
+           positive X axis will have a X+, while the
+           negative Z will have Z-  .
+
+    Fast Rotation:
+	      Fast Rotation is a method for allowing the
+           user to rotate complex graphical objects without
+           having to wait for the slow redrawing speeds.  To
+           accomplish this, while the object is being rotated,
+           it is drawn at a very low resolution or as a simpler
+           object.  When the object is done rotating, it is 
+           displayed back as the complex object.
+
+         by Wireframe:
+	      When rotating, the bodies are displayed as
+           points (not really wireframe).
+
+         by Axis:
+	      When rotating, only the axis are displayed.
+            NOTE:  make sure the axis are on or nothing
+                   will be displayed.
+
+         Off:
+	     The original objects are displayed when 
+            rotating.  
+
+           WARNING:
+                   The voxels and nurbs are slow to redraw
+                 so rotating them without fast rotation 
+                 does not work well.
+
+      
+    Multi-View:
+        With Multi-View enabled, 3 more rendering windows are
+       added to the left side of the screen.  They are camera
+       positions from the left, right and top views.   Because
+       the rendering has to be directed to a total of four 
+       windows, the multi-view slows down the operations 
+       slightly.
+
+    Messages:
+        With Messages enabled, the title bar above the main
+       rendering window will post the current activity of 
+       the program.  At the current time, the messages, are
+       informative, but tend to slow the program slightly.
+
+
+

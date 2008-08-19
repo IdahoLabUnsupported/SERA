@@ -1,0 +1,26 @@
+Sera Model
+__________________________________________________
+
+After the image information has been prepared,
+image editing is usually the next step in the 
+treatment planning process.
+
+The purpose of the seraModel module is to more
+easily and rapidly break an image set into regions 
+of interest. The image matrix used for display in 
+this program has been generalized to work on 
+systems with different color depths, view images 
+at an arbitrary zoom level, in an arbitrary window 
+size, and with an arbitrary number of columns.
+
+The image editor provides many useful image 
+operations including manual and automatic definition 
+and generation of univel-based regions of interest 
+which form the geometry used by the Monte Carlo 
+radiation transport simulation. Various image 
+processing tools are provided to aid in the manual 
+definition of these regions including region
+copying, scaling, overwriting, and painting by fill 
+or borders. Threshold-based segmenting, 3D region 
+growing, body copying, and automatic target 
+definition operations are also provided.

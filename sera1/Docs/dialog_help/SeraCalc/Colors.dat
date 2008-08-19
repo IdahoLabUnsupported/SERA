@@ -1,0 +1,7 @@
+The Color Tool menu provides two selections:
+
+Color Tool 
+   Provides a window for controlling the appearance of an image via changes to the system colormap as well as adjustments for background, saturation, and gamma correction.  The user can also load new colormaps to display the images.  
+   
+Change Body Color
+   Provides a method to change the color of a user defined body to one of eight predefined colors.

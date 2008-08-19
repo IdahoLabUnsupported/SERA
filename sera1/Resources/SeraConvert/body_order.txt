@@ -1,0 +1,21 @@
+# This file contains a list of bodies that might be found
+# in a spline file.  The list is meant to be in the order
+# of containment.  For example, since 'scalp' comes before
+# 'tumor', 'tumor' would be found inside of 'scalp'
+#
+# If seraConvert has asked you add a body to this list,
+# please put it in the 'most logical' place.
+
+buffer
+head
+scalp
+skull
+brain
+cerebellum
+lefthemi
+righthemi
+stem
+target
+edema
+tumor
+

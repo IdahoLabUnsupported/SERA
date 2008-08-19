@@ -1,0 +1,7 @@
+#define IHaveSubdirs
+#define PassCDebugFlags 'CDEBUGFLAGS=$(CDEBUGFLAGS)'
+
+SUBDIRS = Zlib SZ program
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))

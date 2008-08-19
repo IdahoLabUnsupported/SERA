@@ -1,0 +1,14 @@
+SRCS = 	libsz.c
+OBJS = 	libsz.o \
+	../Zlib/adler32.o  ../Zlib/compress.o ../Zlib/crc32.o    ../Zlib/deflate.o  \
+	../Zlib/gzio.o     ../Zlib/infblock.o ../Zlib/infcodes.o ../Zlib/inffast.o  \
+	../Zlib/inflate.o  ../Zlib/inftrees.o ../Zlib/infutil.o  ../Zlib/trees.o    \
+	../Zlib/uncompr.o  ../Zlib/zutil.o
+
+LIBLOCATION = $(SERA_LIB_LOCATION)
+LIB_NAME    = sz
+
+NormalLibraryObjectRule()
+NormalLibraryTarget($(LIB_NAME),$(OBJS))
+InstallLibrary($(LIB_NAME),$(LIBLOCATION))
+DependTarget()

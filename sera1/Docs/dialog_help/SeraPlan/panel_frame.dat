@@ -1,0 +1,17 @@
+
+Plan Name and Patient ID
+
+       __________________________________________________
+
+Plan Name
+
+The plan name is actually a prefix for all the files generated
+by the edit module.  This must be provided for each edit run.
+
+       __________________________________________________
+
+Patient ID
+
+The patient ID serves as a separator for the line edits in the
+.lin file.  This is an optional parameter, and may be an arbitrary
+string, containing no spaces.

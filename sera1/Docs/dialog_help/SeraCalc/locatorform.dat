@@ -1,0 +1,3 @@
+Locate
+   When selected, the location and image pixel value will appear to the right of the button while the mouse cursor is in the window.  The form of the display is "X:nnn Y:nnn I:nnn", where X and Y are the location of the cursor in millimeters, and I is the intensity of the pixel at that location (0-255).
+   If the mouse button is pressed and held down, the locate data becomes a measurement indicating the length and angle of the line being dragged by moving the mouse while holding the button down.  The form of the display is "L:nnn A:nnn.nn", where the angle is in degrees clockwise from vertical and L is the length in millimeters.

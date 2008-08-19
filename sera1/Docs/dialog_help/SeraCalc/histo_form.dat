@@ -1,0 +1,17 @@
+   Histo is an ancilliary program that reads the rtt_MC standard output and invokes the xmgr plot code for each encounter of a volume edit. 
+
+   The dose/volume information for the volume edit is contained by the 7 different toggle buttons.
+
+To use:
+   1.  Select the name of the rtt_MC output file in the file selection box.
+   2.  Enter the xmgr plot commands filename to be created.
+   3.  Select the toggle buttons to be plotted.  An xmgr window is opened for each volume edit and the user can modify the title and perform any other editting of the plot and then print the plot and save the plot file using the capabilities of xmgr.
+
+Notes:
+  1.  In order for histo and xmgr to work correctly, the user's RttPath must be set correctly with lib/HistoCommands as a subdirectory of that path or else an error like this will be displayed:
+
+   Else
+   Can't open commands file YOUR_RTT_PATH/lib/HistoCommands.
+
+  2.  Also, the user's BNCT_BIN must be set correctly with xmgr contained in that directory.
+  3.  If the user tries to run histo and only an Else is printed, the file histo was trying to run is probably not a valid rtt_MC standard output file.

@@ -1,0 +1,13 @@
+#define IHaveSubdirs
+#define PassCDebugFlags 'CDEBUGFLAGS=$(CDEBUGFLAGS)'
+
+# Shared must be the first directory because it builds
+# the libraries that every other module depends on
+
+SUBDIRS = \
+Shared Sera3d SeraCalc SeraDose SeraImage \
+SeraMC SeraMenu SeraModel SeraPlan SeraPlot \
+Util
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))

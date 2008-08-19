@@ -1,0 +1,253 @@
+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    RAFL 5 LIBRARY (OCT 83 FORMAT)
+
+
+
+
+                              88/10/28
+
+                      RAFFLE LIBRARY FROM NDRAFL              
+
+                           162  MATERIALS
+
+                            18  FISSION SPECTRA
+
+                            72  ENERGY GROUPS
+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    RAFL 5 LIBRARY (OCT 83 FORMAT)
+
+
+
+
+                              88/10/28
+
+                      RAFFLE LIBRARY FROM NDRAFL              
+
+                           162  MATERIALS
+
+                            18  FISSION SPECTRA
+
+                            72  ENERGY GROUPS
+1
+
+                              FISSION SPECTRA
+
+
+
+     SPECTRUM NUMBER 1  U-235 ENDF/B-IV  MAT 1261  (THERM FISS)              
+     SPECTRUM NUMBER 2  U-238 ENDF/B-IV  MAT 1262  (THERM FISS)              
+     SPECTRUM NUMBER 3  PU-239 ENDF/B-IV  MAT 1264  (THERM FISS)             
+     SPECTRUM NUMBER 4  PU-239 ENDF/B-IV  MAT 1264  (FAST FISS  ITHETA = GROU
+     SPECTRUM NUMBER 5  PU-240 ENDF/B-IV  MAT 1265  (THERM FISS)             
+     SPECTRUM NUMBER 6  U-233 ENDF/B-IV  MAT 1260  (THERM FISS)              
+     SPECTRUM NUMBER 7  U-235 ENDF/B-V   MAT 1395  (THERM FISS)              
+     SPECTRUM NUMBER 8  U-238 ENDF/B-V   MAT 1398  (THERM FISS)              
+     SPECTRUM NUMBER 9  PU-239 ENDF/B-V   MAT 1399  (THERM FISS)             
+     SPECTRUM NUMBER 10 PU-239 ENDF/B-V MAT 1399 FAST FISS  ITHETA=14        
+     SPECTRUM NUMBER 11 PU-240 ENDF/B-V   MAT 1380  (THERM FISS)             
+     SPECTRUM NUMBER 12 U-233  ENDF/B-V   MAT 1393  (THERM FISS)             
+     SPECTRUM NUMBER 13 PU-241 ENDF/B-V   MAT 1381  (THERM FISS)             
+      SPEC NO. 14 PU-239 VERS4 MAT1264 ITHETA=17 ZPR6 ASSY 7/7I/7S HOMO CORE 
+      SPEC NO. 15  U-238 VERS4 MAT1262 ITHETA= 9 ZPR6 ASSY 7/7I/7S HOMO CORE 
+     SPECTRUM NUMBER 16  TH-232 ENDF/B-V   MAT 1390 (FAST FISS  ITHETA=2)    
+      SPECTRUM NUMBER 17 U-235 VERS 5 MAT 1395 (GODIVA ITHETA = GP 11)       
+      SPECTRUM NUMBER 18 AM-242M VERS 5 MAT 1369 THERMAL SPECTRUM            
+1
+
+                              ISOTOPE LIST
+
+      ID          TITLE           MAT  TAPE VERS  IWR     AWR     SIG-POT     TAPE
+
+     401  URANIUM-238 VERS 4P    1262  409    4    3    236.0060     10.5992         9
+     402  URANIUM-235 VERS 4P,   1261  407    4    3    233.0250     11.5000         9
+     403  PLUTONIUM-239 VERS 4   1264  407    4    3    236.9990     10.2000         9
+     404  PLUTONIUM-240 VERS 4   1265  407    4    3    237.9920     10.5992         9
+     405  OXYGEN-16  ENDF/B-IV   1276  408    4    0     15.8580      3.7482         9
+     406  URANIUM-233  ENDF/B-   1260  409    4    2    231.0430     12.7999         9
+     407  LEAD-NAT   ENDF/B-IV   1288  408    4    0    205.4300     10.9623         9
+     408  PLUTONIUM-241 VERS 4   1266  407    4    3    238.9780     10.9389         9
+     409  SODIUM-23  VERS 4      1156  403    4    2     22.7923      3.5299         9
+     410  IRON  VERS 4           1192  406    4    4     55.3650      2.6590         9
+     411  CHROMIUM  VERS 4       1191  406    4    4     51.5490      4.4388         9
+     412  NICKEL  VERS 4         1190  406    4    4     58.1826      6.5331         9
+     413  URANIUM-238 VERS 4P,   1262  409    4    3    236.0060     10.5992         9
+     414  MANGANESE-55  VERS 4   1197  409    4    0     54.4661      2.5901         9
+     415  MOLYBDENUM  VERS 4     1287  409    4    0     95.1160      4.8008         9
+     501  URANIUM-238 VERS 5P,   1398  555    5    3    236.0060     11.1983         9
+     502  URANIUM-235 VERS 5P,   1395  555    5    3    233.0250     11.5000         9
+     503  PLUTONIUM-239 VERS 5   1399  515    5    3    236.9990     10.2000         9
+     504  PLUTONIUM-240 VERS 5   1380  515    5    3    237.9920     10.5992         9
+     505  OXYGEN-16  VERS 5      1276  551    5    0     15.8580      3.7482         9
+     506  THORIUM-232 VERS 5P,   1390  516    5    3    230.0400     11.8481         9
+     507  LEAD-NAT FROM TAPE 5   1382  508    5    0    205.4300     10.9623         9
+     508  HYDROGEN ENDF/B-V TA   1301  511    5    0       .9992     20.4490         9
+     509  ALUMINIUM-27   VERS    1313  506    5    0     26.7500      1.3480         9
+     510  LITHIUM-6  VERS 5      1303  511    5    0      5.9634       .7105         9
+     511  LITHIUM-7 VERS 5 MOD   1397  558    5    0      6.9557      1.0500         9
+     512  CARBON  VERS 5         1306  511    5    0     11.8969      4.7392         9
+     513  NITROGEN-14  VERS 5    1275  505    5    0     13.8830      9.9574         9
+     514  NITROGEN-15  VERS 5    1307  505    5    0     14.8710      4.4175         9
+     515  CHROMIUM  VERS 5       1324  512    5    4     51.5490      4.4388         9
+     516  MANGANESE-55  VERS 5   1325  553    5    2     54.4661      3.8013         9
+     517  IRON(NAT) VERS 5 RES   1326  557    5    4     55.3650      3.1416         9
+     518  NICKEL  VERS 5         1328  554    5    4     58.1826      6.5331         9
+     519  ZIRCONIUM(NAT) VERS    1340  558    5    4     90.4360      6.9186         9
+     520  HELIUM-3  VERS 5       1146  511    5    0      2.9901      1.0000         9
+     521  BORON-10  VERS 5       1305  511    5    0      9.9269      2.0346         9
+     522  BORON-11  VERS 5       1160  501    5    0     10.9150      5.0352         9
+     523  CADMIUM-NATURAL  VER   1281  501    5    0    111.4600      6.9934         9
+     524  COBALT-59 VERS 5 RES   1327  561    5    2     58.4269      5.8107         9
+     525  SODIUM-23 VERS 5 INF   1311  556    5    0     22.7920      3.6779         9
+     526  SILICON  VERS 5        1314  507    5    0     27.8440      2.0420         9
+     527  COPPER  VERS 5         1329  508    5    4     63.5460      6.7003         9
+     528  SULFUR  VERS 5 *ID     1347  517    5    0     31.7882      1.8350         9
+     529  BERYLLIUM-9  VERS 5    1304  551    5    0      8.9348      6.0000         9
+     530  CURIUM-245    VERS 5   1345  554    5    0    242.9600     10.1000         9
+     531  PLUTONIUM-242  VERS    1342  514    5    3    239.9790     10.6941         9
+     532  CALCIUM(NAT) VERS 5    1320  557    5    0     39.7360      2.9926         9
+     533  MAGNESIUM VERS 5       1312  506    5    0     24.0963      3.3719         9
+     534  TITANIUM  VERS 5       1322  508    5    0     47.4676      1.6088         9
+     535  VANADIUM  VERS 5       1323  508    5    0     50.5040      5.0003         9
+     536  DEUTERIUM  VERS 5      1302  551    5    0      1.9968      3.3949         9
+     537  FLUORINE-19  VERS 5    1309  552    5    0     18.8350      3.6103         9
+     538  GOLD-197  VERS 5       1379  554    5    2    195.2740     12.0687         9
+     539  AMERICIUM 242M VERS    1369  514    5    0    239.9800     10.2000         9
+     541  CHLORINE  VERS 5       1149  513    5    0     35.1480     15.9043         9
+     542  POTASSIUM  VERS 5      1150  513    5    0     38.7660      1.4957         9
+     543  PHOSPHORUS  VERS 5     1315  503    5    0     30.7080      4.0972         9
+     544  AMERICIUM-241  *ID     1361  514    5    0    238.9860     11.3411         9
+     545  NEPTUNIUM-237  VERS    1337  514    5    0    235.0120     10.5002         9
+     546  AMERICIUM-243  *ID     1363  514    5    0    240.9730     10.0000         9
+     547  CURIUM-242  *ID        8642  522    5    0    239.9790     10.2000         9
+     548  CURIUM-244  *ID        1344  514    5    0    241.9660     10.3200         9
+     549  URANIUM-234  VERS 5    1394  554    5    0    232.0300     10.0210         9
+     550  URANIUM-236  VERS 5    1396  555    5    0    234.0180     10.9952         9
+     551  PROTACTINIUM-233 VER   1391  514    5    3    231.0380      9.9950         9
+     552  PLUTONIUM-238  VERS    1338  554    5    0    236.1670     10.8897         9
+     553  URANIUM-238 VERS 5P,   1398  555    5    3    236.0060     11.1983         9
+     554  BISMUTH  VERS 5        1375  517    5    0    207.1850      9.3460         9
+     555  HAFNIUM-174  VERS 5    1374  501    5    0    172.4460      7.5867         9
+     556  HAFNIUM-176  VERS 5P   1376  501    5    3    174.4300      7.5867         9
+     557  HAFNIUM-177  VERS 5P   1377  501    5    3    175.4230      7.5867         9
+     558  HAFNIUM-178  VERS 5P   1378  501    5    3    176.4150      7.5867         9
+     559  HAFNIUM-179  VERS 5P   1383  501    5    3    177.4090      7.5867         9
+     560  HAFNIUM-180  VERS 5P   1384  501    5    3    178.4010      7.5867         9
+     561  TUNGSTEN-182    VERS   1475  559    5    3    180.3900      8.0001         9
+     562  TUNGSTEN-183    VERS   1476  559    5    3    181.3800      8.0001         9
+     563  TUNGSTEN-184    VERS   1477  559    5    3    182.3700      8.0001         9
+     564  TUNGSTEN-186    VERS   1478  559    5    3    184.3600      8.0001         9
+     565  CHROMIUM  VERS 5 INF   1324  557    5    0     51.5490      4.4388         9
+     566  MANGANESE-55  VERS 5   1325  553    5    0     54.4661      3.8013         9
+     567  IRON VERS 5 INFD       1326  557    5    0     55.3650      3.1416         9
+     568  COBALT-59  VERS 5 *I   1327  553    5    0     58.4269      5.8107         9
+     569  NICKLE(NAT) VERS 5 I   1328  554    5    0     58.1826      6.5331         9
+     570  COPPER  VERS 5  *ID    1329  508    5    0     63.5460      6.7003         9
+     571  PLUTONIUM-236  VERS    8436  521    5    0    234.0180     10.5000         9
+     573  IODINE-135  VERS 5 *   9618  544    5    0    133.7510      4.8118         9
+     574  XENON-135  VERS 5 *I   1294  551    5    0    133.7480      6.9934         9
+     575  RUBIDIUM-87  VERS 5    9163  541    5    0     86.1626      3.5891         9
+     576  YTTRIUM-89  VERS 5 *   9202  542    5    0     88.1421      3.6439         9
+     577  NIOBIUM-93  VERS 5 *   1189  510    5    0     92.1051      6.1998         9
+     578  MOLYBDENUM-95  VERS    9282  542    5    0     94.0906      3.8060         9
+     579  MOLYBDENUM-97  VERS    9284  542    5    0     96.0736      3.8593         9
+     580  MOLYBDENUM-98  VERS    9285  542    5    0     97.0644      3.8858         9
+     581  MOLYBDENUM-100 VERS    9287  542    5    0     99.0492      3.9387         9
+     582  TECHNETIUM-99  VERS    1308  510    5    0     98.1500      7.8625         9
+     583  RUTHENIUM-101  VERS    9330  542    5    0    100.0390      3.9649         9
+     584  RUTHENIUM-102  VERS    9331  542    5    0    101.0290      3.9909         9
+     585  RUTHENIUM-104  VERS    9333  542    5    0    103.0130      4.0429         9
+     586  RUTHENIUM-106  VERS    9335  542    5    0    104.9980      4.0949         9
+     587  RHODIUM-103  VERS 5    1310  510    5    0    102.0210      6.3169         9
+     588  PALLADIUM-105  VERS    9382  543    5    0    104.0040      4.0688         9
+     589  PALLADIUM-107  VERS    9384  543    5    0    105.9870      4.1206         9
+     590  PALLADIUM-108  VERS    9386  543    5    0    106.9770      4.1462         9
+     591  PALLADIUM-110  VERS    9389  543    5    0    108.9610      4.1972         9
+     592  SILVER-107  VERS 5     1371  510    5    2    105.9870      6.4000         9
+     593  SILVER-109  VERS 5     1373  510    5    2    107.9690      4.9876         9
+     594  INDIUM-115  VERS 5     9477  543    5    2    113.9170      4.3236         9
+     595  ANTIMONY-121  VERS 5   9548  544    5    0    119.8650      4.4729         9
+     596  ANTIMONY-123  VERS 5   9551  544    5    0    121.8480      4.5219         9
+     597  IODINE-127  VERS 5 *   9606  544    5    0    125.8140      4.6194         9
+     598  IODINE-129  VERS 5 *   9608  544    5    0    127.7980      4.6680         9
+     599  XENON-131  VERS 5 *I   1351  509    5    0    129.7810      4.3005         9
+     600  XENON-132  VERS 5 *I   1352  554    5    0    130.7710      4.3005         9
+     601  XENON-134  VERS 5 *I   1354  509    5    0    132.7550      4.3005         9
+     602  CESIUM-133  VERS 5 *   1355  510    5    0    131.7640      7.0999         9
+     603  CESIUM-135  VERS 5     9665  545    5    0    133.7470      4.8118         9
+     604  CESIUM-137  VERS 5     9669  545    5    0    135.7310      4.8592         9
+     605  LANTHANUM-139  VERS    9707  545    5    0    137.7130      4.9064         9
+     606  CERIUM-140  VERS 5     9724  545    5    0    138.7040      4.9298         9
+     607  CERIUM-142  VERS 5     9726  545    5    0    140.6900      4.9768         9
+     608  CERIUM-144  VERS 5     9728  545    5    0    142.6770      5.0238         9
+     609  PRASEODYMIUM-141  VE   9742  545    5    0    139.6970      4.9535         9
+     610  NEODYMIUM-142  VERS    9763  545    5    0    140.6890      4.9768         9
+     611  NEODYMIUM-143  VERS    9764  545    5    0    141.6820      5.0001         9
+     612  NEODYMIUM-144  VERS    9765  545    5    0    142.6740      5.0234         9
+     613  NEODYMIUM-145  VERS    9766  545    5    0    143.6680      5.0468         9
+     614  NEODYMIUM-146  VERS    9767  545    5    0    144.6600      5.0701         9
+     615  NEODYMIUM-148  VERS    9769  545    5    0    146.6460      5.1165         9
+     616  PROMETHIUM-149  VERS   9786  546    5    0    147.6390      5.1395         9
+     617  PROMETHIUM-147  VERS   9783  546    5    0    145.6530      5.0931         9
+     618  SAMARIUM-147  VERS 5   9806  546    5    0    145.6530      5.0931         9
+     619  SAMARIUM-149  VERS 5   1319  510    5    0    147.6380      3.2595         9
+     620  SAMARIUM-151  VERS 5   9810  546    5    0    149.6230      5.1854         9
+     621  SAMARIUM-152  VERS 5   9811  546    5    0    150.6150      5.2082         9
+     622  EUROPIUM-151  VERS 5   1357  509    5    0    149.6230      9.7314         9
+     623  EUROPIUM-152  VERS 6   1292  551    5    0    150.6200      9.7314         9
+     624  EUROPIUM-153  VERS 5   1359  509    5    0    151.6070      9.7314         9
+     625  EUROPIUM-154  VERS 5   1293  551    5    0    152.6000      9.7314         9
+     626  NEODYMIUM-150  VERS    9771  546    5    0    148.6330      5.1625         9
+     627  INDIUM-115  VERS 5     9477  543    5    0    113.9170      4.3236         9
+     628  BERYLLIUM-9 LASL EVA    104    0    5    0      8.9348      6.0000         9
+     629  PLUTONIUM-241 VERS 5   1381  515    5    0    238.9780     10.9389         9
+     630  ZIRCONIUM(NAT) VERS    1340  558    5    0     90.4360      6.9186         9
+     631  TUNGSTEN(NAT) VERS 5   1474  559    5    4    182.2770      8.0001         9
+     632  TUNGSTEN(NAT) VERS 5   1474  559    5    0    182.2770      8.0001         9
+     633  HAFFNIUM(NAT) VERS 5   1372  501    5    4    176.9540      7.5867         9
+     634  HAFFNIUM(NAT) VERS 5   1372  501    5    0    176.9540      7.5867         9
+     635  ARGON-40 VERS 5 INFD   7180  532    5    0     39.6191      3.1416         9
+     636  EUROPIUM-151 VERS 5P   1357  509    5    3    149.6230      9.7314         9
+     638  EUROPIUM-153 VERS 5P   1359  509    5    3    151.6070      9.7314         9
+     640  SODIUM-23 VERS 5 RES   1311  556    5    2     22.7920      3.6779         9
+     641  COPPER-63 VERS 5 RES   6435  531    5    2     62.9300      6.7003         9
+     642  SCANDIUM-45 VERS 5 R   6426  531    5    2     44.5679      2.7055         9
+     644  HELIUM        VERS 5   1270  501    5    0      4.0015       .7592         9
+     645  XENON-129       VERS   1349  509    5    2    127.7970      4.3005         9
+     646  RHENIUM-185     VERS   1083  503    5    3    183.3640      7.4500         9
+     647  RHENIUM-187     VERS   1084  513    5    3    185.3500      7.5500         9
+     830  CARBON  VERS 5         1306  511    5    0     11.8969      4.7392         9
+     832   FAST DOSE RAD/MIN P      0    0    0    0       .0000       .0000         9
+     833   IN-115(n,n')*IN-115   6437  531    5    0       .9992     20.4490         9
+     834  HYDROGEN ENDF/B-V TA   1301  511    5    0       .9992     20.4490         9
+     835  HYDROGEN ENDF/B-V TA   1301  511    5    0       .9992     20.4490         9
+1
+
+            162  ISOTOPES READ FROM BCD TAPE 9 0            162  ISOTOPES WRITTEN TO BINARY TAPE 15

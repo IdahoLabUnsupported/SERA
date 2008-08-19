@@ -1,0 +1,148 @@
+Last Revised by Mark Rossmeier:	December 1, 1999
+
+This README file describes how to build the BNCT Project tree using Imake.
+
+Currently, running Imake in the root directory of the project tree will build
+in the following directories:
+
+
+	Shared
+ 	======
+		lib
+		===
+			libcommon
+			libqsh
+			libuv
+			libSZ
+			libnurb
+			libdcm
+	Sera3d
+	======
+
+	SeraCalc
+	========
+
+	SeraDose
+	========
+
+	SeraImage
+	=========
+
+	SeraMC
+	======
+
+	SeraMenu
+	========
+
+	SeraModel
+	=========
+
+	SeraPlan
+	========
+
+	SeraPlot
+	========
+
+	Util
+	====
+		DVall
+		SeraConvert
+		Simplot
+		display
+		position
+		xmgr-3.01
+
+
+
+At present, three scripts are available to build the tree presented above: fullbuild, debugbuild, and 
+make_makefiles. Their descriptions follow. For each script, you must be in the root directory of the tree.
+
+It is very important that the libraries in the Shared/lib directory get built and installed
+before any of the other modules begin compiling. The Shared directory must be the first one
+listed in the Imakefile in the root directory.
+
+################################################################
+## Description of fullbuild
+################################################################
+
+The fullbuild script will compile in all of the directories listed above.
+It will install executables in Target/bin as it goes. It must install
+as it goes so that the libraries in the Shared/lib will be there by the
+time the modules that use them try to link them in. Fullbuild should
+always be run if the root Imakefile changes, or if a file for one of
+the libraries changes. All of the modules will detect if a .a file
+has changed, and will relink in the new library. To use this script
+execute the following commands:
+
+	> cd ~/sera1
+	> fullbuild
+
+
+################################################################
+## Description of debugbuild
+################################################################
+
+The debugbuild script behaves exactly the same as fullbuild
+except that debugging information is included when compiling.
+To be effective every source file should be recompiled with
+the debugging information. If you don't want to compile every
+module with debugging information see the description of 
+make_makefiles. To use debugbuild do the following:
+
+	> cd ~/sera1
+	> make clean
+	> debugbuild
+
+
+################################################################
+## Description of make_makefiles
+################################################################
+
+The make_makefiles script is used to update the Makefiles in all
+of the directories listed above. No compiling or installing is
+performed. This should be used whenever a file under the config
+directory is changed. Do the following:
+
+	> cd ~/sera1
+	> make_makefiles
+
+After running make_makefiles, you can go to any modules directory
+and run make to compile that module. Before doing this however, 
+you should make sure that the libraries have been compiled and are
+up to date. Once you have installed the libraries you do not need
+to do it again until they have changed.
+
+To build seraModel by itself for example, you would do the following:
+
+	> cd ~/sera1
+	> make_makefiles
+	> cd Shared/lib
+	> make install
+	> cd ~/sera1/SeraModel
+	> make
+
+If you wanted to compile seraModel by itself, but also include
+debugging information you would do the following:
+
+	> cd ~/sera1
+	> make_makefiles
+	> cd Shared/lib
+	> make install
+	> cd ~/sera1/SeraModel
+	> make clean
+	> make "CDEBUGFLAGS=-g"
+
+Note: This command does not change the Makefile itself, so any
+subsequent calls to make by itself will not use the -g option.
+
+
+A final note about the file Local.def
+=====================================
+Each of the aforementioned scripts will create a file called Local.def
+in the sera1/config directory. This file can be used to change 
+settings from the configuration files such as which compliler to use.
+
+If you are compiling on a Red Hat system, the following line MUST be
+in Local.def for things to build correctly:
+
+	#define REDHAT 

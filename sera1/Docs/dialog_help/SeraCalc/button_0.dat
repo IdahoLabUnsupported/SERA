@@ -1,0 +1,16 @@
+The Slice pulldown menu provides the following options.  
+
+Make New Slice
+   When selected, the user is prompted with the File Selection Widget, which allows a file name to be chosen.  The user can either select individual 8-bit image files or select the Qsh formatted images by selecting or typing a file name with .qim or .qhd extension.  If the selected file is not a Qsh file, the user will be prompted to enter the Field of View (if it has not already been selected from the Slice submenu) as well as the coordinate value of the medical image along it's orthogonal axis (the z-direction).
+
+Set Field Of View
+   The field of view describes the extent, in units of millimeters, of the image plane and in this version is assumed to be equal in both planar directions and constant for all images.  It must be specified here or read in from the Qsh header file.  
+
+Byte Swapping
+   When images are collected on one type of machine and viewed on another, they may not display correctly.  If the displayed image is not what is expected, select the Turn On Byte Swapping option and reload the image.  If byte swapping is on and an image is blurred, use the Turn Off Byte Swapping option and reload.
+
+Auto Z Value
+   This convenience option allows the user to specify a constant image plane distance instead of specifying the distance for each image plane when loading one image plane at a time.  When several image slices are to be displayed simultaneously, selecting Auto Z Value and entering the distance provides automatic calculation of the Z value for all images after the first.  When Qsh-formatted images are used this option is unnecessary.
+   
+Reset Slice Structure
+   This option should be selected before loading a new set of images.  It ensures that the previous slice structures are removed before creating new ones.  

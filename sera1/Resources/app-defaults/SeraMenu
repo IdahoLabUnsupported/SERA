@@ -1,0 +1,33 @@
+! Resource file for BNCT_Edit package
+
+!SeraMenu*main_menu_bar.background: SteelBlue
+!SeraMenu*main_menu_bar.highlightColor: gray52
+!SeraMenu*main_menu_bar.topShadowColor: gray92
+!SeraMenu*main_menu_bar.bottomShadowColor: gray31
+
+SeraMenu*fontList: -*-helvetica-bold-r-normal-*-14-*-*-*-*-*-*-*
+!SeraMenu*fontList: 7x14bold
+!SeraMenu*fontList: -misc-fixed-bold-r-normal--15-120-100-100-c-90-iso8859-1
+
+SeraMenu*error*background: red
+SeraMenu*error*foreground: white
+
+SeraMenu*helpbar*foreground: white
+SeraMenu*helpbar*background: navy
+
+SeraMenu*acceptdialog*background: #dd0000
+SeraMenu*acceptdialog*foreground: #000000
+
+SeraMenu*XmDrawnButton.HighlightColor : navy
+
+SeraMenu*background: gray
+SeraMenu*foreground: navy
+SeraMenu*ViewDrawingArea*background: black
+!SeraMenu*topShadowColor: Gray94
+!SeraMenu*bottomShadowColor: Gray32
+!SeraMenu*highlightColor: Gray53
+
+!SeraMenu*frame2*background: white
+
+!SeraMenu*XmKeyboard.translations: <key>InsertChar: NULL
+

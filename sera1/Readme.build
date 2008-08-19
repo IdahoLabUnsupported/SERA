@@ -1,0 +1,55 @@
+If you are running Solaris 2.6 and newer just make sure you have
+C and FORTRAN compilers, the Motif libraries, and the GL libraries
+installed. Make sure the file Local.def in sera1/config is empty then
+go into the sera1 directory and type fullbuild.
+
+There are a couple of things to consider before building sera
+on a linux system. First of all make sure you have a file named
+Local.def in the sera1/config directory. The file should have the
+following line:
+#define REDHAT
+
+At this time we have recently tested our build on a RedHat 8.0 system.
+You need to make sure that OpenMotif is installed for the sera distribution
+to build and run properly. OpenMotif is included as a rpm with the RedHat 8.0
+distribution.
+
+You will also need to make sure that the Mesa libraries are built and
+installed properly. The following is one way to do this.
+
+#Get MesaLib4 (try www.mesa3d.org)
+#untar:
+tar -xvjf download/MesaLib-4.0.4.tar.bz2
+#Go into the mesa4 directory:
+cd Mesa-4.0.4/
+#If glide development libraries are installed, it will confuse configure.
+# so remove them if they are.
+rpm -e Glide3-devel
+#Configure:
+./configure --prefix=/usr/local/mesa4 --disable-3dnow
+
+
+#Make:
+make
+#Install (as root):
+make install
+#Add library path /usr/local/mesa4/lib to /etc/ld.so.conf
+echo /usr/local/mesa4/lib >> /etc/ld.so.conf
+#add an environmental variable LD_LIBRARY_PATH
+export LD_LIBRARY_PATH='/usr/local/mesa4/lib'
+
+#Get into the widgets-mesa directory
+cd widgets-mesa
+#Configure:
+./configure --prefix=/usr/local/mesa4 --with-motif --with-mesadir=/usr/local/mesa4
+#Make:
+make
+#Make install as root:
+mkdir /usr/local/mesa4/man
+mkdir /usr/local/mesa4/man/man3
+make install
+#Link GL to GLw so that sera can find include files.
+cd /usr/local/mesa4/include 
+ln -s GL GLw
+
+#All done.

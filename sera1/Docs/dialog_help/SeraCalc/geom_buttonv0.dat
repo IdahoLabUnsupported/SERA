@@ -1,0 +1,10 @@
+The file menu contains the following options:
+
+Open
+   Loads a previously saved set of geometry transformations.
+
+New
+   Declares a new set of geometry transformations.  
+
+Exit
+   Terminates the Geometry Transformation window.

@@ -1,0 +1,16 @@
+The Input/Output menu provides options for saving data for future editing, future rendering, or use by other applications programs.  Following are the options of this menu:
+
+Load Old File (V1.2)
+   Loads slice data files saved under previous versions of BNCT_Rtpe.  Generally, the older files were written in normalized device coordinates (NDC) and do not contain field of view information.
+
+Read Signa Tape
+   This option is used to read and translate the raw image data, as obtained from the imaging device, into Qsh format.  It is site-dependent because of the differences between imaging devices and the way these devices archive their data.  Currently, this option works only on tapes obtained from teh GE9800 and Signa systems.  
+   
+Save File
+   Stores the slices' control point information, field of view, and slices' z coordinates.  This file is created so that it is keyed to the file location of the images used to create it.  In subsequent use of the file, it must be remembered that the images associated with this file should remain in the same directory.  If the images are moved to another file location, this file must be edited to reflect the new image location.  
+   
+Load File
+   Loads the data from the saved file back into the program.  This is usually a file that was saved with "Dump All Slices" in earlier versions, and for which more editing is desired.  
+   
+Convert to QSH
+   Executes the toQSH image format editing utility.  This provides a convenient way to convert various image formats to the QSH format which is the internal format used by BNCT_Rtpe.  

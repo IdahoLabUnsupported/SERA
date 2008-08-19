@@ -1,0 +1,48 @@
+The axes convention used within SERA is as follows:
+---------------------------------------------------
+
+The principal axes are the Inferior to Superior (IS) 
+axis, the Posterior to Anterior axis (PA), and the Right
+to Left (RL) axis. These axes are always with respect to
+the patient, for example the patient's right or left.
+Superior is always above inferior and anterior is always
+in front of posterior. We have combined a (+/-) suffix 
+to the axes labels which provide a direction to the axis
+in order to properly describe the slice orientation with
+respect to the pixel and slice ordering.
+
+In seraModel the image origin is located in the upper
+left hand corner of the image so that the columns
+increase left to right with respect to the image and the
+row pixels increase top to bottom. The convention we 
+have adopted for the three major slice orientations is 
+described as follows:
+
+Axial, Transverse, or Transaxial Images
+=======================================
+For the standard set of axial images with the image face
+or nose corresponding to the top of the image the PA 
+axis is labeled as PA- since the pixels increase from
+top to bottom. The IS axis is IS+ if the slice locations
+increase from the bottom of the patient. The RL axis is
+RL+ if the the patient's right side is on the viewer's
+left.
+
+Coronal Images
+==============
+In the case where the viewer is looking at the face of
+the patient the IS axis is labeled IS- since again the
+rows increase from top to bottom of image. The RL axis
+would then be labeled as RL+ and the PA axis would be
+labeled as PA+ if the slices increased from back to
+front of patient.
+
+Sagittal Images
+===============
+If the face or nose of the patient points to the left
+side of the image the PA axis is labeled PA- since
+the pixels increase left to right of the image (not the
+patient). The IS axis would be labeled as IS- if the top
+of the head corresponds to the top of the image. The RL
+axis would be RL+ if the slices increase from the
+patients right.

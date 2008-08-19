@@ -1,0 +1,13 @@
+SRCS = 	seraConvert.c functions.c 
+OBJS = 	seraConvert.o functions.o 
+
+NURB_DIR = $(SERA_HOME)/Shared/lib/libnurb
+
+SERA_DEPS = $(D_COMMON) $(D_QSH) $(D_UV) $(D_NURB)
+
+LOCAL_LIBRARIES = -lcommon -lqsh -luv -lnurb $(DEFAULT_X_LIBS)
+SYS_LIBRARIES   = $(EXTRA_X_LIBS) MathLibrary
+DEPLIBS         = $(DEFAULT_DEP_X_LIBS) $(EXTRA_DEP_X_LIBS) $(SERA_DEPS)
+INCLUDES        = -I$(NURB_DIR)
+
+ComplexProgramTarget(seraConvert)

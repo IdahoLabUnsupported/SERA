@@ -1,0 +1,7 @@
+Plan Effective Boron
+
+       __________________________________________________
+
+The plan effective boron text widget displays the exposure-weighted
+average boron concentration for the plan.  This widget is not editable
+by the user, as this quantity is computed by seraPlan.

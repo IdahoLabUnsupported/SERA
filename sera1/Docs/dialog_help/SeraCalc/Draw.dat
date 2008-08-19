@@ -1,0 +1,10 @@
+The Draw menu toggles the display of the cross hairs and lines representing the control points.  The following options are provided:
+
+Show/Unshow Control Points
+   Choosing "Unshow Control Points" removes the display of the control point cross hairs from the image.  "Show Control Points" can be selected to restore the control point display.  
+   
+Show/Unshow Markers
+   Choosing "Unshow Markers" removes the Fiducial and Constraint Markers in the slices.  Choosing "Show Markers" can be selected to restore these markers.  
+   
+Show/Unshow Particle Paths
+   Choosing "Unshow Particle Paths" removes the neutron and proton tracks in the slices.  Choosing "Show Particle Paths" can be selected to restore these markers.

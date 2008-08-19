@@ -1,0 +1,10 @@
+The "Run" menu of the rtt popup has three selections:
+
+Run
+   - used to initiate a run of the rtt_MC program using the newly generated input file
+   
+Test
+   - is used to run a short trial of the rtt_MC program.  This causes a short rtt_MC run to be made for checkout.  For this run, particle tracks are written to a file named 'rtt.tracks'.  These tracks can be viewed in a BNCT_Rtpe reconstruction window along with the three-dimensional model for further checkout.  
+   
+Kill 
+   - is used to stop the currently running rtt_MC program.  

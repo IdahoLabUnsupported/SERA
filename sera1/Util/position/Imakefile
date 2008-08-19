@@ -1,0 +1,9 @@
+SRCS = main.c transform.c
+OBJS = main.o transform.o
+
+LOCAL_LIBRARIES = 
+SYS_LIBRARIES   = MathLibrary
+DEPLIBS         =
+
+
+ComplexProgramTarget(position)

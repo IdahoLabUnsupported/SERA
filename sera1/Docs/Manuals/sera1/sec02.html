@@ -1,0 +1,116 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.6 [en] (X11; U; SunOS 5.6 sun4u) [Netscape]">
+   <meta name="Description" content="This page contains information about SERA Concepts and Notations.">
+   <title>SERA Manual - Section 2</title>
+</head>
+<body bgcolor="#FFFFFF" background="mainbackground.gif">
+
+<center><a href="sec01.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><a href="sec01.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="sec03.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="sec03.html">Next</a></b>
+<p><b><font color="#274342"><font size=+2>SERA:</font></font></b>
+<br><b><font color="#274342"><font size=+2>Simulation Environment for Radiotherapy
+Applications</font></font></b>
+<br><b><font color="#274342"><font size=+2>User's Manual</font></font></b>
+<br><b><font color="#274342"><font size=+2>Version 1C0</font></font></b>
+<p><img SRC="marblebar.jpg" height=6 width=460></center>
+
+<p><b><font color="#274342"><font size=+2>2. Concepts and Notations</font></font></b>
+<p><b><font color="#274342">The basic concepts used by SERA are slices,
+bodies, and body-slices, as illustrated in Figure 2.1.&nbsp; A slice is
+data corresponding to a single medical image.&nbsp; Typically, several
+anatomical features of interest will intersect a slice.&nbsp; For example,
+a slice can contain a cranial object, tumor object, and objects defining
+eyes, sinuses, and other relevant features.</font></b>
+<p><img SRC="Concepts/concepts.gif" NOSAVE BORDER=1 height=191 width=471>
+<p><b><font color="#274342">Figure 2.1: Basic SERA Concepts</font></b>
+<p><b><font color="#274342">Bodies correspond to anatomical features from
+the image (such as the skull, brain, eyes).&nbsp; Body-slices are intersections
+of bodies (physical features) with slices (a medical image).&nbsp; They
+are defined by drawing, filling, or painting the body on the slice.&nbsp;
+Once defined, body definitions in different slices are combined to form
+three-dimensional volumes.</font></b>
+<p><b><font color="#274342">Typically, the user begins by displaying an
+image (slice), and then defining the objects on that image which represent
+body-slices (see <a href="sec05.html">Section
+5</a>).&nbsp; Body-slices can then be copied to new slices, and modified
+to correspond with the shapes in each new slice.</font></b>
+<p><b><font color="#274342">After several body-slices have been defined,
+they may be reconstructed (or synthesized) into a body representing an
+anatomical feature. These reconstructions can be displayed in a three-dimensional
+viewing window, where viewing controls allow arbitrary views of the reconstructed
+data.</font></b>
+<p><a NAME="2.1"></a><b><font color="#274342"><font size=+1>2.1 Window
+Objects</font></font></b>
+<p><b><font color="#274342">When the program is running, there are a number
+of different types of window objects which appear on the screen.&nbsp;
+The graphics interface is based on the X11 window environment <a href="sec15.html#3">[3]</a>
+, the Motif interface toolkit <a href="sec15.html#4">[4]</a>,
+and the OpenGL three-dimensional graphics system <a href="sec15.html#5">[5]</a>.</font></b>
+<p><b><font color="#274342">As shown in Figure 2.2, there are several components
+in a windows environment.</font></b>
+<ul>
+<li>
+<b><font color="#274342">Buttons - the beginning of all operations in SERA.&nbsp;
+The main SERA menu consists of a single column or row of buttons.&nbsp;
+Buttons may also be the terminus of a menu selection as well as the means
+of cancelling a selection.&nbsp; To "press" a button, move the mouse cursor
+into the objects area and press a mouse button.&nbsp; In some cases, any
+mouse button will do; in others, different mouse buttons have different
+effects.</font></b></li>
+
+<li>
+<b><font color="#274342">Menus - sets of buttons representing the choice
+available to the user.&nbsp; Menus may be arranged either horizontally
+or vertically.</font></b></li>
+
+<li>
+<b><font color="#274342">Pulldown Menus - submenus that appear when a menu
+button is selected.&nbsp; These menus exist only until a selection is made
+or a mouse button is pressed outside of the menu.</font></b></li>
+
+<li>
+<b><font color="#274342">Popup Menus - transient menus that appear unattached
+to any other menu and disappear after a specific action is taken.</font></b></li>
+
+<li>
+<b><font color="#274342">Input/Output Windows - for error messages, feedback,
+and any typed entries that are required from the user.&nbsp; The user may
+enter strings in the input regions of these windows by positioning the
+cursor in the region and depressing the left mouse button which activates
+the region.&nbsp; After entering the appropriate text with the keyboard,
+the user will either press the ENTER key, or select the appropriate button,
+such as "OK".</font></b></li>
+
+<li>
+<b><font color="#274342">Graphics Windows - windows containing graphical
+representations of the data being studied.&nbsp; There are two kinds:&nbsp;
+image windows, which contain a medical image slice and in which objects
+identifying&nbsp; important features are drawn and filled or painted, and
+viewing windows, in which 2D and 3D representations of the reconstructed
+geometries are displayed.</font></b></li>
+</ul>
+<b><font color="#274342">Throughout this manual, the terms window and widget
+will be used interchangeably, to the chagrin of the purists.&nbsp; A window
+is a framed view of the virtual computer display, while a widget is a combined
+set of window objects, such as a viewing window and several buttons.</font></b>
+<p><img SRC="Concepts/x11sample.gif" NOSAVE height=512 width=640 align=BOTTOM>
+<p><b><font color="#274342">Figure 2.2: Typical X11 Environment</font></b>
+<p><a NAME="2.2"></a><b><font color="#274342"><font size=+1>2.2 Input</font></font></b>
+<p><b><font color="#274342">SERA input devices are the keyboard, which
+is used for textual input, and the mouse, which is used for both pointing
+and selection by maneuvering the mouse pointer about the screen and clicking
+the mouse button to indicate desired actions.&nbsp; The meaning of the
+mouse clicks and key strokes depends upon their context.</font></b>
+<p><b><font color="#274342">In a menu, the left mouse button selects an
+item from the menu to indicate what operation is to be performed.&nbsp;
+At other times, the keyboard can be used to generate strings in the active
+window.&nbsp; The program prompts for the type of input expected.</font></b>
+<center>
+<p><img SRC="marblebar.jpg" BORDER=0 height=6 width=460>
+<br>&nbsp;
+<p><a href="sec01.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><a href="sec01.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="sec03.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="sec03.html">Next</a></b></center>
+
+</body>
+</html>

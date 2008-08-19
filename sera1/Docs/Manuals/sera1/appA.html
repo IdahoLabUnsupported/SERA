@@ -1,0 +1,2444 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.6 [en] (X11; U; SunOS 5.6 sun4u) [Netscape]">
+   <meta name="Description" content="This is the SERA Manual Appendix A page.">
+   <title>SERA Manual - Appendix A</title>
+</head>
+<body text="#274342" bgcolor="#FFFFFF" link="#0000FF" vlink="#551A8B" alink="#FF0000" background="mainbackground.gif" nosave>
+
+<center><a href="sec14.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><a href="sec14.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="appB.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="appB.html">Next</a></b>
+<p><b><font color="#274342"><font size=+2>SERA:</font></font></b>
+<br><b><font color="#274342"><font size=+2>Simulation Environment for Radiotherapy
+Applications</font></font></b>
+<br><b><font color="#274342"><font size=+2>User's Manual</font></font></b>
+<br><b><font color="#274342"><font size=+2>Version 1C0</font></font></b>
+<p><img SRC="marblebar.jpg" NOSAVE height=6 width=460>
+<p><b><font color="#274342"><font size=+2>Appendix A.&nbsp; Transport Calculation
+Module (seraMC)</font></font></b></center>
+
+<p><a NAME="A.1"></a><b><font color="#274342"><font size=+1>A.1.&nbsp;
+Introduction</font></font></b>
+<p><b><font color="#274342">The seraMC program is specifically tailored
+for the simulation of neutron irradiation and the determination of absorbed
+dose distributions for research and patient treatment planning.&nbsp; The
+SERA system provides a means to develop a three-dimensional geometry from
+medical images (or otherwise), apply a simulated neutron (and gamma) beam,
+and determine three-dimensional dose patterns.&nbsp; These neutron and
+gamma dose distributions are displayed via zero-, one-, two-, and three-dimensional
+edits which can be viewed using the display systems of the SERA system.&nbsp;
+The seraMC program can also be operated in stand-alone mode using geometry
+constructs based only on <a href="appB.html">Combinatorial Geometry (CG)</a>.</font></b>
+<p><b><font color="#274342">The program is targeted toward boron neutron
+capture therapy (BNCT) using an epithermal neutron beam but could be adapted
+for other types of beams (e.g., thermal neutrons, fast neutrons, x-rays,
+and gamma rays) and/or other dose delivery mechanisms (e.g. gadolinium).&nbsp;
+Modification of the software may be required for optimization in these
+other modes.&nbsp; Other transport programs could also conceivably be used
+in conjunction with SERA for purposes of validation or independent assessment.&nbsp;
+Modification of these programs' outputs would probably be required to interface
+with SERA.</font></b>
+<p><b><font color="#274342">There were several motivating factors for development
+of a new Monte Carlo (MC) transport code specifically for clinical BNCT
+treatment planning.&nbsp; First, existing Monte Carlo programs are usually
+targeted toward general applications or toward specific applications for
+other ends and are not necessarily efficient or adequate for BNCT applications.&nbsp;
+Creating a new code allows generality to be utilized where needed, but
+it allows tailoring of the code structure and computational efficiency
+for BNCT where applicable.&nbsp; Second, detailed results are required
+for BNCT.&nbsp; Most MC programs provide only volume edits and sparse,
+special purpose point or surface edits.&nbsp; Therefore, if the required
+detail is to be obtained, a cumbersome amount of physical modeling is necessary
+and computer requirements become large.&nbsp; An entirely new code would
+not be burdened with the need for general tallies, as the desired tallies
+for BNCT are well known in advance and rarely, if ever, change.&nbsp; Third,
+anatomical features are generally not amenable to reconstructions using
+analytical surface representations.&nbsp; Thus, approximations must be
+made to the geometry.&nbsp; The seraMC module allows the geometry to be
+represented as a set of uniform volume elements (univels) which may be
+as small as the volume represented by an individual pixel extended over
+a single image plane. Since representation of a structure (e.g. a patient's
+head) may require millions of univels, a method was developed to rapidly
+perform the geometric ray-tracing required by the Monte Carlo process.
+The method developed requires an order of magnitude less computation time
+than the earlier B-spline geometric representations.&nbsp; Finally, a</font>
+generalized editing capability is required, and the ability to re-edit
+a previous run with new edit and spatial directives can be useful.&nbsp;
+SeraMC has built-in editing using zero-, one-, two-, and three-dimensional
+edits which can provide all information required.&nbsp; The output from
+a run is stored in a file which can be used to obtain any additional edits
+desired after the run is completed.</b>
+<p><b>In addition, other features enhancing efficiency, usability or function
+have been incorporated.&nbsp; For example, special biasing techniques are
+available to rapidly converge the recalcitrant fast neutron flux distributions,
+and outputs can be combined and normalized to an appropriate beam output
+with little user effort.</b>
+<br>&nbsp;
+<p><a NAME="A.2"></a><b><font color="#274342"><font size=+1>A.2.&nbsp;
+General Problem Input</font></font></b>
+<p><b><font color="#274342">This section provides a description of the
+various general problem input parameters.&nbsp; These inputs control the
+number of histories to simulate, beam direction, edit mesh, and the files
+to be created and accessed during execution.&nbsp; Two sample input files,
+one with somewhat <a href="SeraMC/sample.html">manual edits</a>, and a
+second with more <a href="SeraMC/demo.html">automatic edits</a>, are shown
+to provide templates for the detailed explanations below.&nbsp; The parameters
+are described in the order they appear in the input file.</font></b>
+<p><a NAME="A.2.1"></a><b><font color="#274342">A.2.1.&nbsp; Line 1 - Title</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">title</font><font color="#274342">
+card allows a single descriptive line, up to 80 characters in length, to
+be entered.&nbsp; The </font><font color="#008007">title</font><font color="#274342">
+card is used throughout the output, and also in the restart file, for identification
+purposes.</font></b>
+<p><a NAME="A.2.2"></a><b><font color="#274342">A.2.2.&nbsp;&nbsp; Line
+2 - nbatch, nhist, wncut</font></b>
+<p><b><font color="#274342">The first two entries on Card 2 define the
+total number of particle histories to start from the source.&nbsp; The
+entry </font><font color="#009900">n</font><font color="#008007">batch</font><font color="#274342">
+is the number of statistically independent batches of particles, and </font><font color="#008007">nhist</font><font color="#274342">
+is the number of particles per batch.&nbsp; These parameters also control
+the number of particles started for the biased fast neutron component,
+if such is requested.</font></b>
+<p><b><font color="#274342">The third entry on Card 2, </font><font color="#008007">wncut</font><font color="#274342">,
+defines the weight cutoff for the transport algorithm.&nbsp; Each collision
+reduces the particle weight, initially one, by a factor defined as the
+ratio of the scattering cross section to the total cross section.&nbsp;
+This accounts for the effects of absorption, while allowing all particles
+to make significant contributions to the tallies, efficiently improving
+the convergence of the edit tallies.&nbsp; When the particle weight drops
+below </font><font color="#008007">wncut</font><font color="#274342">,
+the particle is killed.&nbsp; The default value for </font><font color="#008007">wncut</font><font color="#274342">
+is </font><font color="#FF0000">0.01</font><font color="#274342">.</font></b>
+<p><a NAME="A.2.3"></a><b><font color="#274342">A.2.3.&nbsp; Line 3 - Target
+Point</font></b>
+<p><b><font color="#274342">Positioning of the beam requires a target point
+to be specified. This point is the point about which the beam is rotated
+when the beam is positioned.&nbsp; The center of the beam goes through
+this point.&nbsp; This is specified as a triplet of values (</font><font color="#008007">xp,yp,zp</font><font color="#274342">),
+with all three dimensions given in centimeters.&nbsp; Note that the entire
+source beam geometry, as specified in the <a href="appC.html">source file</a>,
+is rotated about the target point.</font></b>
+<p><a NAME="A.2.4"></a><b><font color="#274342">A.2.4.&nbsp; Line 4 - Zb,
+phi, theta</font></b>
+<p><b><font color="#274342">Positioning of the beam requires the distance
+from the source to the target point to be specified.&nbsp; </font><font color="#008007">Zb</font><font color="#274342">
+is this distance in centimeters from the target point (</font><font color="#008007">xp,yp,zp</font><font color="#274342">)
+to the center of the source plane.&nbsp; For all cases, including the initial
+input value for searches, the value of </font><font color="#008007">Zb</font><font color="#274342">
+must be such that beam geometry and patient geometry are separated by the
+buffer region and the patient geometry is completely enclosed by the buffer.&nbsp;
+Otherwise, geometry problems will occur, resulting in lost particles and/or
+terminations from errors.&nbsp; Figure A.1 shows how </font><font color="#008007">Zb</font><font color="#274342">
+helps determine the beam position.</font></b>
+<p><img SRC="SeraMC/beam1.gif" NOSAVE height=232 width=405>
+<p><b><font color="#274342">Figure A.1.&nbsp; Example beam positioning
+showing the target point and Zb.</font></b>
+<p><b><font color="#000000">The angle </font><font color="#008007">phi</font><font color="#274342">
+is the polar angle from the reference beam location at the top of the head
+to the current beam location, with the superior axis used as the reference
+direction;&nbsp; the angle </font><font color="#009900">t</font><font color="#008007">heta</font><font color="#274342">
+is the azimuthal angle from the right side of the head to the current beam
+location.&nbsp; Note that positive values of </font><font color="#008007">theta</font><font color="#274342">
+rotate the beam towards the front of the head, and negative values rotate
+it towards the back of the head.&nbsp; The default value of </font><font color="#009900">theta</font><font color="#000000">
+is zero.</font><font color="#274342">&nbsp;&nbsp; In Figure A.2, where
+</font><font color="#008007">phi</font><font color="#274342">
+is set at
+</font><font color="#FF0000">90 degrees</font><font color="#274342">
+and
+</font><font color="#009900">theta</font><font color="#000000"> is
+unspecified (i.e., left at the default value),
+</font><font color="#274342">the
+beam is rotated from the superior axis to the right side of the head.&nbsp;
+In Figure A.3, where the previous polar angle setting is supplemented by
+adjusting </font><font color="#008007">theta</font><font color="#274342">
+to </font><font color="#FF0000">-90 degrees</font><font color="#274342">,
+the beam is rotated from the right axis to the back of the head.</font></b>
+<p><img SRC="SeraMC/beam2.gif" NOSAVE height=196 width=370 align=CENTER>
+<p><b><font color="#274342">Figure A.2.&nbsp; Beam positioning showing
+polar angle phi.</font></b>
+<p><img SRC="SeraMC/beam3.gif" NOSAVE height=249 width=309>
+<p><b><font color="#274342">Figure A.3.&nbsp; Beam positioning showing
+azimuthal angle theta.</font></b>
+<p><a NAME="A.2.5"></a><b><font color="#274342">A.2.5.&nbsp; Line 5 - Combinatorial
+Geometry (CG) file</font></b>
+<p><b><font color="#274342">The <a href="appB.html">Combinatorial Geometry
+(CG)</a> file consists of a description of the geometry included in neither
+the source file nor the univel file when present. When univel geometry
+is used, the </font><font color="#008007">CG geometry file</font><font color="#274342">
+may be a null file, or it may contain information pertaining to the patient
+(e.g. shields, table, etc.) which supplements the univel geometry.&nbsp;
+The CG body and region descriptions and options available are provided
+in <a href="appB.html">Appendix B</a>.&nbsp; The CG input consists of a
+title line, containing up to 80 characters of descriptive information,
+and records which assign region indices and material names.&nbsp; These
+indices must be consistent with region indices in the source file.&nbsp;
+A comment line, which is any line with the </font><font color="#FF0000">#</font><font color="#274342">
+character in column 1, may be placed anywhere in the file.</font></b>
+<p><a NAME="A.2.6"></a><b><font color="#274342">A.2.6.&nbsp; Line 6 - Univel
+file</font></b>
+<p><b><font color="#274342">Patient, or univel (</font><font color="#CC6600">.uv</font><font color="#274342">),
+geometry is that defined using the <a href="sec05.html">seraModel</a> reconstruction
+software which may be used to read medical images (e.g. MRI, CT) and construct
+3D models of the patient.&nbsp; Output from SeraModel consists of the files
+</font><font color="#CC6600">xx.uv</font><font color="#274342">
+and </font><font color="#CC6600">xx.uvh</font><font color="#274342">,&nbsp;
+which are read by seraMC and used in the radiation transport calculation.&nbsp;
+Region indices from nreg_cg+1 to nreg, where nreg_cg is the number of CG
+bodies and nreg is the total number of bodies, are assigned to the univel
+regions in the order determined by the 3D reconstruction.&nbsp; Only the
+</font><font color="#CC6600">.uv</font><font color="#274342">
+file is specified on this line, as the </font><font color="#CC6600">.uvh</font><font color="#274342">
+file has the same prefix and will be read automatically.</font></b>
+<p><b><font color="#274342">All univels must have a region name (assigned
+during reconstruction).&nbsp; All regions (except buffer) must be assigned
+a material name. Those univels not assigned to a region will be designated
+</font><font color="#FF0000">unnamed</font><font color="#274342">,
+and a warning will be issued by SeraModel when a model is saved with unnamed
+univels.&nbsp; A model can be saved with unnamed univels as model construction
+proceeds, but cannot be used in a transport calculation.</font></b>
+<p><b><font color="#274342">When constructing the model with SeraModel,
+it is necessary to assign all space outside the patient anatomy to the
+buffer.&nbsp; Be careful to generate no internal </font><font color="#FF0000">buffer</font><font color="#274342">
+zones, as they could cause errors in the transport calculation.</font></b>
+<p><a NAME="A.2.7"></a><b><font color="#274342">A.2.7.&nbsp; Line 7 - nedit2
+and nnegp</font></b>
+<p><b><font color="#274342">Line 7 contains two parameters.&nbsp; The first,
+</font><font color="#008007">nedit2</font><font color="#274342">,
+is the dimensionality of the edit mesh array, with the assumption that
+the edit mesh is a cubic grid of uniform cubic voxels.&nbsp; The default
+and maximum values for this parameter are 30.&nbsp; The second value, </font><font color="#008007">nnegp</font><font color="#274342">,
+is the number of edit neutron energy groups specified.&nbsp; The default
+value is </font><font color="#FF0000">3</font><font color="#274342">, and
+the performance for values other than 3 is not guaranteed.&nbsp; Generally,
+the three groups are defined as thermal, epithermal, and fast.</font></b>
+<p><a NAME="A.2.8"></a><b><font color="#274342">A.2.8.&nbsp; Line 8 - Neutron
+energy group boundaries</font></b>
+<p><b><font color="#274342">This card gives the lower energy boundaries
+for the </font><font color="#008007">nnegp</font><font color="#274342">
+edit neutron energy groups.&nbsp; The boundaries are given as the group
+numbers of the 94-group seraMC neutron cross section energy structure.&nbsp;
+The default values are </font><font color="#FF0000">32</font><font color="#000000">,</font><font color="#FF0000">
+72</font><font color="#000000">, and</font><font color="#FF0000"> 94</font><font color="#274342">,
+which set the boundaries at </font><font color="#FF0000">9.12keV, 0.414eV,
+</font><font color="#274342">and</font><font color="#FF0000">
+0.0eV</font><font color="#274342">.&nbsp; The neutron energy group structure
+is given in Table A.1.</font></b>
+<br>&nbsp;
+<center><table BORDER WIDTH="100%" NOSAVE >
+<caption><b>Table A.1.&nbsp; Upper neutron energy boundaries for the seraMC
+94-group neutron cross section library.</b></caption>
+
+<tr>
+<td>
+<center><b>Group</b></center>
+</td>
+
+<td>
+<center><b>Energy (eV)</b></center>
+</td>
+
+<td>
+<center><b>Group</b></center>
+</td>
+
+<td>
+<center><b>Energy (eV)</b></center>
+</td>
+
+<td>
+<center><b>Group</b></center>
+</td>
+
+<td>
+<center><b>Energy (eV)</b></center>
+</td>
+
+<td>
+<center><b>Group</b></center>
+</td>
+
+<td>
+<center><b>Energy (eV)</b></center>
+</td>
+
+<td>
+<center><b>Group</b></center>
+</td>
+
+<td>
+<center><b>Energy (eV)</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>1</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.69046E+07</font></b></center>
+</td>
+
+<td>
+<center><b>2</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.49182E+07</font></b></center>
+</td>
+
+<td>
+<center><b>3</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.34986E+07</font></b></center>
+</td>
+
+<td>
+<center><b>4</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.19125E+07</font></b></center>
+</td>
+
+<td>
+<center><b>5</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.00000E+07</font></b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>6</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">7.78801E+06</font></b></center>
+</td>
+
+<td>
+<center><b>7</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">6.06531E+06</font></b></center>
+</td>
+
+<td>
+<center><b>8</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">4.72367E+06</font></b></center>
+</td>
+
+<td>
+<center><b>9</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">3.67879E+06</font></b></center>
+</td>
+
+<td>
+<center><b>10</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">2.86505E+06</font></b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>11</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">2.23130E+06</font></b></center>
+</td>
+
+<td>
+<center><b>12</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.73774E+06</font></b></center>
+</td>
+
+<td>
+<center><b>13</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.35335E+06</font></b></center>
+</td>
+
+<td>
+<center><b>14</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.05399E+06</font></b></center>
+</td>
+
+<td>
+<center><b>15</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">8.20850E+05</font></b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>16</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">6.39279E+05</font></b></center>
+</td>
+
+<td>
+<center><b>17</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">4.97871E+05</font></b></center>
+</td>
+
+<td>
+<center><b>18</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">3.87742E+05</font></b></center>
+</td>
+
+<td>
+<center><b>19</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">3.01974E+05</font></b></center>
+</td>
+
+<td>
+<center><b>20</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">2.35177E+05</font></b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>21</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.83156E+05</font></b></center>
+</td>
+
+<td>
+<center><b>22</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.42642E+05</font></b></center>
+</td>
+
+<td>
+<center><b>23</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.11090E+05</font></b></center>
+</td>
+
+<td>
+<center><b>24</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">8.65170E+04</font></b></center>
+</td>
+
+<td>
+<center><b>25</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">6.73795E+04</font></b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>26</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">5.24752E+04</font></b></center>
+</td>
+
+<td>
+<center><b>27</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">4.08677E+04</font></b></center>
+</td>
+
+<td>
+<center><b>28</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">3.18278E+04</font></b></center>
+</td>
+
+<td>
+<center><b>29</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">2.47875E+04</font></b></center>
+</td>
+
+<td>
+<center><b>30</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.93045E+04</font></b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>31</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.50344E+04</font></b></center>
+</td>
+
+<td>
+<center><b>32</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.17088E+04</font></b></center>
+</td>
+
+<td>
+<center><b>33</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">9.11882E+03</font></b></center>
+</td>
+
+<td>
+<center><b>34</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">7.10174E+03</font></b></center>
+</td>
+
+<td>
+<center><b>35</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">5.53084E+03</font></b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>36</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">4.30743E+03</font></b></center>
+</td>
+
+<td>
+<center><b>37</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">3.35463E+03</font></b></center>
+</td>
+
+<td>
+<center><b>38</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">2.61259E+03</font></b></center>
+</td>
+
+<td>
+<center><b>39</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">2.03468E+03</font></b></center>
+</td>
+
+<td>
+<center><b>40</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.58461E+03</font></b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>41</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.23410E+03</font></b></center>
+</td>
+
+<td>
+<center><b>42</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">9.61117E+02</font></b></center>
+</td>
+
+<td>
+<center><b>43</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">7.48518E+02</font></b></center>
+</td>
+
+<td>
+<center><b>44</b></center>
+</td>
+
+<td>
+<center>5<b><font color="#274342">.82947E+02</font></b></center>
+</td>
+
+<td>
+<center><b>45</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">4.53999E+02</font></b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>46</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">3.53575E+02</font></b></center>
+</td>
+
+<td>
+<center><b>47</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">2.75365E+02</font></b></center>
+</td>
+
+<td>
+<center><b>48</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">2.14454E+02</font></b></center>
+</td>
+
+<td>
+<center><b>49</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.67017E+02</font></b></center>
+</td>
+
+<td>
+<center><b>50</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.30073E+02</font></b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>51</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.01301E+02</font></b></center>
+</td>
+
+<td>
+<center><b>51</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">7.88932E+01</font></b></center>
+</td>
+
+<td>
+<center><b>53</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">6.14421E+01</font></b></center>
+</td>
+
+<td>
+<center><b>54</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">4.78512E+01</font></b></center>
+</td>
+
+<td>
+<center><b>55</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">3.72665E+01</font></b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>56</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">2.90232E+01</font></b></center>
+</td>
+
+<td>
+<center><b>57</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">2.26033E+01</font></b></center>
+</td>
+
+<td>
+<center><b>58</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.76035E+01</font></b></center>
+</td>
+
+<td>
+<center><b>59</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.37096E+01</font></b></center>
+</td>
+
+<td>
+<center><b>60</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.06770E+01</font></b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>61</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">8.31529E+00</font></b></center>
+</td>
+
+<td>
+<center><b>62</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">6.47595E+00</font></b></center>
+</td>
+
+<td>
+<center><b>63</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">5.04348E+00</font></b></center>
+</td>
+
+<td>
+<center><b>64</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">3.92786E+00</font></b></center>
+</td>
+
+<td>
+<center><b>65</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">3.05902E+00</font></b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>66</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">2.38237E+00</font></b></center>
+</td>
+
+<td>
+<center><b>67</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.85539E+00</font></b></center>
+</td>
+
+<td>
+<center><b>68</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.44498E+00</font></b></center>
+</td>
+
+<td>
+<center><b>69</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.12535E+00</font></b></center>
+</td>
+
+<td>
+<center><b>70</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">8.76425E-01</font></b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>71</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">6.82560E-01</font></b></center>
+</td>
+
+<td>
+<center><b>72</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">5.31579E-01</font></b></center>
+</td>
+
+<td>
+<center><b>73</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">4.13994E-01</font></b></center>
+</td>
+
+<td>
+<center><b>74</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">3.80000E-01</font></b></center>
+</td>
+
+<td>
+<center><b>75</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">3.60000E-01</font></b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>76</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">3.30000E-01</font></b></center>
+</td>
+
+<td>
+<center><b>77</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">3.10000E-01</font></b></center>
+</td>
+
+<td>
+<center><b>78</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">3.00000E-01</font></b></center>
+</td>
+
+<td>
+<center><b>79</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">2.90000E-01</font></b></center>
+</td>
+
+<td>
+<center><b>80</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">2.80000E-01</font></b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>81</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">2.60000E-01</font></b></center>
+</td>
+
+<td>
+<center><b>82</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">2.40000E-01</font></b></center>
+</td>
+
+<td>
+<center><b>83</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">2.20000E-01</font></b></center>
+</td>
+
+<td>
+<center><b>84</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.80000E-01</font></b></center>
+</td>
+
+<td>
+<center><b>85</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.60000E-01</font></b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>86</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.40000E-01</font></b></center>
+</td>
+
+<td>
+<center><b>87</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.00000E-01</font></b></center>
+</td>
+
+<td>
+<center><b>88</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">8.00000E-02</font></b></center>
+</td>
+
+<td>
+<center><b>89</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">6.00000E-02</font></b></center>
+</td>
+
+<td>
+<center><b>90</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">4.00000E-02</font></b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>91</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">2.53000E-02</font></b></center>
+</td>
+
+<td>
+<center><b>92</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">1.50000E-02</font></b></center>
+</td>
+
+<td>
+<center><b>93</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">7.00000E-03</font></b></center>
+</td>
+
+<td>
+<center><b>94</b></center>
+</td>
+
+<td>
+<center><b><font color="#274342">4.00000E-03</font></b></center>
+</td>
+
+<td>
+<center>&nbsp;</center>
+</td>
+
+<td>
+<center>&nbsp;</center>
+</td>
+</tr>
+</table></center>
+
+<p><a NAME="A.2.9"></a><b><font color="#274342">A.2.9.&nbsp; Line 9 - X0,
+Y0, Z0</font></b>
+<p><b><font color="#274342">These values give the origin of the edit voxel
+mesh.&nbsp; To provide the detail required by treatment planning, the model
+geometry is enclosed within a three-dimensional array of edit cubes (voxels).&nbsp;
+In seraMC, there are 30x30x30 cubes in a regular array, each having dimension
+<a href="#A.2.10">delw</a>.
+The user must specify an origin and a dimension
+</font><font color="#008007">delw</font><font color="#274342">
+(usually 1.0 cm) so that the edit mesh entirely encloses the model of the
+patient.&nbsp; As an example, if the model is centered about (0,0,0), then
+specifying an origin at </font><font color="#FF0000">-15,-15,-15</font><font color="#274342">
+and </font><font color="#008007">delw</font><font color="#FF0000"> = 1.0</font><font color="#274342">
+would provide edits for the range x = -15.0 to x = 15.0, y = -15.0 to y
+= 15.0, and z = -15.0 to z = 15.0.</font></b>
+<p><a NAME="A.2.10"></a><b><font color="#274342">A.2.10.&nbsp; Line 10
+- delw, ntrk</font></b>
+<p><b><font color="#274342">The parameter </font><font color="#008007">delw</font><font color="#274342">
+is the dimension of each cubic voxel within the edit mesh.&nbsp; The default
+is </font><font color="#FF0000">1.0cm</font><font color="#274342">.</font></b>
+<p><b><font color="#274342">A second parameter, </font><font color="#008007">ntrk</font><font color="#274342">,
+is also included on this card.&nbsp; If </font><font color="#008007">ntrk</font><font color="#274342">
+is entered as 1, then particle track information will be written to a file
+</font><font color="#CC6600">input.pp
+</font><font color="#274342">(where
+</font><font color="#CC6600">input</font><font color="#274342">
+is the input file name prefix) for display in <a href="sec06.html">sera3d</a>.&nbsp;
+This option is equivalent to the <a href="sec07.html#7.2.2">Test</a> mode
+in <a href="sec07.html">seraCalc</a>.</font></b>
+<p><a NAME="A.2.11"></a><b><font color="#274342">A.2.11.&nbsp; Line 11
+- Old restart file</font></b>
+<p><b><font color="#274342">The seraMC software writes case information
+and all of the edit mesh tallies to a file, usually with </font><font color="#CC6600">.rst</font><font color="#274342">
+appended to the name.&nbsp; Regardless of the form of the filename specified,
+seraMC writes the file for the first transport mode.&nbsp; If subsequent
+modes are specified (see <a href="#A.2.15">Section A.2.15</a>), subsequent
+output files are written to </font><font color="#CC6600">filenamea</font><font color="#274342">,
+</font><font color="#CC6600">filenameb</font><font color="#274342">,
+etc.&nbsp; The run directives are commonly </font><font color="#FF0000">NFGD</font><font color="#274342">,
+which would result in a </font><font color="#CC6600">filename</font><font color="#274342">
+file, a </font><font color="#CC6600">filenamea</font><font color="#274342">
+file, and a </font><font color="#CC6600">filenameb</font><font color="#274342">
+file.&nbsp; After a new restart file is written, the previous version is
+discarded, since all the information is written to the new file.&nbsp;
+For edit-only runs, or other cases where a restart is being performed,
+a filename must be specified.&nbsp; For fresh runs, the value should be
+given as </font><font color="#FF0000">none</font><font color="#274342">.</font></b>
+<p><a NAME="A.2.12"></a><b><font color="#274342">A.2.12.&nbsp; LIne 12
+- New restart file</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">new restart
+file</font><font color="#274342"> behaves in a similar fashion to the old
+restart file.&nbsp; Both filenames may be specified in the case of a restart
+run, but generally only one is given.&nbsp; For a fresh run, the new restart
+filename must be supplied.&nbsp; For edit-only runs, the new restart filename
+is given as </font><font color="#FF0000">none</font><font color="#274342">.</font></b>
+<p><a NAME="A.2.13"></a><b><font color="#274342">A.2.13.&nbsp; LIne 13
+- Source file</font></b>
+<p><b><font color="#274342">A description of the incident coupled neutron-gamma
+field is required to perform the transport calculation.&nbsp; The seraMC
+</font><font color="#008007">source
+file</font><font color="#274342"> provides this description.&nbsp; A description
+of the source file, and the accompanying formats, is found in <a href="appC.html">Appendix
+C</a>.&nbsp; A source file must be specified for all runs, regardless of
+the directives specified.</font></b>
+<p><a NAME="A.2.14"></a><b><font color="#274342">A.2.14.&nbsp; Line 14
+- irand_num and ied</font></b>
+<p><b><font color="#274342">Particle transport in seraMC is accomplished
+by simulating many pseudo-histories of particles using machine-generated
+random number sequences.&nbsp; The value </font><font color="#008007">irand_num</font><font color="#274342">
+is used to determine the initial seed and the stride distance.&nbsp; A
+unique value of </font><font color="#008007">irand_num</font><font color="#274342">
+will provide a unique random number string and an uncorrelated tally estimate
+so that results from two or more runs can be combined without introducing
+bias.&nbsp; The recommended values for </font><font color="#008007">irand_num</font><font color="#274342">
+are from </font><font color="#FF0000">1 to 10</font><font color="#274342">,
+inclusive.&nbsp; If the value of </font><font color="#008007">irand_num</font><font color="#274342">
+is more than 10, unnecessary additional computer time is required.</font></b>
+<p><b><font color="#274342">The parameter </font><font color="#008007">ied</font><font color="#274342">
+allows the knowledgeable user to perform debug traces in seraMC.&nbsp;
+The default value, </font><font color="#FF0000">0</font><font color="#274342">,
+prints the normal output edits.&nbsp; If a value of </font><font color="#FF0000">1</font><font color="#274342">
+is specified, then voluminous and rather ugly debugging output is printed.&nbsp;
+It is recommended that the default value be used at all times.</font></b>
+<p><a NAME="A.2.15"></a><b><font color="#274342">A.2.15.&nbsp; Line 15
+- run_dir and run_date</font></b>
+<p><b><font color="#274342">SeraMC is designed to run in many modes, combining
+the result of modes when appropriate.&nbsp; For example, it is common to
+set run_dir = </font><font color="#FF0000">NFGD</font><font color="#274342">,
+which specifies a standard neutron calculation, followed by a biased fast
+neutron calculation for better convergence of fast dose, followed by a
+gamma calculation, where both the beam gammas and the induced gammas are
+transported, followed by an edit run.&nbsp; After the calculation in each
+mode is finished, a restart file is written.&nbsp; Table A.2 shows the
+different modes and combinations of modes that may be specifed.</font></b>
+<p><b><font color="#274342">Table A.2.&nbsp; Allowed run directives and
+combinations for seraMC.</font></b>
+<p><b><font face="Courier New,Courier"><font color="#274342">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Allowed modes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Allowed combinations</font></font></b>
+<br><b><font face="Courier New,Courier"><font color="#274342">&nbsp; ----------------------------&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+--------------------</font></font></b>
+<br><b><font face="Courier New,Courier"><font color="#274342">&nbsp;&nbsp;&nbsp;
+N;&nbsp; normal neutron calc.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+NFGD, NFD, NGD, FGD,</font></font></b>
+<p><b><font face="Courier New,Courier"><font color="#274342">&nbsp;&nbsp;&nbsp;
+F;&nbsp; biased fast neutron calc.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+UPGD, UPD, UGD, PGD,</font></font></b>
+<p><b><font face="Courier New,Courier"><font color="#274342">&nbsp;&nbsp;&nbsp;
+G;&nbsp; gamma calculation.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ND, FD, GD, UD, PD</font></font></b>
+<p><b><font face="Courier New,Courier"><font color="#274342">&nbsp;&nbsp;&nbsp;
+U;&nbsp; ultrafast neutron calc.</font></font></b>
+<p><b><font face="Courier New,Courier"><font color="#274342">&nbsp;&nbsp;&nbsp;
+P;&nbsp; recoil proton tracking&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+note: can also run</font></font></b>
+<br><b><font face="Courier New,Courier"><font color="#274342">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+without the trailing</font></font></b>
+<br><b><font face="Courier New,Courier"><font color="#274342">&nbsp;&nbsp;&nbsp;
+D;&nbsp; edit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+'D'</font></font></b>
+<p><b><font color="#274342">Note: When the </font><font color="#FF0000">F</font><font color="#274342">
+mode is specified, the contribution to the hydrogen dose is made from incident
+neutron energies greater than the lower energy of group </font><font color="#008007">iged(1)</font><font color="#274342">.&nbsp;
+For example, if </font><font color="#008007">iged(1)</font><font color="#274342">
+= </font><font color="#FF0000">32</font><font color="#274342">, the hydrogen
+dose above </font><font color="#FF0000">9.118keV</font><font color="#274342">
+is tallied; for </font><font color="#008007">iged(1)</font><font color="#274342">
+= </font><font color="#FF0000">70</font><font color="#274342">, the hydrogen
+dose above </font><font color="#FF0000">0.68eV</font><font color="#274342">
+is tallied.&nbsp; When the </font><font color="#FF0000">P</font><font color="#274342">
+mode is specified, the contribution to the proton recoil dose is from incident
+energies above 16.9MeV.&nbsp; The group 1 flux will be tallied from the
+lower energy of group </font><font color="#008007">iged(1)</font><font color="#274342">.&nbsp;
+Specifying </font><font color="#008007">iged(1)</font><font color="#274342">=</font><font color="#FF0000">0</font><font color="#274342">
+will tally all energies above </font><font color="#FF0000">16.9MeV</font><font color="#274342">.</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">run_date</font><font color="#274342">
+variable allows the user to specify a date, which is written to the restart
+file for identification purposes only.&nbsp; No computation is performed
+with the date.</font></b>
+<p><a NAME="A.2.16"></a><b><font color="#274342">A.2.16.&nbsp; Line 16
+- Materials File</font></b>
+<p><b><font color="#274342">In seraMC, materials are specified by a character
+name instead of listing isotopes and elemental (isotopic) densities.&nbsp;
+The densities are stored in a materials file which may be modified by the
+user to specify any composition which is available in the cross sections
+file.&nbsp; The </font><font color="#008007">Materials File</font><font color="#274342">
+is simply a compilation of composition definitions with associated names
+for the various materials available.&nbsp; In seraMC, materials are assigned
+to regions using character descriptors (e.g. </font><font color="#FF0000">brain</font><font color="#274342">,
+</font><font color="#FF0000">water</font><font color="#274342">)
+which must be defined in the </font><font color="#008007">Materials File</font><font color="#274342">.&nbsp;
+The input data for this file are quite simple and in fixed format.&nbsp;
+The input consists of data items defined in Table A.3.&nbsp; This table
+defines the isotopes and atomic densities for defined materials.&nbsp;
+The list of possible isotopes is given in Table A.4, and the list of materials
+presently in the seraMC materials file is shown in Table A.5.&nbsp; The
+file may contain comment lines (lines with a </font><font color="#FF0000">#</font><font color="#274342">
+character in column 1).&nbsp; The data entries are straightforward, except
+that it is possible to have confusion about the way in which thermal scattering
+data are incorporated.&nbsp; An example for a simple molecule (H<sub>2</sub>0)
+will help to show how the data are retrieved from the library.&nbsp; This
+molecule can be specified by setting </font><font color="#008007">id_one</font><font color="#274342">
+= </font><font color="#FF0000">1</font><font color="#274342"> (free hydrogen),
+with </font><font color="#008007">dens</font><font color="#274342"> = </font><font color="#FF0000">0.06668</font><font color="#274342">
+and </font><font color="#008007">id_two</font><font color="#274342"> =
+</font><font color="#FF0000">3</font><font color="#274342">
+(free oxygen for above-thermal energies and H<sub>2</sub>0 for thermal
+energies).&nbsp; Thus the specification for H<sub>2</sub>0 could be:</font></b>
+<p><b><font color="#274342">&nbsp;</font><font color="#000000">H20</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp; 1</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp; 1&nbsp; 0.06668&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+3</font></b>
+<p><b><font color="#274342">The number of primary atoms per molecule is
+given in the library so the code knows to divide the hydrogen density by
+two in order to specify the oxygen density or the molecular density.</font></b>
+<center>
+<p><b><font color="#274342">Table A.3.&nbsp; Description of Materials File
+format</font></b></center>
+
+<blockquote><b><font face="Courier New,Courier"><font color="#274342"><u>RecordVariable</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>&nbsp;&nbsp;
+Format&nbsp;&nbsp;&nbsp;</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <u>Description
+of value</u></font></font></b>
+<br><b><font face="Courier New,Courier"><font color="#274342">&nbsp;&nbsp;
+1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lmat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+i12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Total
+number of materials in the materials file</font></font></b>
+<p><b><font face="Courier New,Courier"><font color="#274342">&nbsp;&nbsp;
+2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mati&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1x,a40&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Name of material</font></font></b>
+<p><b><font face="Courier New,Courier"><font color="#274342">&nbsp;&nbsp;
+2a&nbsp;&nbsp;&nbsp;&nbsp; niso_m&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+i12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Number
+of isotope identifier/density pairs for this material</font></font></b>
+<p><b><font face="Courier New,Courier"><font color="#274342">&nbsp;&nbsp;
+3&nbsp;&nbsp;&nbsp;&nbsp; id_one(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+i5,e15.5,i5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Isotope identifier</font></font></b>
+<br><b><font face="Courier New,Courier"><font color="#274342">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+dens(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+isotope density (atoms/barn-cm)</font></font></b>
+<br><b><font face="Courier New,Courier"><font color="#274342">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+id_two(i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+thermal scattering data identifier</font></font></b>
+<blockquote><b><font color="#274342">Record 3 is repeated for each of the
+</font><font color="#008007">niso_m</font><font color="#274342">
+identifier/density pairs.</font></b></blockquote>
+<b><font color="#274342">Records 2, 2a, and 3 are repeated for each of
+the </font><font color="#008007">lmat</font><font color="#274342"> materials.</font></b></blockquote>
+
+<center><table BORDER=2 CELLSPACING=2 NOSAVE >
+<caption>
+<center><a NAME="TableA.4"></a><b>Table A.4.&nbsp; Listing of isotopes
+available in library</b></center>
+</caption>
+
+<tr NOSAVE>
+<td>
+<center><b>Identifier</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;Edit</b>
+<br><b>Identifier</b></center>
+</td>
+
+<td NOSAVE>
+<center><b>Fast neutron/</b>
+<br><b>gamma element</b></center>
+</td>
+
+<td>
+<center><b>Thermal neutron</b>
+<br><b>element/molecule</b></center>
+</td>
+
+<td NOSAVE>
+<center><b>Note</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>1</b></center>
+</td>
+
+<td>
+<center><b>508</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/H1.KERM">Hydrogen</a></b></center>
+</td>
+
+<td>
+<center><b>none</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;must be combined with thermal</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>2</b></center>
+</td>
+
+<td>
+<center><b>505</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/O16.KERM">Oxygen</a></b></center>
+</td>
+
+<td>
+<center><b>Oxygen</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;Free gas kernel</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>3</b></center>
+</td>
+
+<td>
+<center><b>505</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/O16.KERM">Oxygen</a></b></center>
+</td>
+
+<td>
+<center><b>H<sub>2</sub>O molecule</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;used in conjunction with Hydrogen</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>4</b></center>
+</td>
+
+<td>
+<center><b>509</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/AL27.KERM">Aluminum</a></b></center>
+</td>
+
+<td>
+<center><b>Aluminum</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>5</b></center>
+</td>
+
+<td>
+<center><b>510</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/LI6.KERM"><sup>6</sup>Lithium</a></b></center>
+</td>
+
+<td>
+<center><b><sup>6</sup>Lithium</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>6</b></center>
+</td>
+
+<td>
+<center><b>511</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/LI7.KERM"><sup>7</sup>Lithium</a></b></center>
+</td>
+
+<td>
+<center><b><sup>7</sup>Lithium</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>7</b></center>
+</td>
+
+<td>
+<center><b>512</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/C12.KERM">Carbon</a></b></center>
+</td>
+
+<td>
+<center><b>Carbon</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>8</b></center>
+</td>
+
+<td>
+<center><b>513</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/N14.KERM">Nitrogen</a></b></center>
+</td>
+
+<td>
+<center><b>Nitrogen</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>9</b></center>
+</td>
+
+<td>
+<center><b>521</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/B10.KERM"><sup>10</sup>Boron</a></b></center>
+</td>
+
+<td>
+<center><b><sup>10</sup>Boron</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>10</b></center>
+</td>
+
+<td>
+<center><b>522</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/B11.KERM"><sup>11</sup>Boron</a></b></center>
+</td>
+
+<td>
+<center><b><sup>11</sup>Boron</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>11</b></center>
+</td>
+
+<td>
+<center><b>525</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/NA23.KERM">Sodium</a></b></center>
+</td>
+
+<td>
+<center><b>Sodium</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>12</b></center>
+</td>
+
+<td>
+<center><b>528</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/S.KERM">Sulfur</a></b></center>
+</td>
+
+<td>
+<center><b>Sulfur</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>13</b></center>
+</td>
+
+<td>
+<center><b>532</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/CA.KERM">Calcium</a></b></center>
+</td>
+
+<td>
+<center><b>Calcium</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>14</b></center>
+</td>
+
+<td>
+<center><b>533</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/MG.KERM">Magnesium</a></b></center>
+</td>
+
+<td>
+<center><b>Magnesium</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>15</b></center>
+</td>
+
+<td>
+<center><b>536</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/H2.KERM">Deuterium</a></b></center>
+</td>
+
+<td>
+<center><b>Deuterium</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>16</b></center>
+</td>
+
+<td>
+<center><b>541</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/CL.KERM">Chlorine</a></b></center>
+</td>
+
+<td>
+<center><b>Chlorine</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>17</b></center>
+</td>
+
+<td>
+<center><b>542</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/K.KERM">Potassium</a></b></center>
+</td>
+
+<td>
+<center><b>Potassium</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>18</b></center>
+</td>
+
+<td>
+<center><b>543</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/P.KERM">Phosphorus</a></b></center>
+</td>
+
+<td>
+<center><b>Phosphorus</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>19</b></center>
+</td>
+
+<td>
+<center><b>830</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/C12.KERM">Carbon</a></b></center>
+</td>
+
+<td>
+<center><b>CH<sub>2</sub></b></center>
+</td>
+
+<td>
+<center><b>&nbsp;must be combined with Hydrogen</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>20</b></center>
+</td>
+
+<td>
+<center><b>507</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/PB.KERM">Lead</a></b></center>
+</td>
+
+<td>
+<center><b>Lead&nbsp;</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>21</b></center>
+</td>
+
+<td>
+<center><b>537</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/F19.KERM">Fluorine</a></b></center>
+</td>
+
+<td>
+<center><b>Fluorine</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>22</b></center>
+</td>
+
+<td>
+<center><b>508</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/H1.KERM">Hydrogen</a></b></center>
+</td>
+
+<td>
+<center><b>Hydrogen</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;Free gas kernel&nbsp;</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>23</b></center>
+</td>
+
+<td>
+<center><b>523</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/CD.KERM">Cadmium</a></b></center>
+</td>
+
+<td>
+<center><b>Cadmium&nbsp;</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>24</b></center>
+</td>
+
+<td>
+<center><b>-</b></center>
+</td>
+
+<td>
+<center><b>Hydrogen</b></center>
+</td>
+
+<td>
+<center><b>none</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;Thermal siga=1.0 (not used for edits)</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>25</b></center>
+</td>
+
+<td>
+<center><b>-</b></center>
+</td>
+
+<td>
+<center><b>Hydrogen</b></center>
+</td>
+
+<td>
+<center><b>none</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;Thermal sigs=1.0 (not used for edits)</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>26</b></center>
+</td>
+
+<td>
+<center><b>554</b></center>
+</td>
+
+<td>
+<center><b><a href="SeraMC/KERMA_d/BI.KERM">Bismuth</a></b></center>
+</td>
+
+<td>
+<center><b>Bismuth</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;</b></center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><b>27</b></center>
+</td>
+
+<td>
+<center><b>-</b></center>
+</td>
+
+<td>
+<center><b>Silicon</b></center>
+</td>
+
+<td>
+<center><b>Silicon</b></center>
+</td>
+
+<td>
+<center><b>&nbsp;</b></center>
+</td>
+</tr>
+</table></center>
+
+<center><table BORDER=3 CELLSPACING=3 CELLPADDING=3 NOSAVE >
+<caption>
+<center><a NAME="TableA.5"></a><b>Table A.5.&nbsp; List of materials available
+in Materials File</b></center>
+</caption>
+
+<tr>
+<td><b>Fairchild_tissue</b></td>
+
+<td><b>Fairchild_tissue+5ppm</b></td>
+
+<td><b>Fairchild_tissue+10ppm</b></td>
+</tr>
+
+<tr>
+<td><b>Fairchild_tissue+20ppm</b></td>
+
+<td><b>Duck_cranium</b></td>
+
+<td><b>brain_MIT</b></td>
+</tr>
+
+<tr>
+<td><b>brain_MIT+5ppm</b></td>
+
+<td><b>brain_MIT+10ppm</b></td>
+
+<td><b>brain_MIT+20ppm</b></td>
+</tr>
+
+<tr>
+<td><b>void_edit</b></td>
+
+<td><b>buffer</b></td>
+
+<td><b>Li6_polymer_shield</b></td>
+</tr>
+
+<tr>
+<td><b>lucite</b></td>
+
+<td><b>poly_LIOH_enr</b></td>
+
+<td><b>pure_poly</b></td>
+</tr>
+
+<tr>
+<td><b>Rx_201</b></td>
+
+<td><b>Moran_wgtd_doghead</b></td>
+
+<td><b>H2O</b></td>
+</tr>
+
+<tr>
+<td><b>tissue</b></td>
+
+<td><b>plywood</b></td>
+
+<td><b>A150</b></td>
+</tr>
+
+<tr>
+<td><b>boroflex</b></td>
+
+<td><b>Rx_215_nat</b></td>
+
+<td><b>styrofoam</b></td>
+</tr>
+
+<tr>
+<td><b>Rx_215_enr</b></td>
+
+<td><b>Li6</b></td>
+
+<td><b>lexan</b></td>
+</tr>
+
+<tr>
+<td><b>polybor</b></td>
+
+<td><b>Pb-B-Wax</b></td>
+
+<td><b>Cadmium</b></td>
+</tr>
+
+<tr>
+<td><b>Li6_epoxy</b></td>
+
+<td><b>lead</b></td>
+
+<td><b>PMMA</b></td>
+</tr>
+
+<tr>
+<td><b>concrete</b></td>
+
+<td><b>search_light</b></td>
+
+<td><b>lung</b></td>
+</tr>
+
+<tr NOSAVE>
+<td><b>true_void</b></td>
+
+<td><b>brain_ICRU_46_adult</b></td>
+
+<td NOSAVE><b>skin_ICRU_46_adult</b></td>
+</tr>
+
+<tr>
+<td><b>skeleton-cranium_ICRU_46</b></td>
+
+<td><b>skin_ICRU_46_adult_5ppm</b></td>
+
+<td><b>skin_ICRU_46_adult_10ppm</b></td>
+</tr>
+
+<tr>
+<td><b>skin_ICRU_46_adult_20ppm</b></td>
+
+<td><b>skin_ICRU_46_adult_30ppm</b></td>
+
+<td><b>skin_ICRU_46_adult_40ppm</b></td>
+</tr>
+
+<tr>
+<td><b>brain_ICRU_46_adult_5ppm</b></td>
+
+<td><b>brain_ICRU_46_adult_10ppm</b></td>
+
+<td><b>brain_ICRU_46_adult_20ppm</b></td>
+</tr>
+
+<tr>
+<td><b>skin_ICRU_46_adult_50ppm</b></td>
+
+<td><b>glassbead</b></td>
+
+<td><b>eye_lens_ICRU46_adult</b></td>
+</tr>
+</table></center>
+
+<p><a NAME="A.2.17"></a><b><font color="#274342">A.2.17.&nbsp; Line 17
+- Cross section file</font></b>
+<p><b><font color="#274342">The cross section file contains all the physics
+data required to accurately determine interaction rates and secondary energy
+and angular distributions, as well as probabilities for generation of secondary
+particles.&nbsp; The Evaluated Nuclear Data Files (ENDF/B), and other sources,
+coordinated through the <a href="www.nndc.bnl.gov">National Nuclear Data
+Center</a>, are used.</font></b>
+<p><a NAME="A.2.18"></a><b><font color="#274342">A.2.18.&nbsp; Line 18
+- Edit isotopes</font></b>
+<p><b><font color="#274342">In addition to the normal region and edit mesh
+tallies, there are four special tallies on the edit mesh to provide the
+dose distributions required for treatment planning, and two special reaction
+rate tallies that can be tailored to the user's purposes.&nbsp; The four
+dose tallies can be applied to any isotope in the fast neutron library,
+but usually are applied to:</font></b>
+<p><b><font color="#274342">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 521:&nbsp; The
+<sup>10</sup>B
+capture dose</font></b>
+<br><b><font color="#274342">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 508:&nbsp;
+Hydrogen recoil dose</font></b>
+<br><b><font color="#274342">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 513: <sup>14</sup>N
+capture dose</font></b>
+<br><b><font color="#274342">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 512:&nbsp;
+Carbon dose</font></b>
+<br><b><font color="#274342">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 505:&nbsp;
+Oxygen dose</font></b>
+<p><b><font color="#274342">where the last two are combined into the </font><font color="#008007">other
+dose</font><font color="#274342"> edit.&nbsp; Note that, no matter what
+isotopes are invoked on the edit isotopes line, the edits in the seraMC
+output are always labelled </font><font color="#008007">boron dose, hydrogen
+dose, nitrogen dose,</font><font color="#FF0000"> </font><font color="#274342">and
+</font><font color="#008007">other
+dose</font><font color="#274342">.&nbsp; The two reaction rate tallies
+may utilize any isotope in the fast neutron library, and are designated
+</font><font color="#008007">Reaction
+Rate 1 </font><font color="#274342">and</font><font color="#008007"> Reaction
+Rate 2</font><font color="#274342"> in the output.&nbsp; These last two
+are only included for point and line edits, not dose-volume histograms
+or contour edits.</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">fast neutron
+IDs and densities</font><font color="#274342"> must be supplied on this
+input line.&nbsp; The nuclide KERMA data used by seraMC are retrieved from
+the cross section libraries. The densities are assumed constant for all
+edit mesh voxels.&nbsp; This is done to produce coherent contour profiles
+for these doses.&nbsp; Concentrations can be modified in the seraMC edit
+directives or the seraDose widget for specific tissue of interest.</font></b>
+<p><a NAME="A.2.19"></a><b><font color="#274342">A.2.19.&nbsp; Line 19
+- Run script for seraMC</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">seraMC run
+script</font><font color="#274342"> runs seraMC and performs some file
+management activities.&nbsp; It accepts one argument, the name of the seraMC
+input file.&nbsp; It assumes that the file is named </font><font color="#CC6600">name.input</font><font color="#274342">,
+and it creates an output file named </font><font color="#CC6600">name.out</font><font color="#274342">.&nbsp;
+Invoking this from the
+<a href="sec07.html">seraCalc</a> widget runs seraMC
+in the background.&nbsp; This is included only for the seraCalc interface,
+as the run script is invoked either from seraCalc or the command line.</font></b>
+<p><b><font color="#274342">There are three environmental variables that
+must be set when using seraMC. These can be initiated in a login script
+or set with a command such as </font><font color="#FF0000">setenv</font><font color="#274342">:</font></b>
+<p><b><font color="#274342">&nbsp;&nbsp; </font><font color="#000000">setenv&nbsp;
+SERAPATH&nbsp;&nbsp; $SERA_HOME</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp; setenv&nbsp; SERA_BIN&nbsp;&nbsp;&nbsp;
+$SERAPATH/Target/bin</font></b>
+<p><b><font color="#274342">where </font><font color="#CC6600">$SERA_HOME</font><font color="#274342">
+is the directory where the software resides.</font></b>
+<p><b><font color="#274342">The input to seraMC is provided in a file with
+the suffix </font><font color="#CC6600">.input</font><font color="#274342">
+(e.g., </font><font color="#CC6600">case1.input</font><font color="#274342">).&nbsp;
+A seraMC run can be made by using the </font><font color="#CC6600">run_seraMC</font><font color="#274342">
+script as:</font></b>
+<p><b><font color="#274342">&nbsp;&nbsp; </font><font color="#000000">run_seraMC
+case1</font></b>
+<p><b><font color="#274342">The output from seraMC is written to the file
+</font><font color="#CC6600">case1.out</font><font color="#000000">,</font><font color="#274342">
+which may be processed by ancillary software to provide desired edits.&nbsp;
+The region fluxes and specified edits are written to the </font><font color="#CC6600">.out</font><font color="#274342">
+file and other files as required by the edits.&nbsp; The detailed flux
+and dose distributions are stored in the edit-voxel arrays which are written
+to the file </font><font color="#CC6600">case1.rst</font><font color="#274342">,
+which is specified in the input.&nbsp; If more than one transport mode
+were selected (e.g., </font><font color="#FF0000">NFG</font><font color="#274342">),
+additional files are written; in this case, they would be </font><font color="#CC6600">case1.rsta</font><font color="#274342">
+and </font><font color="#CC6600">case1.rstb</font><font color="#274342">.&nbsp;
+The file </font><font color="#CC6600">case1.rstb</font><font color="#274342">
+contains all information from the previous transport modes, and after successful
+completion of a run, files </font><font color="#CC6600">case1.rst
+</font><font color="#274342">and</font><font color="#CC6600">
+case1.rsta</font><font color="#274342"> will be discarded.</font></b>
+<p><b><font color="#274342">The raster files </font><font color="#CC6600">view.1,
+view.2, </font><font color="#274342">and</font><font color="#CC6600"> view.3</font><font color="#274342">
+are created automatically.&nbsp; These files provide three orthogonal perpendicular
+views centered at the target point.&nbsp; These files may be viewed in
+<a href="sec08.html">seraDose</a>;&nbsp;
+they are very useful for geometry checking.</font></b>
+<p><b><font color="#274342">During execution, seraMC writes a file called
+</font><font color="#CC6600">sera.mon</font><font color="#274342">,
+which presents a current run status, the number of particles processed
+and lost, and the reference flux location and value of thermal flux.&nbsp;
+In version 1B0, the flux and location are written only at the end of the
+transport calculation.&nbsp; In future versions, these may be updated during
+the calculation so that one can monitor the run from a graphical interface
+and take action if warranted.</font></b>
+<p><b><font color="#274342">Finally, seraMC writes a temporary file called
+</font><font color="#CC6600">RUN.INPUT</font><font color="#274342">.&nbsp;
+This is actually an echo of the edit directives and additional generated
+directives, and it is removed after seraMC completes.&nbsp; The purpose
+of this file is to prevent two seraMC runs from being made simultaneously
+in the same working directory.&nbsp; If a seraMC case is running and the
+user tries to execute another seraMC run in the same directory, the run_seraMC
+script detects the presence of
+</font><font color="#CC6600">RUN.INPUT</font><font color="#274342">
+and blocks execution of seraMC, which could destroy results of the already-running
+case.&nbsp; Occasionally, seraMC will terminate abnormally and leave </font><font color="#CC6600">RUN.INPUT</font><font color="#274342">
+in the directory even though seraMC is not running.&nbsp; In this case,
+it is necessary to manually remove </font><font color="#CC6600">RUN.INPUT</font><font color="#274342">
+before another run can be initiated.</font></b>
+<p><a NAME="A.2.20"></a><b><font color="#274342">A.2.20.&nbsp; Line 20
+- Proton range file (U or P mode only)</font></b>
+<p><b><font color="#274342">When the ultrafast mode calculations are invoked,
+data for the proton transport are needed by seraMC.&nbsp; These data consist
+of tables of proton ranges and detour factors in various materials at energies
+from 100MeV to essentially zero.&nbsp; These allow the proton dose to be
+computed at all points within the edit mesh.&nbsp; Data are included for
+all materials likely to be encountered in normal use of seraMC.&nbsp; The
+default file is </font><font color="#CC6600">$SERAMC/lib/range.seraMC</font><font color="#274342">,
+and it is recommended that this file always be used.</font></b>
+<p><a NAME="A.2.21"></a><b><font color="#274342">A.2.21.&nbsp; Line 21
+- Ultrafast directory file (U or P mode only)</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">ultrafast
+directory file</font><font color="#274342"> provides information needed
+for reading and processing the ultrafast cross section file.&nbsp; This
+consists primarily of the isotopes for which information is provided, and
+the locations in the cross section file for each one.&nbsp; Appended to
+this information is composition information for the same materials contained
+in the seraMC
+<a href="#A.2.16">materials file</a>.&nbsp; These provide
+material mixing data for the ultrafast computation.&nbsp; The default file
+is
+</font><font color="#CC6600">$SERAMC/lib/dirult</font><font color="#274342">,
+and it is recommended that this file always be used.</font></b>
+<p><a NAME="A.2.22"></a><b><font color="#274342">A.2.22.&nbsp; Line 22
+- Ultrafast cross section file (U or P mode only)</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">ultrafast
+cross section file</font><font color="#274342"> contains the cross section
+data for 11 isotopes, for the energy range 16.9MeV to 100MeV.&nbsp; This
+includes secondary particle energy-angular distributions, and gamma production
+data.&nbsp; These data are provided as linearly interpolated pointwise
+information in energy and angle.&nbsp; The isotopes available at present
+are&nbsp; H, Be, C, N, O, Al, Si, Ca, Fe, W, and <sup>238</sup>U.&nbsp;
+It is expected that this list will expand in the future, as new data become
+available.&nbsp; The default file is </font><font color="#CC6600">$SERAMC/lib/ultralib</font><font color="#274342">,
+and it is recommended that this file always be used.</font></b>
+<br>&nbsp;
+<p><a NAME="A.3"></a><b><font color="#274342"><font size=+1>A.3.&nbsp;
+Coordinate Transformations</font></font></b>
+<p><b><font color="#274342">This section follows the required input section
+(Block 1) and is located before the </font><font color="#008007">iop</font><font color="#274342">
+section.&nbsp; The transformation input is not required if the correspondence
+between image geometry and model geometry is the standard for the sera
+system.</font></b>
+<p><img SRC="SeraMC/AX26.gif" NOSAVE height=246 width=244>
+<p><b>Figure A.4.&nbsp; Transverse MRI image of a healthy (volunteer) individual.</b>
+<p><b>In the seraMC model, the x-axis vector direction is posterior to
+anterior (back of head to front), the y-axis vector direction is right
+to left, and the z-axis vector direction is inferior to superior (feet
+to head).&nbsp; Thus, for transverse images, the image colums are assigned
+to the y-axis and the rows are assigned to the x-axis.&nbsp; Since the
+reconstruction software puts the material assignments in row, column, slice
+order, the rows and columns are switched by the <font color="#008007">trans_bs</font>
+directive.&nbsp; The default model is based on transverse images and corresponds
+to:</b>
+<p><b>&nbsp;&nbsp;&nbsp;<font color="#000000">&nbsp;&nbsp; trans_bs</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.0&nbsp; 0.0&nbsp; 0.0</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1.0&nbsp; 1.0&nbsp; 1.0</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.0&nbsp; 0.0&nbsp; 0.0</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1.0</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+2 1 3</font></b>
+<p><b>The 3x3 matrix is a limited transformation matrix, with the rows
+denoting three vectors, <font color="#008007">a, b, </font><font color="#274342">and</font><font color="#008007">
+c</font>.&nbsp; The <font color="#FF0000">1.0</font> is a scaling factor,
+and the <font color="#FF0000">2 1 3</font> is a reindex vector which assigns
+x to columns and y to rows.&nbsp; For this default case, the <font color="#008007">trans_bs</font>
+section is not required.</b>
+<p><b>The relation between the initial vector x and the resultant vector
+x' is given by the following system of equations:</b>
+<p><b><tt><font size=+1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">
+x'(1) = a(1) + b(1) * {x(in_x) + c(1)}</font></font></tt></b>
+<br><b><tt><font color="#000000"><font size=+1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+x'(2) = a(2) + b(2) * {x(in_y) + c(2)}</font></font></tt></b>
+<br><b><tt><font color="#000000"><font size=+1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+x'(3) = a(3) + b(3) * {x(in_z) + c(3)}</font></font></tt></b>
+<p><b>where <font color="#008007">in_x, in_y</font> and <font color="#008007">in_z</font>
+are the reindex vector elements.&nbsp; For the default case, <font color="#008007">in_x</font>
+= <font color="#FF0000">2</font>, <font color="#008007">in_y </font>= <font color="#FF0000">1</font>,
+and<font color="#008007"> in_z</font> = <font color="#FF0000">3</font>,
+which results in the x- and y-axes being switched.&nbsp; Obviously, much
+more complex transformations are possible, but unlikely.</b>
+<p><b>One could, however, input th<font color="#274342">e matrix, scaling
+factor and reindex vector as desired to choose another correspondence between
+image and model space.&nbsp; For example, dogs usually have the top of
+the head at the top of the image, so the coordinate system transform could
+be accomplished by:</font></b>
+<p><b><font color="#274342">&nbsp;&nbsp;</font><font color="#000000">&nbsp;&nbsp;&nbsp;
+trans_bs</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+3 2 1</font></b>
+<p><b>Here, the code recognizes that the matrix and scale factor are not
+present and uses the default values.&nbsp; Since the coordinates in the
+patient geometry files are in cm, the scale factor and transform matrix
+would depend upon a ratio of the <font color="#008007">field of view</font>
+(FOV) in image space to the desired FOV rather than on the actual value
+of the desired FOV.</b>
+<br>&nbsp;
+<p><a NAME="A.4"></a><b><font color="#274342"><font size=+1>A.4.&nbsp;
+Automatic Beam Locator</font></font></b>
+<p><b><font color="#274342">Block 3 of the seraMC input consists of the
+key word </font><font color="#008007">iop</font><font color="#274342">
+and necessary input required to allow a search for orienting the beam in
+a specified manner. The geometry must be such that the beam geometry does
+not coincide with the patient geometry, and the patient geometry is always
+surrounded by the CG buffer region for all search orientations, or the
+search may fail.&nbsp; The geometry for the source positioning search is
+shown in Figure A.5, and applies for all beam positioning search modes.&nbsp;
+For more information on the beam location parameters, see <a href="#A.2.4">Section
+A.2.4</a>.</font></b>
+<p><img SRC="SeraMC/T.gif" NOSAVE height=381 width=565>
+<p><b><font color="#274342">Figure A.5.&nbsp; Beam positioning schematic,
+showing the various variables employed for the positioning search.</font></b>
+<p><a NAME="A.4.1"></a><b><font color="#274342">A.4.1.&nbsp; Positioning
+when iop = 1 (default)</font></b>
+<p><b><font color="#274342">The beam location is determined by the source
+geometry, the target point (</font><font color="#008007">Xp, Yp, Zp</font><font color="#274342">),
+the distance from the target to the source center (</font><font color="#008007">Zb</font><font color="#274342">),
+and the two rotation angles (</font><font color="#008007">phi </font><font color="#274342">and</font><font color="#008007">
+theta</font><font color="#274342">), as specified in Block 1. The </font><font color="#008007">iop</font><font color="#274342">
+block is not required for the default case.</font></b>
+<p><a NAME="A.4.2"></a><b><font color="#274342">A.4.2.&nbsp; Positioning
+when iop = 2</font></b>
+<p><b><font color="#274342">A sample input for a case where </font><font color="#008007">iop</font><font color="#274342">
+= </font><font color="#FF0000">2</font><font color="#274342"> is shown
+below.</font></b>
+<p><b><font color="#274342">&nbsp;&nbsp;&nbsp; </font><font color="#000000">iop</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 aperture
+buffer</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.5</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp; -3.0 2.0 5.0</font></b>
+<p><b><font color="#274342">The first input datum sets </font><font color="#008007">iop</font><font color="#274342">
+= </font><font color="#FF0000">2</font><font color="#274342">, and the
+next two items are the names of regions external to the patient. 
+</font><font color="#FF0000">Aperture</font><font color="#274342">
+is the name of the first region encountered in the source geometry;&nbsp;
+it is shown as the yellow region in Figure A.5.&nbsp; </font><font color="#FF0000">Buffer</font><font color="#274342">
+is the name of the first region outside the patient on the beamline between
+the target point and the source plane.&nbsp; This is shown as the light
+blue region in Figure A.5.&nbsp; The region indices could be used instead
+of region names, but it is clearer to use the names.&nbsp; </font><font color="#990000">Note
+that only two regions are allowed for the specification of the iop input.&nbsp;
+This will affect the allowed geometry of the source specification (see
+Appendix C).</font></b>
+<p><b><font color="#274342">The next item is </font><font color="#008007">zsep</font><font color="#274342">
+(0.5) which is the desired distance from the skin to the aperture region
+along the beamline.&nbsp; The user should ensure that the </font><font color="#008007">zsep</font><font color="#274342">
+parameter specified is sufficiently large to prevent any overlap of the
+patient geometry and the source geometry, as this overlap will result in
+lost particles and possible termination of the seraMC run.&nbsp; The last
+three data items are the x,y,z coordinates of a point which the beamline
+must intersect between the target point and the source center.</font></b>
+<p><a NAME="A.4.3"></a><b><font color="#274342">A.4.3.&nbsp; Positioning
+when iop = 3</font></b>
+<p><b><font color="#274342">A sample input for a case where iop = </font><font color="#FF0000">3</font><font color="#274342">
+is shown below.</font></b>
+<p><b><font color="#274342">&nbsp;</font><font color="#000000">&nbsp; iop</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3 aperture
+buffer</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.5</font></b>
+<p><b><font color="#274342">In this instance, </font><font color="#008007">iop</font><font color="#274342">
+= </font><font color="#FF0000">3</font><font color="#274342">, and the
+input is the same as for </font><font color="#008007">iop</font><font color="#274342">
+= </font><font color="#FF0000">2</font><font color="#274342">, except that
+the positioning point is not included.&nbsp; When </font><font color="#008007">iop</font><font color="#274342">
+= </font><font color="#FF0000">3</font><font color="#274342">, seraMC automatically
+finds the beamline such that the distance
+</font><font color="#008007">d</font><font color="#274342">
+from the target point to the skin surface is a minimum. Often, this results
+in a near optimum beam for single-field applications.&nbsp; The user should
+ensure that the </font><font color="#008007">zsep</font><font color="#274342">
+parameter specified is sufficiently large to prevent any overlap of the
+patient geometry and the source geometry, as this overlap will result in
+lost particles and possible termination of the seraMC run.</font></b>
+<p><a NAME="A.4.4"></a><b><font color="#274342">A.4.4.&nbsp; Positioning
+when iop = 4</font></b>
+<p><b><font color="#274342">A sample input for a case where </font><font color="#008007">iop</font><font color="#274342">
+= </font><font color="#FF0000">4</font><font color="#274342"> is shown
+below.</font></b>
+<p><b><font color="#274342">&nbsp;</font><font color="#000000">&nbsp; iop</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4 aperture
+buffer</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.5</font></b>
+<p><b><font color="#274342">Now </font><font color="#008007">iop</font><font color="#274342">
+= </font><font color="#FF0000">4</font><font color="#274342">, and the
+input is the same as for </font><font color="#008007">iop</font><font color="#274342">
+= </font><font color="#FF0000">3</font><font color="#274342">.&nbsp; In
+this case, however,&nbsp; seraMC does not do a search for beam angle.&nbsp;
+The beam angles entered in Block 1 are used, and seraMC merely adjusts
+</font><font color="#008007">Zb</font><font color="#274342">
+to obtain the desired separation distance, </font><font color="#008007">zsep</font><font color="#274342">.&nbsp;
+The user should ensure that the </font><font color="#008007">zsep</font><font color="#274342">
+parameter specified is sufficiently large to prevent any overlap of the
+patient geometry and the source geometry, as this overlap will result in
+lost particles and possible termination of the seraMC run.&nbsp; This is
+a very commonly used option.</font></b>
+<p><a NAME="A.4.5"></a><b><font color="#274342">A.4.5.&nbsp; Positioning
+when iop = 5</font></b>
+<p><b><font color="#274342">A sample input for a case where </font><font color="#008007">iop</font><font color="#274342">
+= </font><font color="#FF0000">5</font><font color="#274342"> is shown
+below.</font></b>
+<p><b><font color="#274342">&nbsp;</font><font color="#000000">&nbsp; iop</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5 aperture
+buffer</font></b>
+<br><b><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.5</font></b>
+<p><b><font color="#274342">Now </font><font color="#008007">iop</font><font color="#274342">
+= </font><font color="#FF0000">5</font><font color="#274342"> and the input
+is the same as for </font><font color="#008007">iop</font><font color="#274342">
+= </font><font color="#FF0000">3</font><font color="#274342"> again.&nbsp;
+In this instance, however, the seraMC search for the minimum distance </font><font color="#008007">d</font><font color="#274342">
+is performed with the azimuthal angle </font><font color="#008007">theta</font><font color="#274342">
+fixed at the value specified in the Block 1 input.</font></b>
+<br>&nbsp;
+<p><a NAME="A.5"></a><b><font color="#274342"><font size=+1>A.5.&nbsp;
+Edit Directives</font></font></b>
+<p><b><font color="#274342">Following the transport computations or during
+a restart run, seraMC may be run in </font><font color="#FF0000">D</font><font color="#274342">
+mode, in which case the code looks for edit directives to provide desired
+outputs.&nbsp; Some edits, such as the region edits and the peak voxel
+edits, are obtained automatically.&nbsp; To obtain additional edits, the
+user must insert the edit directive block of the input, headed by the key
+word </font><font color="#008007">edit_dir</font><font color="#274342">.&nbsp;
+SeraMC then reads all edit directives, pausing to perform the edit whenever
+an active edit directive is encountered.&nbsp; There are four types of
+edit directives.&nbsp; These are:</font></b>
+<ul>
+<li>
+<b><font color="#274342">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; plot headers</font></b></li>
+
+<li>
+<b><font color="#274342">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; directives that,
+if used, must be placed before active edit directives</font></b></li>
+
+<li>
+<b><font color="#274342">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; directives that
+set parameters and can be placed anywhere</font></b></li>
+
+<li>
+<b><font color="#274342">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; active edit directives.</font></b></li>
+</ul>
+<b><font color="#274342">Plot headers are not used by seraMC, but they
+are listed in the output so that <a href="sec09.html">seraPlot</a> can
+post-process the seraMC output and use the headers as labels in plot files.</font></b>
+<p><b><font color="#274342">There are certain edit directives which, if
+used, must appear before any active directive in order to be effective.&nbsp;
+This is the case because the first thing seraMC does when encountering
+the first active directive is to search for the reference edit voxel(s),
+where the default reference voxel is the voxel having peak thermal flux.&nbsp;
+Therefore, directives such as </font><font color="#008007">refvol</font><font color="#274342">
+and </font><font color="#008007">refpoint</font><font color="#274342">,
+which affect the reference volume definition, must appear before the first
+active edit directive.</font></b>
+<p><b><font color="#274342">Before performing an edit, the user usually
+needs to specify certain parameters that will be used in the edit.&nbsp;
+When these directives are encountered, parameters such as boron concentration,
+RBE, etc., are set and later used when the next active edit is encountered.&nbsp;
+These may be changed after the edit is performed to be used in a subsequent
+edit.&nbsp; Finally, there are active edit directives, which cause the
+actual edits to be performed.&nbsp; A variety of active edit directives
+is available to the user, allowing nearly any desired dose or flux quantity
+to be generated.</font></b>
+<p><b><font color="#274342">A detailed listing and description of all the
+available edit directives is given in <a href="appD.html">Appendix D</a>.</font></b>
+<br>&nbsp;
+<br>&nbsp;
+<br>
+<center>
+<p><img SRC="marblebar.jpg" NOSAVE height=6 width=460>
+<p><a href="sec14.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><font color="#274342"><a href="sec14.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="appB.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="appB.html">Next</a></font></b></center>
+
+</body>
+</html>

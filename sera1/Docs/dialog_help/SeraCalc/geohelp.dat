@@ -1,0 +1,5 @@
+The Help button allows the user to get help on most windows.
+
+   To get help on any item, push <F1> on the keypad while the cursor is over the desired item or click on this button and then click the question mark cursor over any item on which help is desired. 
+
+   After choosing a particular item to obtain help on, a dialog box may open asking which method of help to choose.  A standard help dialog box causes a small text window to open containing the appropriate help information.  If all of the information is not displayed within the window, the scroll bar on the right of the dialog box can be used to move up and down in the text.  Choosing to load the Internet Manual pages loads Netscape with the appropriate help .html file obtained from the INEEL site on the Internet.  Choosing to load the File Manual pages loads the appropriate help .html file that is stored on the computer from which BNCT_Rtpe is running.  This option also uses Netscape to display the help information.  If Netscape is not on the computer being used, the user should choose a standard dialog box.  

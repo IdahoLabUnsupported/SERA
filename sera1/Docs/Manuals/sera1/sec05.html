@@ -1,0 +1,835 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.6 [en] (X11; U; SunOS 5.6 sun4u) [Netscape]">
+   <meta name="Description" content="This is the SERA Manual page for seraModel.">
+   <title>SERA Manual - Section 5</title>
+<style type="text/css">
+       BODY {color:#274342; font-weight:bold}
+   </style>
+</head>
+<body text="#274342" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000" background="mainbackground.gif">
+
+<center><a href="sec04.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><a href="sec04.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="sec06.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="sec06.html">Next</a></b>
+<p><b><font color="#274342"><font size=+2>SERA:</font></font></b>
+<br><b><font color="#274342"><font size=+2>Simulation Environment for Radiotherapy
+Applications</font></font></b>
+<br><b><font color="#274342"><font size=+2>User's Manual</font></font></b>
+<br><b><font color="#274342"><font size=+2>Version 1C0</font></font></b>
+<p><img SRC="marblebar.jpg" NOSAVE height=6 width=460></center>
+
+<p><b><font color="#274342"><font size=+2>5.&nbsp; Image Editor (seraModel)</font></font></b>
+<p><b><font color="#274342">After the image information has been prepared,
+image editing is usually the next step in the treatment planning process.&nbsp;
+Figure 5.1 shows seraModel's user interface in the </font><font color="#008007">Edit</font><font color="#274342">
+mode, along with annotated widget components.&nbsp; The purpose of the
+seraModel module is to break an image set easily and rapidly into regions
+of interest, and to create the model geometry.&nbsp; This process is described
+in <a href="#5.3.2">Section 5.3.2</a>.&nbsp; The image pixel matrix used
+for display in this program has been generalized to work on systems with
+different color depths and to view images at an arbitrary zoom level, in
+an arbitrary window size, and with an arbitrary number of columns.</font></b>
+<p><img SRC="ImageEditor/wmainwindow.jpg" NOSAVE height=721 width=905>
+<p><b><font color="#274342">Figure 5.1.&nbsp; seraModel in Edit Mode.</font></b>
+<p><b><font color="#274342">seraModel provides many useful image operations,
+including manual and semi-automatic (</font><font color="#FF0000">threshold</font><font color="#274342">)
+definition and generation of univel-based regions of interest that form
+the geometry used by the radiation transport simulation.&nbsp; Various
+image processing tools are provided to aid in the manual definition of
+these regions, including region copying, scaling,&nbsp; overwriting, and
+painting by fill or borders.&nbsp; Threshold-based segmenting, 3D region
+growing, body copying, and automatic target definition operations are also
+provided.</font></b>
+<p><b><font color="#274342">Finally, the program will save user-defined
+regions in a uniform volume element format (</font><font color="#CC6600">.uv/.uvh</font><font color="#274342">)
+to describe both the geometry of the model and the assignment of the physical
+properties to the univels.</font></b>
+<br>&nbsp;
+<p><a NAME="5.1"></a><b><font color="#274342"><font size=+1>5.1.&nbsp;
+File Menu</font></font></b>
+<p><b><font color="#274342">The File menu has the following parts which
+will be discussed in turn in following subsections:</font></b>
+<ul>
+<li>
+<b><font color="#274342">Open</font></b></li>
+
+<li>
+<b><font color="#274342">Save</font></b></li>
+
+<li>
+<b><font color="#274342">Launch</font></b></li>
+
+<li>
+<b><font color="#274342">Remove Bodies</font></b></li>
+
+<li>
+<b><font color="#274342">Restart Program</font></b></li>
+
+<li>
+<b><font color="#274342">Exit Program.</font></b></li>
+</ul>
+<a NAME="5.1.1"></a><b><font color="#274342">5.1.1.&nbsp; Open Selection</font></b>
+<p><b><font color="#274342">With this selection, the user can open pre-existing
+image sets, and either compressed (</font><font color="#FF0000">gzip</font><font color="#274342">)
+or uncompressed (</font><font color="#CC6600">.uv/.uvh</font><font color="#274342">)
+body files.&nbsp; Image files can be opened so that they either replace
+or overlay an existing set of images.&nbsp; Also, the user can open the
+fiducial and constraint marker files, as well as the files describing the
+body and material properties.&nbsp; When opening a body file, the user
+is prompted to enter the fiducial and constraint marker files.</font></b>
+<p><img SRC="ImageEditor/Load_Images.jpg" NOSAVE height=172 width=206>
+<p><b><font color="#274342">Figure 5.2.&nbsp; Sera File selection widget.</font></b>
+<p><b><font color="#274342">The user has a choice of using the standard
+Motif file selection widget, or the sera file selection widget, which maintains
+a list of recently used files for convenient and quick access. The sera
+file selection widget is shown in Figure 5.2.&nbsp; The last file accessed
+is highlighted and set as the default file to load.</font></b>
+<p><a NAME="5.1.2"></a><b><font color="#274342">5.1.2.&nbsp; Save Selection</font></b>
+<p><b><font color="#274342">This option saves either the modified image
+files, or the new or modified univel (</font><font color="#CC6600">.uv/.uvh</font><font color="#274342">)
+files.&nbsp; The user has a choice of using the standard Motif file selection
+widget or the sera file selection widget described in section 5.1.1.</font></b>
+<p><a NAME="5.1.3"></a><b><font color="#274342">5.1.3.&nbsp; Launch Selection</font></b>
+<p><b><font color="#274342">From this selection, the user can run the other
+modules of the SERA system.&nbsp; This selection is further discussed in
+<a href="sec03.html#3.9.1">Section
+3.9.1</a>.</font></b>
+<p><a NAME="5.1.4"></a><b><font color="#274342">5.1.4.&nbsp; Remove Bodies
+Selection</font></b>
+<p><b><font color="#274342">This selection removes all of the defined bodies
+while retaining the current image set.&nbsp; The user must confirm the
+removal action.</font></b>
+<p><a NAME="5.1.5"></a><b><font color="#274342">5.1.5.&nbsp; Restart Program
+Selection</font></b>
+<p><b><font color="#274342">This option resets the program to its initial
+state.&nbsp; All images and bodies are removed without a need to exit the
+program.&nbsp; The user must confirm this action.</font></b>
+<p><a NAME="5.1.6"></a><b><font color="#274342">5.1.6. Exit Program</font></b>
+<p><b><font color="#274342">This selection closes the module with confirmation
+notice.&nbsp; All other currently running modules are unaffected by this
+action.</font></b>
+<br>&nbsp;
+<p><a NAME="5.2"></a><b><font color="#274342"><font size=+1>5.2.&nbsp;
+Edit Menu</font></font></b>
+<p><b><font color="#274342">The Edit menu has the following parts which
+will be discussed in turn in following subsections:</font></b>
+<ul>
+<li>
+<b><font color="#274342">Undo</font></b><!-- <li>
+<font color="#274342">Slice Information</font></li> --></li>
+
+<li>
+<b><font color="#274342">Relabel Regions</font></b></li>
+
+<li>
+<b><font color="#274342">Remove Bodies from Image Range</font></b></li>
+
+<li>
+<b><font color="#274342">Colormap</font></b></li>
+
+<li>
+<b><font color="#274342">Constraint Markers</font></b></li>
+
+<li>
+<b><font color="#274342">Fiducial Markers</font></b></li>
+
+<li>
+<b><font color="#274342">Sort Images by Z-Value</font></b></li>
+
+<li>
+<b><font color="#274342">Reverse Image Set</font></b></li>
+
+<li>
+<b><font color="#274342">Slice Orientation.</font></b></li>
+</ul>
+<a NAME="5.2.1"></a><b><font color="#274342">5.2.1.&nbsp; Undo</font></b>
+<p><!-- This selection, shown in Figure 5.3, allows
+the user to edit some of the basic image properties, and apply these changes
+on a per image basis, or for the entire set of images.&nbsp; The image
+properties can also be edited in the <a href="sec04.html">seraImage</a>
+model, and this may be the more appropriate place to conduct this editing.&nbsp;
+If this turns out to be the case, this selection may be removed from future
+SERA versions.</font>
+<p><img SRC="ImageEditor/SliceInfo.gif" NOSAVE height=465 width=567>
+<p><font color="#274342">Figure 5.3.&nbsp; Slice Information widget
+selection. --><b><font color="#274342">Allows
+the user to undo recent image editing.</font></b>
+<p><a NAME="5.2.2"></a><b><font color="#274342">5.2.2.&nbsp; Relabel Regions
+Selection</font></b>
+<p><b><font color="#274342">It is very important that every pixel be assigned
+a body (label) in the model to assure a reliable transport simulation.&nbsp;
+The </font><font color="#008007">relabel</font><font color="#274342"> selection
+allows the user to reassign bodies using the widget displayed in Figure
+5.4.&nbsp; Matching a highlighted selection in the left hand column with
+one in the right hand column changes the body assignment.&nbsp; For instance,
+highlighting </font><font color="#FF0000">unlabeled</font><font color="#274342">
+in the left hand column, then highlighting
+</font><font color="#FF0000">buffer</font><font color="#274342">
+in the right hand column, will assign all unassigned pixels as </font><font color="#FF0000">buffer</font><font color="#274342">.</font></b>
+<p><img SRC="ImageEditor/Relabel.gif" NOSAVE height=262 width=240>
+<p><b><font color="#274342">Figure 5.4.&nbsp; Relabel widget selection.</font></b>
+<p><b><font color="#274342">The user needs to exercise a great deal of
+caution when performing this operation.&nbsp; </font><font color="#FF0000">buffer</font><font color="#274342">
+is a special body type that should only be assigned in the outermost areas
+of the image space.&nbsp; If </font><font color="#FF0000">buffer</font><font color="#274342">
+is assigned to any body inside the outermost body (in the case of the head,
+this would be the scalp), an error in particle tracking could occur.</font></b>
+<p><a NAME="5.2.3"></a><b><font color="#274342">5.2.3. Remove Bodies from
+Image Range</font></b>
+<p><b><font color="#274342">Allows the user to remove selected bodies from
+the image range.</font></b>
+<p><a NAME="5.2.4"></a><b><font color="#274342">5.2.4.&nbsp; Colormap Selection</font></b>
+<p><b><font color="#274342">With this selection, the user can adjust the
+contrast, gamma correction, and colormap used to display the images.&nbsp;
+This is useful during manual editing, when trying to discern certain objects
+in the image. Unfortunately, there are usually no set rules for setting
+the values in this widget (see Figure 5.5).</font></b>
+<p><img SRC="ImageEditor/Colormap.jpg" NOSAVE height=564 width=419>
+<p><b><font color="#274342">Figure 5.5.&nbsp; Colormap widget selection.</font></b>
+<p><b><font color="#274342">The user will have to experiment in order to
+obtain a good result.&nbsp; We have noticed that when using CT images from
+the bone window, the soft tissue is enhanced when the background is set
+to 65 and the saturation is set to about 150.&nbsp; This widget will be
+improved in future versions.</font></b>
+<p><a NAME="5.2.5"></a><b><font color="#274342">5.2.5.&nbsp; Constraint
+Markers Selection</font></b>
+<p><b><font color="#274342">Constraint markers will be used to control
+dose to healthy tissues.&nbsp; Their location can be specified in seraModel
+and read by <a href="appA.html">seraMC</a>.&nbsp; After the transport calculation
+is complete, <a href="appA.html">seraMC</a> will compute the flux at the
+marker locations and, given the boron concentration and RBEs specified
+in the edits, will compute the dose.&nbsp; Constraint markers will have
+an associated tolerance dose, and <a href="appA.html">seraMC</a> will warn
+the planner when this tolerance dose is exceeded, so that the plan specifications
+can be altered to keep the particular structure within desired limits.&nbsp;
+Default constraint markers are stored in the file
+</font><font color="#CC6600">Constraint.txt</font><font color="#274342">,
+which must be read by seraModel.&nbsp; Figure 5.6 shows an example for
+the left eye and the right eye.&nbsp; In this example, the left eye has
+been specified by a mouse click at the proper location and the right eye
+is being specified.&nbsp; The right eye marker is still active and can
+be moved with the cursor before establishing its final location.&nbsp;
+The body is specified to allow the marker to associate the marker with
+material properties, including boron ratio relative to blood, and appropriate
+RBE factors.</font></b>
+<p><img SRC="ImageEditor/Constraint.jpg" NOSAVE height=650 width=898>
+<p><b><font color="#274342">Figure 5.6.&nbsp; Constraint Marker selection.</font></b>
+<p><a NAME="5.2.6"></a><b><font color="#274342">5.2.6.&nbsp; Fiducial Markers
+Selection</font></b>
+<p><b><font color="#274342">The patient may be positioned with respect
+to the beam with the aid of fiducial markers.&nbsp; Fiducial markers are
+stored in the file </font><font color="#CC6600">Fiducial.txt</font><font color="#274342">,
+which must be read by seraModel.&nbsp; In the case of MRI, for example,
+the fiducial marker may be a vitamin E capsule located at a tattoo mark.&nbsp;
+The location of the fiducial marker will be read by <a href="appA.html">seraMC</a>,
+and the coordinates relative to the beam entry point will be calculated
+by <a href="appA.html">seraMC</a> and used for the positioning process.
+Otherwise, positioning requires a three-dimensional translation from patient
+geometry to beam geometry, which is tedious and quite error-prone.&nbsp;
+Figure 5.7 shows fiducial markers set for a sample patient geometry.</font></b>
+<p><img SRC="ImageEditor/Fiducial.jpg" NOSAVE height=650 width=898>
+<p><b><font color="#274342">Figure 5.7.&nbsp; Fiducial Marker selection.</font></b>
+<p><a NAME="5.2.7"></a><b><font color="#274342">5.2.7.&nbsp; Sort Images
+by Z-Value Selection</font></b>
+<p><b><font color="#274342">In the unlikely event that the user has an
+image file set that is in random order with respect to the axis of the
+image set, this selection may prove to be useful.&nbsp; Usually, the user
+will correct this problem with the <a href="sec04.html">seraImage</a> module.</font></b>
+<p><a NAME="5.2.8"></a><b><font color="#274342">5.2.8.&nbsp; Reverse Image
+Set Selection</font></b>
+<p><b><font color="#274342">If the images are ordered along the axis of
+the image set in the opposite direction from that which the user requires,
+then this selection should be used.&nbsp; For an axial image series of
+the head, the radiation transport model expects the images to be in increasing
+order from the bottom to top (inferior to superior).&nbsp; If the images
+are ordered in the opposite direction, this selection will correct the
+problem.</font></b>
+<p><a NAME="5.2.9"></a><b><font color="#274342">5.2.9. Slice Orientation</font></b>
+<p><b><font color="#274342">Allows the user to set the orientation of the
+row axis, the column axis and the slice axis.</font></b>
+<br>&nbsp;
+<p><a NAME="5.3"></a><b><font color="#274342"><font size=+1>5.3.&nbsp;
+View Menu</font></font></b>
+<p><b><font color="#274342">The View menu has the following parts, which
+will be discussed in turn in subsequent subsections:</font></b>
+<ul>
+<li>
+<b><font color="#274342">Properties Toolbar</font></b></li>
+
+<li>
+<b><font color="#274342">Edit Regions</font></b></li>
+
+<li>
+<b><font color="#274342">Context Help</font></b></li>
+
+<li>
+<b><font color="#274342">Bottom Information</font></b></li>
+
+<li>
+<b><font color="#274342">Cross-Section Tool</font></b></li>
+
+<li>
+<b><font color="#274342">Intensity Histogram</font></b></li>
+
+<li>
+<b><font color="#274342">Region Volumes.</font></b></li>
+</ul>
+<a NAME="5.3.1"></a><b><font color="#274342">5.3.1.&nbsp; Properties Toolbar
+Selection</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">properties</font><font color="#274342">
+for the seraModel widget (see Figure 5.1) are displayed in the column to
+the immediate right of the image display area.&nbsp; This selection is
+toggled </font><font color="#FF0000">on/off</font><font color="#274342">.&nbsp;
+Normally, the square button to the left of this selection should be in
+the
+</font><font color="#FF0000">on</font><font color="#274342"> (depressed)
+position.&nbsp; If the user requires more screen space to display the images,
+then the button should be set in the </font><font color="#FF0000">off
+</font><font color="#274342">(outward)
+position.&nbsp; The setting for this selection can be saved in the </font><font color="#008007">preferences</font><font color="#274342">
+menu.</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">properties</font><font color="#274342">
+column contains buttons and sliders which affect how the images and regions
+are displayed.&nbsp; The user can adjust widget and image sizes, the number
+of columns used to display the images, whether to display only images,
+regions, or regions superimposed on images,&nbsp; pixel optimization, window
+movement synchronization, and image removal.&nbsp; These adjustments can
+be quite time consuming when operating on a large set of images.</font></b>
+<p><a NAME="5.3.2"></a><b><font color="#274342">5.3.2.&nbsp; Edit Regions
+Selection</font></b>
+<p><b><font color="#274342">The main purpose of this selection is the creation
+of the univel geometry for the transport model, which is at the heart of
+the modeling process.&nbsp; It therefore requires more explanation than
+any other seraModel selection.&nbsp; This selection is toggled </font><font color="#FF0000">on/off</font><font color="#274342">,
+like the </font><font color="#008007">properties</font><font color="#274342">
+toolbar selection.&nbsp; When the selection is in the </font><font color="#FF0000">on</font><font color="#274342">
+position, the </font><font color="#008007">Edit Regions</font><font color="#274342">
+column will appear on the far right side of the widget, as shown in Figure
+5.1.&nbsp; This selection has seven region editing modes and one setup
+mode.&nbsp; When defining bodies for a model, the user should remember
+two very important considerations:</font></b>
+<p><b><font color="#990000">&nbsp;&nbsp;&nbsp; 1.&nbsp; All pixels must
+be assigned a body (region).</font></b>
+<br><b><font color="#990000">&nbsp;&nbsp;&nbsp; 2.&nbsp; The buffer region
+must surround all other regions and cannot be assigned to any interior
+pixels.</font></b>
+<p><b><font color="#274342">The code will generally warn the user when
+there are unassigned pixels.&nbsp; Beneath each image there is the </font><font color="#008007">Edit
+Window</font><font color="#274342"> button, which will allow the user to
+enlarge the image to reveal more detailed pixel information.&nbsp; The
+user can scroll through the entire image set and determine where the unlabeled
+pixels are located.&nbsp; This feature is also very useful for defining
+regions, either when </font><font color="#FF0000">thresholding</font><font color="#274342">
+or when </font><font color="#FF0000">manual editing</font><font color="#274342">.</font></b>
+<p><b><font color="#274342">Currently, seraModel will not guard against
+improper buffer definition, but if the user follows the prescribed editing
+procedures, this should not be a problem.&nbsp; </font><font color="#990000">There
+is no substitute for careful editing.</font></b>
+<p><b><font color="#274342">In order to make body definition complete and
+convenient, seraModel provides several editing modes, which are described
+in the following subsections.&nbsp; The user need not, and should not,
+use all of these modes, but it is a good idea to be aware of these capabilities
+without being overwhelmed by them.&nbsp; As the user becomes experienced,
+certain editing patterns should develop that best suit the user and the
+image quality available.</font></b>
+<p><b><font color="#274342">The user will soon find that one of the most
+important buttons in seraModel is the </font><font color="#008007">undo</font><font color="#274342">
+button, located on the bottom right hand side of the edit section.&nbsp;
+Undo can also be accessed by using Edit->Undo.&nbsp; seraModel stores in
+its memory queue each edit operation, in order from first to last. Each
+time the user presses this button, the last edit operation is undone and
+removed from the memory queue.&nbsp; The utility of this will become obvious
+to the user almost immediately.</font></b>
+<p><a NAME="5.3.2.1"></a><b><font color="#274342">&nbsp;&nbsp; 5.3.2.1.&nbsp;
+Setup Mode</font></b>
+<p><b><font color="#FF0000">Setup</font><font color="#274342"> is the default
+mode of the edit regions selection.&nbsp; </font><font color="#FF0000">Setup</font><font color="#274342">
+is a good place to include all of the bodies which will be used in describing
+the model, and to assign a material type to each of the bodies through
+the </font><font color="#008007">Edit Bodies/Materials</font><font color="#274342">
+button in the </font><font color="#008007">Edit Regions</font><font color="#274342">
+column.&nbsp; Below the </font><font color="#008007">Edit Bodies/Materials</font><font color="#274342">
+button, there is a button labeled either </font><font color="#FF0000">Borders
+Only</font><font color="#274342"> or </font><font color="#FF0000">Filled
+Regions</font><font color="#274342">.&nbsp; This button is available to
+all of the edit modes;&nbsp; it is used to set the region display mode.&nbsp;
+The </font><font color="#FF0000">Borders Only</font><font color="#274342">
+mode displays only the outer boundary of the region, so that the image
+underlying the region fill values can be revealed.</font></b>
+<p><b><font color="#274342">The color area next to the body name in the
+</font><font color="#008007">Edit
+Regions</font><font color="#274342"> column is the color used to display
+that body on the images.&nbsp; The user can change the color by pointing
+and clicking in this color area.&nbsp; A popup widget will appear with
+a color palette, adjustable color mixing sliders, and fixed color buttons.&nbsp;
+All of these settings can be saved for subsequent modeling sessions by
+using the </font><font color="#008007">Preferences</font><font color="#274342">
+selection described in <a href="#5.4">Section 5.4</a>.</font></b>
+<p><a NAME="5.3.2.2"></a><b><font color="#274342">&nbsp;&nbsp; 5.3.2.2.&nbsp;
+Threshold Mode</font></b>
+<p><b><font color="#274342">This mode works best when defining regions
+that have pixel values distinct from adjacent regions, as when defining
+scalp and skull in some CT series.&nbsp; Even in these cases, pixel value
+ambiguities occur between low density regions, such as the sinuses and
+the area surrounding the scalp (buffer area).&nbsp; This mode is less useful
+when working with MRI images.&nbsp; Even so, we have provided this mode
+because when it works, it will save modeling time, and this is especially
+true when you have an image set with high contrast, uniformity, and low
+noise.&nbsp; As SERA matures, we plan to develop and implement automatic
+(unsupervised) segmenting algorithms, but the methods we have examined
+thus far are less efficient than manual editing, chiefly because of the
+computation time resources required by these methods.</font></b>
+<p><b><font color="#274342">Figure 5.9 shows seraModel in </font><font color="#FF0000">threshold</font><font color="#274342">
+mode, with some sinus and skull regions defined.&nbsp; Thresholding works
+by defining a region as those pixels in an image with intensity values
+bounded by minimum and maximum pixel values.&nbsp; For 8-bit images, these
+values range between 0 and 255.&nbsp; In Figure 5.8, we are defining the
+skull as those pixels ranging between 187 and&nbsp; 238.&nbsp; This can
+be accomplished by either setting the sliders located on the right hand
+side of the figure at the desired range, or by using the mouse buttons
+to determine the range.&nbsp; This can be done by observing the mouse button
+functions as indicated in the bottom info section of the seraModel.</font></b>
+<br>&nbsp;
+<p><img SRC="ImageEditor/Threshold.jpg" NOSAVE height=620 width=318>
+<p><b><font color="#274342">Figure 5.8.&nbsp; Thresholding mode selection.</font></b>
+<p><b><font color="#274342">Passing the cursor over the region in the image,
+while holding down the middle mouse button, will set the threshold range.&nbsp;
+Then, to fill in the region definition, while the cursor is in the region
+to be thresholded, press the left mouse button.&nbsp; This will take some
+experience to use effectively, and, as stated earlier, thresholding has
+limited applicability, working best with certain CT image sets.</font></b>
+<p><b><font color="#274342">Despite all of this, the thresholding mode
+is probably the best place to start defining some of the regions, like
+the buffer.&nbsp; Because the buffer, which must be distinct from all other
+regions, has pixel values similar to some of the low density regions, such
+as sinuses, a simple mapping of all low density pixels to the buffer will
+not work.&nbsp; Figure 5.9 shows the </font><font color="#008007">Edit
+Window</font><font color="#274342"> while in threshold mode.</font></b>
+<p><img SRC="ImageEditor/thresholdEdit.gif" NOSAVE height=849 width=576>
+<p><b><font color="#274342">Figure 5.9.&nbsp; Edit Window while thresholding.</font></b>
+<p><b><font color="#274342">The mouse button assignments are shown in the
+bottom information section of the main seraModel window.&nbsp; Dragging
+the cursor through the buffer area of the image, while holding down the
+middle mouse button, will set lower and upper threshold values along the
+line shown in the buffer area of Figure 5.10.&nbsp; The threshold sliders
+will be automatically set following the release of the middle button.&nbsp;
+Alternatively, the user can set the values by moving the sliders.&nbsp;
+Once these values are set, the user can threshold the currently displayed
+image, or all of the images in a pre-specified range, by setting the appropriate
+radio button underneath the sliders.</font></b>
+<p><b><font color="#274342">There is a second radio button labeled </font><font color="#008007">Fill
+Connected Only</font><font color="#274342">.&nbsp; This button will only
+attempt to threshold contiguous regions of the specified pixel range, and
+it should be set to the </font><font color="#FF0000">on</font><font color="#274342">
+position when defining the buffer.&nbsp; When applying the fill threshold
+operations to the entire image range with </font><font color="#008007">Fill
+Connected Only</font><font color="#274342"> set, the user should be careful
+to note that the filling is based on the cursor position in the reference
+image, and this may not produce the desired effect in the other images
+in the range.&nbsp; If this is the case, the user should try unsetting
+</font><font color="#008007">Fill
+Connected Only</font><font color="#274342"> or </font><font color="#008007">Apply
+to Image Range</font><font color="#274342">.&nbsp; In the threshold mode,
+with the right mouse button depressed, the </font><font color="#008007">Fill
+Neighbor Range</font><font color="#274342"> slider is operative and will
+fill the image with current body based on the pixel value ( +/- the fill
+neighbor range value) at the cursor location.</font></b>
+<p><b><font color="#274342">After setting the low and high threshold sliders,
+position the cursor in the buffer area and press the left mouse button
+to fill the buffer area of the image(s) with the buffer region.&nbsp; The
+</font><font color="#008007">Fill
+Connected Only</font><font color="#274342"> mode should prevent buffer
+material from being assigned to the voids inside the image area, if there
+are no penetrations into the image area caused by surface aberrations.&nbsp;
+Voids inside the image area which have the same threshold range as the
+buffer can now be assigned.&nbsp; If the user wants to get all voids within
+the image area assigned at one time, he should make sure the </font><font color="#008007">Fill
+Connected Only</font><font color="#274342"> mode is </font><font color="#990000">not</font><font color="#274342">
+set.</font></b>
+<p><b><font color="#274342">At this point, it is worth noting several of
+the
+</font><font color="#008007">Edit Window</font><font color="#274342">
+functions that are especially useful during thresholding and manual draw
+operations.&nbsp; From any of the </font><font color="#008007">Edit Windows</font><font color="#274342">
+the user can:</font></b>
+<ul>
+<li>
+<b><font color="#274342">scroll through all of the slices of the image
+set using the current slice slider</font></b></li>
+
+<li>
+<b><font color="#274342">set the image range for various thresholding and
+editing operations</font></b></li>
+
+<li>
+<b><font color="#274342">zoom image to reveal further detail for the purposes
+of editing and inspection</font></b></li>
+
+<li>
+<b><font color="#274342">display unlabeled and mislabeled regions.</font></b></li>
+</ul>
+<b><font color="#274342">Through practice, the user will acquire sufficient
+familiarity with these and other related features to fully exploit them
+for model development.</font></b>
+<p><img SRC="ImageEditor/PixelMap.gif" NOSAVE height=667 width=700>
+<p><b><font color="#274342">Figure 5.10.&nbsp; Pixel Mapping widget.</font></b>
+<p><b><font color="#274342">Selecting the "Pixel Mapping" button will display
+the pixel mapping widget shown in Figure 5.10.&nbsp; The widget is used
+to map a pixel range to a body.&nbsp; Pixel mapping can be used to define
+bodies with well defined pixel ranges, or it can be used in conjunction
+with thresholding to fill in the remaining pixels.&nbsp; To map a pixel
+range from the map to a body, first select the body in the right side of
+the widget, move the cursor into the pixel mapping histogram display, and,
+while holding down the left mouse button, drag the cursor through the desired
+pixel range.&nbsp; Once the pixel ranges are assigned, selecting the </font><font color="#008007">Apply
+Pixel Mapping</font><font color="#274342"> button will apply this mapping
+to the current image range.</font></b>
+<p><a NAME="5.3.2.3"></a><b><font color="#274342">&nbsp;&nbsp; 5.3.2.3.&nbsp;
+Manual Draw Mode</font></b>
+<p><b><font color="#274342">This is the simplest and most robust method
+for defining bodies.&nbsp; It is also the most tedious.&nbsp; While in
+the manual draw mode, the user can define any body with one of five paint
+brush sizes.&nbsp; The brush sizes are selected by placing the cursor in
+the appropriate brush size icon (see Figure 5.11) and pressing the left
+mouse button.&nbsp; Once the brush size icon is highlighted and a body
+is selected, the user can move the cursor to an image and draw the body
+outline using the left mouse button, as with many popular paint programs.&nbsp;
+The middle mouse button is used to erase, and, once the border is defined,
+the right mouse button is conveniently used to fill in the region.</font></b>
+<p><b>The overwrite option box allows switching between the options:</b>
+<dl>
+<dt>
+<b>Don't Overwrite</b></dt>
+
+<dd>
+<b>Only allows the user to draw on unlabeled regions. Only allows the current
+region to be erased.</b></dd>
+
+<dt>
+<b>Overwrite All</b></dt>
+
+<dd>
+<b>Allows drawing on any region. Allows any region to be erased.</b></dd>
+
+<dt>
+<b>Overwrite Selected</b></dt>
+
+<dd>
+<b>Pressing the <font color="#008007">Select Overwrite Bodies</font> allows
+the user to select which bodies can be overwritten and erased. Overwrite
+Selected allows you to only overwrite the selected bodies (note: The current
+body is always selected).</b></dd>
+</dl>
+<img SRC="ImageEditor/Draw.jpg" NOSAVE height=255 width=206>
+<p><b><font color="#274342">Figure 5.11.&nbsp; Manual Draw mode selection.</font></b>
+<p><b><font color="#274342">While the user can draw into any of the image
+windows, use of the </font><font color="#008007">Edit Window</font><font color="#274342">
+is highly recommended, because of the features outlined in section 5.3.2.2.&nbsp;
+The authors recommend that the user become skilled with this mode by experimentation
+and liberal use of the </font><font color="#008007">undo</font><font color="#274342">
+button.&nbsp; In the long run, this skill will save considerable modeling
+time.</font></b>
+<p><a NAME="5.3.2.4"></a><b><font color="#274342">&nbsp;&nbsp; 5.3.2.4.&nbsp;
+Fill Mode</font></b>
+<p><b><font color="#274342">This feature is used to fill regions bounded
+by previously defined boundaries. In the </font><font color="#FF0000">Fill</font><font color="#274342">
+mode, as in all other seraModel modes, the bottom information area will
+show how the mouse buttons are mapped to the mode operations.&nbsp; The
+left mouse button will make an educated guess at the filling body.&nbsp;
+For example, the thresholding operation can miss pixel labeling when defining
+bodies, such as the skull.&nbsp; The user can conveniently fill in these
+missed pixels with this operation.&nbsp; Once some bodies are defined,
+the middle button can be used to fill inside or between these bodies with
+a selected body.&nbsp; In the </font><font color="#FF0000">Fill</font><font color="#274342">
+mode, the right mouse button will display a filled region with only its
+inner and outer borders.</font></b>
+<p><a NAME="5.3.2.5"></a><b><font color="#274342">&nbsp;&nbsp; 5.3.2.5.&nbsp;
+3D Grow Mode</font></b>
+<p><b>As with most other semi-automatic body definition strategies, this
+one works best with images containing narrowly defined pixel intensities.&nbsp;
+Once a body is defined in one slice (the <font color="#008007">Base Growth
+Index</font>), this operation will try to define that body in the range
+set by the sliders shown in Figure 5.12.&nbsp; At this time, the <font color="#008007">Base
+Growth Index</font> must be within the range.</b>
+<p><img SRC="ImageEditor/3Dgrow.jpg" NOSAVE height=402 width=195>
+<p><b>Figure 5.12.&nbsp; 3D Grow mode selection.</b>
+<p><b>If the <font color="#008007">Overwrite</font> button is selected
+in the grow operation, it will replace previously defined bodies within
+the grow volume.&nbsp; Normally, the <font color="#008007">overwrite</font>
+button will not be selected.</b>
+<p><b>3D Grow has four methods that can be used:</b>
+<br>&nbsp;
+<dl>
+<dt>
+<b>Edge Threshold</b></dt>
+
+<dd>
+<b>Works best for regions that have an edge that&nbsp;<!-- <font color="#FF0000"><font size=+3>The
+rest of this sentence is unclear!!!!!!</font></font> -->has
+a pixel intensity greater or less than the surrounding area but the interior
+area is very similar to the exterior (i.e. if the region has a bright white
+or dark black boundry)</b></dd>
+
+<dt>
+<b>Picky Edge Threshold</b></dt>
+
+<dd>
+<b>Similar to Edge Threshold but more selective about pixel intensity.</b></dd>
+
+<dt>
+<b>Whole Threshold</b></dt>
+
+<dd>
+<b>Uses all the pixel intensities in the region to try and find other regions.</b></dd>
+
+<dt>
+<b>Old Method</b></dt>
+
+<dd>
+<b>Uses pixel intensities in the region to determine other regions.</b></dd>
+</dl>
+<a NAME="5.3.2.6"></a><b><font color="#274342">&nbsp;&nbsp; 5.3.2.6.&nbsp;
+Copy Body Mode</font></b>
+<p><b>When there are small slice-to-slice variations in the size and shape
+of a body, this feature may be time saving.&nbsp; Once outlined and filled,
+a body may be copied from any slice to any other slice, using sliders as
+shown in Figure 5.13.&nbsp; Like manual draw, this mode has the overwrite
+option.</b>
+<p><img SRC="ImageEditor/CopyBody.jpg" NOSAVE height=534 width=191>
+<p><b><font color="#274342">Figure 5.13.&nbsp; Copy Body mode selection.</font></b>
+<p><b><font color="#274342">The user can show how the copy operation appears
+and can adjust the position, size, and width of the copied body before
+applying the operation.&nbsp; This feature seems to work best with tumor
+and brain bodies.&nbsp; Once applied, this operation can be undone with
+the </font><font color="#008007">undo</font><font color="#274342"> button.</font></b>
+<p><a NAME="5.3.2.7"></a><b><font color="#274342">&nbsp;&nbsp; 5.3.2.7.&nbsp;
+Make Margin Mode</font></b>
+<p><b><font color="#274342">For many tumor types, tumor cells can be found
+outside the main tumor mass.&nbsp; The main tumor mass is enhanced in the
+image, but the tumor cells outside the main tumor mass are not enhanced.
+This robust feature is used to define the target volume containing the
+non-enhanced part of the tumor surrounding the defined tumor object.&nbsp;
+Because the target volume usually only occurs in the brain region, it is
+important that the
+</font><font color="#FF0000">Make Margin</font><font color="#274342">
+operation is the last edit step, so that brain can be the only region overwritten.</font></b>
+<p><img SRC="ImageEditor/Margin.jpg" NOSAVE height=437 width=228>
+<p><b><font color="#274342">Figure 5.14.&nbsp; Make Margin mode selection.</font></b>
+<p><b>The <font color="#FF0000">Make Margin</font> mode, shown in Figure
+5.14, will create a region of a specified thickness surrounding the <font color="#008007">Source
+Region</font>, with the thickness applied in three dimensions.&nbsp; It
+is important to note that the <font color="#008007">Source Region</font>
+may be more than one body, e.g., tumor and edema.</b>
+<p><a NAME="5.3.2.8"></a><b>5.3.2.8. Wand Mode</b>
+<p><b>The wand tool is a thresholding tool like the <font color="#008007">Thresholding
+Mode;</font> however, the wand tool uses the pixel value underneath it
+to threshold. It has three different uses depending on which button is
+pressed:</b>
+<dl>
+<dt>
+<b>Guess Threshold</b></dt>
+
+<dd>
+<b>This is used when the left button is pressed. It looks at the area surrounding
+the mouse pointer and uses that sample of the image to try to find a threshold
+for that region. Then that threshold is used to flood-fill the region.</b></dd>
+
+<dt>
+<b>Grow Region</b></dt>
+
+<dd>
+<b>Expands the region over which the mouse pointer is currently located
+by one pixel up, down, left and right.</b></dd>
+
+<dt>
+<b>Shrink Region</b></dt>
+
+<dd>
+<b>Shrinks by one pixel the region over which the mouse pointer is currently
+located. This can be used with grow region to do closings and openings.
+A closing is a Grow followed by a shrink. This closes any small holes in
+the region created with Guess Threshold. An opening is a Shrink followed
+by a Grow. This removes any small protrusions from the image.&nbsp; In
+order to do a closing that closes larger areas, use two grows followed
+by two shrinks or three grows followed by three shrinks. ...</b></dd>
+</dl>
+<b>The methods to choose from are Careful Narrow, Narrow, Normal, and Wide.
+Each of these determines the patch size that Guess Threshold uses. If you
+want the wand to be less discriminating, use Wide. If you want it to use
+a smaller theshold, then use Narrow. Region Glue determines whether or
+not a shrunk region will shrink away from another region.</b>
+<p><a NAME="5.3.3"></a><b><font color="#274342">5.3.3.&nbsp; Context Help
+Selection</font></b>
+<p><b><font color="#274342">When the cursor passes over some of the buttons
+in the main window, a brief explanation of those buttons will appear in
+the message area, if this selection is set.</font></b>
+<p><a NAME="5.3.4"></a><b><font color="#274342">5.3.4.&nbsp; Bottom Information
+Selection</font></b>
+<p><b><font color="#274342">If the </font><font color="#008007">Bottom
+Information</font><font color="#274342"> item is selected, the bottom portion
+of the main widget will contain information regarding the mouse button
+mappings, the location button, and the image range applying to certain
+operations, such as thresholding.</font></b>
+<p><a NAME="5.3.5"></a><b><font color="#274342">5.3.5.&nbsp; Cross-Section
+Tool Selection</font></b>
+<p><b><font color="#274342">The cross-section tool shown below in Figure
+5.15 provides an "at a glance" view of the image and body information&nbsp;
+within the model.&nbsp; The user can choose views along any of the three
+principal axes.</font></b>
+<p><img SRC="ImageEditor/CrossSection.gif" NOSAVE height=572 width=332>
+<p><b><font color="#274342">Figure 5.15.&nbsp; Cross-Section tool widget.</font></b>
+<p><a NAME="5.3.6"></a><b><font color="#274342">5.3.6.&nbsp; Intensity
+Histogram Selection</font></b>
+<p><b><font color="#274342">This selection, illustrated in Figure 5.16,
+shows either the pixel distribution of an individual image, or the entire
+image set.&nbsp; It may be of value in showing the image definition and
+the suitability of the various edit modes for the image set.</font></b>
+<p><img SRC="ImageEditor/Histogram.gif" NOSAVE height=495 width=614>
+<p><b><font color="#274342">Figure 5.16.&nbsp;&nbsp; Intensity Histogram
+widget.</font></b>
+<p><a NAME="5.3.7"></a><b><font color="#274342">5.3.7.&nbsp; Region Volumes
+Selection</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">Region Volumes</font><font color="#274342">
+widget, illustrated in Figure 5.17, shows the volume distribution for the
+current model.&nbsp; It can reveal gross inconsistencies in the model and
+show if there are any unlabeled regions remaining in the model.</font></b>
+<p><img SRC="ImageEditor/Volumes.gif" NOSAVE height=320 width=407>
+<p><b><font color="#274342">Figure 5.17.&nbsp; Region Volumes widget.</font></b>
+<br>&nbsp;
+<p><a NAME="5.4.1"></a><b>5.4.1. Preferences Menu</b>
+<p><b>The user can customize any of the features contained in Figure 5.18
+for subsequent use in seraModel by selecting the button adjacent to the
+preference.</b>
+<p><img SRC="ImageEditor/Preferences.jpg" NOSAVE height=530 width=309>
+<p><b><font color="#274342">Figure 5.18.&nbsp; Preferences menu.</font></b>
+<br>&nbsp;
+<p><a NAME="5.4.2"></a><b>5.4.2. Autosave Options</b>
+<br><!-- START HERE -->
+<p><!-- FIXME, Check with Matt --><b>Autosave Options change how autosave
+works. If autosave is on, seraModel will automatically save the current
+regions periodically to disk.</b>
+<p><img SRC="ImageEditor/Autosave.jpg" NOSAVE height=278 width=469>
+<p><b>Figure 5.19. Autosave options.</b>
+<p><b>If the file has not been named yet the autosaved files will be saved
+at <font color="#CC6600">$HOME/sera1/autosaved_files/autosaved_regions.uv</font>
+and <font color="#CC6600">$HOME/sera1/autosaved_files/autosaved_regions.uvh</font>
+(i.e., the default autosave directory plus the default autosave filename
+plus .uv and .uvh). The first autosave will take place five minutes after
+the program starts, and subsequent autosaves will occur every five minutes
+thereafter. Autosave is <font color="#FF0000">on</font> since the button
+to the right of <font color="#008007">Toggle Auto Saver</font> is pressed.</b>
+<p><a NAME="5.5"></a><b><font color="#274342"><font size=+1>5.5.&nbsp;
+Suggested Modeling Steps for BNCT Treatment Planning</font></font></b>
+<p><b><font color="#274342">There are many ways to develop the patient
+model using seraModel.&nbsp; This section discusses steps we have found
+useful for developing a model.&nbsp; We are sure that some resourceful
+users will come up with better modeling strategies than we suggest here,
+and, if they are kind enough to share them with us, we will keep this section
+updated with their comments.&nbsp; An accurate model can be constructed
+with an image separation of 4mm along the transverse direction.&nbsp; A
+finer resolution will increase the workload and require more computer memory
+with a diminishing return on accuracy.&nbsp; When modeling lesions or objects
+that are less than 4mm along the transverse direction, it will be necessary
+to use a finer resolution image set.&nbsp;</font><font color="#990000">
+It is important to note again that the basic property of the univel represenataion
+is that image transverse spacing must be uniform in order to achieve high
+performance.</font></b>
+<p><b><font color="#274342">Because CT and MRI image sets are fundamentally
+different with respect to how the pixel intensity values are derived, it
+is necessary to consider separate modeling steps for each.&nbsp; CT images
+have high geometric fidelity, low image noise, and good bone definition,
+but poor soft tissue contrast.&nbsp; MRI images provide excellent soft
+tissue resolution, but bone information must be inferred, and the images
+are usually noisy.&nbsp; Segmenting MRI images using thresholding is of
+limited value.&nbsp; In time, we hope to include the capability to register
+both image types, and allow the modeler to work with both simultaneously.&nbsp;
+In future releases, we will also be providing image filtering functions
+in the seraImage module, which can be used to clean up noise and accommodate
+higher contrast pixel values;&nbsp; this improvement should extend the
+usefulness of thresholding.&nbsp; The tradeoff would be some loss of image
+fidelity.</font></b>
+<p><b><font color="#274342">As a general rule, the modeler should try to
+assign contrasting colors to each body.&nbsp; The </font><font color="#FF0000">buffer</font><font color="#274342">
+body should stand out among all others, so that it can be distinguished
+when found in the image area.&nbsp; The </font><font color="#008007">Edit
+Window</font><font color="#274342"> allows body definition at the resolution
+of an individual pixel, and it can be used to detect unlabeled and improperly
+assigned pixels.&nbsp; This is a good way to detect if a buffer pixel crept
+into
+the image area while thresholding.&nbsp; When first learning seraModel,
+the modeler will, and should, make generous use of the </font><font color="#008007">undo</font><font color="#274342">
+button.</font></b>
+<p><a NAME="5.5.1"></a><b><font color="#274342">5.5.1.&nbsp; Suggested
+Modeling Steps Using CT Image Sets</font></b>
+<p><b><font color="#274342">If there are no pixel ambiguities, and the
+pixel value ranges of each body are known, then the modeler should use
+the </font><font color="#008007">Pixel Mapping</font><font color="#274342">
+button of the thresholding option, make the body assignments to the pixel
+ranges, and apply pixel mapping;&nbsp; then the model is complete.&nbsp;
+Otherwise, remembering to frequently save the </font><font color="#CC6600">.uv/.uvh</font><font color="#274342">
+files during the modeling steps, the modelere should try the following:</font></b>
+<ul>
+<li>
+<b><font color="#274342">Using the </font><font color="#FF0000">thresholding</font><font color="#274342">
+option, define buffer with the </font><font color="#008007">Fill Connected
+Only</font><font color="#274342"> and </font><font color="#008007">Apply
+Threshold To Range</font><font color="#274342"> buttons set to the </font><font color="#FF0000">on</font><font color="#274342">
+state.</font></b></li>
+
+<li>
+<b><font color="#274342">Define low density bodies (i.e., sinus) with </font><font color="#008007">Fill
+Connected Only</font><font color="#274342"> set to the </font><font color="#FF0000">off</font><font color="#274342">
+state.</font></b></li>
+
+<li>
+<b><font color="#274342">Manually define tumor, eyes, and other relatively
+small objects that do not occur in the majority of slices.</font></b></li>
+
+<li>
+<b><font color="#274342">Attempt to </font><font color="#FF0000">threshold</font><font color="#274342">
+the brain.&nbsp; If that doesn't work out, use the </font><font color="#FF0000">Manual
+Edit</font><font color="#274342"> mode for brain.</font></b></li>
+
+<li>
+<b><font color="#FF0000">Threshold</font><font color="#274342"> skull,
+bone, and cartilage material.&nbsp; Paint in what </font><font color="#FF0000">thresholding</font><font color="#274342">
+missed.</font></b></li>
+
+<li>
+<b><font color="#274342">Use full </font><font color="#FF0000">threshold</font><font color="#274342">
+range with </font><font color="#008007">Overwrite</font><font color="#274342">
+turned </font><font color="#FF0000">off</font><font color="#274342"> to
+set the last body, in this case, the scalp.</font></b></li>
+
+<li>
+<b><font color="#274342">Touch up improperly assigned pixels using the
+</font><font color="#FF0000">Manual
+Edit </font><font color="#274342">mode.</font></b></li>
+
+<li>
+<b><font color="#274342">Use </font><font color="#FF0000">Make Margin</font><font color="#274342">
+to define the target.&nbsp; Only allow the brain to be overwritten with
+the target body.</font></b></li>
+</ul>
+
+<p><br><a NAME="5.5.2"></a><b><font color="#274342">5.5.2.&nbsp; Suggested
+Modeling Steps Using MRI Image Sets</font></b>
+<p><b>Until we can find or develop effective automated segmenting techniques,
+defining bodies in MRI images will be dominated by <font color="#FF0000">Manual
+Editing</font>, <font color="#FF0000">Wand tool</font> and <font color="#FF0000">Filling</font>.&nbsp;
+The Wand tool is fairly effective on brain, tumor, and sometimes skull.
+If the image set has high signal to noise ratios, or can be effectively
+made so, the user may be able to use <font color="#FF0000">thresholding</font><font color="#274342">
+to define the very low (buffer, sinus) and very high (edema, tumor) signal
+regions making sure the </font><font color="#008007">Fill Connected Only</font><font color="#274342">
+state is set </font><font color="#FF0000">on</font><font color="#274342">.&nbsp;
+The modeler should try </font><font color="#FF0000">thresholding</font><font color="#274342">,
+followed by </font><font color="#FF0000">Manual Edit </font><font color="#274342">touchup,
+using experience as a guide, for unfiltered MRI image sets.</font></b>
+<center>
+<p><img SRC="marblebar.jpg" NOSAVE height=6 width=460>
+<p><a href="sec04.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><a href="sec04.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="sec06.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="sec06.html">Next</a></b></center>
+
+</body>
+</html>

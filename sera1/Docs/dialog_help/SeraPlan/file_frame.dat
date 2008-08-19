@@ -1,0 +1,11 @@
+seraMC dose file name (.rst file)
+
+       __________________________________________________
+
+The seraMC dose file name widgets allow the user to specify the
+.rst files to be used for each field in the dose combination.
+The file names may be either typed in directly, or found by
+traversing the directory structures using the FSB spawned by
+the attached arrow button.  In either case, full path names for
+the files should be provided, as this allows the combination to
+be reproduced more easily.

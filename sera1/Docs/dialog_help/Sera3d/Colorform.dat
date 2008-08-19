@@ -1,0 +1,42 @@
+Color
+
+	The colors of the bodies may be changed.  
+	There are several tools available to control 
+	the bodies color.
+
+	________________________________________________
+
+  	Body Selector:
+
+	  The Body Selector menu is used to determine
+         which body the current settings will affect.
+	________________________________________________
+
+	Color Presets:
+
+	  The color presets list is a shortcut list to
+         a few preset colors for various bodies.  To 
+	 use a preset simply click on the name and the
+         sliders will be set accordingly.
+	________________________________________________
+
+	Color Swatch:
+
+	  The color swatch is simply a preview of the
+         current color settings of the r,g,b sliders.
+	________________________________________________
+
+	R,G,B sliders:
+
+	  The three sliders on the bottom are the red,
+	 green and blue components that are combined to
+	 produce the selected body's color.  The values
+ 	 of the sliders go from 0 (bottom) to 1 (top). 
+     	________________________________________________
+
+	Apply to Body:
+
+	  The Apply to Body button simply sets the bodies
+         color to the new specifications and the rendering
+         is redrawn.
+     	________________________________________________

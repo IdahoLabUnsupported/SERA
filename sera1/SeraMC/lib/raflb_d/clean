@@ -1,0 +1,11 @@
+rm -rf therm_a-b.e
+rm -rf therm_a-b.o
+rm -rf fast_a-b.o
+rm -rf fast_a-b.e
+rm -rf raf.tape11
+rm -rf fastlib.cds
+rm -rf thermal.list
+rm -rf neut.list
+rm -rf neut.tape15
+rm -rf gam.list
+rm -rf gam.tape15

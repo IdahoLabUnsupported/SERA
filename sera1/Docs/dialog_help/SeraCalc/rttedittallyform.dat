@@ -1,0 +1,3 @@
+Tally Panel
+
+The tally panel of the rtt popup specifies the overlaying 3D edit mesh and integrated power.  This panel has three fields which are text entry fields.  The user chooses a field for which a change is to take place and enters new values in the field.  

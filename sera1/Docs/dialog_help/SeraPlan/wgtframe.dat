@@ -1,0 +1,9 @@
+Fraction Weight
+
+       __________________________________________________
+
+The fraction weight widget displays the fraction of the total
+plan exposure accumulated in a particular fraction.  This is
+the simple sum of the individual field exposures for each
+fraction, divided by the total plan exposure.  This widget
+is not editable by the user.

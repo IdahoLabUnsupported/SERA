@@ -1,0 +1,247 @@
+# This is a comment card
+# This materials file assumes library materials from
+#
+# //bnct1/bnct/users/fjw/rtt/library/rtt_001.lib
+# or from
+# //bnct1/bnct/users/fjw/rtt/library/rtt_002.lib
+# or from
+# //bnct1/bnct/users/fjw/rtt/library/rtt_003.lib
+#
+# Note that filenames and material names must start in
+# column 2.
+#
+# A thermal-scatter for bound molecules can be specified by
+# assigning two library materials. For example, pure H2O is
+#   1 0.06668           3
+# Here library material 1 is free hydrogen in the fast-neutron
+# groups with 0 thermal ID (no thermal). Material 3 is oxygen
+# in fast groups and H2O for thermal. Nbound=2 for material 3
+# so the code divides the density by 2 to weight the
+# oxygen and H2O data. The gamma data is also weighted properly
+# since material 1 is hydrogen for the gamma data and 3 is oxy.
+#
+# Number mixtures in this file
+          30
+ brain_MIT
+# density = 1.047 grams/cc
+# The MIT composition assumes 50%/50% by-weight average of gray 
+# and white matter and is taken from reference (1)
+#
+# Number of entries for this material
+           9
+    1 0.0577212         3 H2O molecule
+    1 0.008908         19 CH2 molecule
+    7 0.0028794         0 Free carbon
+    8 0.00082827        0 Nitrogen
+    9 4.402     E-09    0 Boron-10 (Natural concentration in blood (2))
+   11 0.0000384         0 Sodium
+   16 0.0000249         0 Chlorine
+   17 0.00006289        0 Potassium
+   18 0.00007939        0 Phosphorus
+# true void (will get no sub-element edits)
+ void_true
+           0
+ void_edit
+           1
+    1 0.0               0 Simulated void (will get sub-element edits)
+ buffer
+           1
+    1 0.0               0 All undefined space between BSG and CG is void
+ lucite
+           3
+    1 0.028399          3 H2O
+    1 0.028404         19 CH2
+    7 0.021304          0 Free carbon
+ poly_LIOH_enr
+           5
+    1 0.01753           3 H2O
+    1 0.05312          19 CH2
+    2 0.003065          0 Free Oxygen
+    5 0.006432          0 Li-6
+    6 0.0003385         0 Li-7
+ H2O
+           1
+    1 0.06668           3
+ tissue
+# density = 1.07
+           4
+    1 0.06044           3 H2O Molecule
+    1 0.00351          19 CH2 Molecule
+    7 0.004149          0 Free carbon
+    8 0.001196          0 Nitrogen
+ bone
+# density = 1.5
+           6
+    1 0.023754          3 H2O Molecule
+    1 0.0210585        19 CH2 Molecule
+    2 0.0135298         0 Free oxygen
+    8 0.002580          0 Nitrogen
+   13 0.0047332         0 Calcium
+   16 0.00280455        0 Chlorine
+ pure_poly
+# density = 0.9
+           1
+    1 0.077            19 CH2 Molecule
+ Rx_201
+# density = 0.93
+           3
+    1 0.0645           19 CH2 Molecule
+    9 0.0005094         0 boron-10
+   10 0.0020506         0 boron-11
+ plywood
+# density = 0.64
+           3
+    1 0.02378          19 CH2 Molecule
+    2 0.01189           0 Oxygen
+    7 0.00237           0 Free carbon
+ boroflex
+           4
+    1 0.027            19 CH2 Molecule
+    7 0.04563           0 Free carbon
+    9 0.004617          0 B10
+   10 0.01858           0 B11
+ Rx_215_nat
+           5
+    1 0.05445          19 CH2
+    2 0.01043           0 Free Oxygen
+    5 0.0005025         0 Li-6
+    6 0.006198          0 Li-7
+    7 0.003505          0 Free carbon
+ styrofoam
+# density = 0.09
+           1
+    1 0.0077           19 CH2 Molecule
+ head
+# phantom head is lucite
+           3
+    1 0.02888           3 H2O
+    1 0.028885         19 CH2
+    7 0.021665          0 Free carbon
+ snout
+# phantom snout is lucite
+           3
+    1 0.02888           3 H2O
+    1 0.028885         19 CH2
+    7 0.021665          0 Free carbon
+ trachea
+# phantom trachea is lucite for now
+           3
+    1 0.02888           3 H2O
+    1 0.028885         19 CH2
+    7 0.021665          0 Free carbon
+ mouth_plug
+# phantom mouth plug is lucite for now
+           3
+    1 0.02888           3 H2O
+    1 0.028885         19 CH2
+    7 0.021665          0 Free carbon
+ Rx_215_enr
+           5
+    1 0.054465         19 CH2
+    2 0.010425          0 Free Oxygen
+    5 0.007499          0 Li-6
+    6 0.000395          0 Li-7
+    7 0.0034925         0 Free carbon
+ Li6
+# same density as for LiF but no F
+# assumes density of 1.32
+           2
+    5 0.030130          0 Li-6
+    6 0.001586          0 Li-7
+ lexan
+# From Parag Gokhale (9/4/91) H=5.55%, O=18.87%, C=75.58%, density=1.2
+           3
+    1 0.017046          3 H2O
+    1 0.0227444        19 CH2
+    7 0.0341005         0 Free carbon
+ polybor
+# from Peter Watkins-this is the petten beam delimiter
+           2
+    1 0.07423          19 CH2 Molecule
+    9 0.005602          0 B10
+ Pb-B-Wax
+# from Peter Watkins-this is the petten beam collimator
+           5
+    1 0.03197          19 CH2 Molecule
+    2 0.001052          0 Oxygen
+    9 0.0000696         0 B10
+   10 0.0002811         0 B11
+   20 0.01978           0 Lead
+ Cadmium
+           1
+   23 0.0464            0 cadmium (gamma lines from ANL5800)
+ Fairchild_tissue
+           5
+    1 0.04592           3 H2O Molecule
+    1 0.01419          19 CH2 Molecule
+    7 0.004435          0 Free carbon
+    8 0.001118          0 Nitrogen
+   16 0.00003397        0 Chlorine
+ Fairchild_tissue+300ppm
+           6
+    1 0.04592           3 H2O Molecule
+    1 0.01419          19 CH2 Molecule
+    7 0.004435          0 Free carbon
+    8 0.001118          0 Nitrogen
+    9 1.80429000E-05    0 Boron-10
+   16 0.00003397        0 Chlorine
+ Li6_epoxy
+# same density as for LiF but no F
+# assumes 50 % LiF (.66 g/cc) 50% Ch2 (.5 g/cc)
+           3
+    1 0.042932         19 CH2 Molecule
+    5 0.015065          0 Li-6
+    6 0.000793          0 Li-7
+ Moran_wgtd_doghead
+          11
+    1 0.0452108         3 H2O Molecule
+    1 0.0148980        19 CH2 Molecule
+    7 0.0021566         0 Free carbon
+    8 0.0018972         0 Nitrogen
+   11 5.00240006E-05    0 Sodium
+   12 4.59018000E-05    0 Sulfur
+   13 6.04645000E-04    0 Calcium
+   14 1.94952000E-05    0 Magnesium
+   16 3.44767000E-05    0 Chlorine
+   17 4.37658000E-05    0 Potassium
+   18 4.00170000E-04    0 Phosphorus
+# dummy material for searchlight problem
+ search_light
+           2
+   24 0.01              0 siga = 0.01
+   25 0.99              0 sigs = 0.99
+#
+# References
+#
+# 1) RA Brooks, G DiChiro, MR Keller, "Explanation of cerebral white-
+#    gray contrast in computed tomography," J. Comp. Assist. Tomog.,
+#    4(4):489-491, 1980.
+#
+# 2) ICRP-23
+#
+# Fast-neutron isotope titles on rtt_002.sigma
+#  1     508  HYDROGEN ENDF/B-V TAPE 511
+#  2     505  OXYGEN-16  VERS 5   
+#  3     505  OXYGEN-16  VERS 5   
+#  4     509  ALUMINIUM-27   VERS 5   
+#  5     510  LITHIUM-6  VERS 5 
+#  6     511  LITHIUM-7 VERS 5 MOD 1  
+#  7     512  CARBON  VERS 5 
+#  8     513  NITROGEN-14  VERS 5 
+#  9     521  BORON-10  VERS 5
+# 10     522  BORON-11  VERS 5   
+# 11     525  SODIUM-23 VERS 5 INFD
+# 12     528  SULFUR  VERS 5 *ID
+# 13     532  CALCIUM(NAT) VERS 5 MOD 3  
+# 14     533  MAGNESIUM VERS 5
+# 15     536  DEUTERIUM  VERS 5
+# 16     541  CHLORINE  VERS 5
+# 17     542  POTASSIUM  VERS 5
+# 18     543  PHOSPHORUS  VERS 5 
+# 19     830  CARBON  VERS 5
+# 20     507  LEAD-NAT FROM TAPE 508
+# 21     537  FLUORINE-19  VERS 5
+# 22     508  HYDROGEN ENDF/B-V TAPE 511
+# 23     523  CADMIUM ENDFB/B-V ANL5800 GAMMA PROD
+# 24     508  fast hydrogen (dummy) siga=1.0 in thermal gps
+# 25     508  fast hydrogen (dummy) sigs=1.0 in thermal gps

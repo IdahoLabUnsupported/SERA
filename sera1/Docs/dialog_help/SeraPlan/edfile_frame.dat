@@ -1,0 +1,10 @@
+
+Dose file name (.rst file)
+
+       __________________________________________________
+
+The dose file name widget allows the user to specify the
+.rst file to be used for the edit calculations.  The file
+name may be either typed in directly, or found by traversing
+the directory structures using the FSB spawned by the
+attached arrow button.

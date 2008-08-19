@@ -1,0 +1,35 @@
+Sera Plot
+--------------------------------------------------
+
+Sera Plot provides the following two utilities.
+
+
+Dose Depth Plot
+_______________
+
+The dose depth plotting utility reads the seraMC
+standard output and invokes the xmgr generalized 
+two dimensional plotting code for each encounter 
+of a seraMC line edit. 
+
+Dose depth plots can be shown for either or all of 
+the following dose components
+- total dose
+- b-10 dose
+- gamma dose
+- n-14 dose
+- hydrogen dose
+- other dose
+- Group 1 fluence
+- Group 2 fluence
+- Thermal fluence
+- Gamma production
+- Ultrafast Gamma
+
+
+Dose Volume Histogram
+_____________________
+
+The dose volume histogram plotting utility reads 
+the seraMC standard output and invokes the xmgr 
+plot code for each encounter of a seraMC line edit. 

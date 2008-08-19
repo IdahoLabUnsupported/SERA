@@ -1,0 +1,19 @@
+#!/bin/sh
+#rm -f cvstatic.fileset
+DIRS="./areas ./common ./conpack ./dashchar ./ezmap ./gks ./plotchar ./spps ./stitle ./support"
+EXTENSIONS="*.c *.f"
+
+for EXT in $EXTENSIONS
+do
+     echo "$EXT" >> dumb   
+done
+
+for DIR in $DIRS
+do
+   cd $DIR
+   for EXT in $EXTENSIONS
+   do
+        echo "$DIR/$EXT"  
+   done
+   cd ..
+done

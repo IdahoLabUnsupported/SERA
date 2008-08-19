@@ -1,0 +1,9 @@
+Patient ID
+
+       __________________________________________________
+
+The patient ID text widget allows the user to set and display
+any character string (without embedded blanks) to identify
+the treatment plan.  The patient ID is used as the base for
+the filenames in which the plan data and combined doses are
+saved.  A maximum of 50 characters are allowed.

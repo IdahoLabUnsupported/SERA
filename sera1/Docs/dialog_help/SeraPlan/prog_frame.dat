@@ -1,0 +1,31 @@
+
+
+Reference dose input parameters
+
+       __________________________________________________
+
+B10 (ppm)
+
+The reference boron level, in ppm, to be used to determine
+the reference dose for the volume search.  This values will
+be used at all points.
+
+       __________________________________________________
+
+Regions
+
+The regions to be included in the volume search for the
+reference dose location.  This is a space- or
+return-delimited list of body names, with the union of
+all specified bodies used for the search.  All other
+regions will be ignored.
+
+       __________________________________________________
+
+Location
+
+The (x,y,z) location, given as a space-delimited triplet,
+to use for the reference dose when the Point option is
+selected.  The boron level will correspond to the region
+at that location, but the reference RBE values defined
+by the user will be applied.

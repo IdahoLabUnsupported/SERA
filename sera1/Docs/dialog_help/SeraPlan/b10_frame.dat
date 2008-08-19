@@ -1,0 +1,8 @@
+Boron concentration input widget
+
+       __________________________________________________
+
+The boron concentration input widget allows the user to specify
+the boron concentration (in arbitrary units, although ppm is the
+usual choice) for the dose combination.  These values are used
+to weight the boron dose during the combination.

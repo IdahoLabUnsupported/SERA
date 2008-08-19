@@ -1,0 +1,41 @@
+# sources taken out:  nurb_plot.c nurb_c2 nurb_ray nurb_xsplit
+SRCS = 	nurb_bound.c     nurb_interp.c    nurb_refine.c    nurb_xsplit.c \
+	nurb_knot.c      nurb_reverse.c   oslo_calc.c \
+	nurb_copy.c      nurb_norm.c      nurb_solve.c     oslo_map.c \
+	nurb_diff.c	                  nurb_split.c     nurb_basis.c \
+	nurb_eval.c      nurb_poly.c      nurb_trim.c      vers.c \
+	nurb_bezier.c    nurb_flat.c      nurb_util.c 
+
+OBJS = 	nurb_bound.o     nurb_interp.o    nurb_refine.o    nurb_xsplit.o \
+	nurb_knot.o      nurb_reverse.o   oslo_calc.o \
+	nurb_copy.o      nurb_norm.o      nurb_solve.o     oslo_map.o \
+	nurb_diff.o                       nurb_split.o     nurb_basis.o \
+	nurb_eval.o      nurb_poly.o      nurb_trim.o      vers.o \
+	nurb_bezier.o    nurb_flat.o      nurb_util.o 
+
+
+machine=i386
+
+TOP = $(SERA_HOME)/Interface/Spline
+
+# 
+# The DSINGLE flag triggers single precision usage for the "fastest
+# float" (fastf_t) data type defined by the ARL libraries.
+#
+DEFINES = -DDOUBLE
+
+INCLUDES = -I$(TOP)/include/libnurb_includes
+LIBLOCATION = .
+USRLIBDIR = /usr/lib
+INCROOT = /usr/include
+SYS_LIBRARIES = -lm 
+CCOPTIONS = 
+DEPLIBS = 
+#CDEBUGFLAGS=  -Aa -D_HPUX_SOURCE -g
+#CDEBUGFLAGS= -g -cckr -common -prototypes 
+CDEBUGFLAGS = 	-O2
+NormalLibraryTarget(nurb,$(OBJS))
+InstallLibrary(nurb, $(LIBLOCATION));
+DependTarget()
+LintTarget()
+all::

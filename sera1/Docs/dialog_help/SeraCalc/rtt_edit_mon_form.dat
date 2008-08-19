@@ -1,0 +1,3 @@
+Monitor Panel
+
+   The panel at the lower left of the rtt_MC popup is used to display running statistics for the rtt_MC run.  As the rtt_MC program and this program exchange data, the appropriate values are displayed in this panel.  This is accomplished via a file called 'rtt.mon' which is written into the rtt_MC working directory.  The file is updated after each batch of particles and the peak location and value are written at the end of the run.  

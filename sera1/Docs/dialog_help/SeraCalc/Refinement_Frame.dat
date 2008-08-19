@@ -1,0 +1,7 @@
+This frame contains two scrollbars
+
+Curve Fineness
+   Sets the curve fineness value to be used for displaying curves in the image windows.  Larger values give coarser curves, with fewer line segments used to approximate the curve.
+
+Surface Fineness
+   Sets the surface fineness value used in generating a faceted approximation of the surface.  Lower values result in approximations which use more polygons to approximate the surface.  Higher values give coarser approximations of the surface.  Values less than 10 will take a long time to compute and may result in the program running out of available memory.

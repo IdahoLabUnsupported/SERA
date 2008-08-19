@@ -1,0 +1,41 @@
+The Edit menu has the following options:
+
+New Body
+   Allows user to define the location of a body.  The user can perform this action by:
+   1.  Select New Body.
+   2.  Enter the name of the body being defined.
+   3.  Add points around the perimeter of the body slice by clicking the left mouse button.
+Note:  Points must be entered clockwise around the boundary of the object.  More points produces a smoother boundary.  The number of points describing an object must be the same in each slice.  When defining multiple bodies,  the bodies may not intersect.
+   4.  Select the Done button when finished entering points.
+   5.  Pressing Cancel at any time aborts the process of defining a body.
+
+Show List
+   Causes a list of defined bodies to be displayed with the image slice.  The menu selection becomes Unshow List, so that the list can be removed.
+
+Unshow Points
+   Causes the defined body points to be removed from the display so that the image can be displayed without the points covering portions of it.  The menu changes to Show Points so that the points may be displayed.
+
+Copy Body
+   Allows body definitions to be copied from one image to another.  The user can perform this action by:
+   1.  Select Copy Body.
+   2.  Click on the body to be copied with the left mouse button.
+   3.  Click on the image the body is to be copied to.
+   4.  Repeat Steps 1 and 2 for as many bodies as are desired.
+
+Edit Body
+   Allows the curve defining a body to be modified.  The user can perform this action by:
+   1.  Select Edit Body.
+   2.  Click on a point in the curve to be edited.
+   3.  Click on the location where the point is to be moved.
+   4.  Repeat steps 2 and 3 for all desired points and then click the Done button.
+
+Add Flex
+   After tracing several slices in a single body, allows the user to add additional points to represent the next slice accurately.  The user can perform this action by:
+   1.  Select Add Flex
+   2.  Select an area where additional points are needed by clicking on a point in the body.
+   3.  Click on another non-adjacent point where points will be added in a clockwise fashion.
+   4.  Move the displayed slider to the correct number of points and select OK.
+   5.  If the points added are correctly placed select Accept and the change will be permanent, otherwise Cancel removes the new points.
+
+Automatic Edge
+   With user help, automatically finds the edges of bodies in the image and establishes boundary points.  When Auto Edge is selected, a widget with a number of options appears.

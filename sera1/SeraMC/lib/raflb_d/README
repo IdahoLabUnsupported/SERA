@@ -1,0 +1,58 @@
+
+   raflC4 library data and conversion routines
+
+       file                    description
+    __________      ___________________________________________________________
+
+
+    raf.tape11      binary form of the raffle thermal-neutron cross sections.
+
+    raf.tape15      binary form of the raffle fast-neutron (or gamma) cross
+                    sections.
+
+    thermlib.cds    ascii form of the raffle thermal-neutron cross sections.
+
+
+    neutlib.cds     ascii form of the raffle fast-neutron cross sections.
+
+    gamlib.cds      ascii form of the raffle gamma cross sections.  
+
+    therm_a->b.f    code to convert thermlib.cds --> raf.tape11
+
+    therm_b->a.f    code to convert raf.tape11 --> thermlib.cds 
+
+    fast_a->b.f     code to convert fastlib.cds --> raf.tape15
+
+    fast_b->a.f     code to convert raf.tape15 --> fastlib.cds 
+
+    pkern.Al        physical data sample for point kernel calculation
+                    with aluminum build-up factors
+
+    pkern.Pb        physical data sample for point kernel calculation
+                    with lead build-up factors
+
+    ___________________________________________________________________________
+
+
+    The files raf.tape11 and raf.tape15 must be in this directory when
+    running raffle. A file called pkern.in must be in your working
+    directory if you desire a point kernel calculation.
+
+    The fast cross sections may be neutron or gamma. To use the run script
+    for the 12 sample problems you must have a file neut.tape15 (fast
+    neutron cross sections in binary format) and gam.tape15 (gamma library
+    in binary format). These can be made by copying ascii files to the
+    temporary file fastlib.cds, running fast_a-b.e and copying the output
+    file raf.tape15 to neut.tape15 or gam.tape15, whichever is appropriate.   
+
+ 
+    Or you can use the run script in this directory.
+    example: prepare lib_d directory for wigner.
+    ____________________________________________
+
+    > chmod 777 make_ibm_lib
+    > make_ibm_lib &
+
+    This run script should compile the format conversion routines and
+    generate neut.tape15, gam.tape15, raf.tape11, neut.list, gam.list
+    and thermal.list.

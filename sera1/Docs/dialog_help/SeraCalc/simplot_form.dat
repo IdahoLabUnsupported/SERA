@@ -1,0 +1,18 @@
+   Simplot is an ancilliary program that reads the rtt_MC standard output and invokes the xmgr plot code for each encounter of a line edit. 
+
+   The dose/depth information for the line edit is contained by the 9 different toggle buttons.
+
+To use:
+   1.  Select the name of the rtt_MC output file in the file selection box.
+   2.  Enter the xmgr plot commands filename to be created. 
+   3.  Enter the sample rate or stride distance.
+   4.  Select the toggle buttons to be plotted.  An xmgr window is opened for each line edit and the user can modify the title and perform any other editting of the plot and then print the plot and save the plot file using the capabilities of xmgr.
+
+Notes:
+  1.  In order for simplot and xmgr to work correctly, the user's RttPath must be set correctly with lib/SimplotCommands as a subdirectory of that path or else an error like this will be displayed:
+
+   Else 
+   Can't open commands file YOUR_RTT_PATH/lib/SimplotCommands.  Bummer!
+
+  2.  Also the user's BNCT_BIN must be set correctly with xmgr contained in that directory.
+  3.  If the user tries to run Simplot and only an Else is printed, the file simplot was trying to run is probably not a valid rtt_MC standard output file.

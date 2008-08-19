@@ -1,0 +1,9 @@
+# This is a sample site file read by the seraDose module.
+# 
+# All lines written in this file will be displayed except
+# those lines beginning with a pound symbol (#). 
+#
+*************************************************
+  This file is $SERA_RESOURCES/Site/info.txt
+  It can be changed for your site's needs.
+*************************************************

@@ -1,0 +1,509 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.6 [en] (X11; U; SunOS 5.6 sun4u) [Netscape]">
+   <meta name="Description" content="This is the SERA Manual Page for seraMC.">
+   <title>SERA Manual - Section 7</title>
+</head>
+<body text="#274342" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000" background="mainbackground.gif">
+
+<center><a href="sec06.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><a href="sec06.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="sec08.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="sec08.html">Next</a></b>
+<p><b><font color="#274342"><font size=+2>SERA:</font></font></b>
+<br><b><font color="#274342"><font size=+2>Simulation Environment for Radiotherapy
+Applications</font></font></b>
+<br><b><font color="#274342"><font size=+2>User's Manual</font></font></b>
+<br><b><font color="#274342"><font size=+2>Version 1C0</font></font></b>
+<p><img SRC="marblebar.jpg" NOSAVE height=6 width=460></center>
+
+<p><b><font color="#274342"><font size=+2>7. Transport Modeling</font></font></b>
+<p><a NAME="7.1"></a><b><font color="#274342"><font size=+1>7.1.&nbsp;
+Introduction</font></font></b>
+<p><b><font color="#274342">The seraMC interface for transport modeling,
+seraCalc, provides an interactive input interface for the <a href="appA.html">seraMC</a>
+radiation transport module.&nbsp; This interface allows the user to manipulate
+the various input parameters and edit directives for <a href="appA.html">seraMC</a>,
+to create an input file for a specific calculation.&nbsp; Existing input
+files may be read in and modified, or the input may be created from an
+essentially blank template.&nbsp; A sample configuration for the seraCalc
+interface is shown in Figure 7.1.&nbsp; The following sections provide
+a brief explanation of the various input fields in the interface, with
+links to more detailed descriptions of the input parameters in the <a href="appA.html">seraMC</a>
+documentation.</font></b>
+<p><img SRC="DoseCalculations/seraCalc.gif" NOSAVE height=634 width=942>
+<p><b>Figure 7.1.&nbsp; Sample seraCalc interface display.&nbsp; This is
+the default configuration at startup.</b>
+<br>&nbsp;
+<p><a NAME="7.2"></a><b><font size=+1>7.2.&nbsp; Menus</font></b>
+<p><a NAME="7.2.1"></a><b>7.2.1.&nbsp; File Menu</b>
+<p><b><font color="#274342">To start the creation of a seraMC input file,
+the user should select the name of the input file.&nbsp; By default, a
+set of standard values is displayed in the interface window, as in Figure
+7.1, with </font><font color="#008007">Save Directory</font><font color="#274342">
+assigned the directory from which seraCalc was invoked.&nbsp; Selecting
+</font><font color="#008007">Open</font><font color="#274342">
+from the
+</font><font color="#FF0000">File</font><font color="#274342">
+menu, as shown in Figure 7.2, allows the user to start with values from
+a previous session.&nbsp; The </font><font color="#008007">Save</font><font color="#274342">
+and
+</font><font color="#008007">Save As</font><font color="#274342"> menu
+buttons allow the modified input data to be saved either to the loaded
+file, or to a new file as chosen in a file selection widget.</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">Launch</font><font color="#274342">
+button allows other sera modules to be executed from within seraCalc.&nbsp;
+The </font><font color="#008007">Check Version</font><font color="#274342">
+entry submits an Internet job to verify that the version presently used
+is the most current.&nbsp; A database is checked, and the two code versions
+are displayed in a popup.</font></b>
+<p><img SRC="DoseCalculations/seraCalc.fmenu.gif" NOSAVE BORDER=1 height=634 width=942>
+<p><b><font color="#274342">Figure 7.2.&nbsp; File pulldown menu.</font></b>
+<p><a NAME="7.2.2"></a><b>7.2.2.&nbsp; Run Menu</b>
+<p><b><font color="#274342">The </font><font color="#FF0000">Run</font><font color="#274342">
+menu in the top left corner of the seraCalc window has three selections,
+as shown in Figure 7.3.&nbsp; The </font><font color="#008007">Run</font><font color="#274342">
+button is used to initiate a run of the seraMC program using the newly
+generated input file.&nbsp; This invokes the script file given in the
+<a href="appA.html">seraMC</a></font><font color="#008007">
+Run Script</font><font color="#274342"> field (see <a href="#7.4.9">Section
+7.4.9</a>), with the input file specified by either the </font><font color="#008007">Save
+</font><font color="#274342">or</font><font color="#008007">
+Save As</font><font color="#274342"> options in the </font><font color="#FF0000">File</font><font color="#274342">
+menu (see <a href="#7.2.1">Section 7.2.1</a>).&nbsp; The </font><font color="#008007">Test</font><font color="#274342">
+button is used to run a short trial of the <a href="appA.html">seraMC</a>
+program. This causes a short <a href="appA.html">seraMC</a> run to be made
+for checkout.&nbsp; For this run, particle tracks are written to a file
+named </font><font color="#CC6600">input.pp</font><font color="#274342">,
+where </font><font color="#CC6600">input</font><font color="#274342"> is
+the name of the input file used for the run.&nbsp; These tracks can be
+viewed in <a href="sec06.html">sera3d</a> along with the three-dimensional
+model for further model verification.&nbsp; The </font><font color="#008007">Kill</font><font color="#274342">
+button is used to stop the currently running <a href="appA.html">seraMC</a>
+program.</font></b>
+<p><img SRC="DoseCalculations/seraCalc.rmenu.gif" NOSAVE height=634 width=942>
+<p><b><font color="#274342">Figure 7.3.&nbsp; Run pulldown menu.</font></b>
+<p><a NAME="7.2.3"></a><b><font color="#274342">7.2.3.&nbsp; Options Menu</font></b>
+<p><b><font color="#274342">The </font><font color="#FF0000">Options</font><font color="#274342">
+menu has only one selection, as shown in Figure 7.4.&nbsp; This option
+toggles the automatic display of the three axial views of the source-patient
+configuration generated by <a href="appA.html">seraMC</a>.&nbsp; These
+views are saved in the three raster files </font><font color="#CC6600">view.1</font><font color="#274342">,
+</font><font color="#CC6600">view.2</font><font color="#274342">,
+and </font><font color="#CC6600">view.3</font><font color="#274342">.</font></b>
+<p><img SRC="DoseCalculations/seraCalc.omenu.gif" NOSAVE height=634 width=942>
+<p><b><font color="#274342">Figure 7.4.&nbsp; Options pulldown menu.</font></b>
+<br>&nbsp;
+<p><a NAME="7.3"></a><b><font color="#274342"><font size=+1>7.3.&nbsp;
+Run Title Panel</font></font></b>
+<p><b><font color="#274342">The title for the <a href="appA.html">seraMC</a>
+run is entered in the field at the top of the panel labeled </font><font color="#008007">Run
+Title:</font><font color="#274342"> (see Figure 7.5).&nbsp; This identifies
+the particular data set.&nbsp; As for other data entry fields, the user
+can edit this field by positioning the text cursor anywhere in the input
+area and entering new characters.&nbsp; Also, the entire line can be highlighted
+and deleted or replaced.</font></b>
+<p><img SRC="DoseCalculations/seraCalc.title.gif" NOSAVE BORDER=1 height=34 width=483>
+<p><b><font color="#274342">Figure 7.5.&nbsp; Run Title</font></b>
+<br>&nbsp;
+<p><a NAME="7.4"></a><b><font color="#274342"><font size=+1>7.4.&nbsp;
+Files Panel</font></font></b>
+<p><b><font color="#274342">All of the fields on the panel work in a fashion
+similar to </font><font color="#008007">Run Title</font><font color="#274342">,
+with the exception of the fields in the subpanel labeled </font><font color="#008007">Files</font><font color="#274342">
+in Figure 7.6.&nbsp; This corresponds to the upper left quadrant of the
+<a href="appA.html">seraMC</a>
+interface.</font></b>
+<p><img SRC="DoseCalculations/seraCalc.files.gif" NOSAVE height=327 width=375>
+<p><b><font color="#274342">Figure 7.6.&nbsp; Files Panel</font></b>
+<p><b><font color="#274342">Each of these selections consists of a push
+button with a label and a text entry field to the right of the button.&nbsp;
+Entering a value can be performed using one of two methods.&nbsp; The first
+method consists of the user selecting the text entry field by moving the
+cursor to the area and clicking the left mouse button.&nbsp; The value
+for the field is entered using the keyboard.&nbsp; In this instance, environmental
+variables (e.g., </font><font color="#CC6600">$SERAMC</font><font color="#274342">),
+relative paths (e.g., </font><font color="#CC6600">../filename</font><font color="#274342">),
+and home directory shortcuts (e.g., </font><font color="#CC6600">~user_id</font><font color="#274342">)
+may be employed, as these are expanded in the <a href="appA.html">seraMC</a>
+code.&nbsp; The second method consists of pressing the button with the
+label.&nbsp; A file selection popup appears and the user can select the
+name of an existing file.&nbsp; When the </font><font color="#008007">OK</font><font color="#274342">
+button of the file selection popup is pressed, the name chosen is entered
+into the text entry field.</font></b>
+<p><a NAME="7.4.1"></a><b><font color="#274342">7.4.1.&nbsp; Save Directory</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">Save Directory</font><font color="#274342">
+field specifies the name of the working directory to be used for the <a href="appA.html">seraMC</a>
+calculation.&nbsp; It is to this directory that all the files created by
+the <a href="appA.html">seraMC</a> calculation will be written.&nbsp; A
+copy of the input file, with the same name chosen for the </font><font color="#008007">Save
+</font><font color="#274342">and/or</font><font color="#008007">
+Save As</font><font color="#274342"> buttons, will also be written to this
+directory.</font></b>
+<p><a NAME="7.4.2"></a><b><font color="#274342">7.4.2.&nbsp; CG Geom File
+Name</font></b>
+<p><b><font color="#274342">This file defines the <a href="appA.html#A.2.5">combinatorial
+geometry</a> (CG) space for the problem.&nbsp; For cases where a patient
+geometry (image space) is specified, the CG space is used for the source
+region and the world outside the image space.&nbsp; The source geometry
+is defined in the source file (see <a href="#7.4.6">Section 7.4.6</a>.)&nbsp;
+However, it is permitted to have cases where only a CG space is specified.&nbsp;
+This is generally done for phantom irradiations, or where the geometry
+may be simply defined in terms of intersections and/or unions of solid
+geometric shapes.&nbsp; A CG file is </font><font color="#990000">always
+</font><font color="#274342">required.</font></b>
+<p><a NAME="7.4.3"></a><b><font color="#274342">7.4.3.&nbsp; Patient Geom
+File Name</font></b>
+<p><b><font color="#274342">The <a href="appA.html#A.2.6">patient geometry</a>
+file is used to define the geometry of the patient in image space.&nbsp;
+This will be a univel file constructed by <a href="sec05.html">seraModel</a>
+from the MRI, CT, or PET images.&nbsp; For cases where the entire geometry
+is described by the CG file, a patient geometry file is not required.</font></b>
+<p><a NAME="7.4.4"></a><b><font color="#274342">7.4.4.&nbsp; Old RST File
+Name</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">old restart
+file</font><font color="#274342"> provides a restart capability for <a href="appA.html">seraMC</a>.&nbsp;
+Specification of a file name here causes seraMC to read in the dose information
+from this file, and continue the calculation from this starting point.&nbsp;
+Note, however, that this restart ability only allows the user to run additional
+run directives, not to run additional particles for a previously calculation.&nbsp;
+For example, if a <a href="appA.html">seraMC</a> case was run for 1,000,000
+neutron histories, and this was deemed insufficient for convergence, the
+restart capability will </font><font color="#990000">not</font><font color="#274342">
+allow the user to run an additional 1,000,000 histories for a total of
+2,000,000.&nbsp; It </font><font color="#990000">will</font><font color="#274342">
+allow the user to run only the neutron histories, then later run the biased
+fast neutron and gamma components, or to run the neutron and gamma components,
+and edit later.&nbsp; For calculations that do not utilize the restart
+capability, the old restart file should be specified as </font><font color="#CC6600">none</font><font color="#274342">.&nbsp;
+For further details, please see the <a href="#7.5.3">run_dir</a> section
+below and in the <a href="appA.html#A.2.11">seraMC</a> manual.</font></b>
+<p><a NAME="7.4.5"></a><b><font color="#274342">7.4.5.&nbsp; New RST File
+Name</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">new restart
+file</font><font color="#274342"> is the restart file to be created by
+the present <a href="appA.html">seraMC</a> calculation.&nbsp; One restart
+file is created for each run directive specified, except the edit directive.&nbsp;
+The first file is named </font><font color="#CC6600">filename</font><font color="#274342">,
+the second is </font><font color="#CC6600">filenamea</font><font color="#274342">,
+the third is </font><font color="#CC6600">filenameb</font><font color="#274342">,
+and so on.&nbsp; Since each of these later versions contains the information
+from the previous file, the older files are deleted as the newer ones are
+created.&nbsp; Edit only calculations should specify </font><font color="#CC6600">none</font><font color="#274342">
+for the new restart file.&nbsp; For additional information on the contents
+of the restart files, see the <a href="appA.html#A.2.12">seraMC</a> manual.</font></b>
+<p><a NAME="7.4.6"></a><b><font color="#274342">7.4.6.&nbsp; Source File
+Name</font></b>
+<p><b><font color="#274342">The <a href="appA.html#A.2.13">source file</a>
+provides the coupled energy-angle description of the neutron and gamma
+source from a particular facility, as well as the CG description of the
+source and collimator geometry.&nbsp; A complete description of the </font><font color="#008007">source
+file</font><font color="#274342"> contents and formats is available in
+the <a href="appC.html">seraMC</a> manual.</font></b>
+<p><a NAME="7.4.7"></a><b><font color="#274342">7.4.7.&nbsp; Material File
+Name</font></b>
+<p><b><font color="#274342">The <a href="appA.html#A.2.16">material file</a>
+provides nuclide density composition specifications for a variety of materials
+useful for BNCT and other forms of clinical radiation therapy.&nbsp; Cross
+sections to access from the <a href="appA.html">seraMC</a> cross section
+file are given for each nuclide.</font></b>
+<p><a NAME="7.4.8"></a><b><font color="#274342">7.4.8.&nbsp; Cross Section
+File Name</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">cross section
+file</font><font color="#274342"> contains the neutron and gamma cross
+section data for the set of nuclides required by the material file.&nbsp;
+Neutron and gamma production data are available at energies up to 16.9
+Mev, and gamma interaction data are available to 100 MeV.&nbsp; Details
+on this file are available in the <a href="appA.html#A.2.17">seraMC</a>
+manual, with a list of available nuclides given in the <a href="#7.8.2">edit
+isotopes</a> section.</font></b>
+<p><a NAME="7.4.9"></a><b><font color="#274342">7.4.9.&nbsp; seraMC Run
+Script</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">seraMC run
+script</font><font color="#274342"> is a simple Unix shell script which
+invokes the seraMC transport module and performs some file management activities.&nbsp;
+The supplied default script file is usually sufficient for most users'
+purposes.</font></b>
+<p><a NAME="7.4.10"></a><b><font color="#274342">7.4.10.&nbsp; Ultrafast
+Mode Files</font></b>
+<p><b><font color="#274342">There are three "hidden" file inputs not shown
+above.&nbsp; These files concern the high-energy neutron calculations available
+for analysis of fast neutron therapy facilities.&nbsp; These text fields
+only become visible when the </font><font color="#FF0000">U</font><font color="#274342">
+and/or </font><font color="#FF0000">P</font><font color="#274342"> run
+directives are entered (see
+<a href="#7.5.3">Section 7.5.3</a>.)&nbsp;
+The three files specify the </font><font color="#008007">proton range data
+file</font><font color="#274342">, the </font><font color="#008007">ultrafast
+directory file</font><font color="#274342">, and the </font><font color="#008007">ultrafast
+cross section file</font><font color="#274342">.</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">proton range
+data file</font><font color="#274342"> gives tabulated range-energy data
+for protons in a variety of materials.&nbsp; This is used to compute the
+proton recoil dose from scattering of high-energy (>16.9 MeV) neutrons
+on hydrogen.&nbsp; A general description of the <a href="http://id/cart/1997report/wemple.html">proton
+dose computation</a> is provided.</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">ultrafast
+directory file</font><font color="#274342"> provides information that <a href="appA.html">seraMC</a>
+requires to read the </font><font color="#008007">ultrafast cross section
+file</font><font color="#274342">.&nbsp; The cross section file contains
+a limited subset of the materials in the <a href="appA.html">seraMC</a>
+cross section file, for energies between 16 and 100 MeV.&nbsp; Further
+details are provided in the <a href="appA.html">seraMC</a> manual.</font></b>
+<br>&nbsp;
+<p><a NAME="7.5"></a><b><font color="#274342"><font size=+1>7.5 Control
+Panel</font></font></b>
+<p><b><font color="#274342">The </font><font color="#008007">control panel</font><font color="#274342">
+specifies the number of particle histories to simulate and the run mode(s).&nbsp;
+It is shown below in Figure 7.7.&nbsp; This panel has four fields, which
+are text entry fields.&nbsp; The user chooses a field for which a change
+is to take place and enters new values in the field.</font></b>
+<p><img SRC="DoseCalculations/seraCalc.cont.gif" NOSAVE height=182 width=188>
+<p><b><font color="#274342">Figure 7.7.&nbsp; Control Panel</font></b>
+<p><a NAME="7.5.1"></a><b>7.5.1.&nbsp; Nbatch</b>
+<p><b>The <a href="appA.html#A.2.2">nbatch</a> input parameter specifies
+the number of statistically independent batches of neutron histories to
+run in <font color="#274342"><a href="appA.html">seraMC</a></font>.</b>
+<p><a NAME="7.5.2"></a><b>7.5.2.&nbsp; Nhist</b>
+<p><b>The <a href="appA.html#A.2.2">nhist</a> input parameter specifies
+the number of neutron histories to run in each batch.&nbsp; There is presently
+a limit of 2000 histories per batch.</b>
+<p><a NAME="7.5.3"></a><b>7.5.3.&nbsp; Run Directives</b>
+<p><b>The <a href="appA.html#A.2.15">run directives</a> determine which
+particular calculational modes are to be invoked in seraMC.&nbsp; The valid
+directives are <font color="#FF0000">N</font>,
+<font color="#FF0000">F</font>,
+<font color="#FF0000">G</font>,
+<font color="#FF0000">D</font>,
+<font color="#FF0000">T</font>,
+<font color="#FF0000">U</font>,
+and <font color="#FF0000">P</font>.&nbsp; The valid combinations of these
+directives are <font color="#FF0000">NFGD</font>,
+<font color="#FF0000">NFD</font>,
+<font color="#FF0000">NGD</font>,
+<font color="#FF0000">FGD</font>,
+<font color="#FF0000">UPGD</font>,
+<font color="#FF0000">UPD</font>,
+<font color="#FF0000">UGD</font>,
+<font color="#FF0000">PGD</font>,
+and
+<font color="#FF0000">GD</font>.</b>
+<p><a NAME="7.5.4"></a><b>7.5.4.&nbsp; Run Date</b>
+<p><b>The <font color="#008007">run date</font> allows the user to specify
+a date for identification purposes.&nbsp; This date is not used in any
+computation, merely to allow the user to retain information regarding the
+construction of the treatment plan, or to identify the treatment date.&nbsp;
+The date is limited to 15 characters, and it must be provided in the form
+of a character string, with no embedded blanks or other white spaces.&nbsp;
+The default is the date of the invocation of seraCalc, given in the form
+<font color="#FF0000">DD_MMM_YYYY</font>,&nbsp;
+where the month designation is the abbreviation using three alphabetic
+letters.</b>
+<br>&nbsp;
+<p><b><font color="#274342"><font size=+1>7.6 Positioning Panel</font></font></b>
+<p><b><font color="#274342">The </font><font color="#008007">positioning
+panel</font><font color="#274342"> specifies the beam orientation for this
+case.&nbsp; It is shown below in Figure 7.8.&nbsp; This panel has four
+fields which are text entry fields.&nbsp; Any changes may be entered as
+described above.&nbsp; These four fields provide a complete description
+of the beam orientation for a particular irradiation setup.</font></b>
+<p><img SRC="DoseCalculations/seraCalc.pos.gif" NOSAVE BORDER=1 height=179 width=157>
+<p><b><font color="#274342">Figure 7.8.&nbsp; Positioning Panel</font></b>
+<p><a NAME="7.6.1"></a><b>7.6.1.&nbsp; Target Point Location</b>
+<p><b>The <a href="appA.html#A.2.3">target point location</a> <font color="#008007">T</font>
+is given in terms of the model coordinate system, which is the coordinate
+system used in <font color="#274342"><a href="appA.html">seraMC</a></font>.&nbsp;
+This provides the (x,y,z) coordinates of the point where the center of
+the source beam is aimed.</b>
+<p><a NAME="7.6.2"></a><b>7.6.2.&nbsp; Distance to Target Point</b>
+<p><b>The distance to the target point <a href="appA.html#A.2.4">Zb</a>
+is the straight-line distance from the source plane to the target point.&nbsp;
+This parameter should be set sufficiently large to prevent overlap between
+the patient and the source/collimator assembly.&nbsp; This distance is
+given in <font color="#FF0000">cm</font>.</b>
+<p><a NAME="7.6.3"></a><b>7.6.3.&nbsp; Polar Angle</b>
+<p><b>The polar angle <a href="appA.html#A.2.4">phi</a> is the angle in
+degrees between the superior axis and the desired beam location.&nbsp;
+Positive values are associated with rotation towards the right side of
+the patient.</b>
+<p><a NAME="7.6.4"></a><b>7.6.4.&nbsp; Azimuthal angle</b>
+<p><b>The azimuthal angle <a href="appA.html#A.2.4">theta</a> is the angle
+in degrees between the right axis and the desired beam location.&nbsp;
+Positive angles are associated with rotation towards the front of the patient.</b>
+<br>&nbsp;
+<p><a NAME="7.7"></a><b><font color="#274342"><font size=+1>7.7 Tally Panel</font></font></b>
+<p><b><font color="#274342">The </font><font color="#008007">tally panel
+</font><font color="#274342">of
+the rtt popup specifies the overlying 3D edit mesh.&nbsp; It is shown below
+in Figure 7.9.&nbsp; This panel has three fields, which are text entry
+fields.&nbsp; Any changes may be entered as previously described.</font></b>
+<p><img SRC="DoseCalculations/seraCalc.tal.gif" NOSAVE BORDER=1 height=179 width=156>
+<p><b><font color="#274342">Figure 7.9.&nbsp; Tally Panel</font></b>
+<p><b><font color="#274342">7.7.1.&nbsp; Origin</font></b>
+<p><b><font color="#274342">The <a href="appA.html#A.2.9">origin</a> parameter
+specifies the (x,y,z) coordinate location of the center of the edit mesh
+system.&nbsp; This superimposes a 30x30x30 cubic mesh over the 3D image
+system, centered on the designated origin point.&nbsp; This edit mesh is
+used for all dose and flux tallies in the seraMC calculation.</font></b>
+<p><b><font color="#274342">7.7.2.&nbsp; Delw</font></b>
+<p><b><font color="#274342">The <a href="appA.html#A.2.10">delw</a> parameter
+specifies the size, in </font><font color="#FF0000">cm</font><font color="#274342">,
+of each mesh element in the 3D edit mesh.&nbsp; All mesh elements are regular
+cubes, so only one dimension need be provided.</font></b>
+<p><b><font color="#274342">7.7.3.&nbsp; Wncut</font></b>
+<p><b><font color="#274342">The <a href="appA.html#A.2.2">wncut</a> parameter
+designates the minimum weight allowed for neutrons in the particle history
+simulation.&nbsp; When a particle weight falls below this value, a binary
+decision is made. The particle weight may be doubled and tracking continued,
+or the particle history may be terminated.&nbsp; The initial particle weight
+is specified in the source routines.</font></b>
+<br>&nbsp;
+<p><a NAME="7.8"></a><b><font color="#274342"><font size=+1>7.8 Auxilliary
+Panels</font></font></b>
+<p><b><font color="#274342">There are two buttons below the three panels
+just described (see Figure 7.10).&nbsp; These activate popups for special
+operations affecting the transport run.&nbsp; Pressing a button will cause
+its popup to appear.&nbsp; Each of the popups has text entry fields with
+default data (Figures 7.11 and 7.12).&nbsp; The user can change these data
+and then press the </font><font color="#008007">Save </font><font color="#274342">button
+on the popup to put it away. The </font><font color="#008007">Reset</font><font color="#274342">
+button on the popups causes the default values to be reinstated for that
+popup.&nbsp; The names on these buttons are </font><font color="#FF0000">iop</font><font color="#274342">
+and </font><font color="#FF0000">isotopes</font><font color="#274342">.</font></b>
+<p><img SRC="DoseCalculations/seraCalc.opt.gif" NOSAVE BORDER=1 height=35 width=152>
+<p><b><font color="#274342">Figure 7.10.&nbsp; Auxiliary Panel</font></b>
+<p><a NAME="7.8.1"></a><b>Section 7.8.1.&nbsp; Beam Optimization and Automatic
+Positioning</b>
+<p><b>The <font color="#008007">beam optimization and automatic positioning</font>
+popup is displayed by pressing the <a href="appA.html#A.4">iop</a> button,
+as shown in Figure 7.11.</b>
+<p><img SRC="DoseCalculations/seraCalc.iop.gif" NOSAVE height=224 width=473>
+<p><b><font color="#274342">Figure 7.11.&nbsp; Beam optimization and positioning
+input panel.</font></b>
+<p><b><font color="#274342">There are five options for the beam positioning
+search, selected by the four buttons at the top of the popup.&nbsp; The
+default positioning is <a href="appA.html#A.4.1">iop=1</a>, which uses
+the values for </font><font color="#008007">T</font><font color="#274342">,
+</font><font color="#008007">Zb,
+phi, </font><font color="#274342">and</font><font color="#008007"> theta</font><font color="#274342">
+to position the beam.</font></b>
+<p><b><font color="#274342">For <a href="appA.html#A.4.2">iop=2</a>, all
+the parameters in the popup (</font><font color="#008007">regions, zsep,
+</font><font color="#274342">and</font><font color="#008007">
+beamline</font><font color="#274342">) must be specified.&nbsp; </font><font color="#008007">Regions</font><font color="#274342">
+designates the regions encountered between the patient and the source plane.
+</font><font color="#008007">Zsep</font><font color="#274342">
+gives the minimum distance that must be maintained between the skin surface
+and the source aperture.&nbsp; </font><font color="#008007">Beamline</font><font color="#274342">
+is a point that the beam centerline is forced to intersect between the
+center of the source plane and the target point.&nbsp; These values will
+allow seraMC to determine the beam positioning by calculating new values
+for </font><font color="#008007">Zb, phi, </font><font color="#274342">and</font><font color="#008007">
+theta</font><font color="#274342">.</font></b>
+<p><b><font color="#274342">For <a href="appA.html#A.4.3">iop=3</a>, only
+the</font><font color="#008007"> regions </font><font color="#274342">and</font><font color="#008007">
+zsep </font><font color="#274342">parameters need be provided.&nbsp; The
+positioning search determines </font><font color="#008007">phi </font><font color="#274342">and</font><font color="#008007">
+theta</font><font color="#274342"> such that the distance from the skin
+surface to the target point is a minimum.</font></b>
+<p><b><font color="#274342">For <a href="appA.html#A.4.4">iop=4</a>, the
+input is similar to that for </font><font color="#FF0000">iop=3</font><font color="#274342">.&nbsp;
+The search fixes the beam angles at the specified values, and sets the
+separation distance, </font><font color="#008007">zsep</font><font color="#274342">,
+between the skin surface and the source aperture.</font></b>
+<p><b><font color="#274342">For <a href="appA.html#A.4.5">iop=5</a>, the
+input is similar to that for </font><font color="#FF0000">iop=3</font><font color="#274342">.&nbsp;
+The positioning search uses the
+</font><font color="#008007">theta</font><font color="#274342">
+angle as specified in the input and finds </font><font color="#008007">phi</font><font color="#274342">
+such that the distance from the skin surface to the target point is a minimum.</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">Adjust zsep</font><font color="#274342">
+button activates an option to adjust the distance </font><font color="#008007">zsep</font><font color="#274342">
+so that it is a minimum but causes no geometric interferences between the
+collimator structures and the patient.</font></b>
+<p><a NAME="7.8.2"></a><b><font color="#274342">7.8.2.&nbsp; Edit Isotopes</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">edit isotopes</font><font color="#274342">
+popup is displayed by pressing the <a href="appA.html#A.2.18">isotopes</a>
+button, as shown in Figure 7.12.</font></b>
+<p><img SRC="DoseCalculations/seraCalc.iso.gif" NOSAVE height=311 width=312>
+<p><b><font color="#274342">Figure 7.12.&nbsp; Isotope density input panel.</font></b>
+<p><b><font color="#274342">The </font><font color="#009900">edit isotopes</font><font color="#274342">
+popup allows the user to specify the composition of a particular material,
+which will be used for the dose edits.&nbsp; Generally, this is brain tissue,
+as shown in the default values, but any material for which a dose calculation
+is required may be used.&nbsp; The compositions are specified in </font><font color="#FF0000">atoms/barn-cm</font><font color="#274342">,
+and the <a href="appA.html#TableA.4">list of edit isotopes</a> is provided
+in the <a href="appA.html">seraMC</a> manual.&nbsp; Any isotopes may be
+requested, with the caution that the edits will always be titled as in
+the popup, i.e., </font><font color="#008007">boron dose</font><font color="#274342">,
+etc.&nbsp; It thus falls to the user to account for any deviations from
+human tissue in the edit isotopes specifications.</font></b>
+<p><b><font color="#274342">In addition, two edit isotopes may also be
+specified, which will be used to calculate reaction rate edits for arbitrary
+nuclides.&nbsp; Any nuclide provided in the <a href="appA.html#A.2.16">seraMC
+material file</a> may be used for these edits, and infinite-dilute reaction
+rates may be computed by supplying a very small density (usually 1.0E-24).&nbsp;
+For further details on available nuclides, please consult the <a href="appA.html#A.2.16">seraMC</a></font>
+manual.</b>
+<br>&nbsp;
+<p><a NAME="7.9"></a><b><font color="#274342"><font size=+1>7.9 Edit Directives</font></font></b>
+<p><b><font color="#990000">Note:&nbsp; The seraMC edit capability has
+been transferred to the <a href="sec08.html">seraPlan</a> module, and will
+eventually be deleted from seraMC and seraCalc.&nbsp; This section is provided
+for compatibility with input files for previous versions of seraCalc/seraMC.</font></b>
+<p><b><font color="#008007">Edit directives</font><font color="#274342">
+for the input file are entered in the large text widget shown in Figure
+7.13, which corresponds to the lower right corner of the rtt popup.&nbsp;
+An <a href="appD.html">edit directive</a> is chosen from the directives
+popup that appears when the </font><font color="#008007">Edit Directives
+Add</font><font color="#274342"> button is pressed.&nbsp; The edit directives
+are interpreted after the transport runs are completed when a </font><font color="#FF0000">D</font><font color="#274342">
+mode run is specified.</font></b>
+<p><img SRC="DoseCalculations/seraCalc.edit.gif" NOSAVE height=369 width=527>
+<p><b>Figure 7.13.&nbsp; Edit directives display.</b>
+<p><b><font color="#274342">These edit directives may be passive (setting
+variables, etc.) or active (specifying that a particular type of edit be
+performed).&nbsp; When an active edit directive is encountered during the
+<a href="appA.html">seraMC</a>
+run, the code performs the edit.&nbsp; After the active edit directive
+line, the user may change the variables and perform as many additional
+edits as desired.&nbsp; When the user selects the edit from the box shown
+in Figure 7.14, a line is added to the edit window showing the number and
+type of input words required as well as some defaults.&nbsp; In general,
+the user will change these values to those required for this problem.&nbsp;
+When a protocol is established, many of the edit directives are very similar,
+and those loaded from a previous case may need only slight modification
+for the current case.&nbsp; All entries are cleared when the </font><font color="#008007">Edit
+Directives Clear</font><font color="#274342"> button is pressed.</font></b>
+<p><img SRC="DoseCalculations/seraCalc.edit2.gif" NOSAVE height=255 width=435>
+<p><b><font color="#274342">Figure 7.14.&nbsp; Edit directives creation
+widget.</font></b>
+<p><b><font color="#274342">The user can press as many of these directive
+buttons as desired before pressing the </font><font color="#008007">Close</font><font color="#274342">
+button to put the popup away.&nbsp; As each button is pressed, the appropriate
+edit directive template is entered into the text widget.&nbsp; The user
+can then use standard editing techniques to enter the desired values for
+the specific directive.</font></b>
+<br>&nbsp;
+<p><a NAME="7.10"></a><b><font color="#274342"><font size=+1>7.10 Monitor
+Panel</font></font></b>
+<p><b><font color="#274342">The panel at the lower left is used to display
+running statistics for the <a href="appA.html">seraMC</a> run (see Figure
+7.15). As the <a href="appA.html">seraMC</a> program and this program exchange
+data, the appropriate values are displayed in this panel.&nbsp; This is
+accomplished via a file called
+</font><font color="#CC6600">sera.mon</font><font color="#274342">,
+which is written into the <a href="appA.html">seraMC</a> working directory.&nbsp;
+The file is updated after each batch of particles, and the peak location
+and value are written at the end of the run.</font></b>
+<p><img SRC="DoseCalculations/seraCalc.mon.gif" NOSAVE height=253 width=375>
+<p><b><font color="#274342">Figure 7.15.&nbsp; Monitor Panel</font></b>
+<br>&nbsp;
+<br>&nbsp;
+<br>
+<br>
+<center>
+<p><img SRC="marblebar.jpg" NOSAVE height=6 width=460>
+<p><a href="sec06.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><a href="sec06.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="sec08.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="sec08.html">Next</a></b></center>
+
+</body>
+</html>

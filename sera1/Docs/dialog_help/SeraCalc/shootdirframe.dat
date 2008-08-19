@@ -1,0 +1,2 @@
+Dir Cosines
+   Defines the direction cosines of the proposed ray.  There are fields for the three coordinates of the starting points X, Y, and Z.  The User may change the current values using the standard method.

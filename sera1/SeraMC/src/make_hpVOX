@@ -1,0 +1,32 @@
+PROGRAM =	rtt_MC_107VOX
+
+CFLAGS	=	-O
+FFLAGS = +O3 +E1 -K
+LIBDIR =        $(BNCT_PATH)/src/interface
+
+LIBS =          $(LIBDIR)/lib/libjrt/libjrt.a \
+		$(LIBDIR)/lib/libnurb_aux/libnurb_aux.a \
+		$(LIBDIR)/lib/libnurb/libnurb.a
+
+RTLIBS_UV =	$(LIBDIR)/lib/libuv/libuv.a \
+		$(LIBDIR)/lib/libnurb/libnurb.a
+
+OBJS =  cg.o scatter.o rand.o source.o  epmc.o \
+	image.o Tlook.o DoseOpt.o \
+	ultraxs.o tyme_hp.o cputime.o \
+	envr.o mod_date.o track.o \
+	locate.o rtt_MC.o rst_edit.o \
+	volume.o libin.o gampro.o proptd.o write_row.o
+
+.f.o:
+	f77 $(FFLAGS) -c $*.f
+
+.c.o:
+	cc -c $(CFLAGS) $*.c
+
+all:	$(OBJS) 
+	f77 -o $(PROGRAM) \
+        $(OBJS) \
+        $(LIBS) \
+	$(RTLIBS_UV) \
+	/lib/libm.a /usr/lib/end.o

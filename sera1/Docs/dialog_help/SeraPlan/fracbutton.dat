@@ -1,0 +1,10 @@
+
+Same Fields Button
+
+       __________________________________________________
+
+The Same Fields button provides a convenience function to the user.
+When the button is toggled on (default), the .rst file names entered
+in the fields for any one fraction will propogate to all other fractions
+which have the button toggled on.  Toggling the button off allows
+unique .rst file names to be entered for one or more fractions.

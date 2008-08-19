@@ -1,0 +1,20 @@
+scalp > sinus
+scalp > eye
+scalp > skull
+scalp > brain
+scalp > eye_left
+scalp > eye_right
+skin > soft_tissue
+soft_tissue > femur
+soft_tissue > tibia
+soft_tissue > synovium
+soft_tissue > fibula
+soft_tissue > patella
+skull > brain
+brain > target
+brain > tumor
+brain > ventricle
+brain > ventricles
+target > edema
+edema > tumor
+

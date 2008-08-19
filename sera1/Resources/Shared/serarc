@@ -1,0 +1,28 @@
+# sets up the enviroment varaiables for SERA. There are
+# several ways to make this file take effect. See your system
+# administrator for the best way.
+setenv SERA_HOME $HOME/sera1
+
+# SERA_RESOURCES locates resource information
+setenv SERA_RESOURCES $SERA_HOME/Resources
+
+# set location for X11 resource files
+setenv XUSERFILESEARCHPATH $SERA_RESOURCES/app-defaults/%N
+
+# set documentation paths
+setenv SERA_HELP $SERA_HOME/Docs/dialog_help
+setenv FILES_MANUAL_PATH $SERA_HOME/Docs/Manuals/sera1/
+setenv NET_MANUAL_PATH http://www.cs.montana.edu/~bnct/manual/
+
+#SERAMC resources - probably no longer needed
+setenv SERAMC SeraMC
+setenv SERAMC_PATH $SERA_HOME/$SERAMC
+
+
+if ( { test $DISPLAY } ) then
+    xrdb -merge $SERA_RESOURCES/app-defaults/SeraCalc;
+    xrdb -merge $SERA_RESOURCES/app-defaults/SeraDose;
+    xrdb -merge $SERA_RESOURCES/app-defaults/SeraImage;
+    xrdb -merge $SERA_RESOURCES/app-defaults/SeraMenu;
+    xrdb -merge $SERA_RESOURCES/app-defaults/SeraPlan;
+endif

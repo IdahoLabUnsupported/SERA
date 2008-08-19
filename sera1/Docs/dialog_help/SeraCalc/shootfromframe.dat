@@ -1,0 +1,2 @@
+From
+   Defines the origin of the ray.  It has a Prev End button to select as a starting point the location where the most previously fired ray hit.  There are fields for the three coordinates of the starting point X, Y, and Z.  The user may change the current values using the standard method.

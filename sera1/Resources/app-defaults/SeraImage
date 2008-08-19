@@ -1,0 +1,7 @@
+*SeraImage*title: seraImage
+
+*SeraImage*fontList:-*courier-medium-r-normal-*-14-*-*-*-*-*-iso8859-1
+*SeraImage*dragInitiatorProtocolStyle: XmDRAG_NONE
+*SeraImage*dragReceiverProtocolStyle:  XmDRAG_NONE
+! *foreground: black
+! *background: gray

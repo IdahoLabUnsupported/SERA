@@ -1,0 +1,70 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.6 [en] (X11; U; SunOS 5.6 sun4u) [Netscape]">
+   <meta name="Description" content="Simulation Environment for Radiotherapy Applications (SERA) Introduction Page">
+   <title>SERA Manual - Section 1</title>
+</head>
+<body text="#274342" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000" background="mainbackground.gif">
+
+<center><a href="sec00.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><a href="sec00.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="sec02.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="sec02.html">Next</a></b>
+<p><b><font color="#274342"><font size=+2>SERA:</font></font></b>
+<br><b><font color="#274342"><font size=+2>Simulation Environment for Radiotherapy
+Applications</font></font></b>
+<br><b><font color="#274342"><font size=+2>User's Manual</font></font></b>
+<br><b><font color="#274342"><font size=+2>Version 1C0</font></font></b>
+<p><img SRC="marblebar.jpg" NOSAVE height=6 width=460></center>
+
+<p><b><font color="#274342"><font size=+2>1. Introduction</font></font></b>
+<p><b><font color="#274342">SERA is a suite of command line or interactively
+launched software modules, including graphical, geometric reconstruction,
+and execution interface modules, for developing the Boron Neutron Capture
+Therapy (BNCT) radiation treatment plans.&nbsp; In typical use, SERA consists
+of three main components:</font></b>
+<ul>
+<li>
+<b><font color="#274342">Manual and semi-automated geometric modeling of
+treatment objects (brain, tumor, eyes, sinus, etc.) derived from MRI, CT,
+and other medical imaging modalities</font></b></li>
+
+<li>
+<b><font color="#274342">Dose computation for these geometric models with
+seraMC, the INEEL radiation transport computer code</font></b></li>
+
+<li>
+<b><font color="#274342">Dose contouring that overlays dose contours derived
+from the dose computation onto the original image planes to determine healthy
+tissue limits.</font></b></li>
+</ul>
+<b><font color="#274342">Digitized data produced from medical imaging devices
+are used as a template to draw, fill, or paint regions of interest in each
+image plane, forming a solid model description of the region of interest.&nbsp;
+These solid model descriptions are composed of volumetric automatons, which
+will be referred to as uniform volume elements (univels)<a href="sec15.html#1">[1]</a>.&nbsp;
+Because of the uniformity of the univels, geometric interrogation can be
+performed using a very efficient integer arithmetic algorithm. Also, the
+resolution of the univels is only limited by the imaging modality, since
+each univel can be as small as an individual image pixel.</font></b>
+<p><b><font color="#274342">Using the solid model descriptions of the regions
+of interest, a three-dimensional Monte Carlo radiation transport model,
+seraMC <a href="sec15.html#2">[2]</a>,
+developed at INEEL, is used to calculate the complex radiation fields present
+in BNCT treatment.&nbsp; These radiation fields are then related to radiation
+doses delivered to the treatment volume and surrounding areas.</font></b>
+<p><b><font color="#274342">When the planning calculations are complete,
+the radiation fields are displayed in the original image space as dose
+contours.&nbsp; This gives the clinician or researcher an accurate and
+convenient way to view the radiation fields, so that the optimal beam location
+and treatment time can be quickly determined, balancing tumor cell kill
+against healthy tissue sparing.</font></b>
+<p><b><font color="#274342">The remainder of this manual provides a guide
+to the practical use of SERA, but is not an exhaustive treatment of each
+feature of the code.</font></b>
+<center>
+<p><img SRC="marblebar.jpg" NOSAVE height=6 width=460>
+<br>&nbsp;
+<p><a href="sec00.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><a href="sec00.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="sec02.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="sec02.html">Next</a></b></center>
+
+</body>
+</html>

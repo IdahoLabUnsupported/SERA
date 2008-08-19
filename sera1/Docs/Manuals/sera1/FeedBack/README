@@ -1,0 +1,10 @@
+
+This file describes the permission settings for the perls scripts and lists
+used in the user feedback form on the web.
+
+Here are the necessary permissions to make the scripts work properly:
+
+              ~/www/manual/FeedBack> chmod 711 cgi-bin   <-- is a directory
+      ~/www/manual/FeedBack/cgi-bin> chmod 711 lists     <-- is a directory
+~/www/manual/FeedBack/cgi-bin/lists> chmod 644 *.list
+      ~/www/manual/FeedBack/cgi-bin> chmod 755 *.cgi *.pl

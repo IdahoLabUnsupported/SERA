@@ -1,0 +1,7 @@
+Total Exposure
+
+       __________________________________________________
+
+The total exposure widget displays the total exposure, in arbitrary
+units, for the plan.  This is the simple sum of the individual field
+exposures.  This widget is not editable by the user.

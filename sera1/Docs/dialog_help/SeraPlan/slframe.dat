@@ -1,0 +1,15 @@
+Slide Bars
+
+       __________________________________________________
+
+Fractions
+
+The Fractions slide bar specifies the number of treatment fractions
+used in the plan combination.
+
+       __________________________________________________
+
+Fields per Fraction
+
+The Fields per Fraction slide bar specifies the number of treatment
+fields to be used for each fraction in the plan combination.

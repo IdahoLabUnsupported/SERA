@@ -1,0 +1,10 @@
+This library, while small, contains the all-important surface
+subdivision and ray tracing routines.
+
+subdivision_routines.c :
+	Uses recursion, Peterson's method to approximate a nurb surface
+	locally with quadrilaterals.
+
+ray_tracing_routines.c :
+	traverses the bounding box heirarchy set up in
+	subdivision_routines, looking for an intersection.

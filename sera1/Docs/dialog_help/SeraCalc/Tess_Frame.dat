@@ -1,0 +1,5 @@
+Tessellate
+   Produces the faceted approximation for the reconstructed body selected by the user and displays it in the current view window.  
+
+Re-Tessellate
+   Recomputes the faceted approximation and displays it in the current view window.  This is useful for experimenting with different surface fineness values.

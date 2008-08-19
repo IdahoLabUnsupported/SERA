@@ -1,0 +1,33 @@
+Body Transparency
+
+	  Making a body transparent allows a better view into
+	the inner regions, and a better sense of the body
+	positioning.
+  	The body selector tool and the opacity slider are 
+  	the available controls for changing the opacity
+  	of a body.
+     	________________________________________________
+
+	Body Selector:
+	
+	  The is simply a pull down menu with the list of
+     	bodies on it.  The body that was last selected,
+     	(the name on the menu widget) is the name of the
+     	body which transparency (or Opacity) will change.  
+     	________________________________________________
+
+	Opacity Slider:
+
+	  The opacity slider simply determines the opacity 
+     	of the selected body.  The value is a percentage
+     	where at 100%, the body is fully visible, at 50%
+     	the body is halfway visible, and at 0%, the body
+     	cannot be seen.
+     	________________________________________________
+
+	Apply to Body:
+
+	  The Apply to Body button simply sets the bodies
+        transparency to the new specifications and 
+	the rendering is redrawn.
+     	________________________________________________

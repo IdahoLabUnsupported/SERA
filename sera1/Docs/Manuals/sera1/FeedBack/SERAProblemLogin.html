@@ -1,0 +1,62 @@
+<!-- 
+
+This is the password page for entering the SERA Problem Reporting Form
+
+-->
+
+<HTML>
+<HEAD>
+<TITLE>SERA Problem Login Screen</TITLE>
+
+<SCRIPT LANGUAGE = "JavaScript">
+
+<!-- Hide from none javascript browsers
+
+function CheckPassword(formInfo)
+{
+    formInfo.method="GET"
+    formInfo.action="cgi-bin/CheckSERALogin.cgi"
+    formInfo.submit()
+}
+
+// -->
+
+</SCRIPT>
+</HEAD>
+
+<BODY bgcolor = "#ccbbaa" background = "../mainbackground.gif">
+
+<CENTER>
+<H3><BR>You must enter a valid username and password to enter the<BR>
+SERA Problem Reporting Form</H3><BR>
+</CENTER>
+
+<FORM name="passwordForm">
+
+<TABLE align=center border=5 cellpadding=10>
+  <TR>
+    <TD><I>
+      Username: <INPUT type="text" name="username" value="" maxlength="30" size="20">
+    </I></TD>
+  </TR>
+
+  <TR>
+    <TD><I>
+      Password: <INPUT type="password" name="password" value="" maxlength="30" size="20">
+    </I></TD>
+  </TR>
+</TABLE>
+
+<CENTER>
+<H3>
+<I>
+<INPUT type="button" value=" Enter " onClick="CheckPassword(this.form)">
+<INPUT type="reset" value=" Clear ">
+</I>
+</H3>
+</CENTER>
+
+</FORM>
+
+</BODY>
+</HTML>

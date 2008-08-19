@@ -1,0 +1,10 @@
+Active button
+
+       __________________________________________________
+
+The active button for each field allows the user to activate
+(the default) or inactivate any field or combination of fields
+from the dose combination.  All input data is retained during
+the inactivation.  Inactive fields are not included in the
+dose combination calculations, or the fraction and plan summary 
+computations.

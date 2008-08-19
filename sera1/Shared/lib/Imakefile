@@ -1,0 +1,7 @@
+#define IHaveSubdirs
+#define PassCDebugFlags 'CDEBUGFLAGS=$(CDEBUGFLAGS)'
+
+SUBDIRS = libcommon libqsh libuv libnurb libSZ libdcm libGLwM
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))

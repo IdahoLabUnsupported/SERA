@@ -1,0 +1,18 @@
+SRCS = \
+do_histo.c StartHistoCB.c HistoToggleCB.c GetMemory.c \
+GetTopShell.c DestroyShell.c CancelCB.c RadioCB.c \
+SetCursorPos.c
+
+OBJS = \
+do_histo.o StartHistoCB.o HistoToggleCB.o GetMemory.o \
+GetTopShell.o DestroyShell.o CancelCB.o RadioCB.o \
+SetCursorPos.o
+
+SERA_DEPS = $(D_COMMON)
+
+LOCAL_LIBRARIES = -lcommon $(DEFAULT_X_LIBS)
+SYS_LIBRARIES   = $(EXTRA_X_LIBS)
+DEPLIBS         = $(DEFAULT_DEP_X_LIBS) $(EXTRA_DEP_X_LIBS) $(SERA_DEPS)
+
+
+ComplexProgramTarget(runHisto)

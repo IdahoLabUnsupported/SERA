@@ -1,0 +1,20 @@
+PROGRAMS = seraZip seraUnzip
+
+SRCS1 = szip.c
+OBJS1 = szip.o
+DEPLIBS1 = ../SZ/libsz.a
+
+SRCS2 = sunzip.c
+OBJS2 = sunzip.o
+DEPLIBS2 = ../SZ/libsz.a
+
+AllTarget(seraZip)
+NormalProgramTarget(seraZip,$(OBJS1),$(DEPLIBS1),../SZ/libsz.a,NullParameter)
+InstallProgram(seraZip,$(BINDIR))
+
+AllTarget(seraUnzip)
+NormalProgramTarget(seraUnzip,$(OBJS2),$(DEPLIBS2),../SZ/libsz.a,NullParameter)
+InstallProgram(seraUnzip,$(BINDIR))
+
+DependTarget()
+LintTarget()

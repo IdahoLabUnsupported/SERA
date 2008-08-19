@@ -1,0 +1,17 @@
+#!/usr/bin/sh
+#
+# Run this script to properly install the bnct website:
+#
+# > ./install
+
+chmod 600 README
+chmod 711 cgi-bin
+cd cgi-bin
+chmod 711 pages pages/feedback pages/updates
+chmod 755 *.cgi *.pl
+rm -f data
+ln -s /usr/users/bnct/secure/data .
+cd pages/updates
+ln -s /usr/users/bnct/secure/bin .
+
+# end install

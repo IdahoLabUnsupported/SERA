@@ -1,0 +1,5 @@
+Auxilliary Panels
+
+   There are five buttons in the center of the rtt_MC popup window.  These activate popups for special operations affecting the transport run.  Pressing a button will cause its popup to appear.  Each of the popups have text entry fields with default data.  The user can change this data and then press the "Close" button on the popup to put it away.  
+
+   The names of these buttons are "margin," "exclude," "trans_bs," "iop," and "isotopes."   

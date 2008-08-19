@@ -1,0 +1,50 @@
+Version:         uvh2.0
+Dimensionality:  cm
+SliceOrientation:Transverse
+
+ImageColumns:    256
+ImageRows:       256
+ImageSlices:     48
+
+PixelSizeRows:    1.015620
+PixelSizeColumns: 1.015620
+PixelSizeSlices:  5.499910
+
+RLaxisMin:       -130.000000
+RLaxisMax:       130.000000
+PAaxisMin:       -130.000000
+PAaxisMax:       130.000000
+ISaxisMin:       -267.74910
+ISaxisMax:       -3.75342
+
+ImageColumnAxis: RL+
+ImageRowAxis:    PA-
+ImageSliceAxis:  IS+
+
+# Body information follows:
+
+begin:  'buffer'
+  uvval: 1
+  regionnum: 1
+end
+
+begin:  'scalp'
+  uvval: 2
+  regionnum: 2
+end
+
+begin:  'brain'
+  uvval: 3
+  regionnum: 3
+end
+
+begin:  'tumor'
+  uvval: 4
+  regionnum: 4
+end
+
+
+
+
+
+

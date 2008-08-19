@@ -1,0 +1,15 @@
+SRCS = main.c file_ops.c memory.c
+OBJS = main.o file_ops.o memory.o
+
+LOCAL_LIBRARIES =
+SYS_LIBRARIES   =
+DEPLIBS         =
+STD_INCLUDES    =
+ALL_INCLUDES    =
+EXTRA_LIBRARIES =
+STD_DEFINES     =
+PROTO_DEFINES   = 
+TOP_INCLUDES    =
+EXTRA_LOAD_FLAGS=
+
+ComplexProgramTarget(histo)

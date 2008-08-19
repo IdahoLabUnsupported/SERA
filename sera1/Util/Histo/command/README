@@ -1,0 +1,5 @@
+Before running this program, you must determine the path of xmgr on your 
+system.  Then go to line 118 in main.c, and change the exec line accordingly,
+making the first argument the path of xmgr.  Savvy?
+
+Drop me mail at wessol@cs.montana.edu if you have questions.

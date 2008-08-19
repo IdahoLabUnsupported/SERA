@@ -1,0 +1,331 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.61 [en] (X11; U; Linux 2.2.12-20 i686) [Netscape]">
+   <meta name="Description" content="Getting started with SERA.  This page contains basic information about all the SERA Modules.">
+   <title>SERA Manual - Section 3</title>
+</head>
+<body text="#274342" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000" background="mainbackground.gif">
+
+<center><a href="sec02.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><a href="sec02.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="sec04.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="sec04.html">Next</a></b>
+<p><b><font color="#274342"><font size=+2>SERA:</font></font></b>
+<br><b><font color="#274342"><font size=+2>Simulation Environment for Radiotherapy
+Applications</font></font></b>
+<br><b><font color="#274342"><font size=+2>User's Manual</font></font></b>
+<br><b><font color="#274342"><font size=+2>Version 1C0</font></font></b>
+<p><img SRC="marblebar.jpg" height=6 width=460></center>
+
+<p><b><font color="#274342"><font size=+2>3.&nbsp; Getting Started</font></font></b>
+<p><b><font color="#274342">To operate properly, SERA relies on the existence
+of several ancillary files in specified locations within the user's UNIX
+file system.&nbsp; These files control the appearance of the various user
+interfaces within the SERA system, provide physical property information,
+colormaps, and contextual help, and store user-specific preferences. There
+is one file, usually in the user's home directory,&nbsp; called </font><font color="#CC6600">.serarc</font><font color="#274342">,
+that provides the information the operating system needs in order to determine
+the location of these ancillary files.&nbsp; In UNIX parlance, this file
+is "sourced" when the user login shell is started.&nbsp; If this procedure
+is unfamiliar to you, check with your local UNIX or X-Windows expert.&nbsp;
+An example of this file follows:</font></b>
+<p><b><font color="#000000">&nbsp;# .serarc: sets up the enviroment varaiables
+for SERA. There are</font></b>
+<br><b><font color="#000000">&nbsp;# several ways to make this file take
+effect. See your system</font></b>
+<br><b><font color="#000000">&nbsp;# administrator for the best way.</font></b>
+<br><b><font color="#000000">&nbsp;setenv SERA_HOME $HOME/sera1</font></b>
+<p><b><font color="#000000">&nbsp;# SERA_RESOURCES locates resource information</font></b>
+<br><b><font color="#000000">&nbsp;setenv SERA_RESOURCES $SERA_HOME/Resources</font></b>
+<p><b><font color="#000000">&nbsp;# set location for X11 resource files</font></b>
+<br><b><font color="#000000">&nbsp;setenv XUSERFILESEARCHPATH $SERA_RESOURCES/app-defaults/%N</font></b>
+<p><b><font color="#000000">&nbsp;# set documentation paths</font></b>
+<br><b><font color="#000000">&nbsp;setenv SERA_HELP $SERA_HOME/Docs/dialog_help</font></b>
+<br><b><font color="#000000">&nbsp;setenv FILES_MANUAL_PATH $SERA_HOME/Docs/Manuals/sera1/</font></b>
+<br><b><font color="#000000">&nbsp;setenv NET_MANUAL_PATH http://www.cs.montana.edu/~bnct/manual/</font></b>
+<p><b><font color="#000000">&nbsp;#seraMC resources</font></b>
+<br><b><font color="#000000">&nbsp;setenv SERAMC SeraMC</font></b>
+<br><b><font color="#000000">&nbsp;setenv SERAMC_PATH $SERA_HOME/$SERAMC</font></b>
+<p><b><font color="#274342">By default, all of the SERA executable binaries
+are installed in </font><font color="#CC6600">$HOME/sera1/Target/bin</font><font color="#274342">,
+and this directory path should be in the user's "path" environment variable.&nbsp;
+The default installation directory structure under the user's home directory
+should appear similar to what is shown in Figure 3.1. Most of the SERA
+distributions will reflect this directory structure and for most cases
+the user can place the the gzipped tar file included in the distribution
+CD (eg sera1C0linux.tar.gz) in the appropriate directory, usually the user's
+home directory, and unzip and extract the the tar archive(eg tar xvzf sera1C0linux.tar.gz.)</font></b>
+<p><img SRC="GettingStarted/seraDir.jpg" NOSAVE height=910 width=466>
+<p><b><font color="#274342">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Figure 3.1.&nbsp; Default UNIX directory structure for the SERA system.</font></b>
+<p><b><font color="#274342">There should be a </font><font color="#CC6600">README</font><font color="#274342">
+file included with your software distribution that will detail this information,
+but if you are not familiar with UNIX and X11, try to get help from your
+local system administrator.</font></b>
+<br>&nbsp;
+<p><a NAME="3.1"></a><b><font color="#274342"><font size=+1>3.1.&nbsp;
+Main Menu (seraMenu)</font></font></b>
+<p><b><font color="#274342">Once SERA is properly installed, the user issues
+the command </font><font color="#FF0000">seraMenu</font><font color="#274342">
+from the command line, and the main menu, as shown in Figure 3.2, should
+appear.&nbsp; If the response is </font><font color="#FF0000">Command not
+found</font><font color="#274342">, the UNIX path variable may not be properly
+set.&nbsp; If the program runs, but the menu appearance is strange (i.e.
+poor color choices, odd fonts, or inappropriate font sizes), it is likely
+your X11 server has not found the SERA resource file.</font></b>
+<p><img SRC="MainMenu/MainMenu.gif" NOSAVE height=679 width=216>
+<p><b><font color="#274342">Figure 3.2.&nbsp; SERA Main Menu (seraMenu).</font></b>
+<p><b><font color="#274342">Buttons are provided to execute the five main
+functions within SERA, which include the image formatter, image editor,
+3D viewer, dose display utilities, and dose calculation utilities.&nbsp;
+These functions/utilities may also be executed from the operating system
+prompt (command line), but the main menu accomodates certain advanced features,
+such as changing displays, monitoring the processes initiated from the
+main menu, setting global preferences, and other features.&nbsp; Each function
+can execute the other functions (cross-launch capability), so the ability
+to monitor the various processes can be a necessity.&nbsp; The seven main
+modules of SERA will be briefly discussed in turn in the remainder of this
+section.</font></b>
+<br>&nbsp;
+<p><a NAME="3.2"></a><b><font color="#274342"><font size=+1>3.2.&nbsp;
+Image Formatter (seraImage)</font></font></b>
+<p><b><font color="#274342">Most of the treatment plans developed with
+SERA will begin with seraImage. Its basic function is to convert the original
+image format into the Qsh format, which is the internal format used within
+the SERA modules. The image formatter is discussed at length in <a href="sec04.html">Section
+4</a>.&nbsp; Shown in Figure 3.3 is the image formatter's user interface
+with the </font><font color="#FF0000">File</font><font color="#274342">
+pulldown selected.</font></b>
+<p><img SRC="toQsh/toQsh.file.gif" NOSAVE height=868 width=920>
+<p><b><font color="#274342">Figure 3.3.&nbsp; Image Formatter user interface
+(seraImage).</font></b>
+<p><b><font color="#274342">The image formatting function will accept unformatted
+(raw) and dicom images. It will also allow the user to edit images already
+in the Qsh format.&nbsp; Images may be deleted, image header information
+may be changed, and the images may be translated or rotated.</font></b>
+<br>&nbsp;
+<p><a NAME="3.3"></a><b><font color="#274342"><font size=+1>3.3.&nbsp;
+Image Editor (seraModel)</font></font></b>
+<p><b><font color="#274342">After the image information has been prepared,
+image editing with the seraModel module is usually the next step in the
+treatment planning process.&nbsp; This is discussed at length in <a href="sec05.html">Section
+5</a>.&nbsp; The user interface for seraModel is shown in Figure 3.4, with
+the </font><font color="#FF0000">File</font><font color="#274342"> pulldown
+selected.</font></b>
+<br>&nbsp;
+<p><img SRC="ImageEditor/ImageEditor.file.gif" NOSAVE height=893 width=1190>
+<p><b><font color="#274342">Figure 3.4.&nbsp; Image Editor user interface
+(seraModel).</font></b>
+<p><b><font color="#274342">The purpose of the seraModel module is to more
+easily and rapidly break an image set into regions of interest.&nbsp; The
+image matrix used for display in this program has been generalized to work
+on systems with different color depths, and to view an arbitrary number
+of columns of images at an arbitrary zoom level in an arbitrary window
+size.</font></b>
+<p><b><font color="#274342">The image editor provides many useful image
+operations, including manual and automatic definition and generation of
+univel-based regions of interest, which form the geometry used by the Monte
+Carlo radiation transport simulation.&nbsp; Various image processing tools,
+including region copying, scaling, overwriting, and painting by fill or
+borders, are provided to aid in the manual definition of these regions.&nbsp;
+Threshold-based segmenting, 3D region growing, body copying, and automatic
+target definition operations are also provided.</font></b>
+<br>&nbsp;
+<p><a NAME="3.4"></a><b><font color="#274342"><font size=+1>3.4.&nbsp;
+Three-Dimensional&nbsp; Viewer (sera3d)</font></font></b>
+<p><b><font color="#274342">After all of the bodies are created with seraModel,
+the three dimensional viewer, sera3d, which is detailed in <a href="sec06.html">Section
+6</a>, provides flexible three-dimensional displays of the univel-based
+solid models (see Figure 3.5) and isodose contour data.&nbsp; Points/lines,
+solid volume elements, or hollow volume elements can be used to view the
+geometry.</font></b>
+<p><img SRC="Sera3D/sera3d.jpg" NOSAVE height=905 width=1060>
+<p><b><font color="#274342">Figure 3.5.&nbsp; Three-dimensional viewer
+user interface (sera3d).</font></b>
+<p><b><font color="#274342">Two clipping planes are provided in each of
+the three orthogonal directions.&nbsp; The images used to define the regions
+in the image editing step may be inlaid into the viewing window via the
+texture map.&nbsp; The beam line and selected particles may also be displayed
+in the viewing window.&nbsp; A unique feature for viewing two- and three-dimensional
+isodose contours is also provided.</font></b>
+<br>&nbsp;
+<p><a NAME="3.5"></a><b><font color="#274342"><font size=+1>3.5.&nbsp;
+Dose Contours (seraDose)</font></font></b>
+<p><b>The SERA dose contouring utility, seraDose, can be invoked either
+from the <font color="#FF0000">Sera Dose</font> button in the main menu,
+or directly from the command line by entering <font color="#FF0000">seraDose</font>.&nbsp;
+The two-dimensional dose display module contours, registers, and displays
+two-dimensional isodose curves, superimposed over the original image set.&nbsp;
+It will also display user-selectable dose components, and it permits dose
+component editing.</b>
+<p><img SRC="DoseDisplay/Doseplay.multi.gif" NOSAVE height=772 width=616>
+<p><b><font color="#274342">Figure 3.6.&nbsp; Two-dimensional dose contour
+user interface (seraDose).</font></b>
+<p><b>The seraDose module also allows user-specified contour levels, and
+it will report contour values at the current cursor location.&nbsp; Isodose
+contours can be represented either as lines or color-washed regions. A
+unique dose masking feature is provided to remove unwanted dose curves
+in specific regions.&nbsp; Moreover, seraDose will accept either Qsh formatted
+or raw 256x256 pixel images.&nbsp; This is further described in <a href="sec09.html">Section
+9</a>.</b>
+<br>&nbsp;
+<p><a NAME="3.6"></a><b><font color="#274342"><font size=+1>3.6.&nbsp;
+Dose Plots (seraPlot)</font></font></b>
+<p><b><font color="#274342">The </font><font color="#FF0000">Sera Plot</font><font color="#274342">
+selection from the main menu provides integrated control of dose-depth
+and dose-volume histogram plotting utilities (Figure 3.7), which post-process
+the results of the treatment simulation and display the results as dose-volume
+histograms or depth-dose plots.&nbsp; This module is further described
+in <a href="sec10.html">Section 10</a>.</font></b>
+<p><img SRC="DoseDisplay/DoseDisplay.gif" NOSAVE height=123 width=146>
+<p><b><font color="#274342">Figure 3.7.&nbsp; Sera Plot pop-up widget (seraPlot).</font></b>
+<p><a NAME="3.6.1"></a><b><font color="#274342">3.6.1.&nbsp; Dose-Depth
+Plotting</font></b>
+<p><b><font color="#274342">The dose-depth plotting utility reads the <a href="appA.html">seraMC</a>
+standard output and invokes the <a href="http://plasma-gate.weizmann.ac.il/Xmgr/">xmgr</a>
+generalized two-dimensional plotting code for each encounter of a seraMC
+line edit.&nbsp; The utility can be run from</font> the <font color="#FF0000">Dose
+Depth Plot</font> button in the seraPlot pop-up widget (see Figure 3.8),
+which is triggered from the main menu's <font color="#FF0000">Sera Plot</font>
+button.&nbsp; The seraPlot pop-up widget can&nbsp; also be brought up from
+the command line, by entering <font color="#FF0000">seraPlot</font> at
+the operating system prompt.</b>
+<p><img SRC="DoseDisplay/Simplot.gif" NOSAVE height=390 width=662>
+<p><b><font color="#274342">Figure 3.8.&nbsp; Dose Depth plotting widget
+in seraPlot.</font></b>
+<p><b><font color="#274342">Dose depth plots can be shown for either or
+all of the following dose components:</font></b>
+<ul>
+<li>
+<b><font color="#274342">total dose</font></b></li>
+
+<li>
+<b><font color="#274342">b-10 dose</font></b></li>
+
+<li>
+<b><font color="#274342">gamma dose</font></b></li>
+
+<li>
+<b><font color="#274342">n-14 dose</font></b></li>
+
+<li>
+<b><font color="#274342">hydrogen (proton recoil) dose</font></b></li>
+
+<li>
+<b><font color="#274342">other dose</font></b></li>
+
+<li>
+<b><font color="#274342">Group 1 fluence</font></b></li>
+
+<li>
+<b><font color="#274342">Group 2 fluence</font></b></li>
+
+<li>
+<b><font color="#274342">Thermal fluence</font></b></li>
+
+<li>
+<b><font color="#274342">Gamma production</font></b></li>
+
+<li>
+<b><font color="#274342">Ultrafast Gamma.</font></b></li>
+</ul>
+<b><font color="#274342">More information can be found in <a href="sec10.html#10.2">Section
+10</a>.</font></b>
+<p><a NAME="3.6.2"></a><b><font color="#274342">3.6.2.&nbsp; Dose-Volume
+Histogram Plotting</font></b>
+<p><b><font color="#274342">The dose-volume histogram plotting utility
+reads the <a href="appA.html">seraMC</a> standard output and invokes the
+<a href="http://plasma-gate.weizmann.ac.il/Xmgr/">xmgr</a>
+plot code for each encounter of a seraMC dose-volume edit.&nbsp; The utility
+can be run from</font> the <font color="#FF0000">Dose Volume Histogram</font>
+button in the seraPlot pop-up widget (see Figure 3.9), which is triggered
+from the main menu's <font color="#FF0000">Sera Plot</font> button.&nbsp;
+The seraPlot pop-up widget can also be brought up from the command line,
+by entering <font color="#FF0000">seraPlot</font> at the operating system
+prompt.</b>
+<p><img SRC="DoseDisplay/seraPlotAll.gif" NOSAVE height=564 width=488>
+<p><b><font color="#274342">Figure 3.9.&nbsp; Dose-Volume Histogram plotting
+widget in seraPlot.</font></b>
+<br>&nbsp;
+<p><a NAME="3.7"></a><b><font color="#274342"><font size=+1>3.7.&nbsp;
+seraMC Interface (seraCalc)</font></font></b>
+<p><b>The sera<font color="#274342">MC interface for transport modeling</font>
+can be invoked either from the <font color="#FF0000">Sera Calc</font> button
+of the main menu, or directly from the command line by entering <font color="#FF0000">seraCalc</font>.<font color="#274342">&nbsp;
+The seraMC interface is shown in Figure 3.10. The user may build a new
+seraMC input file from scratch or open an existing input file, which can
+be modified as desired to produce an updated input file.&nbsp; The input
+can then be run from this interface. The components of this interface are
+explained in <a href="sec07.html">Section 7</a>. The detailed input description
+of the components appears in the
+<a href="appA.html">seraMC</a> user's
+manual.</font></b>
+<p><img SRC="DoseCalculations/seraCalc.gif" NOSAVE height=678 width=908>
+<p><b><font color="#274342">Figure 3.10.&nbsp; The seraMC input interface
+(seraCalc).</font></b>
+<br>&nbsp;
+<p><a NAME="3.8"></a><b><font color="#274342"><font size=+1>3.8.&nbsp;
+Dose Combination (seraPlan)</font></font></b>
+<p><b><font color="#274342">The seraPlan module allows the user to statistically
+combine fields and/or fractions from several independent seraMC calculations,
+so that single effective doses can be presented.&nbsp; Seraplan can be
+invoked either from the </font><font color="#FF0000">Sera Plan</font><font color="#274342">
+button in the main menu, or directly from the command line by entering
+</font><font color="#FF0000">seraPlan</font><font color="#274342">.&nbsp;
+When seraPlan starts, the window in Figure 3.11 will be displayed.&nbsp;
+The user may select between 1 and 4 fractions and between 1 and 6 fields
+per fraction.&nbsp; This is discussed further in <a href="sec08.html">Section
+8</a>.</font></b>
+<p><img SRC="DoseCalculations/seraPlan.gif" NOSAVE height=831 width=1233>
+<p><b><font color="#274342">Figure 3.11.&nbsp; The dose combination widget
+(seraPlan).</font></b>
+<br>&nbsp;
+<p><a NAME="3.9"></a><b><font color="#274342"><font size=+1>3.9.&nbsp;
+Advanced Features</font></font></b>
+<p><b><font color="#274342">This section is highly experimental and not
+generally available to the user community.&nbsp; It is only mentioned here
+to remind the authors of this manual of incompleted work and, perhaps more
+importantly, to evoke responses from the user community on accommodating
+and further developing useful concepts for the SERA system.</font></b>
+<p><a NAME="3.9.1"></a><b><font color="#274342">3.9.1.&nbsp; Launch Feature</font></b>
+<p><a NAME="3.9.2"></a><b><font color="#274342">3.9.2.&nbsp; Advanced Mode</font></b>
+<p><b><font color="#274342">This feature is presently under construction.&nbsp;
+It only works with seraDose;&nbsp; it allows users to specify display and
+command line parameters.</font></b>
+<p><a NAME="3.9.3"></a><b><font color="#274342">3.9.3.&nbsp; Set Project
+Directory</font></b>
+<p><b><font color="#274342">This feature is not implemented, pending advisement
+from the user community.</font></b>
+<p><a NAME="3.9.4"></a><b><font color="#274342">3.9.4.&nbsp; Set Global
+Preferences</font></b>
+<p><b><font color="#274342">This feature is presently under construction.</font></b>
+<p><a NAME="3.9.5"></a><b><font color="#274342">3.9.5.&nbsp; Close Launched
+Applications</font></b>
+<p><b><font color="#274342">This feature allows the user to remove uneeded
+processes.</font></b>
+<br>&nbsp;
+<p><a NAME="3.10"></a><b><font color="#274342"><font size=+1>3.10.&nbsp;
+Help</font></font></b>
+<p><b><font color="#274342">Selecting the Help button changes the user's
+cursor to a question mark </font><font color="#FF0000">? </font><font color="#274342">character.
+The user can then select any button on the main menu.&nbsp; After the user
+selects a button on the main menu, a help prompt widget will appear, similar
+to Figure 3.12.&nbsp; The help prompt widget gives the user a choice of
+selecting </font><font color="#008007">Dialog Help</font><font color="#274342">,
+a context sensitive help text, </font><font color="#008007">Internet Manual</font><font color="#274342">,
+which displays an appropriate section of the manual in the user's web browser,
+or the </font><font color="#008007">Files Manual</font><font color="#274342">,
+which is similar to the Internet Manual selection, except that the source
+files for the manual are taken from the user's local file system.&nbsp;
+In most cases, the Internet Manual selection should be the most recent
+source of information.</font></b>
+<p><img SRC="Help/Help.gif" NOSAVE height=239 width=560>
+<p><b><font color="#274342">Figure 3.12.&nbsp; Help Prompt widget.</font></b>
+<br>&nbsp;
+<br>&nbsp;
+<br>
+<center>
+<p><img SRC="marblebar.jpg" height=6 width=460>
+<p><a href="sec02.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><a href="sec02.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="sec04.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="sec04.html">Next</a></b></center>
+
+</body>
+</html>
