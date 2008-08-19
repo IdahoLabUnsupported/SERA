@@ -1811,7 +1811,9 @@ int check_and_report_qhd_values(qsh_gui_t *q){
   /** the qhd popup **/
   /**********************************************************************/
   /*printf("entering the AppProcess event loop in check_and_report_qhd\n");*/
-  while (XtIsManaged(q->qsh_dialog)){
+  /* XXX Checking read_qhd_cancelled, because otherwise we end up reading 
+   values in qsh_dialog that has already been destroyed.  */
+  while (q->read_qhd_cancelled && XtIsManaged(q->qsh_dialog)){
     XtAppProcessEvent(q->qsh_app, XtIMAll);
   }
   
