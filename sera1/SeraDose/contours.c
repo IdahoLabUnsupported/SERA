@@ -59,7 +59,8 @@ void draw_contour_lines (CONTOUR_LINES_TYPE *contour_lines,
                          CONTOUR_LINES_TYPE *preview_contour_lines,
                          floyd_data_ptr data,
                          int which_dose, Boolean scale_font, 
-                         Boolean draw_large_labels, Boolean draw_preview_labels);
+                         Boolean draw_large_labels, Boolean draw_preview_labels,
+			 XImage * image);
                          
 /*
 void get_max_contour_value (floyd_data_ptr data, int which_dose,
@@ -71,7 +72,7 @@ void get_max_contour_value (floyd_data_ptr data, int which_dose, int *max);
 void draw_contour_colorwash (/*CONTOUR_LINES_TYPE *contour_lines,
 			       CONTOUR_LINES_TYPE *preview_contour_lines,*/
                              floyd_data_ptr data,
-                             int which_dose);
+                             int which_dose, XImage * image);
 
 void calculate_colorwash (/*CONTOUR_LINES_TYPE *contour_lines, */
                           short width, short height,
@@ -139,7 +140,7 @@ void draw_contours (floyd_data_ptr data, int whichDose, Boolean recalculate_cont
        }
      draw_contour_lines (&contour_lines, &preview_contour_lines, 
 			 data, whichDose, scale_font, draw_large_labels, 
-			 draw_preview_labels);    
+			 draw_preview_labels, &global_image);    
      {
        int contour_num;
        for(contour_num = 0; contour_num < contour_levels.number_levels; 
@@ -169,7 +170,7 @@ void draw_contours (floyd_data_ptr data, int whichDose, Boolean recalculate_cont
     */
   
    if (draw_colorwash) 
-      draw_contour_colorwash (data, whichDose);
+     draw_contour_colorwash (data, whichDose, &global_image);
 
 
    /*
@@ -287,7 +288,8 @@ void draw_contour_lines (CONTOUR_LINES_TYPE *contour_lines,
                          CONTOUR_LINES_TYPE *preview_contour_lines,
                          floyd_data_ptr data,
                          int which_dose, Boolean scale_font, 
-                         Boolean draw_large_labels, Boolean draw_preview_labels)
+                         Boolean draw_large_labels, Boolean draw_preview_labels,
+			 XImage * image)
 {
    Pixmap lines_and_scan_pixmap;
    short width, height;
@@ -297,8 +299,8 @@ void draw_contour_lines (CONTOUR_LINES_TYPE *contour_lines,
 
    DEBUG_TRACE_IN printf ( "Entering draw_contour_lines\n" );
    
-   width = global_image.width;
-   height = global_image.height;
+   width = image->width;
+   height = image->height;
 
    clear_lines_image (mainWindowDrawingArea, width, height);
 
@@ -343,7 +345,7 @@ void draw_contour_lines (CONTOUR_LINES_TYPE *contour_lines,
     */
     /* Freed with XDestroyImage so don't use Memory tools */
    canvas_data = (char *) MT_malloc (width * height * sizeof (char) * get_num_bytes()); 
-   memcpy (canvas_data, global_image.data, width * height * sizeof(char) * get_num_bytes());
+   memcpy (canvas_data, image->data, width * height * sizeof(char) * get_num_bytes());
    contoured_image = XCreateImage (di, DefaultVisual (di, DefaultScreen (di)), 
                                    get_color_info()->depth, ZPixmap, 0, canvas_data, width,
                                    height, BitmapPad (di), width*get_num_bytes());
@@ -400,7 +402,7 @@ void draw_contour_lines (CONTOUR_LINES_TYPE *contour_lines,
      * image to fit the preview image
      */
     generic_resize_image (mask_pack.buffer, small_mask_data, 
-                          global_image.width, global_image.height, width, height);
+                          image->width, image->height, width, height);
 
     /* MTC added 6/24/98 */
     if (image_matrix.img_arr[image_matrix.active_picture].contoured_image)
@@ -762,7 +764,7 @@ void get_max_contour_value (floyd_data_ptr data, int which_dose,
 void draw_contour_colorwash (/*CONTOUR_LINES_TYPE *contour_lines,*/
                              /*CONTOUR_LINES_TYPE *preview_contour_lines,*/
                              floyd_data_ptr data,
-                             int which_dose)
+                             int which_dose, XImage * image)
 {
    short *colorwash_index;
    char *canvas_data;
@@ -772,8 +774,8 @@ void draw_contour_colorwash (/*CONTOUR_LINES_TYPE *contour_lines,*/
 
    DEBUG_TRACE_IN printf ( "Entering draw_contour_colorwash\n" );
 
-   width = global_image.width;
-   height = global_image.height;
+   width = image->width;
+   height = image->height;
    
    colorwash_index = (short *) MT_malloc (width * height * sizeof (short));
    for (count = 0; count < width * height; count ++)
@@ -783,7 +785,7 @@ void draw_contour_colorwash (/*CONTOUR_LINES_TYPE *contour_lines,*/
                         mainWindowDrawingArea); 
 
    canvas_data = (char *) MT_malloc (width * height * sizeof (char) * get_num_bytes());
-   memcpy (canvas_data, global_image.data, width * height * sizeof (char) * get_num_bytes());
+   memcpy (canvas_data, image->data, width * height * sizeof (char) * get_num_bytes());
 
    /*
     *  MTC 5/25/99
@@ -849,7 +851,7 @@ void draw_contour_colorwash (/*CONTOUR_LINES_TYPE *contour_lines,*/
      * image to fit the preview image
      */
    generic_resize_image (mask_pack.buffer, small_mask_data,
-                          global_image.width, global_image.height, width, height);
+                          image->width, image->height, width, height);
 
    draw_colorwash_image (image_matrix.img_arr[image_matrix.active_picture].
 			 colorwashed_image, 
