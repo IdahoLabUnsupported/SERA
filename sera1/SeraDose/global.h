@@ -211,7 +211,7 @@ externOrNot XColor point_color;
 externOrNot Display *di;
 externOrNot Window wi;
 externOrNot GC gc, newGC, drag_gc;
-externOrNot XImage image;
+externOrNot XImage global_image;
 externOrNot XImage *contoured_image;
 externOrNot XImage *colorwashed_image;
 externOrNot XEvent SureEvent;
