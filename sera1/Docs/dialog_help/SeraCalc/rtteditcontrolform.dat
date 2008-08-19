@@ -1,0 +1,3 @@
+Control Panel
+
+The control panel of the rtt popup specifies the number of particle histories to simulate and then run mode(s).  This panel has four fields which are text entry fields. The user chooses a field for which a change is to take place and enters new values in the field. 

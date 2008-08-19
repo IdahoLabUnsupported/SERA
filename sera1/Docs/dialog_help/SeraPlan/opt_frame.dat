@@ -1,0 +1,14 @@
+
+
+Reference dose type
+
+       __________________________________________________
+
+The reference dose type allows the user to select the dose
+component used to determine the reference location, and,
+thus, the reference dose.  The reference location is the
+center of the voxel containing the peak value of the
+selected dose component.
+
+The reference dose type is selected from the following:
+total dose, thermal flux, or gamma dose.

@@ -1,0 +1,32 @@
+SRCS = \
+toqsh.c toqsh_gui.c tools.c file_select.c \
+gen_resize.c color_tool.c image_locations.c matrix.c \
+messages.c color_support.c unknown_raw.c multi_file_select.c \
+arrange_images.c resize_images.c toolbar_callbacks.c \
+manip_images.c manip_gui.c rotate_and_translate.c image_processing.c \
+mark_images.c remember_files.c remove_noise.c \
+reslice.c reslice_utils.c reslice_manip.c reslice_gui.c \
+register.c register_gui.c register_utils.c register_cmd.c \
+register_color.c dicom.c dcm2qsh.c
+
+
+OBJS = \
+toqsh.o toqsh_gui.o tools.o file_select.o \
+gen_resize.o color_tool.o image_locations.o matrix.o \
+messages.o color_support.o unknown_raw.o multi_file_select.o \
+arrange_images.o resize_images.o toolbar_callbacks.o \
+manip_images.o manip_gui.o rotate_and_translate.o image_processing.o \
+mark_images.o remember_files.o remove_noise.o \
+reslice.o reslice_utils.o reslice_manip.o reslice_gui.o \
+register.o register_gui.o register_utils.o register_cmd.o \
+register_color.o dicom.o dcm2qsh.o
+
+SERA_DEPS = $(D_COMMON) $(D_QSH) $(D_DCM)
+
+LOCAL_LIBRARIES = -lcommon -lqsh -ldcm $(DEFAULT_X_LIBS)
+SYS_LIBRARIES   = $(EXTRA_X_LIBS) MathLibrary
+DEPLIBS         = $(DEFAULT_DEP_X_LIBS) $(EXTRA_DEP_X_LIBS) $(SERA_DEPS) 
+
+ComplexProgramTarget(seraImage)
+
+

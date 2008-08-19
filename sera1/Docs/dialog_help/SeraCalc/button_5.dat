@@ -1,0 +1,7 @@
+The Quit option allows the user to exit the BNCT_Rtpe program.  Two choices are provided to avoid terminating the program prematurely:
+
+Yes, really quit! 
+   Terminates the BNCT_Rtpe program.
+
+No, don't really quit!
+   Allows user to resume normal operation of the BNCT_Rtpe program.

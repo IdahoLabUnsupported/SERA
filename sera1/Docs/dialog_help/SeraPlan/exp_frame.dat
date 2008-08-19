@@ -1,0 +1,8 @@
+Exposure input widget
+
+       __________________________________________________
+
+The exposure input widget allows the user to specify the exposure
+for each field (in arbitrary units, although MW-min is the usual
+choice) for the dose combination.  These values are used to weight
+the dose components during the combination.

@@ -1,0 +1,4 @@
+surface structure defs
+
+  added cap flags to struct surface type and arl_body_type
+  also added order

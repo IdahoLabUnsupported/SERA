@@ -1,0 +1,83 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.51 [en] (X11; I; SunOS 5.6 sun4u) [Netscape]">
+   <meta name="Description" content="This is the SERA manual page for seraConvert.">
+   <title>SERA Manual - seraConvert</title>
+</head>
+<body text="#274342" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000" background="../mainbackground.gif" nosave>
+
+<center><a href="../appD.html"><img SRC="../bullet10.gif" NOSAVE BORDER=0 height=17 width=17></a><b><a href="../appD.html">Previous<a href="../toc.html"><img SRC="../bullet10.gif" NOSAVE BORDER=0 height=17 width=17></a></a><a href="../toc.html">Contents</a></b>
+<p><b><font color="#274342"><font size=+2>SERA</font></font></b>
+<br><b><font color="#274342"><font size=+2>Simulation Environment for Radiotherapy
+Applications</font></font></b>
+<br><b><font color="#274342"><font size=+2>User's Manual</font></font></b>
+<br><b><font color="#274342"><font size=+2>Version 1C0</font></font></b>
+<p><img SRC="../marblebar.jpg" NOSAVE height=6 width=460><b></b>
+<p><b><font size=+1>Appendix E. SeraConvert</font></b></center>
+<b></b>
+<p><b><font size=+2>Converting Spline Files to Univel Files (seraConvert)</font></b>
+<p><b>Spline files can be converted to univel files with seraConvert.</b>
+<p><a NAME="convert1"></a><b><font size=+1>1. Invoke seraConvert</font></b>
+<p><b>Begin seraConvert by typing <font color="#FF0000">seraConvert</font>
+in the directory of the spline file you would like to convert.&nbsp; The
+binary must be installed in your path and you should invoke seraConvert
+in the directory of the spline file. Below is an image of seraConvert which
+you should see.</b>
+<center>
+<p><a href="seraConvertMain.html"><img SRC="images/seraConvertMainTN.jpg" NOSAVE height=287 width=413></a>
+<p><b>Click image for a larger view.</b></center>
+
+<p><a NAME="convert2"></a><b><font size=+1>2. Load Qsh and Spline Files</font></b>
+<p><b>You'll notice two buttons for loading files.&nbsp; First, "Qsh File".&nbsp;
+This is used to gather information about the images used to define the
+spline file.&nbsp; If you don't have a qsh file for the patient, you'll
+probably want to build one using seraImage.&nbsp; This way you will be
+able to view the univel files in seraModel.&nbsp; The other button is <font color="#FF0000">Spline
+File</font>.&nbsp; This is the button to load the actual spline file.</b>
+<p><b><u>Note:</u>&nbsp; You can convert a spline file to univels without
+loading the qsh file, but if the spline file is spaced unevenly, or has
+a different number of images with defined bodies, the univels may not match
+up correctly with the image set.</b>
+<p><a NAME="convert3"></a><b><font size=+1>3. Making Sure all Bodies Are
+Known</font></b>
+<p><b>When you load the spline file, seraConvert may close and give a warning
+at the command prompt about adding an unknown body to <font color="#CC6600">body_order.txt</font>.&nbsp;
+This file contains a list of bodies that are found in spline files.&nbsp;
+It is used by seraConvert to determine the order to draw the regions.&nbsp;
+Roughly, it is sort of a body containment file.&nbsp; However, righthemi
+and lefthemi do not contain one another, but one will have to appear before
+the other.&nbsp; This isn't really a problem, just a little confusing.</b>
+<p><a NAME="convert4"></a><b><font size=+1>4. Build the Univel Files</font></b>
+<p><b>Once you have loaded the spline and qsh (if desired) files, press
+<font color="#FF0000">Convert</font>.
+SeraConvert will take a moment to convert the file and should display <font color="#FF0000">Done!</font>
+when it is finished.</b>
+<p><a NAME="convert5"></a><b><font size=+1>5. Verifying Results</font></b>
+<p><b>Check the uv files with seraModel.&nbsp; You should load the images
+and univel files in seraModel to make sure they look correct.&nbsp; I have
+noticed occasional problems when a region has filled outside instead of
+inside the spline.&nbsp; If this happens, one 'work-around' I have provided
+is to click <font color="#FF0000">Lines Only</font> before converting.&nbsp;
+The bad part is you have to manually flood fill the splines in seraModel
+to get filled regions.&nbsp; Hopefully, this problem is rare.</b>
+<p><a NAME="convert6"></a><b><font size=+1>6. Viewing Univel Files in SeraModel</font></b>
+<p><b>SeraModel may not recognize the body names from the univel file created
+from the spline file.&nbsp; That is because body_data.txt doesn't contain
+these bodies.&nbsp; You'll have to edit this file using seraModel.&nbsp;
+Just open seraModel and click <font color="#FF0000">Edit Bodies/Materials</font>
+and add the appropriate bodies.&nbsp; You'll probably want to save this
+as a new file such as <font color="#CC6600">body_data_splines.txt</font>
+and load it next time you start seraModel for viewing the spline data.&nbsp;
+Lastly, seraConvert doesn't define colors for the bodies it finds in the
+spline file.&nbsp; So, seraModel may display them as black.&nbsp; You can
+adjust the colors to your liking. Once you have done this you can save
+the uv file in seraModel and it should look the same next time you load
+the file.</b>
+<center>
+<p><img SRC="../marblebar.jpg" NOSAVE height=6 width=460>
+<p><a href="../appD.html"><img SRC="../bullet10.gif" NOSAVE BORDER=0 height=17 width=17></a><b><a href="../appD.html">Previous<a href="../toc.html"><img SRC="../bullet10.gif" NOSAVE BORDER=0 height=17 width=17></a></a><a href="../toc.html">Contents</a></b></center>
+
+</body>
+</html>

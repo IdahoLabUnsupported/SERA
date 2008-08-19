@@ -1,0 +1,712 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.75 [en] (X11; U; SunOS 5.6 sun4u) [Netscape]">
+   <meta name="Description" content="This is the SERA Manual page for seraPlan.">
+   <title>SERA Manual - Section 8</title>
+</head>
+<body text="#274342" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000" background="mainbackground.gif">
+
+<center><a href="sec07.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><a href="sec07.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="sec09.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="sec09.html">Next</a></b>
+<p><b><font color="#274342"><font size=+2>SERA</font></font></b>
+<br><b><font color="#274342"><font size=+2>Simulation Environment for Radiotherapy
+Applications</font></font></b>
+<br><b><font color="#274342"><font size=+2>User's Manual</font></font></b>
+<br><b><font color="#274342"><font size=+2>Version 1C0</font></font></b>
+<p><img SRC="marblebar.jpg" NOSAVE height=6 width=460></center>
+
+<p><b><font color="#274342"><font size=+2>8.&nbsp; Statistical Dose Combination
+and Dose Editing</font></font></b>
+<p><a NAME="8.1"></a><b><font color="#274342"><font size=+1>8.1.&nbsp;
+Introduction</font></font></b>
+<p><b><font color="#274342">Following the calculation of the dose results
+with <a href="sec07.html">seraCalc</a> and <a href="appA.html">seraMC</a>
+for each field, it is necessary to properly combine the individual field
+dose results into an appropriate plan.&nbsp; This is accomplished by using
+the seraPlan tool.&nbsp; SeraPlan combines the dose results from up to
+24 fields (maximum of four fractions, each with up to six fields), with
+source strength, boron, and exposure weighting, to provide an editable
+<a href="appA.html">seraMC</a>
+restart file containing the weighted, normalized dose results.&nbsp; A
+plan file is also written, which contains the weighting data for each field,
+along with fraction and plan totals for boron and exposure.&nbsp; An existing
+plan file may be loaded from the File pulldown menu in seraPlan.</font></b>
+<p><b><font color="#274342">The dose combination is performed by weighting
+each specified field dose component by the appropriate weighting factors.&nbsp;
+All dose components are weighted by the source strength and exposure.&nbsp;
+The boron dose weight factor also includes the boron concentration, and
+the gamma dose weight factor includes the total gamma source for each field,
+which consists of both the source gamma and the capture gamma source from
+neutron capture in tissue, and the gamma repair factor (see <a href="#8.3.1.3.4">Section
+8.3.1.3.4</a>) from the input display.&nbsp; The total dose is the sum
+of all the dose components.&nbsp; In all cases, the doses are normalized
+to unit exposure, unit source strength, and unit boron concentration.&nbsp;
+This allows the user to examine the effects of total plan exposure and
+average boron on the dose results, using the <a href="sec09.html">seraDose</a>,
+<a href="sec06.html">sera3d</a>,
+and <a href="sec10.html">seraPlot</a> modules.</font></b>
+<p><b><font color="#274342">Dose editing allows the user to compute a variety
+of meaningful parameters to characterize the treatment plan.&nbsp; Doses
+may be computed at a point, along a line, as contours on a plane, or they
+may be integrated over a volume.&nbsp; Boron concentration and RBE values
+may be incorporated into these edits in several different ways.&nbsp; In
+addition to the extensive standard edits, the user may specify up to 20
+additional point edits, 10 line edits, 10 volume edits, and 4 plane (contour)
+edits.</font></b>
+<p><b><font color="#274342">As with the other modules in the SERA system,
+seraPlan may be executed from the <a href="sec03.html#3.1">Main Menu</a>,
+cross launched from any other module, or run from the command line by typing
+</font><font color="#FF0000">seraPlan</font><font color="#274342">.&nbsp;
+A sample seraPlan display is shown in</font> <font color="#274342">Figure
+8.1.</font></b>
+<p><img SRC="DoseCalculations/seraPlan.gif" NOSAVE height=695 width=1136>
+<p><b><font color="#274342">Figure 8.1.&nbsp; Sample seraPlan display.</font></b>
+<br>&nbsp;
+<p><a NAME="8.2"></a><b><font color="#274342"><font size=+1>8.2.&nbsp;
+Menus</font></font></b>
+<p><a NAME="8.2.1"></a><b>8.2.1.&nbsp; File Menu</b>
+<p><b><font color="#274342">The </font><font color="#FF0000">File</font><font color="#274342">
+menu in seraPlan, shown in Figure 8.2, contains six selections - </font><font color="#008007">Load
+plan file</font><font color="#274342">, </font><font color="#008007">Apply/save
+plan</font><font color="#274342">, </font><font color="#008007">Clear window</font><font color="#274342">,
+</font><font color="#008007">Check
+version</font><font color="#274342">,
+</font><font color="#008007">Launch</font><font color="#274342">,
+and </font><font color="#008007">Exit</font><font color="#274342">.</font></b>
+<p><img SRC="DoseCalculations/seraPlan.filemenu.jpg" NOSAVE height=197 width=240>
+<p><b>Figure 8.2.&nbsp; SeraPlan file menu display.</b>
+<p><b><font color="#274342">The </font><font color="#008007">Load plan
+file</font><font color="#274342"> selection pops up a file selection widget
+that allows the user to traverse the file systems and choose a plan file
+to load into seraPlan.&nbsp; This will read all the relevant information
+from the selected file and display it in the seraPlan main window.&nbsp;
+Note that if an attempt is made to load a file that is not a plan file,
+no error messages are generated, but the results are unpredictable.&nbsp;
+Generally, this will produce a default configuration display, with unintelligible
+information in the data fields.&nbsp; It is advised that the user load
+only files known to be plan files into seraPlan.</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">Apply/save
+plan</font><font color="#274342"> selection also pops up a file selection
+widget, but this only allows the user to choose a directory into which
+the plan and restart files will be written.&nbsp; After the directory selection
+is made, the plan file is written, and the dose combination is performed
+as specified.&nbsp; The plan file name and restart file name are determined
+by the </font><font color="#008007">patient ID</font><font color="#274342">
+entry.</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">Clear window</font><font color="#274342">
+selection will re-initialize the data fields in the seraPlan display.&nbsp;
+This operation is not reversible - all information is permanently lost.&nbsp;
+A popup window verifies that this is actually what is desired by the user.</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">Check version</font><font color="#274342">
+selection spawns an Internet process that accesses a database of the most
+recent released versions of all SERA modules, and reports both the most
+recent version and the version executed by the user.&nbsp; This allows
+users to determine whether or not the version of seraPlan used is state-of-the-art.</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">Launch</font><font color="#274342">
+selection produces a submenu listing the other modules in the SERA system.&nbsp;
+Selection of one will launch that particular module.&nbsp; This cross launch
+capability is built into all the modules in the SERA system.</font></b>
+<p><b><font color="#274342">The </font><font color="#008007">Exit</font><font color="#274342">
+selection exits seraPlan, without saving any information in the window.&nbsp;
+A popup verifies that this is actually the desired action.</font></b>
+<p><a NAME="8.2.2"></a><b>8.2.2.&nbsp; Edit Menu</b>
+<p><b>The <font color="#FF0000">Edit</font> menu, shown in Figure 8.3,
+lists the four types of user-defined edits that may be defined.&nbsp; Each
+of the four (point, line, dose-volume histogram, and contour) activate
+a popup that allows the user to define the various parameters needed for
+each type of edit.&nbsp; Details on each are provided in <a href="#8.4.2">Section
+8.4.2</a>.</b>
+<p><img SRC="DoseCalculations/seraPlan.editmenu.jpg" NOSAVE height=217 width=231>
+<p><b>Figure 8.3.&nbsp; SeraPlan edit menu display.</b>
+<p><b>The <font color="#008007">Perform Edits</font> menu item launches
+the computation of the edits.&nbsp; Before the actual edit calculations
+begin, seraPlan prompts the user to define a directory into which all files
+will be written, and then performs a conflict check to see if any requested
+files are already defined in that directory.&nbsp; If the conflict check
+fails, the user is asked for permission to overwrite the existing files.&nbsp;
+If permission is not granted, the edit calculation halts, and the user
+must launch the computation again, specifying a different save directory.&nbsp;
+If execution is allowed to proceed, the standard edits are performed first,
+followed by the user-defined edits.&nbsp; A status window is displayed
+so that progress through the edit calculation may be monitored.</b>
+<p><a NAME="8.2.3"></a><b>8.2.3.&nbsp; Preferences Menu</b>
+<p><b><font color="#274342">The </font><font color="#FF0000">Preferences</font><font color="#274342">
+menu in seraPlan, shown in Figure 8.4, has one selection, </font><font color="#008007">Preferences</font><font color="#274342">,
+which allows the user to set a variety of default values for both the combination
+and edit modules.&nbsp; The information entered is stored in the file </font><font color="#CC6600">$SERA_HOME/Resources/SeraPlan/SeraPlan.rsc</font><font color="#274342">.
+</font><font color="#990000">Note
+that in order to use the preferences, this file must be set to read-write
+mode (644), by using the system command chmod.</font></b>
+<p><img SRC="DoseCalculations/seraPlan.prefmenu.jpg" NOSAVE height=105 width=244>
+<p><b><font color="#274342">Figure 8.4.&nbsp; SeraPlan preferences menu
+display.</font></b>
+<p><a NAME="8.2.3.1"></a>&nbsp;&nbsp;&nbsp; <b>8.2.3.1.&nbsp; Fields/Fractions
+Preferences</b>
+<p><b>This panel, shown in Figure 8.5, allows the user to set the default
+number of Fractions and Fields per Fraction.&nbsp; These values are displayed
+on the appropriate slide bars in the Combination Utility.</b>
+<p><img SRC="DoseCalculations/seraPlan.prefff.jpg" NOSAVE height=328 width=498>
+<p><b>Figure 8.5.&nbsp; SeraPlan Fields/Fractions preferences panel.</b>
+<p><a NAME="8.2.3.2"></a>&nbsp;&nbsp;&nbsp; <b>8.2.3.2.&nbsp; Reference
+Dose Preferences</b>
+<p><b>This panel, shown in Figure 8.6, allows the user to set the dose
+component used to determine the reference dose, and also to set the RBE
+values used in the reference dose calculation search.&nbsp; These are only
+applicable to the Volume search, as the Point reference dose merely gives
+the dose at the chosen location.</b>
+<p><img SRC="DoseCalculations/seraPlan.prefref.jpg" NOSAVE height=549 width=498>
+<p><b>Figure 8.6.&nbsp; SeraPlan Reference Dose preferences panel.</b>
+<p><a NAME="8.2.3.3"></a>&nbsp;&nbsp;&nbsp; <b>8.2.3.3.&nbsp; Dose-volume
+Edit Options Preferences</b>
+<p><b>This panel, shown in Figure 8.7, allows the user to set three parameters
+that affect the appearance of the dose-volume histogram edit output.&nbsp;
+The parameter
+<font color="#008007">N_avg
+</font><font color="#274342">controls
+the number of equal volume regions used.&nbsp; This calculation divides
+a body into N equal volumes, based upon the dose in each voxel, and then
+computes the average dose in each region.&nbsp; When only one region is
+specified (the default), this supplemental edit is not performed.</font></b>
+<p><b><font color="#274342">The parameters </font><font color="#008007">Nbin_DV
+</font><font color="#274342">and</font><font color="#008007">
+Upper DV bin (%) </font><font color="#274342">control the number of bins
+into which the dose-volume histogram edits are divided, and the upper boundary
+of the last fixed width bin.&nbsp; Thus, in the example shown in Figure
+8.7, there would be 12 bins of 10% width each, ending at 120% of the reference
+dose, and one additional bin for the volume greater than 120% of the reference
+dose.</font></b>
+<p><img SRC="DoseCalculations/seraPlan.prefdvo.jpg" NOSAVE height=365 width=498>
+<p><b>Figure 8.7.&nbsp; SeraPlan Dose-volume Edit Options preferences panel.</b>
+<p><a NAME="8.2.3.4"></a>&nbsp;&nbsp;&nbsp; <b>8.2.3.4.&nbsp; Additional
+Dose-volume Edits Preferences</b>
+<p><b>This panel, shown in Figure 8.8, allows the user to specify up to
+10 extra dose-volume histogram edits.&nbsp; These edits will be performed
+in addition to the standard dose-volume histogram edits, and each should
+be performed over the union of two or more bodies.&nbsp; The default value
+is <font color="#FF0000">zero (0)</font>.&nbsp; <font color="#990000">Please
+note that any edits specified here will reduce the number of problem specific
+dose-volume histogram edits allowed in the edit module (presently, up to
+10 are allowed).</font></b>
+<p><img SRC="DoseCalculations/seraPlan.prefdve.jpg" NOSAVE height=393 width=498>
+<p><b>Figure 8.8.&nbsp; SeraPlan Additional Dose-volume Edits preferences
+panel.</b>
+<p><a NAME="8.2.4"></a><b><font color="#274342">8.2.4.&nbsp; Help Menu</font></b>
+<p><b><font color="#274342">The </font><font color="#FF0000">Help</font><font color="#274342">
+menu, shown in Figure 8.9, has one selection, </font><font color="#008007">HelpOnContext</font><font color="#274342">,
+which activates the context sensitive help facility for seraPlan.&nbsp;
+This facility provides explanations for various features of seraPlan by
+clicking the right mouse button on the desired feature in the seraPlan
+window.</font></b>
+<p><img SRC="DoseCalculations/seraPlan.helpmenu.jpg" NOSAVE height=101 width=312>
+<p><b><font color="#274342">Figure 8.9.&nbsp; SeraPlan help menu display.</font></b>
+<br>&nbsp;
+<p><a NAME="8.3"></a><b><font color="#274342"><font size=+1>8.3.&nbsp;
+Plan Combination Utility</font></font></b>
+<p><b><font color="#274342">The plan combination utility allows the user
+to combine multiple (up to 24) dose files into a single dose file, with
+weighting by both exposure and boron concentration.&nbsp; This section
+describes the input required to perform the combination, and the files
+that result.</font></b>
+<p><a NAME="8.3.1"></a><b>8.3.1.&nbsp; Input Data</b>
+<p><a NAME="8.3.1.1"></a><b>&nbsp;&nbsp;&nbsp; 8.3.1.1.&nbsp; Identification
+Parameters</b>
+<blockquote><a NAME="8.3.1.1.1"></a><b>8.3.1.1.1.&nbsp; Patient ID</b></blockquote>
+
+<blockquote><b>The <font color="#008007">Patient ID</font> field in the
+seraPlan input allows the user to specify a character string (no blanks)
+to identify the patient treatment plan.&nbsp; This parameter is used to
+construct all files created by seraPlan - the plan file and the fraction
+and plan dose (<font color="#CC6600">.rst</font>) files.&nbsp; These filenames
+are constructed automatically from the <font color="#008007">Patient ID</font>
+specified.&nbsp; Use of blanks and non-printing control characters is not
+permitted, as this will cause problems with file displays in the Unix systems.&nbsp;
+A <font color="#008007">Patient ID
+</font><font color="#990000">must</font>
+be specified, or seraPlan will issue an error message in the <font color="#008007">Apply</font>
+stage.</b>
+<p><a NAME="8.3.1.1.2"></a><b>8.3.1.1.2.&nbsp; Treatment Date</b>
+<p><b>The <font color="#008007">Treatment Date</font> field provides a
+means for denoting the date on which the treatment was performed, or the
+date when the plan was constructed.&nbsp; The default value is the date
+when seraPlan was launched.&nbsp; This is only used presently in the plan
+file for identification purposes, and has no bearing on the dose combination.</b></blockquote>
+<a NAME="8.3.1.2"></a><b>&nbsp;&nbsp;&nbsp; 8.3.1.2.&nbsp; Field/Fraction
+Specifications</b>
+<blockquote><a NAME="8.3.1.2.1"></a><b>8.3.1.2.1.&nbsp; Number of Fractions</b></blockquote>
+
+<blockquote><b>The number of fractions (distinct boron administrations
+and/or treatment days) is provided by using the <font color="#008007">Fractions</font>
+slider.&nbsp; Up to <font color="#FF0000">four (4)</font> fractions per
+plan are allowed.&nbsp; The default is <font color="#FF0000">two (2)</font>
+fractions, unless a different value is set using the <font color="#008007">Preferences</font>
+file (see <a href="#8.2.3">Section 8.2.3</a>).&nbsp; A dose (<font color="#CC6600">.rst</font>)
+file is written for each fraction, as well as for the complete plan.&nbsp;
+The fraction dose file contains only the information and combined doses
+for that fraction, with the proper boron and exposure weighting.</b>
+<p><a NAME="8.3.1.2.2"></a><b>8.3.1.2.2.&nbsp; Number of Fields per Fraction</b>
+<p><b>The number of fields (distinct beam placements) per fraction is provided
+using the <font color="#008007">Fields per Fraction</font> slider.&nbsp;
+Up to <font color="#FF0000">six (6)</font> fields per fraction are allowed.&nbsp;
+The default is <font color="#FF0000">two (2)</font> fields per fraction,
+unless a different value is set using the <font color="#008007">Preferences</font>
+file (see <a href="#8.2.3">Section 8.2.3</a>).</b>
+<p><a NAME="8.3.1.2.3"></a><b>8.3.1.2.3.&nbsp; Set Button</b>
+<p><b>The <font color="#008007">Set</font> button, located between the
+<font color="#008007">Fractions</font>
+and <font color="#008007">Fields per Fraction</font> sliders, fixes the
+number of fractions and fields per fraction for the plan, and generates
+the seraPlan display used to input the field data.&nbsp; Changes to the
+number of fractions and/or fields per fraction may be made, but the <font color="#008007">Set</font>
+button must be activated to implement the changes.&nbsp; If either parameter
+is changed, any data input in the display is retained and, in the case
+of reducing either parameter, may be recovered by increasing the appropriate
+parameter.&nbsp; Any information that is overwritten is lost.</b></blockquote>
+<a NAME="8.3.1.3"></a><b>&nbsp;&nbsp;&nbsp; 8.3.1.3.&nbsp; Field Data</b>
+<blockquote><a NAME="8.3.1.3.1"></a><b>8.3.1.3.1.&nbsp; Dose File Name</b></blockquote>
+
+<blockquote><b>The filenames for the <a href="appA.html">seraMC</a> dose
+files to be used in the dose combination are given in the <font color="#008007">seraMC
+dose file text</font> display.&nbsp; The filename can be typed in directly,
+or a search of the directory tree can be instituted by clicking on the
+arrow button to the left of the text widget.&nbsp; Full pathnames are recommended,
+as this allows access to the dose files from any directory.&nbsp; Note
+that these filenames will be written into the plan file exactly as entered
+in the text widget.&nbsp; Dose files must be specified for each active
+field in the plan.</b>
+<p><a NAME="8.3.1.3.2"></a><b>8.3.1.3.2.&nbsp; Boron Concentration Data</b>
+<p><b>The <font color="#008007"><sup>10</sup>B concentration</font> for
+each field is entered in the <sup>10</sup>B text display.&nbsp; The units
+on the boron concentration are arbitrary, and largely irrelevant, as long
+as they are entered in a consistent fashion for all fields.&nbsp; This
+is a result of the normalization to unit boron concentration, described
+above in <a href="#Sect8.1">Section 8.1</a>.&nbsp; Generally, the boron
+concentration is given in <font color="#FF0000">parts per million (ppm)</font>.</b>
+<p><b>Running simple averages and exposure weighted effective boron concentrations
+are calculated and displayed in the fraction and plan sum displays.&nbsp;
+Details of these are provided in <a href="#Sect8.4.">Section 8.3.2</a>.</b>
+<p><a NAME="8.3.1.3.3"></a><b>8.3.1.3.3.&nbsp; Exposure Data</b>
+<p><b>The exposure for each field is supplied in the <font color="#008007">Exposure</font>
+text display.&nbsp; The units on the exposure are, like those for the boron
+concentration, arbitrary and irrelevant, as long as they are consistent.&nbsp;
+Since the combined dose results are normalized to unit exposure, the exposure
+can be entered in units of <font color="#FF0000">minutes</font>, <font color="#FF0000">MW-minutes</font>,
+neutron flux or current, or any other convenient measure.&nbsp; Since variable
+intensity beams are not yet envisioned for BNCT, it is likely that the
+exposure will generally be given in terms of time.</b>
+<p><b>Running summations of exposure for each fraction and the plan, along
+with fraction relative weights, are calculated and displayed in the fraction
+and plan sum displays.&nbsp; Details are provided in <a href="#Sect8.4.">Section
+8.3.2.</a></b>
+<p><a NAME="8.3.1.3.4"></a><b>8.3.1.3.4.&nbsp; Gamma Repair Data</b>
+<p><b>The <font color="#008007">gamma repair factor</font> is defined as
+the fraction of the gamma dose that is considered to contribute substantially
+to multifraction exposures, i.e., the fraction of gamma dose induced damage
+that is <font color="#990000">not</font> repaired between fractions.&nbsp;
+This factor will range from <font color="#FF0000">0</font> to <font color="#FF0000">1</font>,
+with single fraction exposures using a factor of <font color="#FF0000">1</font>.&nbsp;
+It should be noted that no internal "sanity checks" (other than to ensure
+that only numerical data is entered) are performed on the gamma repair
+factor, so it is up to the user to verify that the values input are correct
+and appropriate.</b>
+<p><a NAME="8.3.1.3.5"></a><b>8.3.1.3.5.&nbsp; Active Field</b>
+<p><b>The <font color="#008007">Active</font> button at the far right of
+the field data display is used to activate or deactivate the data for that
+particular field.&nbsp; A <font color="#FF0000">deactivated</font> field
+is not included in the dose combination calculation, and all <font color="#FF0000">activated</font>
+fields are included.&nbsp; By default, all fields are active.&nbsp; To
+deactivate a field, simply click on the red button, and click on the button
+again to reactivate.</b>
+<p><a NAME="8.3.1.3.6"></a><b>8.3.1.3.6.&nbsp; Same Fields button</b></blockquote>
+
+<blockquote><b>The <font color="#008007">Same Fields</font> buttons, located
+at the upper left of each fraction subsection, allow the user easily to
+specify the same field dose file names for multiple fractions.&nbsp; When
+these buttons are <font color="#FF0000">activated</font>, specifying a
+dose file name for one field in a fraction will propagate that file name
+to the same field in each fraction, for all fractions which have this button
+activated.&nbsp; Those fractions which allow <font color="#008007">Unique
+Fields</font> (the <font color="#FF0000">deactivated</font> state) will
+not be changed.&nbsp; Note that activation of this button will overwrite
+any existing file name(s) specified.&nbsp; The default is for the button
+to be <font color="#FF0000">activated</font> for all fractions.</b></blockquote>
+
+<p><br><a NAME="8.3.2"></a><b>8.3.2.&nbsp; Summation Data</b>
+<p><a NAME="8.3.2.1"></a><b>&nbsp;&nbsp;&nbsp; 8.3.2.1.&nbsp; Fraction
+Sum</b>
+<p><b>The <font color="#008007">fraction sum display</font> is a cluster
+of four non-editable text widget displays at the end of each fraction.&nbsp;
+These display the <font color="#008007">fraction average</font> and <font color="#008007">effective</font>
+(exposure weighted) <sup>10</sup>B concentration, the <font color="#008007">fraction
+total exposure</font>, and the <font color="#008007">fraction of the total
+exposure</font> given in that fraction.&nbsp; The <font color="#008007">effective
+boron</font> is given by summing the product of the <sup>10</sup>B concentration
+and the exposure for each field, and then dividing by the total exposure.&nbsp;
+These are running totals, and they are updated as each entry is entered
+in the field data displays.</b>
+<p><a NAME="8.3.2.2"></a><b>&nbsp;&nbsp;&nbsp; 8.3.2.2.&nbsp; Plan Sum</b>
+<p><b>The <font color="#008007">plan sum display</font> is very similar
+to the fraction sum display.&nbsp; It appears at the bottom of the seraPlan
+display scrolled window;&nbsp; it shows the <font color="#008007">average</font>
+and <font color="#008007">effective <sup>10</sup>B</font> concentrations
+and the <font color="#008007">total exposure</font>.&nbsp; Again, these
+are running totals, updated continuously as data are entered.</b>
+<br>&nbsp;
+<p><a NAME="8.3.3"></a><b>8.3.3.&nbsp; Output Files</b>
+<p><a NAME="8.3.3.1"></a><b>&nbsp;&nbsp;&nbsp; 8.3.3.1.&nbsp; Plan File</b>
+<p><b>The plan file written by seraPlan contains all the information shown
+in the seraPlan display.&nbsp; It is an ASCII file, and it generally works
+on the keyword-value system.&nbsp; A sample plan file is shown below.</b>
+<br>&nbsp;
+<blockquote><b><font color="#000000">Patient: Patient</font></b>
+<br><b><font color="#000000">Treatment date: Tue 30 Mar 1999 14:15 MST</font></b>
+<br><b><font color="#000000">FRACTIONS=2 FIELDS=3</font></b>
+<br><b><font color="#000000">Fraction 0</font></b>
+<br><b><font color="#000000">Field 0</font></b>
+<br><b><font color="#000000">/users/cew/Patient/inel/I1/I1.rstb</font></b>
+<br><b><font color="#000000">17.12 16 1 1</font></b>
+<br><b><font color="#000000">Field 1</font></b>
+<br><b><font color="#000000">/users/cew/Patient/inel/P1/P1.rstb</font></b>
+<br><b><font color="#000000">15.86 10 1 1</font></b>
+<br><b><font color="#000000">Field 2</font></b>
+<br><b><font color="#000000">/users/cew/Patient/inel/S1/S1.rstb</font></b>
+<br><b><font color="#000000">13.94 6.5 1 1</font></b>
+<br><b><font color="#000000">Fraction sums 15.64 16.0963 32.5 0.488722</font></b>
+<br><b><font color="#000000">Fraction 1</font></b>
+<br><b><font color="#000000">Field 0</font></b>
+<br><b><font color="#000000">/users/cew/Patient/inel/I1/I1.rstb</font></b>
+<br><b><font color="#000000">16.34 17 1 1</font></b>
+<br><b><font color="#000000">Field 1</font></b>
+<br><b><font color="#000000">/users/cew/Patient/inel/P1/P1.rstb</font></b>
+<br><b><font color="#000000">13.74 10 1 1</font></b>
+<br><b><font color="#000000">Field 2</font></b>
+<br><b><font color="#000000">/users/cew/Patient/inel/S1/S1.rstb</font></b>
+<br><b><font color="#000000">12.71 7 1 1</font></b>
+<br><b><font color="#000000">Fraction sums 14.2633 14.8279 34 0.511278</font></b>
+<br><b><font color="#000000">Plan sums 14.9517 15.4478 66.5</font></b></blockquote>
+<b>All values are as displayed in the seraPlan display, with the exception
+of the <font color="#008007">Active</font> button status.&nbsp; This is
+given as 0 for inactive fields, and 1 for active fields.&nbsp; The plan
+file generated is called <font color="#CC6600">XXplan</font><font color="#274342">,
+where </font><font color="#CC6600">XX</font><font color="#274342"> is the
+</font><font color="#008007">Patient
+ID</font><font color="#274342"> specified.</font></b>
+<p><a NAME="8.3.3.2"></a><b>&nbsp;&nbsp;&nbsp; 8.3.3.2.&nbsp; Combined
+Dose Files</b>
+<p><b>The combined dose file is formatted exactly as the dose files created
+by <a href="appA.html">seraMC</a>.&nbsp; The individual field parameters
+from each specified <font color="#008007">field dose file</font> (beam
+directional inputs, input files, etc.) are retained, and written in the
+combined dose file.</b>
+<p><b>In all cases, a total plan dose file is written.&nbsp; For the case
+of multifraction irradiations, a combined fraction dose file is written
+for each fraction.&nbsp; The dose results given in the plan dose file are
+the weighted sum of all the fraction dose file results.&nbsp; The new dose
+files are called <font color="#CC6600">XXplan.fracN.rst</font> and <font color="#CC6600">XXplan.rst</font>,
+where <font color="#CC6600">XX</font> is the <font color="#008007">Patient
+ID</font>, and <font color="#CC6600">N</font> is the fraction number (for
+multi-fraction plans).</b>
+<br>&nbsp;
+<p><a NAME="8.4"></a><b><font size=+1>8.4.&nbsp; Edit Module</font></b>
+<p><b>The edit module allows the user to perform a variety of edits on
+a single dose file, which may be either a single field dose file, or one
+produced by the plan combination utility.&nbsp; This section describes
+the input required from the user, and the resulting files that are generated.</b>
+<p><a NAME="8.4.1"></a><b>8.4.1.&nbsp; Basic Input Data</b>
+<p><a NAME="8.4.1.1"></a><b>&nbsp;&nbsp;&nbsp; 8.4.1.1.&nbsp; Dose File</b>
+<p><b>This is the name of the dose (.rst) file which will be used to generate
+the edits.&nbsp; It may be either a plan file created by the <a href="#8.1">seraPlan</a>
+combination utility, or a single field dose file written by <a href="appA.html">seraMC</a>.&nbsp;
+The filename may be typed in directly, or selected by traversing the directory
+tree with the file selection widget invoked by pressing the arrow key attached
+to the text widget.</b>
+<p><a NAME="8.4.1.2"></a>&nbsp;&nbsp;&nbsp; <b>8.4.1.2.&nbsp; Plan Name</b>
+<p><b>This field provides a filename prefix that is used to construct the
+names of all generated files from the edit module.&nbsp; Any text string
+which does not contain spaces may be entered.</b>
+<p><a NAME="8.4.1.3"></a>&nbsp;&nbsp;&nbsp; <b>8.4.1.3.&nbsp; Patient ID</b>
+<p><b>This field provides a text string which is used in the headers for
+various edit outputs.&nbsp; Its primary function is as a delimiter between
+line edits, but it also appears in the title of any dose-depth plots generated
+by <a href="sec10.html">seraPlot</a> from these line edits.&nbsp; Any string
+which does not contain spaces may be entered.</b>
+<p><a NAME="8.4.1.4"></a><b>&nbsp;&nbsp;&nbsp; 8.4.1.4.&nbsp; Blood B10</b>
+<p><b>The Blood B10 entry provides a concentration of boron-10 in the blood,
+which is used to calculate the boron concentration in all tissue types.&nbsp;
+This is done by using the tissue-to-blood ratios provided in the <font color="#CC6600">.uvh</font>
+file.&nbsp; Generally, this entry is given in ppm boron-10.&nbsp; <font color="#990000">Note
+that this is not used for the reference dose determination, unless the
+Point option is selected as the search type (see <a href="#8.4.1.9">Section
+8.4.1.9</a>).</font></b>
+<p><a NAME="8.4.1.5"></a><b>&nbsp;&nbsp;&nbsp; 8.4.1.5.&nbsp; N_avg</b>
+<p><b>This parameter activates a supplemental dose-volume edit for each
+body.&nbsp; It divides the body into <font color="#008007">N_avg</font><font color="#274342">
+regions of equal volume, with the volume elements (in this case, the edit
+voxels) sorted by total dose, and computes the average dose in each region.&nbsp;
+Thus, if the parameter is set to </font><font color="#FF0000">3</font><font color="#274342">,
+then the body will be divided into three regions, with the first region
+containing the voxels with doses above the 67th percentile, the second
+region containing the voxels with doses between the 33rd and 67th percentiles,
+and the third region containing the voxels with doses below the 33rd percentile.&nbsp;
+If the parameter is set to </font><font color="#FF0000">1</font><font color="#274342">,
+then this supplemental edit is not performed.</font></b>
+<p><b><font color="#274342">A default value for this parameter may be specified
+in the </font><font color="#008007">Preferences</font><font color="#274342">
+file (see <a href="#8.2.3.3">Section 8.2.3.3</a>).</font></b>
+<p><a NAME="8.4.1.6"></a><b>&nbsp;&nbsp;&nbsp; 8.4.1.6.&nbsp; Upper DV
+bin (%)</b>
+<p><b>This entry, along with <a href="#8.4.1.7">Nbin_DV</a>, helps determine
+the number and width of bins into which each dose-volume histogram edit
+will be broken.&nbsp; The number of bins will always be <font color="#FF0000">Nbin_DV+1</font><font color="#274342">,
+and each bin will have a width given by the upper bin value specified divided
+by </font><font color="#FF0000">Nbin_DV</font><font color="#274342">.&nbsp;
+There will also be an additional bin, which will accommodate all regions
+with dose greater than the upper bin value.</font></b>
+<p><b><font color="#274342">It is recommended that this value be evenly
+divisible by </font><font color="#008007">Nbin_DV</font><font color="#274342">,
+although this is not required.&nbsp; A default value for this parameter
+may be specified in the Preferences file (see <a href="#8.2.3.3">Section
+8.2.3.3</a>).</font></b>
+<p><a NAME="8.4.1.7"></a><b>&nbsp;&nbsp;&nbsp; 8.4.1.7.&nbsp; Nbin_DV</b>
+<p><b>This entry determines the number of bins into which the dose-volume
+histogram edits will be broken.&nbsp; As explained in <a href="#8.4.1.6">Section
+8.4.1.6</a>, there will always be <font color="#FF0000">Nbin_DV+1</font>
+bins.</b>
+<p><b><font color="#274342">A default value for this parameter may be specified
+in the </font><font color="#008007">Preferences</font><font color="#274342">
+file (see <a href="#8.2.3.3">Section 8.2.3.3</a>).</font></b>
+<p><a NAME="8.4.1.8"></a><b>&nbsp;&nbsp;&nbsp; 8.4.1.8.&nbsp; Reference
+Dose Search Component</b>
+<p><b>The reference dose search component is selected from the pulldown
+menu located in the <font color="#008007">Reference Dose Options</font>
+subpanel, as shown in Figure 8.10.&nbsp; This dose component will be the
+only component compared for the Volume reference dose search (see <a href="#8.4.1.9">Section
+8.4.1.9</a>), where the reference dose is the dose at the center of the
+edit voxel with the highest value of the selected dose component.&nbsp;
+At present, three options are available:&nbsp; <font color="#FF0000">total
+dose</font><font color="#274342">,</font><font color="#FF0000"> thermal
+flux</font><font color="#274342">,</font><font color="#FF0000"> </font><font color="#274342">and
+</font><font color="#FF0000">gamma
+dose</font>.</b>
+<p><b><font color="#274342">A default value for this parameter may be specified
+in the </font><font color="#008007">Preferences</font><font color="#274342">
+file (see <a href="#8.2.3.2">Section 8.2.3.2</a>).</font></b>
+<p><img SRC="DoseCalculations/seraPlan.reftype.jpg" NOSAVE height=154 width=417>
+<p><b>Figure 8.10.&nbsp; Pulldown menu used to select the dose component
+used in the reference dose search.</b>
+<p><a NAME="8.4.1.9"></a><b>&nbsp;&nbsp;&nbsp; 8.4.1.9.&nbsp; Reference
+Dose Search Type</b>
+<p><b>There are two options for the type of reference dose search: <font color="#FF0000">Volume</font>
+and <font color="#FF0000">Point</font>.&nbsp; If the <font color="#008007">Point</font>
+option is selected, the user is prompted for an (x,y,z) location, as shown
+in Figure 8.11.&nbsp; It is actually a misnomer, as there is no actual
+search for the reference point in this case;&nbsp; the reference point
+is at the specified spatial location, and the reference dose is the physical
+dose at this point, with the boron concentration given by the product of
+the blood boron concentration (see <a href="#8.4.1.4">Section 8.4.1.4</a>)
+and the tissue-to-blood ratio for the material at the specified location.</b>
+<p><img SRC="DoseCalculations/seraPlan.refpt.jpg" NOSAVE height=143 width=414>
+<p><b>Figure 8.11.&nbsp; Display produced by selecting the Point type of
+reference dose search.</b>
+<p><b>Selection of the <font color="#008007">Volume</font> option causes
+the program to prompt the user for a boron concentration, and a list of
+bodies to be included in the search, as shown in Figure 8.12.&nbsp; The
+boron concentration provided will be used only for the reference dose search,
+and will <font color="#990000">not</font> be modified by the tissue-to-blood
+ratios of the specified bodies.&nbsp; The list of bodies denotes the only
+bodies that will be include in the search.&nbsp; The search will encompass
+all edit voxels in the defined bodies, with the reference point defined
+as the location of the center of the edit voxel with the largest value
+of the specified dose component (see <a href="#8.4.1.8">Section 8.4.1.8</a>),
+with the dose component(s) modified by the specified reference dose RBE
+values (see <a href="#8.4.1.10">Section 8.4.1.10</a>).</b>
+<p><img SRC="DoseCalculations/seraPlan.refvol.jpg" NOSAVE height=145 width=414>
+<p><b>Figure 8.12.&nbsp; Display produced by selecting the Volume type
+of reference dose search.</b>
+<p><a NAME="8.4.1.10"></a><b>&nbsp;&nbsp;&nbsp; 8.4.1.10.&nbsp; Reference
+Dose RBE Values</b>
+<p><b>The reference dose RBE values are defined in the seven text widgets
+below the <font color="#008007">Reference Dose Options</font> subpanel,
+and are used only for the reference dose search.&nbsp; At present, the
+<font color="#008007">Other</font>
+and <font color="#008007">Ultrafast</font> RBE values may both be defined,
+but only the <font color="#008007">Other</font> dose RBE is actually applied.&nbsp;
+This will very likely change in future versions, to accommodate varying
+RBE values for high-energy (> 20MeV) neutron therapy.</b>
+<p><b>Default values for these parameters may be specified in the <font color="#008007">Preferences</font>
+file (see <a href="#8.2.3.2">Section 8.2.3.2</a>).</b>
+<p><a NAME="8.4.1.11"></a><b>&nbsp;&nbsp;&nbsp; 8.4.1.11.&nbsp; Perform
+Standard Edits Button</b>
+<p><b>This toggle button, located at the bottom of the e<font color="#274342">dit</font>
+module input panel, allows the user to choose to perform, or not perform,
+the standard edits (see Section 8.4.3).&nbsp; If toggled <font color="#FF0000">on</font>,
+the standard edits will be performed.&nbsp; If toggled <font color="#FF0000">off</font>,
+they will not be computed.</b>
+<p><a NAME="8.4.2"></a><b>8.4.2.&nbsp; User-defined Edits Input Data</b>
+<p><b>The input data for the four types of user-defined edits are activated
+from the Edit menu (see <a href="#8.2.2">Section 8.2.2</a>).&nbsp; Each
+popup will initially contain only a text widget, in which the user is asked
+to set the number of that particular edit type desired.&nbsp; After typing
+in the number, and hitting the <font color="#008007">Enter</font> or <font color="#008007">Return</font>
+key, the popup will then display the requisite widgets for the desired
+number of edits.&nbsp; When the required data is entered, the user must
+then click on the <font color="#008007">Save</font> button at the bottom
+of the popup to store information.&nbsp; The <font color="#008007">Done</font>
+button will then exit the popup.</b>
+<p><b><font color="#990000">Be aware that the information is not stored,
+and thus, the edits will not be performed, if the </font><font color="#008007">Save</font><font color="#990000">
+button is not clicked.&nbsp; </font><font color="#274342">However, if the
+user does not click the </font><font color="#008007">Save</font> button,
+all is not lost.&nbsp; The information may be recovered by reactivating
+the popup.</b>
+<p><a NAME="8.4.2.1"></a><b>&nbsp;&nbsp;&nbsp; 8.4.2.1.&nbsp; Point</b>
+<p><b>An example of the Point popup is shown in Figure 8.13.&nbsp; This
+shows the required input fields for five point edits.&nbsp; For each point
+edit, a triplet of values must be provided, giving the spatial location
+of the requested edit.&nbsp; Checking is performed to assure that three,
+and only three, values are entered for each point edit location.&nbsp;
+Up to 20 user-defined point edits are allowed in a single problem.</b>
+<p><img SRC="DoseCalculations/seraPlan.point.jpg" NOSAVE height=310 width=409>
+<p><b>Figure 8.13.&nbsp; The popup for the user-defined Point edits.</b>
+<p><a NAME="8.4.2.2"></a><b>&nbsp;&nbsp;&nbsp; 8.4.2.2.&nbsp; Line</b>
+<p><b>A line edit is simply a series of point edits for a sequence of points
+along a line, with a regular, defined spacing between points.&nbsp; All
+dose components are defined in the line edit results.</b>
+<p><b>An example of the Line popup is shown in Figure 8.14.&nbsp; This
+shows the required input fields for three line edits.&nbsp; For each line
+edit, three parameters are required.&nbsp; The first is the spacing, in
+cm, between points.&nbsp; The last two define the initial and final point
+of the line, and are given as triplets representing a spatial location
+in the model.&nbsp; As with the point edit, checking is performed to assure
+the proper number of entries for each line edit input set.&nbsp; Up to
+10 user-defined line edits are allowed in a single problem.</b>
+<p><img SRC="DoseCalculations/seraPlan.line.jpg" NOSAVE height=468 width=525>
+<p><b>Figure 8.14.&nbsp; The popup for the user-defined Line edits.</b>
+<p><a NAME="8.4.2.3"></a><b>&nbsp;&nbsp;&nbsp; 8.4.2.3.&nbsp; Dose-volume
+Histogram</b>
+<p><b>A dose-volume histogram edit integrates the dose over a body or set
+of bodies.&nbsp; In seraPlan, the integration is performed by calculating
+the dose at the center of each univel in the body, then summing the product
+of the dose in the univel and the univel volume over all univels in the
+list of accepted bodies.&nbsp; The results are reported as the fraction
+of the volume that falls within a range of dose values.&nbsp; These dose
+value ranges are generally reported as a percentage of the reference dose.&nbsp;
+Each individual dose component is reported separately.</b>
+<p><b>An example of the Dose-volume Histogram popup is shown in Figure
+8.15.&nbsp; This shows the required input fields for three DV histogram
+edits.&nbsp; The only required input for the user-defined DV histogram
+edits is a list of body names, with the body names separated by white spaces
+(spaces, tabs, or returns).&nbsp; Up to 10 user-defined DV histogram edits
+are allowed in a single problem.</b>
+<p><img SRC="DoseCalculations/seraPlan.dvh.jpg" NOSAVE height=246 width=565>
+<p><b>Figure 8.15.&nbsp; The popup for the user-defined Dose-volume Histogram
+edits.</b>
+<p><a NAME="8.4.2.4"></a><b>&nbsp;&nbsp;&nbsp; 8.4.2.4.&nbsp; Contour</b>
+<p><b>A contour, or surface, edit is a dose edit over a regular array of
+points, all of which reside in a common plane.&nbsp; These data are then
+used by the <a href="sec09.html">seraDose</a> and <a href="sec06.html">sera3d</a>
+modules to construct isodose contours.</b>
+<p><b>An example of the Contour (surface edit) popup is shown in Figure
+8.16.&nbsp; This shows the required input fields for two contour edits.&nbsp;
+Each contour edit requires two basic input groups:&nbsp; the prefix for
+the files to which data is written; and the definition of the plane over
+which the edit is performed.&nbsp; The plane definition requires a base
+point and two vectors.&nbsp; The base point gives a starting location,
+and the two vectors, which must be normal to each other, then define the
+remainder of the plane inside the edit space.&nbsp; <font color="#990000">Please
+note that the edit plane will be oriented along the directions defined
+by the two vectors.</font><font color="#274342">&nbsp; This may cause the
+plane to be skewed within the edit voxel space, if the vectors are not
+tangent to coordinate planes (i.e., x-y plane, y-z plane, and x-z plane).</font></b>
+<p><b><font color="#274342">The skew is a result of the method employed
+to map the defined plane into a space more amenable to editing.&nbsp; First,
+the two vectors are normalized to unity, and a third vector, normal to
+the two defined, is constructed and normalized.&nbsp; This gives a set
+of three basis vectors, which function not only as the coordinate axes
+for the transformed space, but also as the self-orthogonal transformation
+matrix between the two spaces.&nbsp; The base point then defines the z-level
+in the new space, and the plane tangential to the x-y plane in the transformed
+space.&nbsp; The edit is then performed by stepping, in a regular fashion,
+over the x-y plane, with the maxima and minima for the two axes defined
+by the maxima and minima for the edit space.&nbsp; Points which lie outside
+the univel or base edit space, i.e., those which have no body assignment,
+are assigned a zero dose.</font></b>
+<p><b><font color="#274342">Up to 4 user-defined contour edits are allowed
+in a single problem.</font></b>
+<p><img SRC="DoseCalculations/seraPlan.contour.jpg" NOSAVE height=411 width=441>
+<p><b>Figure 8.16.&nbsp; The popup for the user-defined Contour edits.</b>
+<p><a NAME="8.4.3"></a><b>8.4.3.&nbsp; Standard Edits</b>
+<p><b>A set of standard edits is produced by seraPlan when the <font color="#008007">Perform
+Standard Edits</font> button is toggled <font color="#FF0000">on</font>.&nbsp;
+These include:</b>
+<ul>
+<li>
+<b>point edits for the target point of each field in the plan</b></li>
+
+<li>
+<b>point edits at each constraint point defined in the model</b></li>
+
+<li>
+<b>line edits along the beamline of each field from the entry point to
+the target point at 0.25cm intervals</b></li>
+
+<li>
+<b>dose-volume histograms for each body defined in the model, except <font color="#008007">buffer</font></b></li>
+
+<li>
+<b>contour edits for each image plane in the image set.</b></li>
+</ul>
+
+<p><br><a NAME="8.4.4"></a><b>8.4.4.&nbsp; Output Files</b>
+<p><b>Several output files are created by seraPlan.&nbsp; Each is written
+to the <font color="#008007">Save Directory</font> defined at the beginning
+of the edit calculation (see <a href="#8.2.2">Section 8.2.2</a>).&nbsp;
+The all filenames, except those for the user-defined contour edits, are
+prefixed with the <a href="#8.4.1.2">Plan Name</a> defined in the input
+data.&nbsp; Thus, if the <font color="#008007">Plan Name</font> is <font color="#FF0000">george</font>,
+then the files will all have names <font color="#CC6600">george.xxx</font>.</b>
+<p><a NAME="8.4.4.1"></a>&nbsp;&nbsp;&nbsp; <b>8.4.4.1.&nbsp; Reference
+Dose</b>
+<p><b>The reference dose information is written to the <font color="#CC6600">.edit</font>
+file.&nbsp; This edit is always performed, as it is needed for practically
+every other edit.&nbsp; It is the first edit to appear in the <font color="#CC6600">.edit</font>
+file, immediately after the list of bodies defined in the problem.</b>
+<p><a NAME="8.4.4.2"></a><b>&nbsp;&nbsp;&nbsp; 8.4.4.2.&nbsp; Point Edits</b>
+<p><b>All point edits, whether standard or user-defined, are written to
+the <font color="#CC6600">.edit</font> file.&nbsp; The point edit results
+appear immediately after the reference dose edit.&nbsp; The target points
+are printed first, followed by the constraint points, and, finally, the
+user-defined points.</b>
+<p><a NAME="8.4.4.3"></a><b>&nbsp;&nbsp;&nbsp; 8.4.4.3.&nbsp; Line Edits</b>
+<p><b>All line edits, whether standard or user-defined, are written to
+the <font color="#CC6600">.lin</font> file.&nbsp; The beamline edits appear
+first, followed by any user-defined line edits.</b>
+<p><a NAME="8.4.4.4"></a><b>&nbsp;&nbsp;&nbsp; 8.4.4.4.&nbsp; Dose-volume
+Histogram Edits</b>
+<p><b>All dose-volume histogram edits, whether standard or user-defined,
+are written to the <font color="#CC6600">.dvh</font> file.&nbsp; This includes
+the supplemental dose-volume edits generated by setting <font color="#008007">N_avg</font>.&nbsp;
+The standard DV histogram edits appear first, then the user-defined edits.</b>
+<p><a NAME="8.4.4.5"></a><b>&nbsp;&nbsp;&nbsp; 8.4.4.5.&nbsp; Contour Edits</b>
+<p><b>All contour edits cause three files to be created.&nbsp; These are
+analogous to the Qsh files, with a header file (<font color="#CC6600">.chd</font>)
+for general information about the contour planes, and the data files for
+the dose data (<font color="#CC6600">.cdf</font>) and mask information
+(<font color="#CC6600">.cmf</font>).</b>
+<blockquote><a NAME="8.4.4.5.1"></a><b>8.4.4.5.1.&nbsp; Standard Edits</b></blockquote>
+
+<blockquote><b>The standard contour edits are written to a concatenated
+(3D) contour file.&nbsp; All planes appear in these files, which will be
+prefixed with the <font color="#008007">Plan Name</font>.</b>
+<p><a NAME="8.4.4.5.2"></a><b>8.4.4.5.2.&nbsp; User-defined Edits</b>
+<p><b>The user-defined contour edits will each create a set of contour
+files.&nbsp; The filenames will be prefixed with the name given for the
+filename in the contour popup (see <a href="#8.4.2.4">Section 8.4.2.4</a>).</b></blockquote>
+
+<center><img SRC="marblebar.jpg" NOSAVE height=6 width=460>
+<br>&nbsp;
+<br>&nbsp;
+<p><a href="sec07.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><a href="sec07.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="sec09.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="sec09.html">Next</a></b></center>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+SRCS = displayC.c
+OBJS = displayC.o
+
+LOCAL_LIBRARIES = -lX11
+SYS_LIBRARIES   = 
+DEPLIBS         =
+
+
+ComplexProgramTarget(displayC)

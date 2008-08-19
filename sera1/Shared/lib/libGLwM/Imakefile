@@ -1,0 +1,17 @@
+SRCS = GLwMDrawA.c
+OBJS = GLwMDrawA.o
+
+LOCAL_LIBRARIES = -lcommon $(DEFAULT_X_LIBS) 
+SYS_LIBRARIES   = $(EXTRA_X_LIBS) MathLibrary
+DEPLIBS         = $(DEFAULT_DEP_X_LIBS) $(EXTRA_DEP_X_LIBS)
+
+LIBLOCATION     = $(SERA_LIB_LOCATION)
+LIB_NAME        = GLwM
+SPECIAL_INCLUDES = -I../../include/GLw
+
+CFLAGS = $(CDEBUGFLAGS) $(CCOPTIONS) $(THREADS_CFLAGS) $(ALLDEFINES) $(SPECIAL_INCLUDES)
+
+NormalLibraryObjectRule()
+NormalLibraryTarget($(LIB_NAME),$(OBJS))
+InstallLibrary($(LIB_NAME),$(LIBLOCATION))
+DependTarget()

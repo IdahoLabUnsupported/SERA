@@ -1,0 +1,9 @@
+The File menu contains two selections to remove various slices from the window:
+
+Remove All Slices
+   Removes all slices from the image window upon confirmation.
+   
+Remove Multiple Slices
+   Allows the user to select which of the images should be removed.  
+   
+For both remove options, click the "Done" button at the bottom of the image window to confirm removal.  

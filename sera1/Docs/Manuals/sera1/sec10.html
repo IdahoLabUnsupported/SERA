@@ -1,0 +1,202 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.6 [en] (X11; U; SunOS 5.6 sun4u) [Netscape]">
+   <meta name="Description" content="This is the SERA Manual page for Simplot, DVall, and the patient positioning program.">
+   <title>SERA Manual - Section 10</title>
+</head>
+<body text="#274342" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000" background="mainbackground.gif">
+
+<center><a href="sec09.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><font color="#274342"><a href="sec09.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="sec11.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="sec11.html">Next</a></font></b>
+<p><b><font size=+2>SERA</font></b>
+<br><b><font size=+2>Simulation Environment for Radiotherapy Applications</font></b>
+<br><b><font size=+2>User's Manual</font></b>
+<br><b><font size=+2>Version 1C0</font></b>
+<p><img SRC="marblebar.jpg" NOSAVE height=6 width=460></center>
+
+<p><b><font size=+2>10.&nbsp; 2D Dose Plotting Tools</font></b>
+<p><a NAME="10.1"></a><b><font size=+1>10.1 Introduction</font></b>
+<p><b>After a plan is developed, two separate tools are used to plot the
+dose results, and a third tool is used to determine the patient positioning.&nbsp;
+These tools are located in <font color="#CC6600">$SERA_BIN</font>, and
+all are currently launchable from the command line;&nbsp; the plotting
+tools may also be launched from the SERA <a href="sec03.html#3.1">main
+menu</a> or cross launched from any other SERA module by selecting the
+desired action.&nbsp; The two plotting modules all invoke the <a href="http://plasma-gate.weizmann.ac.il/Xmgr/">xmgr</a>
+two-dimensional plotting code to display the results of the request.</b>
+<p><b><font color="#990000">Note:&nbsp; the plotting tools have recently
+been re-written, and they are no longer compatible with output files from
+older (pre-1B0) versions of seraMC.&nbsp; For these tools to be used with
+previous seraMC runs, the edits MUST be reperformed with <a href="sec08.html">seraPlan</a>.</font></b>
+<br>&nbsp;
+<p><a NAME="10.2"></a><b><font size=+1>10.2 Simplot</font></b>
+<p><b><font color="#FF0000">Simplot</font> is an ancillary program that
+reads the <a href="sec08.html">seraPlan</a> line-edit output file (<font color="#CC6600">.lin</font>)
+and invokes the
+<a href="http://plasma-gate.weizmann.ac.il/Xmgr/">xmgr</a>
+plot code for each instance of a line edit.</b>
+<p><b>In the line edit, dose/depth data are available for</b>
+<p><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<font color="#000000">0&nbsp; Total dose</font></tt></b>
+<br><b><tt><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1&nbsp; 10B dose</font></tt></b>
+<br><b><tt><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+2&nbsp; Gamma dose</font></tt></b>
+<br><b><tt><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+3&nbsp; 14N dose</font></tt></b>
+<br><b><tt><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+4&nbsp; Hydrogen (fast) dose</font></tt></b>
+<br><b><tt><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+5&nbsp; Other dose</font></tt></b>
+<br><b><tt><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+6&nbsp; Group 1 (fast) fluence</font></tt></b>
+<br><b><tt><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+7&nbsp; Group 2 (epithermal) fluence</font></tt></b>
+<br><b><tt><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+8&nbsp; Thermal fluence</font></tt></b>
+<br><b><tt><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+9&nbsp; Gamma production</font></tt></b>
+<br><b><tt><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+a&nbsp; Ultrafast gamma production</font></tt></b>
+<br><b><tt><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+b&nbsp; Reaction rate 1</font></tt></b>
+<br><b><tt><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+c&nbsp; Reaction rate 2,</font></tt></b>
+<p><b>where the leading single digit (in hex) represents the code provided
+to force that dose component to be plotted.</b>
+<p><b>As an example, the simplot program might be invoked with:</b>
+<p><b><font color="#000000">&nbsp;simplot case1.lin case1.xmgr 2 96 12.3
+0 2 3 4</font></b>
+<p><b>Here, <font color="#CC6600">case1.lin</font> is the seraMC output
+file, and <font color="#CC6600">case1.xmgr</font> is a new file that will
+contain the plot commands and data for <a href="http://plasma-gate.weizmann.ac.il/Xmgr/">xmgr</a>.&nbsp;
+If there is more than one plot, simplot adds an increment to the plot file
+name.</b>
+<p><b><font color="#FF0000">Simplot</font> begins generating plot data
+from 0.0 to the depth obtained from the last point in the line plot.&nbsp;
+The third argument to simplot (<font color="#FF0000">2</font>) is a sample
+rate, or stride distance.&nbsp; The <font color="#FF0000">2</font> specifies
+that every other point in the line plot is used for the plot.&nbsp; The
+next two arguments (<font color="#FF0000">96</font> and <font color="#FF0000">12.3</font>)
+are the normalization factor and boron concentration to be folded into
+the dose data.&nbsp; Generally, the normalization factor is either 1, for
+no normalization, or the exposure in MW-min.&nbsp; The boron concentration
+is applied only to the <sup>10</sup>B dose and the total dose, where the
+total dose is the sum of all the dose components.</b>
+<p><b>The final <font color="#FF0000">0 2 3 4</font> argument tells <font color="#FF0000">simplot</font>
+to provide plots for the <font color="#008007">total dose</font>, <font color="#008007">gamma
+dose</font>, the <font color="#008007"><sup>14</sup>N dose</font> and the
+<font color="#008007">fast
+dose</font>.&nbsp; An <a href="http://plasma-gate.weizmann.ac.il/Xmgr/">xmgr</a>
+window is then opened for each line edit instance, and the user can modify
+the title and perform any other editing of the plot.&nbsp; Then the user
+can print the plot and save the plot file using the capabilities of <a href="http://plasma-gate.weizmann.ac.il/Xmgr/">xmgr</a>.</b>
+<p><b>If one simply enters <font color="#FF0000">simplot</font>, the routine
+will prompt the user for the necessary input data, and then present the
+requested components in an <a href="http://plasma-gate.weizmann.ac.il/Xmgr/">xmgr</a>
+window.</b>
+<p><b><font color="#FF0000">Simplot</font> may be executed from the main
+menu by selecting <font color="#008007">Dose-Depth Plot</font> under the
+<font color="#FF0000">SeraPlot</font>
+menu (see <a href="/users/cew/sera1/Docs/manual/sec03.html#fig3.6">Figure
+3.6</a>).&nbsp; A widget is then presented to the user as shown in Figure
+10.1.&nbsp; Once the <font color="#008007">Start</font> button is selected,
+plots of the line edits will appear.&nbsp; This widget may also be called
+from the command line by typing <font color="#FF0000">runSimplot</font>.</b>
+<p><img SRC="DoseDisplay/simplotpopup.gif" NOSAVE height=371 width=809>
+<p><b>Figure 10.1: Simplot Widget</b>
+<br>&nbsp;
+<p><a NAME="10.3"></a><b><font size=+1>10.3 DVall</font></b>
+<p><b><font color="#FF0000">DVall</font> is an ancillary program that reads
+the <a href="sec08.html">seraPlan</a> dose-volume histogram output file
+(<font color="#CC6600">.dvh</font>) from up to six different cases and
+provides dose-volume histogram plots for as many as four selected bodies
+on a single page.&nbsp; This allows multiple treatment plans to be compared
+simultaneously and easily.</b>
+<p><b>The <font color="#FF0000">DVall</font> code is entirely widget-driven
+and cannot be run directly from the command line.&nbsp; To invoke the code,
+either type <font color="#FF0000">DVall</font> from the command line, or
+select <font color="#008007">DVall</font> from the <font color="#FF0000">Dosimetry
+Display</font> menu of the main menu.&nbsp; This will pop up the widget,
+which is shown in Figure 10.2.</b>
+<p><img SRC="DoseDisplay/dvallpopup.gif" NOSAVE height=600 width=712>
+<p><b>Figure 10.2.&nbsp; DVall Widget.</b>
+<p><b>The widget interface asks the user to provide the number and name
+of each <a href="appA.html">seraMC</a> output file and the number and name
+of each body in these files.&nbsp; The body names must be the same in all
+<a href="appA.html">seraMC</a>
+cases; otherwise, <font color="#FF0000">DVall</font> will not pick up the
+information for non-matching body names.&nbsp; The
+<font color="#008007">maximum
+allowable dose</font> input parameter causes
+<font color="#FF0000">DVall</font>
+to calculate the exposure time necessary to achieve this dose at the reference
+point in healthy tissue.&nbsp; This information is written to the output
+file (<font color="#CC6600">plot_file_name.out</font>).</b>
+<p><b>Dose-volume data may be displayed either as cumulative or differential
+dose-volume plots, and in either histogram or smoothed form.&nbsp; After
+the user has supplied the necessary information to the widget interface,
+the code is then executed by selecting the <font color="#008007">Run</font>
+button from the bottom of the widget.&nbsp; <font color="#FF0000">DVall</font>
+then produces an <a href="http://plasma-gate.weizmann.ac.il/Xmgr/">xmgr</a>
+plot file, written to <font color="#CC6600">plot_file_name.xmgr</font>,&nbsp;
+containing the dose-volume histogram data for all requested cases and bodies.&nbsp;
+A sample plot output for two cases and three bodies is shown in Figure
+10.3.</b>
+<p><img SRC="DoseDisplay/dvallplot.gif" NOSAVE height=916 width=882>
+<p><b>Figure 10.3.&nbsp; DVall plot display.</b>
+<br>&nbsp;
+<p><a NAME="10.4"></a><b><font size=+1>10.4 Patient Positioning</font></b>
+<p><b>Patient positioning for BCNT currently employs a system of beads
+and tatoos placed on the patient during final imaging procedures.&nbsp;
+This method is simple to implement and should be sufficiently accurate
+if care is taken.&nbsp; It is also very laborious to position the patient
+using this method, and it is likely that the method will be either improved
+or replaced.</b>
+<p><b>Because the preferred patient positioning method has yet to be determined,
+patient positioning is treated in an ad hoc fashion, and both the source
+and executable files used for patient positioning are supplied with the
+software distribution.&nbsp; The source is being supplied until a preferred
+method is determined so that the field changes may be made if necessary.&nbsp;
+To run this code, enter from the command line:</b>
+<p><b><font color="#000000">&nbsp;position input_file</font></b>
+<p><b>The user will be prompted for the x-, y-, and z-coordinates of the
+various beads.&nbsp; These coordinates are obtained by using the locate
+button on the slice widgets displaying the beads.</b>
+<p><b>The input file may appear as:</b>
+<pre><font size=+1><b>&nbsp;</b>&nbsp;<b>&nbsp;&nbsp; <font color="#000000">THETA PHI numBEADS
+&nbsp;&nbsp;&nbsp;&nbsp; -13.0 75.0 4
+&nbsp;&nbsp;&nbsp;&nbsp; TARGET X Y Z
+&nbsp;&nbsp;&nbsp;&nbsp; -14.00 41.80 48.00
+&nbsp;&nbsp;&nbsp;&nbsp; BEAM X Y Z
+&nbsp;&nbsp;&nbsp;&nbsp; -20.92 71.77 56.24</font></b></font></pre>
+<b>where <font color="#008007">THETA</font> is the azimuthal patient rotational
+angle and <font color="#008007">PHI</font> is the polar rotational angle.&nbsp;
+A more detailed discussion of the coordinate system used is available in
+the <a href="appA.html#A.2.4">seraMC</a> manual, but note that, by necessity,
+the beam is rotated instead of the patient, so that the patient rotational
+angles are specified counter to
+<a href="appA.html">seraMC</a> angles.&nbsp;
+The target and beam coordinates are generated by <a href="appA.html">seraMC</a>,
+and the beam values are given with the beam rotated.&nbsp; The target point
+is the origin of rotation, so it is invariant.</b>
+<p><b>The <font color="#FF0000">position</font> code rotates the beam back
+to its original position. Then it rotates the patient (beads) by the angles
+specified in the input file.&nbsp; The final bead coordinates are expressed
+relative to the beam exit point.</b>
+<p><b>Admittedly, this is a cumbersome and complicated process, and it
+is necessary to provide one-on-one training of the user.&nbsp; Much work
+remains to get this process automated.</b>
+<br>&nbsp;
+<br>&nbsp;
+<br>
+<br>
+<center>
+<p><img SRC="marblebar.jpg" NOSAVE height=6 width=460>
+<br>&nbsp;
+<p><a href="sec09.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><font color="#274342"><a href="sec09.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="sec11.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="sec11.html">Next</a></font></b></center>
+
+<p><br>
+</body>
+</html>

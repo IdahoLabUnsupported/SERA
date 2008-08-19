@@ -1,0 +1,24 @@
+Mouse Control Panel:
+
+	________________________________________________
+
+	Control Method:
+	
+	   The control method buttons allow changing 
+          the rendering rotation between Pulling Axis,
+          Sliders, or Mouse Buttons.  These can also
+          be changed by right clicking on the main 
+          window and using the popup menu. 
+	________________________________________________
+	
+	Rotational Locks:
+
+	  The rotational locks provide the ability to 
+         "lock" a part of the rendering from being 
+         rotated.  Locking the bodies prevent the 
+         bodies from rotating, but the clipping planes
+         will.  Likewise locking the clipping planes
+         and not the bodies with cause the bodies to 
+         rotate while the clipping planes remain 
+         stationary.
+	________________________________________________

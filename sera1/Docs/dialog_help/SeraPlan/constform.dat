@@ -1,0 +1,13 @@
+SERA Plan Combination Utility
+
+       __________________________________________________
+
+The Plan Combination Utility is an interactive tool to perform statistical
+combination of dose results for multiple fields into a single weighted plan.
+It requires a series of .rst files, containing the dose results from each
+individual irradiation field, with boron levels, exposures, and gamma repair
+factors for each field.  Boron levels and exposures are given in arbitrary units.
+
+The utility generates a final weighted .rst file, containing the dose
+results for the combined fields.  The weighted dose results are
+normalized to 1 ppm boron and 1 unit of exposure.

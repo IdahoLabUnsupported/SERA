@@ -1,0 +1,61 @@
+  1001.95c     385  8   0.9992    22 1 hydrogen
+  4009.21c   17573 42   8.9348     0 0 beryllium
+  6012.21c   10057 27  11.8969    19 1 carbon
+  7014.98c   23990 54  13.8829     8 1 nitrogen
+  8016.21c   16186 39  15.8575     3 1 oxygen
+ 13027.21c   10480 28  26.7498     4 1 aluminum
+ 14000.21c   13782 34  27.8440     0 0 silicon
+ 20040.21c   15095 37  39.6193    13 1 calcium
+ 26000.21c   12100 31  55.3650     0 0 iron
+ 74000.21c   13533 34 182.2706     0 0 tungsten
+ 92238.21c   16427 40 236.0060     0 0 U238
+ MATERIALS
+ 11
+ void_edit
+           1
+    1 0.0               0 Simulated void (will get sub-element edits)
+ buffer
+           1
+    1 0.0               0 All undefined space between BSG and CG is void
+ lucite
+           3
+    1 0.057765            hydrogen
+    3 0.0361075           carbon
+    5 0.01444             oxygen
+ H2O
+           2
+    1 0.06668             hydrogen
+    5 0.03334             oxygen
+ pure_poly
+           2
+    1 0.077               hydrogen
+    3 0.0385              carbon
+ plywood
+           3
+    1 0.02378             hydrogen
+    3 0.01426             carbon
+    5 0.01189             oxygen
+ A150
+           5
+    1 0.067588            hydrogen
+    3 0.04363254          carbon
+    4 0.00168539          nitrogen
+    5 0.00219214          oxygen
+    8 0.000302925         calcium
+ styrofoam
+           2
+    1 0.0077              hydrogen
+    3 0.00385             carbon
+ lexan
+           3
+    1 0.0397904           hydrogen
+    3 0.0454727           carbon
+    5 0.008523            oxygen
+ Oxy
+           1
+    5 0.03334             oxygen
+ glassbead
+           3
+    5 0.0512445           oxygen
+    7 0.0214885           silicon
+    8 0.000329253         calcium

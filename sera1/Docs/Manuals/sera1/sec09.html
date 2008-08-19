@@ -1,0 +1,1064 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.6 [en] (X11; U; SunOS 5.6 sun4u) [Netscape]">
+   <meta name="Description" content="This is the SERA manual page for seraDose.">
+   <title>SERA Manual - Section 9</title>
+</head>
+<body text="#274342" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000" background="mainbackground.gif" nosave>
+
+<center><a href="sec08.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><a href="sec08.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="sec10.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="sec10.html">Next</a></b>
+<p><b><font color="#274342"><font size=+2>SERA</font></font></b>
+<br><b><font color="#274342"><font size=+2>Simulation Environment for Radiotherapy
+Applications</font></font></b>
+<br><b><font color="#274342"><font size=+2>User's Manual</font></font></b>
+<br><b><font color="#274342"><font size=+2>Version 1C0</font></font></b>
+<p><img SRC="marblebar.jpg" NOSAVE height=6 width=460></center>
+
+<p><b><font size=+2>9. Dose Contouring (seraDose)</font></b>
+<p><b>Dose contours can be viewed in two dimensions using seraDose.&nbsp;
+SeraDose can be invoked from either the "Sera Dose" button on the seraMenu
+(see <a href="sec03.html#3.1">Figure
+3.2</a>) or from the command line by entering<font color="#FF0000"> seraDose</font>,
+assuming the executable has been correctly installed in the SERA <font color="#CC6600">Target/bin</font>
+directory and the paths are set correctly.</b>
+<p><b>Upon invoking seraDose, the user will be presented with two windows
+(Figure 9.1).&nbsp; The first window, entitled "seraDose," is the main
+working window.&nbsp; The second window, entitled "seraDose: Image Contouring,"
+is used to view single images.</b>
+<br>&nbsp;
+<center><table CELLSPACING=5 COLS=2 WIDTH="60%" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><a href="SeraDose/mainWindows.html"><img SRC="SeraDose/images/mainWindowsTN.jpg" NOSAVE height=202 width=357></a></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.1.&nbsp; SeraDose main windows.&nbsp; Click image for large
+version (45k).</b>
+<p><b>The menu bar on the seraDose main window contains the following selections,
+as shown in Figure 9.2.</b>
+<br>&nbsp;
+<center><table CELLSPACING=5 COLS=3 WIDTH="100%" NOSAVE >
+<tr VALIGN=BOTTOM NOSAVE>
+<td VALIGN=CENTER WIDTH="15%" NOSAVE></td>
+
+<td NOSAVE><img SRC="SeraDose/images/mainMenus.jpg" NOSAVE height=184 width=607></td>
+
+<td NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.2.&nbsp; seraDose Main Window.&nbsp; Invoking seraDose presents
+the user with four main options seen here.</b>
+<br>&nbsp;
+<p><a NAME="9.1"></a><b><font color="#274342"><font size=+1>9.1 File Menu</font></font></b>
+<p><b>After the seraDose main window appears, pull down the <font color="#FF0000">File</font>
+menu item and the following options appear:</b>
+<br>&nbsp;
+<center><table CELLSPACING=5 COLS=2 WIDTH="40%" NOSAVE >
+<tr NOSAVE>
+<td VALIGN=BOTTOM NOSAVE><a href="SeraDose/fileMenu.html"><img SRC="SeraDose/images/fileMenuTN.jpg" NOSAVE height=159 width=178></a></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.3.&nbsp; The seraDose
+<font color="#993399">File</font> menu.&nbsp;
+Click image for large version (44k).</b>
+<br>&nbsp;
+<table BORDER WIDTH="100%" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b><a href="#Load QSH">Load QSH Pair</a></b></td>
+
+<td NOSAVE><b>Loads images in the QSH format. It will invoke the QSH load
+selection window (<a href="sec04.html#4.2.1">Figure
+4.2</a>).</b></td>
+</tr>
+
+<tr NOSAVE>
+<td NOSAVE><b><a href="#Load Dose(s) on QSH">Load Dose(s) on QSH Pair</a></b></td>
+
+<td NOSAVE><b>Allows user to load doses on QSH images.&nbsp; From this
+menu, there are three options, described in <a href="#9.5">section 9.5</a>.</b></td>
+</tr>
+
+<tr NOSAVE>
+<td NOSAVE><b><a href="#Load Mask(s) on QSH">Load Mask(s) on QSH Pair</a></b></td>
+
+<td NOSAVE><b>Allows user to load masks on QSH images.&nbsp; From this
+menu, there are three options, described in <a href="#9.6">section 9.6</a>.</b></td>
+</tr>
+
+<tr NOSAVE>
+<td NOSAVE><b>Remove Images without Doses</b></td>
+
+<td NOSAVE><b>Allows the user to unload images that do not have dose values,
+once doses have been loaded on QSH images.</b></td>
+</tr>
+
+<tr NOSAVE>
+<td NOSAVE><b><a href="#Automatic Loader">Automatic Loader</a></b></td>
+
+<td NOSAVE><b>Automates the process of loading single image, contour, and
+mask files.</b></td>
+</tr>
+
+<tr NOSAVE>
+<td NOSAVE><b><a href="#Smart Loader">Smart Loader</a></b></td>
+
+<td NOSAVE><b>Allows the user to continually load any number of image,
+contour, and mask files.&nbsp; The file selection box will continue to
+prompt the user to load the next file until <font color="#FF0000">Done</font>
+is selected in the box.</b></td>
+</tr>
+
+<tr NOSAVE>
+<td NOSAVE><b><a href="#Load Image">Load Image</a></b></td>
+
+<td NOSAVE><b>Allows user to load a single image file.</b></td>
+</tr>
+
+<tr NOSAVE>
+<td NOSAVE><b><a href="#Load Dose">Load Dose</a></b></td>
+
+<td NOSAVE><b>Allows user to load a single contour file (ending in <font color="#CC6600">,contour</font>).</b></td>
+</tr>
+
+<tr NOSAVE>
+<td NOSAVE><b><a href="#Load Mask">Load Mask</a></b></td>
+
+<td NOSAVE><b>Allows user to load a single mask file (ending in <font color="#CC6600">,mask</font>).</b></td>
+</tr>
+
+<tr NOSAVE>
+<td NOSAVE><b>Unload Images</b></td>
+
+<td NOSAVE><b>Unloads all images, contours, and masks.</b></td>
+</tr>
+
+<tr NOSAVE>
+<td NOSAVE><b>Print</b></td>
+
+<td NOSAVE><b>Provides the ability to print either a window or the selected
+image.</b></td>
+</tr>
+
+<tr NOSAVE>
+<td NOSAVE><b>Launch</b></td>
+
+<td NOSAVE><b>Allows any other SERA module to be invoked by selecting in
+from this submenu.</b></td>
+</tr>
+
+<tr NOSAVE>
+<td NOSAVE><b>Exit</b></td>
+
+<td NOSAVE><b>Closes seraDose.&nbsp; Note: seraDose creates temporary files
+during its execution.&nbsp; It is important to close seraDose properly
+using this <font color="#FF0000">Exit</font> option for seraDose to clean
+up the temporary files.</b></td>
+</tr>
+</table>
+
+<p><a NAME="9.2"></a><b><font color="#274342"><font size=+1>9.2 Color Menu</font></font></b>
+<br>&nbsp;
+<center><table CELLSPACING=5 COLS=2 WIDTH="50%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="10%" NOSAVE><a href="SeraDose/colorMenu.html"><img SRC="SeraDose/images/colorMenuTN.jpg" NOSAVE height=158 width=178></a></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.4.&nbsp; The seraDose Color menu. Click image for large view
+(28k).</b>
+<br>&nbsp;
+<table BORDER COLS=2 WIDTH="100%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="15%" NOSAVE><b><a href="#Contour Colors">Edit Contour Colors</a></b></td>
+
+<td><b>Invokes a window which allows user to enter colors of the dose contours.</b></td>
+</tr>
+
+<tr NOSAVE>
+<td WIDTH="15%" NOSAVE><b><a href="#Reserve Colors">Reserve Color Cells</a></b></td>
+
+<td><b>Allows user to change the number of color values reserved for the
+images.</b></td>
+</tr>
+
+<tr>
+<td><b><a href="#Load Colormap">Load Color Table</a></b></td>
+
+<td><b>Loads a colormap (<font color="#CC6600">cmap</font>) from a file.</b></td>
+</tr>
+
+<tr>
+<td><b><a href="#Reload Default Color Table">Reload Default Color Table</a></b></td>
+
+<td><b>Reloads the default colormap for the current view.</b></td>
+</tr>
+
+<tr>
+<td><b><a href="#Adjusting Colors">Colormap Tool</a></b></td>
+
+<td><b>Invokes a window to view and fine tune colormap values.</b></td>
+</tr>
+</table>
+
+<p><a NAME="9.3"></a><b><font color="#274342"><font size=+1>9.3 Options
+Menu</font></font></b>
+<br>&nbsp;
+<center><table CELLSPACING=5 COLS=2 WIDTH="50%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="10%" NOSAVE><a href="SeraDose/optionsMenu.html"><img SRC="SeraDose/images/optionsMenuTN.jpg" NOSAVE height=143 width=178></a></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.5.&nbsp; The seraDose Options menu.&nbsp; Click image for large
+view (38k).</b>
+<br>&nbsp;
+<table BORDER COLS=2 WIDTH="100%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="15%" NOSAVE><b><a href="#9.11">Preferences</a></b></td>
+
+<td><b>Edits and saves seraDose preferences.</b></td>
+</tr>
+
+<tr>
+<td><b><a href="#9.13">Select Dose Component</a></b></td>
+
+<td><b>Chooses which dose component to view.</b></td>
+</tr>
+
+<tr>
+<td><b><a href="#9.12">Enter Dose Factors</a></b></td>
+
+<td><b>Changes dose factors and recomputes contours.</b></td>
+</tr>
+
+<tr>
+<td><b><a href="#Contour Levels">Contour Levels</a></b></td>
+
+<td><b>Selects which contour levels to view.</b></td>
+</tr>
+
+<tr>
+<td><b><a href="#Contour Labels Options">Contour Labels Options</a></b></td>
+
+<td><b>Changes contour labeling options such as font size.</b></td>
+</tr>
+
+<tr>
+<td><b><a href="#9.14">Change Field of View</a></b></td>
+
+<td><b>Changes the current field of view.</b></td>
+</tr>
+
+<tr>
+<td><a NAME="Automatic Updates"></a><b>Automatic Updates</b></td>
+
+<td><b>Allows changes to affect all images when toggled on.&nbsp; Limits
+changes to affect only the currently selected image when toggled off.</b></td>
+</tr>
+
+<tr>
+<td><b><a href="#Masks Replace Images">Masks Replace Images</a></b></td>
+
+<td><b>Views the mask files as images.</b></td>
+</tr>
+
+<tr>
+<td><b>View Contour Lines</b></td>
+
+<td><b>Shows colorwashed images when toggled off.&nbsp; Shows contour lines
+when toggled on.&nbsp; Contour lines or colorwashes can only be viewed
+when dose files are loaded.</b></td>
+</tr>
+
+<tr>
+<td><b>View Contour Colorwash</b></td>
+
+<td><b>Shows contour lines when toggled off.&nbsp; Shows images contour
+colorwashed when toggled on.</b></td>
+</tr>
+</table>
+
+<p><a NAME="9.4"></a><b><font color="#274342"><font size=+1>9.4 Help Menu</font></font></b>
+<p><b>The <font color="#FF0000">Help</font> menu has one option, <font color="#008007">Help
+On Context</font>.&nbsp; When this menu is selected, the cursor will look
+similar to a question mark with an arrow.&nbsp; For help with an option
+in seraDose, simply click on the option with the cursor and you will be
+directed to this document.</b>
+<br>&nbsp;
+<p><a NAME="9.5"></a><b><font color="#274342"><font size=+1>9.5 Loading
+Images</font></font></b>
+<p><a NAME="Load QSH"></a><b>SeraDose can load two types of image formats.&nbsp;
+The first type of image format is the QSH pair format.&nbsp; QSH images
+are contained in a file with the <font color="#CC6600">.qim </font>extension.&nbsp;
+A corresponding header file with the <font color="#CC6600">.qhd </font>extension
+is needed before the images can be loaded.&nbsp; SeraDose extracts the
+necessary information from the QSH pair and loads all images in the files.&nbsp;
+The user can see what image set is currently being worked with by viewing
+the label under each image.&nbsp; Once several images have been loaded,
+an image can be selected by clicking on it in the main seraDose window.&nbsp;
+The current image is indicated with a red border as in Figure 9.6.</b>
+<center><table CELLSPACING=5 WIDTH="50%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="20%" NOSAVE><img SRC="SeraDose/images/imageLabel.jpg" NOSAVE height=298 width=274></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.6.&nbsp; The label below each image contains information about
+the image set and the image.&nbsp; This particular label indicates that
+this is the VH_tumor2mm set and that this image has a z value of 5.0.</b>
+<p><b>The second type of image format seraDose is capable of loading is
+raw images.&nbsp; SeraDose provides three ways to load single raw images:</b>
+<ul>
+<li>
+<a NAME="Load Image"></a><b>Load Image - Use this option to load single
+raw images.&nbsp; This option allows the user to load one image at a time.&nbsp;
+Once invoked from the <font color="#FF0000">File</font> menu, the
+<font color="#008007">Load
+Image</font> option presents the user with the file selection box pictured
+in Figure 9.7.</b></li>
+</ul>
+
+<center><table CELLSPACING=5 COLS=2 WIDTH="50%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="10%" NOSAVE><a href="SeraDose/loadImage.html"><img SRC="SeraDose/images/loadImageTN.jpg" NOSAVE height=139 width=97></a></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.7. Selecting Load Image from the File menu presents the user
+with a file selection box.&nbsp; Click image to see large version (23k).</b>
+<ul>
+<li>
+<a NAME="Automatic Loader"></a><b>Automatic Loader -</b> <b>The automatic
+loader speeds up the process of loading individual images, contour files,
+and mask files.&nbsp; Upon selecting the automatic loader, the user will
+be prompted to select an image file and the image's corresponding contour
+and mask files.&nbsp; Once these three files have been selected, the automatic
+loader can load all other corresponding image, contour, and mask files.</b></li>
+</ul>
+
+<center><table CELLSPACING=5 COLS=4 WIDTH="60%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="10%" NOSAVE><a href="SeraDose/autoLoader.html"><img SRC="SeraDose/images/autoLoadImageTN.jpg" NOSAVE height=139 width=97></a></td>
+
+<td WIDTH="10%" NOSAVE><a href="SeraDose/autoLoader.html"><img SRC="SeraDose/images/autoLoadContourTN.jpg" NOSAVE height=139 width=97></a></td>
+
+<td WIDTH="10%" NOSAVE><a href="SeraDose/autoLoader.html"><img SRC="SeraDose/images/autoLoadMaskTN.jpg" NOSAVE height=139 width=97></a></td>
+
+<td VALIGN=BOTTOM WIDTH="30%" NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.8. Using the Automatic Loader presents the user with a series
+of file selection boxes.&nbsp; Click images for large versions (60k).</b>
+<ul>
+<li>
+<a NAME="Smart Loader"></a><b><font color="#274342">Smart Loader</font>
+- Loads the images along with their corresponding doses and masks utilizing
+a convenient set of prompts.&nbsp; After choosing the Smart Loader option,
+select the name of the first image to be loaded from the file selection
+widget.&nbsp; As soon as an image is loaded, a new popup prompts for this
+image's corresponding dose.&nbsp; After the dose is selected, another popup
+asks for this same image's corresponding mask.&nbsp; Finally, after the
+mask is selected, seraDose will prompt for any other images to be loaded.&nbsp;
+For each succeeding image, seraDose will automatically attempt to load
+the corresponding dose and mask files if these files exist.&nbsp; This
+is done by matching the file name prefixes and looking in the same directory
+in which the first dose and mask files were located.&nbsp; It is assumed
+by convention that dose files end in <font color="#CC6600">,contour
+</font>and
+mask files end in
+<font color="#CC6600">,mask</font>.&nbsp; The image files
+do not have to be in the same directory where the dose and mask files are
+located.&nbsp; Press <font color="#008007">Done</font> to stop loading
+images.</b></li>
+</ul>
+
+<center><table CELLSPACING=5 COLS=4 WIDTH="60%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="10%" NOSAVE><a href="SeraDose/smartLoader.html"><img SRC="SeraDose/images/smartLoadImageTN.jpg" NOSAVE height=139 width=85></a></td>
+
+<td WIDTH="10%" NOSAVE><a href="SeraDose/smartLoader.html"><img SRC="SeraDose/images/smartLoadContourTN.jpg" NOSAVE height=139 width=97></a></td>
+
+<td WIDTH="10%" NOSAVE><a href="SeraDose/smartLoader.html"><img SRC="SeraDose/images/smartLoadMaskTN.jpg" NOSAVE height=139 width=97></a></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.9.&nbsp; Smart Loader file selection window.&nbsp; User can
+continue loading images, contours, and masks until Done is selected.&nbsp;
+Click on images to view larger versions (73k).</b>
+<br>&nbsp;
+<p><a NAME="9.6"></a><b><font color="#274342"><font size=+1>9.6 Loading
+Contours</font></font></b>
+<p><b>Once an image or an image set is loaded, dose contours can be viewed.&nbsp;
+The contour files this section describes are generated by <a href="sec07.html">seraCalc,</a>
+and the contour lines are computed using a marching squares strategy&nbsp;
+(See Reference <a href="sec15.html#15.9">[9]</a>).&nbsp;
+The result of these operations will be similar to that shown in Figure
+9.10.</b>
+<br>&nbsp;
+<center><table CELLSPACING=5 COLS=2 WIDTH="50%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="10%" NOSAVE><a href="SeraDose/largeContour.html"><img SRC="SeraDose/images/largeContoursTN.jpg" NOSAVE height=203 width=177></a></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.10.&nbsp; An image with contours in the Image Contouring window.&nbsp;
+Click on image to see large version (52k).</b>
+<p><b>There are several ways to load contour files.</b>
+<ul>
+<li>
+<a NAME="Load Dose"></a><b>Loading Single Contour Files - This option allows
+loading a single contour file.&nbsp; It is important to first select the
+image on which the contour file is to be displayed.&nbsp; To accomplish
+this, click on the image in the main seraDose window.&nbsp; Next, select
+<font color="#008007">Load
+Dose </font>from the <font color="#FF0000">File</font> menu.&nbsp; This
+option will bring up a file selection box where selection of one contour
+file can be made.</b></li>
+
+<li>
+<b>Loading Contours in the Automatic or Smart Loader - After the files
+are selected in the <a href="#Automatic Loader">Automatic Loader</a>, all
+corresponding contours will be loaded.&nbsp; Similarly, the <a href="#Smart Loader">Smart
+Loader</a> provides a convenient way to load contour files.</b></li>
+
+<li>
+<a NAME="Load Dose(s) on QSH"></a><b>Loading Contours on QSH Images -There
+are four ways to load contours on QSH images.</b></li>
+
+<ul>
+<li>
+<b><font color="#009900">Load Dose </font><font color="#274342">- </font>This
+is the same option as described above.&nbsp; It can be used to load any
+contour file on any image.</b></li>
+
+<li>
+<b><font color="#009900">Load All Doses</font></b><i> - </i><b>User selects
+a directory containing single dose contour files.&nbsp; Selecting a directory
+is accomplished by selecting any file in the desired directory using the
+file selection box.&nbsp; SeraDose matches each contour file (ending in
+<font color="#CC6600">,contour</font>)
+on an image with the closest z value.</b></li>
+
+<li>
+<b><font color="#009900">Load Dose on Current Image</font></b><i> - </i><b>User
+selects a directory containing single dose contour files.&nbsp; SeraDose
+searches the directory for the contour file with the closest z value to
+the current selected image.</b></li>
+
+<li>
+<b><font color="#009900">Load 3D Contour File</font></b><i> - </i><b>Loads
+a seraZipped, concatenated contour file (ending in <font color="#CC6600">.cdf.sz</font>).&nbsp;
+A header file (ending with <font color="#CC6600">.chd</font>), which corresponds
+to the contour file, must be in the same directory as the contour file.</b></li>
+</ul>
+</ul>
+
+<center><table CELLSPACING=5 COLS=2 WIDTH="50%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="10%" NOSAVE><a href="SeraDose/loadDoseOnQSH.html"><img SRC="SeraDose/images/loadDoseOnQSHTN.jpg" NOSAVE height=158 width=178></a></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.11.&nbsp; Multiple ways of loading contours on QSH images.&nbsp;
+Click on image to view a large version (38k).</b>
+<br>&nbsp;
+<p><a NAME="9.7"></a><b><font color="#274342"><font size=+1>9.7 Working
+with Contours</font></font></b>
+<p><b>Once the contours have been loaded, there are several options provided
+to work with them.</b>
+<ul>
+<li>
+<b><a href="#Contour Colors">Editing Contour Colors</a> - This option is
+described in detail in section <a href="#9.10">9.10 Working with Colors</a>.</b></li>
+
+<li>
+<a NAME="Contour Levels"></a><b>Changing Contour Levels - To change, add,
+or remove contour levels, select Contour Levels from the Options menu.&nbsp;
+This will bring up the Contour Levels window (Figure 9.12).&nbsp;&nbsp;
+To change the contour levels, enter each contour level on a line in the
+window.&nbsp; Each contour value should be between 0 and 100.&nbsp; To
+apply the new contour values, click the <font color="#009900">Apply </font>button.&nbsp;
+To close the window without applying the new contour values, click the
+<font color="#009900">Cancel</font>
+button.</b></li>
+</ul>
+
+<center><table CELLSPACING=5 COLS=2 WIDTH="50%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="10%" NOSAVE><img SRC="SeraDose/images/contourLevels.jpg" NOSAVE height=338 width=188></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.12.&nbsp; The Contour Levels window.</b>
+<ul>
+<li>
+<a NAME="Contour Labels Options"></a><b>Contour Labels Options - The Contour
+Labels Options window (Figure 9.13) provides a variety of labeling options.&nbsp;
+This window allows the user to control the label sizes and fonts for the
+numerical isodose contour labels on the images.&nbsp; Separate sliders
+are available for both the large (single) image window labels and the small
+(multiple) image window labels.&nbsp; No changes are implemented in the
+labels until they are applied with the <font color="#009900">Apply to Images
+</font><font color="#274342">button.</font>&nbsp;
+To close the window without applying any changes, double click on the window
+menu button in the top left corner of the window.</b></li>
+</ul>
+
+<center><table CELLSPACING=5 COLS=2 WIDTH="50%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="10%" NOSAVE><img SRC="SeraDose/images/contourLabelsOption.jpg" NOSAVE height=316 width=222></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.13.&nbsp; The Contour Labels Options window.</b>
+<br>&nbsp;
+<p><a NAME="9.8"></a><b><font color="#274342"><font size=+1>9.8 Loading
+Masks</font></font></b>
+<p><b>Once an image or an image set is loaded, it is possible to load mask
+files.&nbsp; A mask file is a raster image containing the regions of the
+transport model corresponding to the appropriate medical image.&nbsp; This
+image is generated by <a href="sec07.html">seraCalc</a>
+and will appear in a popup window (Figure 9.14).&nbsp; This image is used
+to remove contour lines from unwanted areas in the image, and at the same
+time, retain a smooth appearance for the existing contour lines. To perform
+this operation, position the cursor in one of the raster areas and click
+the mouse.&nbsp; The corresponding contour lines from the image window
+will be removed.&nbsp; An example is shown in Figure 9.15.</b>
+<center><table CELLSPACING=5 COLS=2 WIDTH="50%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="10%" NOSAVE><a NAME="Mask Window"></a><a href="SeraDose/maskWindow.html"><img SRC="SeraDose/images/maskWindowTN.jpg" NOSAVE height=128 width=88></a></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.14.&nbsp; The seraDose Mask window.&nbsp; Click on image to
+see large version (18k).</b>
+<br>&nbsp;
+<center><table CELLSPACING=5 COLS=2 WIDTH="50%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="10%" NOSAVE><a href="SeraDose/maskedContours.html"><img SRC="SeraDose/images/maskedContoursTN.jpg" NOSAVE height=203 width=177></a></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.15.&nbsp; An image with contours after masking is applied.&nbsp;
+Click on image to see large version (40k).</b>
+<p><b>There are several ways to load mask files.&nbsp; The ways to load
+mask files are very similar to those of loading contour files.</b>
+<ul>
+<li>
+<a NAME="Load Mask"></a><b>Loading Single Mask Files - This option allows
+loading a single mask file.&nbsp; It is important to first select the image
+to which the mask file is to be applied.&nbsp; To accomplish this, click
+on the image in the main seraDose window.&nbsp; Next, select <font color="#009900">Load
+Mask</font> from the <font color="#FF0000">File</font> menu.&nbsp; This
+option will bring up a file selection box where selection of one mask file
+can be made.</b></li>
+
+<li>
+<b>Loading Mask in the Automatic or Smart Loader - After the files are
+selected in the <a href="#Automatic Loader">Automatic Loader</a>, all corresponding
+masks will be loaded.&nbsp; Similarly, the <a href="#Smart Loader">Smart
+Loader</a> provides a convenient way to load mask files.</b></li>
+
+<li>
+<a NAME="Load Mask(s) on QSH"></a><b>Loading Mask on QSH Images - There
+are four ways to load masks on QSH images.</b></li>
+
+<ul>
+<li>
+<b><font color="#009900">Load Mask </font><font color="#274342">-</font>
+This is the same option as described above.&nbsp; It can be used to load
+any mask file on any image.</b></li>
+
+<li>
+<b><font color="#009900">Load All Masks</font><font color="#993399"> </font><font color="#274342">-
+</font>User
+selects a directory containing single mask files.&nbsp; Selecting a directory
+is accomplished by selecting any file in the desired directory using the
+file selection box.&nbsp; SeraDose matches each mask file (ending in <font color="#CC6600">,mask</font>)
+on an image with the closest z value.</b></li>
+
+<li>
+<b><font color="#009900">Load Mask on Current Image </font><font color="#274342">-
+</font>User
+selects a directory containing single mask files.&nbsp; SeraDose searches
+the directory for the mask file with the closest z value to the current
+selected image.</b></li>
+
+<li>
+<b><font color="#009900">Load 3D Mask File </font><font color="#274342">-
+</font>Loads
+a seraZipped, concatenated mask file (ending in <font color="#CC6600">.cmf.sz</font>).
+A header file (ending with<font color="#008007"> </font><font color="#CC6600">.chd</font>)
+which corresponds with the mask file must be in the same directory as the
+mask file.</b></li>
+</ul>
+</ul>
+
+<center><table CELLSPACING=5 COLS=2 WIDTH="50%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="10%" NOSAVE><a href="SeraDose/loadMaskOnQSH.html"><img SRC="SeraDose/images/loadMaskOnQSHTN.jpg" NOSAVE height=184 width=203></a></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.16.&nbsp; Multiple ways of loading masks on QSH images.&nbsp;
+Click image for a larger version (49k).</b>
+<br>&nbsp;
+<p><a NAME="9.9"></a><b><font color="#274342"><font size=+1>9.9 Working
+with Masks</font></font></b>
+<p><b>Once the masks have been loaded, several options are available:</b>
+<ul>
+<li>
+<b><font color="#009900">Apply To All</font> - This toggle button is linked
+with the <a href="#Automatic Updates">Automatic Updates</a> button in the
+Options menu.&nbsp; When these buttons are toggled on, all operations are
+performed to the entire image set.&nbsp; Toggle them off, and changes only
+occur to the currently selected image.</b></li>
+
+<li>
+<b><font color="#009900">Clear All Masks</font> - This option will clear
+any masks that have been previously applied.</b></li>
+
+<li>
+<b><font color="#009900">Set All Masks</font> - This option will set all
+the masks.&nbsp; Essentially, this will cause all contours with corresponding
+masks to be removed from the images.</b></li>
+
+<li>
+<b><font color="#009900">Dismiss</font> - Closes the Mask window (<a href="#Mask Window">Figure
+9.14</a>).&nbsp; The Mask window will appear when an image is selected.</b></li>
+
+<li>
+<a NAME="Masks Replace Images"></a><b><font color="#009900">Masks Replace
+Images </font>- This option, found in the <a href="#9.3">Options</a> menu,
+will replace all the images with a gray scale mask image.</b></li>
+</ul>
+
+<p><br><a NAME="9.10"></a><b><font color="#274342"><font size=+1>9.10 Working
+with Colors</font></font></b>
+<p><b>There is a variety of options available to adjust colors to personal
+taste or to aid in image viewing.</b>
+<p><a NAME="Contour Colors"></a><b>Editing Contour Colors - The colors
+of the dose contours can be edited if desired.&nbsp; To edit the contour
+colors, select <font color="#009900">Edit Contour Colors</font> from the
+<font color="#FF0000">Color</font>
+menu.&nbsp; Upon selecting this option the Contour Color Window will appear
+(Figure 9.17).&nbsp; To change the color of a contour, first select the
+contour in the list on the bottom left of the window.&nbsp; The contour's
+current color will be indicated on the right.&nbsp; To change the color,
+simply click on a different color button on the left.&nbsp; Once the colors
+have been adjusted, select <font color="#009900">Apply</font>.&nbsp; Saving
+the colors for future runs of seraDose must be done in the <font color="#009900">Preferences</font>
+window.</b>
+<br>&nbsp;
+<center><table CELLSPACING=5 COLS=2 WIDTH="40%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="5%" NOSAVE><a href="SeraDose/contourColorEditor.html"><img SRC="SeraDose/images/contourColorEditorTN.jpg" NOSAVE height=178 width=66></a></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.17.&nbsp; The contour color editing window.&nbsp; Click image
+for a larger version (21k).</b>
+<p><a NAME="Reserve Colors"></a><b><font color="#274342">Reserving Color
+Cells - </font>To change the number of color cells used to display the
+gray scale image, select <font color="#009900">Reserve Color Cells</font>
+from the <font color="#FF0000">Color</font> menu.&nbsp; The default is
+128 gray scale values.</b>
+<br>&nbsp;
+<center><table CELLSPACING=5 COLS=2 WIDTH="65%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="10%" NOSAVE><img SRC="SeraDose/images/reserveColors.jpg" NOSAVE height=169 width=412></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.18.&nbsp; Multiple ways of loading masks on QSH images.&nbsp;
+Click image for a larger version (49k).</b>
+<p><a NAME="Load Colormap"></a><b><font color="#274342">Loading a Color
+Table -</font><font color="#000000"> </font><font color="#274342">It is
+possible to load a colormap other than the default colormap used for the
+images.&nbsp; To load a different colormap, select </font><font color="#009900">Load
+Color Table</font><font color="#993399"> </font><font color="#274342">from
+the </font><font color="#FF0000">Color</font><font color="#993399"> </font><font color="#274342">menu.&nbsp;
+Several colormap (</font><font color="#CC6600">cmap</font><font color="#274342">)
+files are provided in the SERA </font><font color="#CC6600">Resources/Shared/colormaps</font><font color="#274342">
+directory.&nbsp; See Figure 9.19 for an example of loading a different
+colormap.</font></b>
+<br>&nbsp;
+<br>&nbsp;
+<center><table CELLSPACING=5 COLS=3 WIDTH="65%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="10%" NOSAVE><a href="SeraDose/colormaps.html"><img SRC="SeraDose/images/gammaColormapTN.jpg" NOSAVE height=203 width=177></a></td>
+
+<td WIDTH="10%" NOSAVE><a href="SeraDose/colormaps.html"><img SRC="SeraDose/images/sockColormapTN.jpg" NOSAVE height=203 width=177></a></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.19.&nbsp; Image on the left is the default colormap.&nbsp;
+Image on right is after loading
+<font color="#CC6600">sock.cmap</font>.&nbsp;
+Click images for a larger version (98k).</b>
+<p><a NAME="Reload Default Color Table"></a><b><font color="#274342">Loading
+the Default Color Table -</font></b><font color="#000000"> </font><b><font color="#274342">To
+reload the default colormap, select </font><font color="#008007">Reload
+Default Color Table</font><font color="#274342"> from the </font><font color="#FF0000">Color</font><font color="#274342">
+menu.&nbsp; SeraDose will load the default colormap depending on whether
+contour lines or colorwashed images are being viewed.</font></b>
+<p><a NAME="Adjusting Colors"></a><b><font color="#274342">Adjusting Colors
+-</font><font color="#000000"> </font>SeraDose provides a color adjustment
+tool which can be accessed by selecting <font color="#009900">Colormap
+Tool</font> in the <font color="#FF0000">Color</font> menu.&nbsp; The colormap
+tool (Figure 9.20) allows the user, via sliders, to select a new background
+level or saturation level, change the gamma correction, or rotate through
+the colors of the current colormap.&nbsp; Adjusting the sliders in this
+window can aid in viewing images.&nbsp; Color adjustment is performed interactively.&nbsp;
+To reset to the original values, click on the <font color="#009900">Reset</font>
+button.&nbsp; To close the Color Adjustment window, click on the <font color="#009900">Done</font>
+button.</b>
+<br>&nbsp;
+<center><table CELLSPACING=5 COLS=2 WIDTH="50%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="10%" NOSAVE><a href="SeraDose/colorAdjustor.html"><img SRC="SeraDose/images/colorAdjustorTN.jpg" NOSAVE height=185 width=138></a></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.20.&nbsp; The Color Adjustment Window.&nbsp; Click image for
+a larger version (27k).</b>
+<br>&nbsp;
+<p><a NAME="9.11"></a><b><font color="#274342"><font size=+1>9.11 Preferences</font></font></b>
+<p><b>The user can set and save individual preferences by selecting the
+<font color="#009900">Preferences</font>
+option in the <font color="#FF0000">Options</font> menu.&nbsp; This will
+bring up the <font color="#009900">Preferences</font> window (Figure 9.21).</b>
+<br>&nbsp;
+<center><table CELLSPACING=5 COLS=2 WIDTH="50%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="10%" NOSAVE><a href="SeraDose/preferences.html"><img SRC="SeraDose/images/preferencesShellTN.jpg" NOSAVE height=143 width=96></a></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.21.&nbsp; The Preferences window.&nbsp; Click image for a larger
+version (81k).</b>
+<p><b>To save a change to the preferences, select a preference category
+and toggle on the individual preference to be saved.&nbsp; The next time
+seraDose is invoked, the preference will be as it was saved.</b>
+<p><b><font color="#274342">For example, the current default dose is </font><font color="#FF0000">Total
+Dose</font><font color="#274342">.&nbsp; The user wants to change the default
+dose to </font><font color="#FF0000">Boron Dose</font><font color="#274342">.&nbsp;
+To accomplish this, the user chooses <a href="#9.12">Select Dose Component</a>
+from the </font><font color="#FF0000">Options</font><font color="#274342">
+menu.&nbsp; From the </font><font color="#009900">Dose Options</font><font color="#274342">
+window, the user selects </font><font color="#FF0000">Boron Dose</font><font color="#274342">
+and clicks the </font><font color="#009900">Select</font><font color="#274342">
+button, then dismisses the window by clicking the Dismiss button.&nbsp;
+Now, the user chooses the </font><font color="#009900">Preferences</font><font color="#274342">
+option from the </font><font color="#FF0000">Options</font><font color="#274342">
+menu.&nbsp; Under the </font><font color="#009900">Defaults</font><font color="#274342">
+preferences, the default dose is now </font><font color="#FF0000">Boron
+Dose</font><font color="#274342">.&nbsp; In order to save </font><font color="#FF0000">Boron
+Dose</font><font color="#274342"> as the default dose in the future, the
+user now toggles the
+</font><font color="#009900">Dose Component</font><font color="#274342">
+button on and then clicks </font><font color="#009900">Save</font><font color="#274342">.</font></b>
+<p><b><font color="#274342">There are four preference areas in the </font><font color="#009900">Preferences</font><font color="#274342">
+window:</font></b>
+<br>&nbsp;
+<center><table CELLSPACING=5 COLS=3 WIDTH="85%" NOSAVE >
+<tr NOSAVE>
+<td><b><font color="#274342">Defaults</font></b>
+<ul>
+<li>
+<b><font color="#009900">View Contour Lines (not colorwash)</font></b></li>
+
+<li>
+<b><font color="#009900">Masks Replace Images</font></b></li>
+
+<li>
+<b><font color="#009900">Dose Component</font></b></li>
+</ul>
+</td>
+
+<td WIDTH="10%" NOSAVE><a href="SeraDose/preferences.html"><img SRC="SeraDose/images/preferencesDefaultsTN.jpg" NOSAVE height=143 width=96></a></td>
+
+<td VALIGN=BOTTOM NOSAVE><b>Figure 9.22.&nbsp; The Preferences window showing
+Defaults.&nbsp; Click image for a larger version (81k).</b></td>
+</tr>
+
+<tr NOSAVE>
+<td><b><font color="#274342">Contour Levels</font></b>
+<ul>
+<li>
+<b><font color="#009900">Default Contour Color</font></b></li>
+
+<li>
+<b><font color="#009900">Contour Levels</font></b></li>
+</ul>
+</td>
+
+<td><a href="SeraDose/preferences.html"><img SRC="SeraDose/images/preferencesContourLevelsTN.jpg" NOSAVE height=143 width=96></a></td>
+
+<td VALIGN=BOTTOM NOSAVE><b>Figure 9.23. The Preferences window showing
+Contour Levels.&nbsp; Click image for a larger version (81k).</b></td>
+</tr>
+
+<tr NOSAVE>
+<td><b>Contour Lines' Labels</b>
+<ul>
+<li>
+<b><font color="#009900">Attempt To Use Scalable Fonts</font></b></li>
+
+<li>
+<b><font color="#009900">View Large Image Labels</font></b></li>
+
+<li>
+<b><font color="#009900">Large Image Labels' Size</font></b></li>
+
+<li>
+<b><font color="#009900">View Preview Image Labels</font></b></li>
+
+<li>
+<b><font color="#009900">Preview Image Labels' Size</font></b></li>
+</ul>
+</td>
+
+<td><a href="SeraDose/preferences.html"><img SRC="SeraDose/images/preferencesContourLinesTN.jpg" NOSAVE height=130 width=87></a></td>
+
+<td VALIGN=BOTTOM NOSAVE><b>Figure 9.24.&nbsp; The Preferences window showing
+Contour Lines' Labels.&nbsp; Click image for a larger version (81k).</b></td>
+</tr>
+
+<tr>
+<td><b>Miscellaneous</b>
+<ul>
+<li>
+<b>Currently no preferences</b></li>
+</ul>
+</td>
+
+<td></td>
+
+<td></td>
+</tr>
+</table></center>
+
+<p><a NAME="9.12"></a><b><font color="#274342"><font size=+1>9.12 Entering
+Dose Factors</font></font></b>
+<p><b>This option allows the user to specify the dose factors and concentrations
+for each of the dose components.&nbsp; New reference values are computed
+and new dose values are displayed.&nbsp; To open the <font color="#009900">Dose
+Factor</font> window, select
+<font color="#009900">Enter Dose Factors</font>
+from the <font color="#FF0000">Options</font> menu.</b>
+<p><b>The <font color="#009900">Dose Factor</font> window (Figure 9.25)
+contains three main sections:</b>
+<ul>
+<li>
+<b>The first section contains patient information.&nbsp; The four fields
+in the patient section are filled with information found in the QSH header
+file (ending in <font color="#CC6600">.qhd</font>).&nbsp; If information
+is missing in the header file or single images were loaded, the user can
+enter the information by clicking in the desired field and typing the information.</b></li>
+
+<li>
+<b>The second section of the <font color="#009900">Dose Factor</font> window
+is used to enter reference boron values.&nbsp; The <font color="#FF0000">Tissue
+to Blood</font> value is taken from the <font color="#274342">body data
+file</font>.&nbsp; The <font color="#FF0000">Tissue to Blood </font>value
+for each body in the body data file (i.e.. <font color="#CC6600">body_data.txt.sz</font>)
+can be selected in the <font color="#FF0000">Body</font> pull down menu.&nbsp;
+To enter a <font color="#FF0000">Reference Boron</font> value, click in
+the <font color="#009900">Reference Boron</font> text box and type in the
+value.&nbsp; To adjust the dose factors, click <font color="#009900">Apply</font>.&nbsp;
+The factors in the third section of the <font color="#009900">Dose Factor</font>
+window will be adjusted.&nbsp; To select a body data file different from
+the default file loaded, click
+<font color="#009900">Load File</font>.&nbsp;
+The body data file must be a seraZipped (ending in<font color="#CC6600">.sz</font>)
+text file.</b></li>
+
+<li>
+<b>The third section contains 6 rows.&nbsp; The first 4 rows are for the
+primary BNCT dose components, the <sup>10</sup>B(n,alpha)<sup>7</sup>Li
+dose (<font color="#FF0000">Boron</font>), the <font color="#FF0000">Gamma</font>
+Dose, the 14N(n,p)14C dose (<font color="#FF0000">Nitrogen</font>), and
+the <font color="#FF0000">Fast</font> (Hydrogen Recoil) component.&nbsp;
+There are three columns for each component.&nbsp; These 3 columns display
+a <font color="#009900">Factor</font>, a <font color="#009900">Concentration</font>,
+and a <font color="#009900">Reference Value</font>.&nbsp; After loading
+the contour file, seraDose reads the default data from the file.&nbsp;
+The reference values are those values for the edit voxel at the location
+of the reference value (the default reference volume is a cubic voxel with
+volume 1.0cc and having peak thermal flux.&nbsp; These reference values
+have been multiplied by the values read in for Factor and Concentration.&nbsp;
+The value for <font color="#009900">Factor</font> is usually a Relative
+Biological Effect (RBE) or a Compound Factor (CF).&nbsp; The values for
+<font color="#009900">Concentration</font> vary depending on the component.&nbsp;
+For the boron dose, concentration is usually parts per million by weight
+(ppm).&nbsp; For the gamma dose, concentration is usually not meaningful
+and is set to unity.&nbsp; For the nitrogen dose, concentration is percent
+by weight.&nbsp; For the fast concentration, percent by weight of hydrogen
+is specified.&nbsp; <font color="#990000">It is usually less confusing
+to run the seraMC problem normalized to one MW-minute with all factors
+set to unity, with 1.0 ppm for the <sup>10</sup>B concentration, and with
+the actual concentrations for nitrogen and hydrogen.</font>&nbsp; The fifth
+row is the total dose, or just the sum of the four components weighted
+by Factor and Concentration.&nbsp; Once the values have been entered, click
+on <font color="#009900">Update Contours</font> to recompute the contours.&nbsp;
+To reset the Dose Factor Window to the default values, click on <font color="#009900">Set
+to Default</font>.&nbsp; To close the window, click <font color="#009900">Dismiss</font>.&nbsp;
+The <font color="#009900">Print</font> button in not yet implemented.</b></li>
+</ul>
+
+<center><table CELLSPACING=5 COLS=2 WIDTH="50%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="10%" NOSAVE><a href="SeraDose/doseFactorWindow.html"><img SRC="SeraDose/images/doseFactorWindowTN.jpg" NOSAVE height=145 width=244></a></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.25.&nbsp; The Factor Window.&nbsp; Click image for a larger
+version (50k).&laquo;</b>
+<br>&nbsp;
+<p><a NAME="9.13"></a><b><font color="#274342"><font size=+1>9.13 Selecting
+Dose Components</font></font></b>
+<p><b>To select a dose component to view, choose <font color="#009900">Select
+Dose Component</font> from the <font color="#FF0000">Options</font> menu.&nbsp;
+As shown in Figure 9.26, this option allows the user to select which dose
+or fluence component to display, including:</b>
+<ul>&nbsp;
+<table CELLSPACING=5 COLS=3 WIDTH="75%" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE>
+<ul>
+<li>
+<b>Boron</b> <b>Dose</b></li>
+
+<li>
+<b>Gamma Dose</b></li>
+
+<li>
+<b>Nitrogen Dose</b></li>
+
+<li>
+<b>Fast Dose</b></li>
+
+<li>
+<b>Group 1 Fluence</b></li>
+
+<li>
+<b>Group 2 Fluence</b></li>
+
+<li>
+<b>Thermal Fluence</b></li>
+
+<li>
+<b>Other Dose</b></li>
+
+<li>
+<b>Total Dose</b></li>
+</ul>
+</td>
+
+<td WIDTH="10%" NOSAVE><img SRC="SeraDose/images/selectDoseComponent.jpg" NOSAVE height=278 width=182></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table>
+</ul>
+<b>Figure 9.26.&nbsp; The Dose Options Window used for selecting which
+dose component to view.</b>
+<br>&nbsp;
+<p><a NAME="9.14"></a><b><font color="#274342"><font size=+1>9.14 Changing
+Field of View</font></font></b>
+<p><b>To change the field of view of an image, select <font color="#009900">Change
+Field of View</font> from the <font color="#FF0000">Options </font>menu.&nbsp;
+This allows the user to enter a new field of view (FOV) value in mm.&nbsp;
+If a QSH image set is loaded, the field of view is automatically calculated.&nbsp;
+If you have loaded raw images, the default is <font color="#FF0000">250mm</font>.&nbsp;
+The field of view must be calculated or entered before using the <font color="#000000"><a href="#Locate Button">Locate</a></font>
+option in the <a href="#9.15">Image Contouring Window</a>.</b>
+<center><table CELLSPACING=5 COLS=2 WIDTH="50%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="10%" NOSAVE><img SRC="SeraDose/images/fieldOfView.jpg" NOSAVE height=91 width=193></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.27.&nbsp; The Change Field of View window.</b>
+<br>&nbsp;
+<p><a NAME="9.15"></a><b><font color="#274342"><font size=+1>9.15 The Image
+Contouring Window</font></font></b>
+<p><b>The Image Contouring Window displays a large view of the current
+image.&nbsp; To change which image is shown in the Image Contouring Window,
+select the image in the main seraDose window simply by clicking on the
+desired image.&nbsp; The Image Contouring Window includes the following
+features:</b>
+<ul>
+<li>
+<a NAME="Locate Button"></a><b><font color="#274342">Locate</font> - Clicking
+the Locate button will display the cursor location within the image as
+the cursor passes over the image in the Image Contouring Window.&nbsp;
+The cursor location is dependent upon the field of view.&nbsp; The location,
+x = 0.0, y = 0.0, is centered in the image.&nbsp; If contours are loaded,
+the dose value at the current cursor location is also displayed.</b></li>
+
+<li>
+<b>Info - Clicking the Info button will display information about the current
+image and the current dose, and also information found in the site file.&nbsp;
+The site file is located in <font color="#CC6600">$SERA_RESOURCES/Site/</font>
+and is named <font color="#CC6600">info.txt</font>.</b></li>
+
+<li>
+<b><font color="#274342">Print</font> - Allows user to print the Image
+Contour Window to a printer or to a file.</b></li>
+
+<li>
+<b><font color="#274342">Reveal Legend</font> - Extends the window to show
+the contour legend.&nbsp; From within this window, the contour values can
+be changed by clicking on <font color="#009900">Change Contour Level Values</font>.&nbsp;&nbsp;
+This button will open the <a href="#Contour Levels">Contour Levels Window</a>.&nbsp;
+The colors can also be adjusted by clicking on <font color="#009900">Change
+Contour Level Colors.</font>&nbsp; This button will open the <a href="#Adjusting Colors">Contour
+Colors Window</a>.</b></li>
+</ul>
+
+<center><table CELLSPACING=5 COLS=2 WIDTH="50%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="10%" NOSAVE><a href="SeraDose/imageContouringWindow.html"><img SRC="SeraDose/images/imageContouringWindowTN.jpg" NOSAVE height=269 width=243></a></td>
+
+<td VALIGN=BOTTOM NOSAVE></td>
+</tr>
+</table></center>
+<b>Figure 9.28.&nbsp; The Image Contouring Window.&nbsp; Click image for
+a larger version (67k).</b>
+<br>&nbsp;
+<br>&nbsp;
+<br>
+<br>
+<center>
+<p><img SRC="marblebar.jpg" NOSAVE height=6 width=460>
+<br>&nbsp;
+<p><a href="sec08.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><a href="sec08.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="sec10.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="sec10.html">Next</a></b></center>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+Gamma repair input widget
+
+       __________________________________________________
+
+The gamma repair input widget allows the user to specify the gamma
+repair factor for each field (values are limited to the range 0 to 1)
+for the dose combination.  These values are used to weight the gamma
+dose during the combination, and are used to account for the body's
+natural, rapid repair of low-LET radiation damage.

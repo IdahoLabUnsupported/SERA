@@ -1,0 +1,21 @@
+SRCS = \
+seraplan.c construct.c editplan.c dimensions.c \
+set.c textfiles.c apply.c load.c \
+file_rw.c editcalc.c editinp.c preferences.c \
+check_files.c
+
+OBJS = \
+seraplan.o construct.o editplan.o dimensions.o \
+set.o textfiles.o apply.o load.o \
+file_rw.o editcalc.o editinp.o preferences.o \
+check_files.o
+
+SERA_DEPS = $(D_COMMON) $(D_UV) $(D_SZ)
+
+LOCAL_LIBRARIES = -lcommon -luv -lsz $(DEFAULT_X_LIBS)
+SYS_LIBRARIES   = $(EXTRA_X_LIBS) MathLibrary -lXpm
+DEPLIBS         = $(DEFAULT_DEP_X_LIBS) $(EXTRA_DEP_X_LIBS) $(SERA_DEPS)
+
+DEFINES         = -DNO_NURBS
+
+ComplexProgramTarget(seraPlan)

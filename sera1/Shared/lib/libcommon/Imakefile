@@ -1,0 +1,24 @@
+SRCS = \
+connection_tools.c data_tools.c debug_tools.c dialog_tools.c \
+environment_tools.c gz_tools.c keyval_tools.c launch_tools.c \
+libhelp.c memory_tools.c print_tools.c ps_print.c sliderText.c \
+file_tools.c
+
+OBJS = \
+connection_tools.o data_tools.o debug_tools.o dialog_tools.o \
+environment_tools.o gz_tools.o keyval_tools.o launch_tools.o \
+libhelp.o memory_tools.o print_tools.o ps_print.o sliderText.o \
+file_tools.o
+
+
+LOCAL_LIBRARIES = $(DEFAULT_X_LIBS) 
+SYS_LIBRARIES   = $(EXTRA_X_LIBS) MathLibrary
+DEPLIBS         = $(DEFAULT_DEP_X_LIBS) $(EXTRA_DEP_X_LIBS)
+
+LIBLOCATION     = $(SERA_LIB_LOCATION)
+LIB_NAME        = common
+
+NormalLibraryObjectRule()
+NormalLibraryTarget($(LIB_NAME),$(OBJS))
+InstallLibrary($(LIB_NAME),$(LIBLOCATION))
+DependTarget()

@@ -1,0 +1,407 @@
+# This is a comment card
+#
+# Note that filenames and material names must start in
+# column 2.
+#
+# A thermal-scatter for bound molecules can be specified by
+# assigning two library materials. For example, pure H2O is
+#   1 0.06668           3
+# Here library material 1 is free hydrogen in the fast-neutron
+# groups with 0 thermal ID (no thermal). Material 3 is oxygen
+# in fast groups and H2O for thermal. Nbound=2 for material 3
+# so the code divides the density by 2 to weight the
+# oxygen and H2O data. The gamma data is also weighted properly
+# since material 1 is hydrogen for the gamma data and 3 is oxy.
+#
+# Number mixtures in this file
+          39
+# MAT 1 brain_ICRU_46_adult
+ brain_ICRU_46_adult
+# density = 1.04 grams/cc
+#
+# Number of entries for this material
+          10
+    1 0.0557418         3 H2O molecule
+    1 0.0107458        19 CH2 molecule
+    7 0.0021878         0 Free carbon
+    8 0.000983696       0 Nitrogen
+    9 6.25662   E-08    0 Boron-10
+   11 0.00005448        0 Sodium
+   12 0.0000390697      0 Sulfur 
+   16 0.000053          0 Chlorine
+   17 0.000048055       0 Potassium
+   18 0.00008088        0 Phosphorus
+# true void (will get no sub-element edits)
+# MAT 2 true_void - no edits -- not recommended
+ void_true
+           0
+# MAT 3 void_edit -- recommended
+ void_edit
+           1
+    1 0.0               0 Simulated void (will get sub-element edits)
+# MAT 4 buffer
+ buffer
+           1
+    1 0.0               0 All undefined space between BSG and CG is void
+# MAT 5 lucite
+ lucite
+           3
+    1 0.02888           3 H2O
+    1 0.028885         19 CH2
+    7 0.021665          0 Free carbon
+# MAT 6  poly_LIOH_enr
+ poly_LIOH_enr
+           5
+    1 0.01753           3 H2O
+    1 0.05312          19 CH2
+    2 0.003065          0 Free Oxygen
+    5 0.006432          0 Li-6
+    6 0.0003385         0 Li-7
+# MAT 7 H2O
+ H2O
+           1
+    1 0.06668           3
+# MAT 8 skin_ICRU_46_adult
+ skin_ICRU_46_adult
+# density = 1.09
+          10
+    1 0.052924          3 H2O Molecule
+    1 0.0122013        19 CH2 Molecule
+    7 0.00504785        0 Free carbon
+    8 0.00196825        0 Nitrogen
+    9 6.55742   E-08    0 Boron-10
+   11 0.0000571035      0 Sodium
+   12 0.0000409481      0 Sulfur 
+   16 0.0000555438      0 Chlorine
+   17 0.0000167884      0 Potassium
+   18 0.0000211921      0 Phosphorus
+# MAT 9 skeleton-cranium_ICRU_46
+ skeleton-cranium_ICRU_46
+# density = 1.61 (Ref 3, Ref 4 for Cl)
+           9
+    1 0.0480971         3 H2O Molecule
+    2 0.00231185        0 Free oxygen
+    7 0.01711295        0 Free carbon
+    8 0.0027689         0 Nitrogen
+   11 0.0000421728      0 Sodium
+   12 0.0000820417      0 Sulfur
+   13 0.00436437        0 Calcium
+   14 0.0000626041      0 Magnesium
+   18 0.00244956        0 Phosporous
+# MAT 10 pure_poly
+ pure_poly
+# density = 0.9
+           1
+    1 0.077            19 CH2 Molecule
+# MAT 11 Rx_201 Reactor Experiments borated poly
+ Rx_201
+# density = 0.93
+           3
+    1 0.0645           19 CH2 Molecule
+    9 0.0005094         0 boron-10
+   10 0.0020506         0 boron-11
+# MAT 12 plywood
+ plywood
+# density = 0.64
+           3
+    1 0.02378          19 CH2 Molecule
+    2 0.01189           0 Oxygen
+    7 0.00237           0 Free carbon
+# MAT 13 A150 plastic tissue substitute (density=1.12)
+# ICRU 50
+ A150
+           6
+    1 0.067588         19 CH2 Molecule
+    2 0.00219214        0 Oxygen
+    7 0.00983854        0 Free carbon
+    8 0.00168539        0 Nitrogen
+   13 0.000302925       0 Calcium
+   21 0.000603532       0 Calcium
+# MAT 14 boroflex
+ boroflex
+           4
+    1 0.027            19 CH2 Molecule
+    7 0.04563           0 Free carbon
+    9 0.004617          0 B10
+   10 0.01858           0 B11
+# MAT 15 Rx_215_nat 15 Reactor Experiments lithiated poly 215
+ Rx_215_nat
+           5
+    1 0.05445          19 CH2
+    2 0.01043           0 Free Oxygen
+    5 0.0005025         0 Li-6
+    6 0.006198          0 Li-7
+    7 0.003505          0 Free carbon
+# MAT 16 styrofoam
+ styrofoam
+# density = 0.09
+           1
+    1 0.0077           19 CH2 Molecule
+# MAT 17  Rx_215_enr Reactor Experiments special order enr. lithiated poly 215
+ Rx_215_enr
+           5
+    1 0.054465         19 CH2
+    2 0.010425          0 Free Oxygen
+    5 0.007499          0 Li-6
+    6 0.000395          0 Li-7
+    7 0.0034925         0 Free carbon
+# MAT 18 Li6 (assumes density of 1.32)
+ Li6
+# same density as for LiF but no F
+           2
+    5 0.030130          0 Li-6
+    6 0.001586          0 Li-7
+# MAT 19 lexan
+ lexan
+# From Parag Gokhale (9/4/91) H=5.55%, O=18.87%, C=75.58%, density=1.2
+           3
+    1 0.017046          3 H2O
+    1 0.0227444        19 CH2
+    7 0.0341005         0 Free carbon
+# MAT 20 polybor
+ polybor
+# from Peter Watkins-this is the petten beam delimiter
+           3
+    1 0.07073          19 CH2 Molecule
+    2 0.00611           0 Free Oxygen
+    9 0.0005987         0 B10
+# MAT 21 Pb-B-Wax
+ Pb-B-Wax
+# from Peter Watkins-this is the petten beam collimator
+           5
+    1 0.03197          19 CH2 Molecule
+    2 0.001052          0 Oxygen
+    9 0.0000696         0 B10
+   10 0.0002811         0 B11
+   20 0.01978           0 Lead
+# MAT 22 Cadmium
+ Cadmium
+           1
+   23 0.0464            0 cadmium (gamma lines from ANL5800)
+# MAT 23 skin_ICRU_46_adult + 5 ppm 10B
+ skin_ICRU_46_adult_5ppm
+# density = 1.09
+          10
+    1 0.052924          3 H2O Molecule
+    1 0.0122013        19 CH2 Molecule
+    7 0.00504785        0 Free carbon
+    8 0.00196825        0 Nitrogen
+    9 3.27871   E-07    0 Boron-10
+   11 0.0000571035      0 Sodium
+   12 0.0000409481      0 Sulfur 
+   16 0.0000555438      0 Chlorine
+   17 0.0000167884      0 Potassium
+   18 0.0000211921      0 Phosphorus
+# MAT 24 skin_ICRU_46_adult_10ppm + 10ppm 10B
+ skin_ICRU_46_adult_10ppm
+# density = 1.09
+          10
+    1 0.052924          3 H2O Molecule
+    1 0.0122013        19 CH2 Molecule
+    7 0.00504785        0 Free carbon
+    8 0.00196825        0 Nitrogen
+    9 6.55742   E-07    0 Boron-10
+   11 0.0000571035      0 Sodium
+   12 0.0000409481      0 Sulfur 
+   16 0.0000555438      0 Chlorine
+   17 0.0000167884      0 Potassium
+   18 0.0000211921      0 Phosphorus
+# MAT 25 skin_ICRU_46_adult + 20ppm 10B
+ skin_ICRU_46_adult_20ppm
+# density = 1.09
+          10
+    1 0.052924          3 H2O Molecule
+    1 0.0122013        19 CH2 Molecule
+    7 0.00504785        0 Free carbon
+    8 0.00196825        0 Nitrogen
+    9 1.31148   E-06    0 Boron-10
+   11 0.0000571035      0 Sodium
+   12 0.0000409481      0 Sulfur 
+   16 0.0000555438      0 Chlorine
+   17 0.0000167884      0 Potassium
+   18 0.0000211921      0 Phosphorus
+# MAT 26 skin_ICRU_46_adult + 30ppm 10B
+ skin_ICRU_46_adult_30ppm
+# density = 1.09
+          10
+    1 0.052924          3 H2O Molecule
+    1 0.0122013        19 CH2 Molecule
+    7 0.00504785        0 Free carbon
+    8 0.00196825        0 Nitrogen
+    9 1.96723   E-06    0 Boron-10
+   11 0.0000571035      0 Sodium
+   12 0.0000409481      0 Sulfur 
+   16 0.0000555438      0 Chlorine
+   17 0.0000167884      0 Potassium
+   18 0.0000211921      0 Phosphorus
+# MAT 27 Li6_epoxy
+ Li6_epoxy
+# same density as for LiF but no F
+# assumes 50 % LiF (.66 g/cc) 50% Ch2 (.5 g/cc)
+           3
+    1 0.042932         19 CH2 Molecule
+    5 0.015065          0 Li-6
+    6 0.000793          0 Li-7
+# MAT 28 lead
+ lead
+# 11.355 g/cc
+           1
+   20 0.03300           0 Lead
+# MAT 29 PMMA tissue-equivalent plastic
+ PMMA
+# PMMA Plexiglass phantom (from ICRU 50)
+           3
+    1 0.05489          19 CH2 Molecule
+    2 0.013725          0 Free Oxygen
+    7 0.006865          0 Free carbon
+# MAT 30 concrete (Petten)
+ concrete
+           5              Haematite Concrete (density=2.38)
+    1 0.013860          3 H2O Molecule
+    2 0.019470          0 free Oxygen
+    7 0.001454          0 Carbon
+   13 0.004357          0 Calcium
+   20 0.005372          0 Lead (wgt Eq of Iron)
+# MAT 31 Moran_wgtd_doghead homogenized dog head (Moran)
+ Moran_wgtd_doghead
+          11
+    1 0.0452108         3 H2O Molecule
+    1 0.0148980        19 CH2 Molecule
+    7 0.0021566         0 Free carbon
+    8 0.0018972         0 Nitrogen
+   11 5.00240006E-05    0 Sodium
+   12 4.59018000E-05    0 Sulfur
+   13 6.04645000E-04    0 Calcium
+   14 1.94952000E-05    0 Magnesium
+   16 3.44767000E-05    0 Chlorine
+   17 4.37658000E-05    0 Potassium
+   18 4.00170000E-04    0 Phosphorus
+# MAT 32 search_light dummy material for searchlight problem
+ search_light
+           2
+   24 0.01              0 siga = 0.01
+   25 0.99              0 sigs = 0.99
+# MAT 33 lung 
+ lung   
+# density = 0.107
+           4
+    1 0.006044          3 H2O Molecule
+    1 0.000351         19 CH2 Molecule
+    7 0.0004149         0 Free carbon
+    8 0.0001196         0 Nitrogen
+# MAT 34 brain_ICRU_46_adult + 5ppm 10B
+ brain_ICRU_46_adult_5ppm
+# density = 1.04 grams/cc
+#
+# Number of entries for this material
+          10
+    1 0.0557418         3 H2O molecule
+    1 0.0107458        19 CH2 molecule
+    7 0.0021878         0 Free carbon
+    8 0.000983696       0 Nitrogen
+    9 3.12831   E-07    0 Boron-10 (5 ppm)
+   11 0.00005448        0 Sodium
+   12 0.0000390697      0 Sulfur 
+   16 0.000053          0 Chlorine
+   17 0.000048055       0 Potassium
+   18 0.00008088        0 Phosphorus
+# MAT 35 brain_ICRU_46_adult + 10ppm 10B
+ brain_ICRU_46_adult_10ppm
+# density = 1.04 grams/cc
+#
+# Number of entries for this material
+          10
+    1 0.0557418         3 H2O molecule
+    1 0.0107458        19 CH2 molecule
+    7 0.0021878         0 Free carbon
+    8 0.000983696       0 Nitrogen
+    9 6.25662   E-07    0 Boron-10 (10 ppm)
+   11 0.00005448        0 Sodium
+   12 0.0000390697      0 Sulfur 
+   16 0.000053          0 Chlorine
+   17 0.000048055       0 Potassium
+   18 0.00008088        0 Phosphorus
+# MAT 36 brain_ICRU_46_adult + 20ppm 10B
+ brain_ICRU_46_adult_20ppm
+# density = 1.04 grams/cc
+#
+# Number of entries for this material
+          10
+    1 0.0557418         3 H2O molecule
+    1 0.0107458        19 CH2 molecule
+    7 0.0021878         0 Free carbon
+    8 0.000983696       0 Nitrogen
+    9 1.26132   E-06    0 Boron-10 (20 ppm)
+   11 0.00005448        0 Sodium
+   12 0.0000390697      0 Sulfur 
+   16 0.000053          0 Chlorine
+   17 0.000048055       0 Potassium
+   18 0.00008088        0 Phosphorus
+ Li6_polymer_shield
+# density = 1.8
+           4
+    1 0.048298         19 CH2 Molecule
+    5 0.0497637         0 Li-6
+    7 0.0135186         0 Free carbon
+   21 0.0519354         0 Flourine
+# MAT 38 skin_ICRU_46_adult + 40ppm 10B
+ skin_ICRU_46_adult_40ppm
+# density = 1.09
+          10
+    1 0.052924          3 H2O Molecule
+    1 0.0122013        19 CH2 Molecule
+    7 0.00504785        0 Free carbon
+    8 0.00196825        0 Nitrogen
+    9 2.62297   E-06    0 Boron-10
+   11 0.0000571035      0 Sodium
+   12 0.0000409481      0 Sulfur 
+   16 0.0000555438      0 Chlorine
+   17 0.0000167884      0 Potassium
+   18 0.0000211921      0 Phosphorus
+# MAT 39 skin_ICRU_46_adult + 50ppm 10B
+ skin_ICRU_46_adult_50ppm
+# density = 1.09
+          10
+    1 0.052924          3 H2O Molecule
+    1 0.0122013        19 CH2 Molecule
+    7 0.00504785        0 Free carbon
+    8 0.00196825        0 Nitrogen
+    9 3.27871   E-06    0 Boron-10
+   11 0.0000571035      0 Sodium
+   12 0.0000409481      0 Sulfur 
+   16 0.0000555438      0 Chlorine
+   17 0.0000167884      0 Potassium
+   18 0.0000211921      0 Phosphorus
+#
+# References
+#
+# 1) ICRU REPORT 46 "Photon, Electron, Proton and
+#    Neutron Interaction Data for Body Tissues" Feb. 1992
+#
+# Fast-neutron isotope titles on rtt_002.sigma
+#  1     508  HYDROGEN ENDF/B-V TAPE 511
+#  2     505  OXYGEN-16  VERS 5   
+#  3     505  OXYGEN-16  VERS 5   
+#  4     509  ALUMINIUM-27   VERS 5   
+#  5     510  LITHIUM-6  VERS 5 
+#  6     511  LITHIUM-7 VERS 5 MOD 1  
+#  7     512  CARBON  VERS 5 
+#  8     513  NITROGEN-14  VERS 5 
+#  9     521  BORON-10  VERS 5
+# 10     522  BORON-11  VERS 5   
+# 11     525  SODIUM-23 VERS 5 INFD
+# 12     528  SULFUR  VERS 5 *ID
+# 13     532  CALCIUM(NAT) VERS 5 MOD 3  
+# 14     533  MAGNESIUM VERS 5
+# 15     536  DEUTERIUM  VERS 5
+# 16     541  CHLORINE  VERS 5
+# 17     542  POTASSIUM  VERS 5
+# 18     543  PHOSPHORUS  VERS 5 
+# 19     830  CARBON  VERS 5
+# 20     507  LEAD-NAT FROM TAPE 508
+# 21     537  FLUORINE-19  VERS 5
+# 22     508  HYDROGEN ENDF/B-V TAPE 511
+# 23     523  CADMIUM ENDFB/B-V ANL5800 GAMMA PROD
+# 24     508  fast hydrogen (dummy) siga=1.0 in thermal gps
+# 25     508  fast hydrogen (dummy) sigs=1.0 in thermal gps
+# 26     554  BISMUTH  VERS 5

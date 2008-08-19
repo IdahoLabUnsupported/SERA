@@ -1,0 +1,26 @@
+PROGRAM = rt_test
+CFLAGS	= -I$(BNCT_HOME)/Shared/libuv -O2
+# -Aa -D_HPUX_SOURCE
+FFLAGS = -O2
+
+RTLIBS = $(BNCT_HOME)/Shared/libuv/libuv.a 
+ 
+OBJS   = mc_rt_mc_univel.o
+
+.f.o:
+	f77 -c $(FFLAGS) $*.f
+
+.c.o:
+	cc -c  -O2 $(CFLAGS) $*.c
+
+all:	$(PROGRAM)
+
+$(PROGRAM): $(OBJS)
+	f77 -O2 -o  $(PROGRAM) \
+        $(OBJS) \
+	$(RTLIBS)
+#       -lm /usr/lib/end.o
+
+clean:
+	rm -f *.o
+

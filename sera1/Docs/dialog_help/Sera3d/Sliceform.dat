@@ -1,0 +1,59 @@
+Slice Controls:
+
+	The Slice control panel provides the controls
+       needed to inlaying medical slices into the rendering.
+
+	________________________________________________
+	Loading Raw Images:
+
+	  The Load Raw Images button will bring up the 
+        file selection box (fsb).  The Raw Images must
+        be contained in a .qim file that corresponds to 
+        the UV file which is in use.  
+	  When the slices are loaded, they are stacked 
+        into a 3D texture map for easier handling.
+	________________________________________________
+
+	Inlay Slice Check Box:
+
+	  The inlay slice check box toggles a single 
+         from being inlaid into the rendering.
+	________________________________________________
+	
+	Slice Direction:
+
+	  The three radio buttons control the direction
+         of the inlaid slice.  Choices are the three
+         orthogonal directions: Axial (IS), Coronal (PA),
+	 or Sagittal (RL).
+	________________________________________________
+	
+	External Window:
+
+	  The external window button will toggle an
+         external window in which the current inlaid 
+         slice will be drawn. The external window
+	 can be drawn in single or double size, and 
+         will also allow beam lines to be displayed.
+	  The external window will display the inlaid 
+         beam slice if one is enabled.
+	________________________________________________
+	
+	Slice Slider:
+
+	  The slice slider controls the position of the
+         currently inlaid slice.  If the current slice 
+         direction is Axial the slider represents the 
+         IS value, if the current slice is a coronal
+         slice, the slider represents the PA value, etc.
+	________________________________________________
+
+
+
+
+
+
+
+
+
+

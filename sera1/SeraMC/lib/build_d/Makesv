@@ -1,0 +1,12 @@
+PROGRAM =	rtlib.e
+FFLAGS = -g
+OBJS =  rtt_lib.o plot.o edit.o
+
+.f.o:
+	f77 -c $(FFLAGS) $*.f
+
+.c.o:
+	cc -c $(CFLAGS) $*.c
+
+all:	$(OBJS) 
+	f77 -o $(PROGRAM) $(OBJS)

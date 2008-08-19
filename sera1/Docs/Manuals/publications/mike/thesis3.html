@@ -1,0 +1,1877 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<META NAME="Description" CONTENT="Master Degree Thesis by Michael W. Frandsen">
+<TITLE>FAST RAY TRACKING THROUGH UNIFORM VOLUME ELEMENTS AS APPLIED TO BORON NEUTRON CAPTURE THERAPY</TITLE>
+<META NAME="keywords" CONTENT="algorithm univels track point line ">
+<META NAME="doccomm" CONTENT="Figure 14: Various Tracking Algorithms ComparedThree-Dimensional Algorithm to Examine Representative Univels along LineCommon Integer-Based Representative Line AlgorithmThree-Dimensional Algorithm to Examine All Univels Intersected by LineIf tra">
+<META NAME="Template" CONTENT="C:\Program Files\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">RAPID GEOMETRY INTERROGATION FOR A UNIFORM VOLUME ELEMENT-BASED MONTE CARLO PARTICLE TRANSPORT SIMULATION</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">by</P>
+<P ALIGN="CENTER">Michael William Frandsen</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">A thesis submitted in partial fulfillment</P>
+<P ALIGN="CENTER">of the requirements for the degree</P>
+<P ALIGN="CENTER">of</P>
+<P ALIGN="CENTER">Master of Science</P>
+<P ALIGN="CENTER">in</P>
+<P ALIGN="CENTER">Computer Science</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P ALIGN="CENTER">MONTANA STATE UNIVERSITY—BOZEMAN</P>
+<P ALIGN="CENTER">Bozeman, Montana</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">April 1998</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<B><P ALIGN="CENTER">ACKNOWLEDGEMENTS</P>
+</B><P>This work was sponsored by the U.S. D.O.E., Office of Energy Research, through INEEL under Contract DE-AC07-94ID13223.</P>
+<P>Thanks are given to Floyd Wheeler of the INEEL for providing the Monte Carlo transport simulation results and to Dan Wessol, also of the INEEL, for introducing me to the problem at hand and starting me down the path of uniform volume element tracking. Thanks are also given to my wife for her constant support and assistance in editing this thesis – not to mention the many hours she let me spend in front of her computer instead of with her.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<B><P ALIGN="CENTER">TABLE OF CONTENTS</P>
+</B><P>&nbsp;</P>
+<P>BACKGROUND INFORMATION&#9;<A HREF="#_Toc417321373">*</A></P><DIR>
+
+<P>Boron Neutron Capture&#9;<A HREF="#_Toc417321374">*</A></P>
+<P>Boron Neutron Capture Therapy&#9;<A HREF="#_Toc417321375">*</A></P>
+<P>Boron Neutron Capture Therapy for Glioblastoma Multiforme&#9;<A HREF="#_Toc417321376">*</A></P>
+<P>Clinical Trials&#9;<A HREF="#_Toc417321377">*</A></P>
+<P>BNCT Planning Process&#9;<A HREF="#_Toc417321378">*</A></P>
+<P>BNCT Treatment Plan Validation&#9;<A HREF="#_Toc417321379">*</A></P></DIR>
+
+<P>INTRODUCTION&#9;<A HREF="#_Toc417321380">*</A></P><DIR>
+
+<P>Problem Statement&#9;<A HREF="#_Toc417321381">*</A></P></DIR>
+
+<P>ANALYSIS OF CURRENT TRACKING TECHNIQUE&#9;<A HREF="#_Toc417321382">*</A></P><DIR>
+
+<P>Non-Uniform Rational B-Spline Surface Descriptions&#9;<A HREF="#_Toc417321383">*</A></P>
+<P>Positive Aspects of NURBS&#9;<A HREF="#_Toc417321384">*</A></P>
+<P>Problems with NURBS&#9;<A HREF="#_Toc417321385">*</A></P></DIR>
+
+<P>UNIFORM VOLUME ELEMENTS PROPOSED&#9;<A HREF="#_Toc417321386">*</A></P><DIR>
+
+<P>Description&#9;<A HREF="#_Toc417321387">*</A></P>
+<P>Advantages&#9;<A HREF="#_Toc417321388">*</A></P>
+<P>Disadvantages&#9;<A HREF="#_Toc417321389">*</A></P></DIR>
+
+<P>TWO-DIMENSIONAL TRACKING TECHNIQUES&#9;<A HREF="#_Toc417321390">*</A></P><DIR>
+
+<P>Common Integer-Based Representative Line Algorithm&#9;<A HREF="#_Toc417321391">*</A></P>
+<P>Adaptation to Investigate All Pixels Intersected by Ideal Line&#9;<A HREF="#_Toc417321392">*</A></P>
+<P>Relation to Ray Tracking&#9;<A HREF="#_Toc417321393">*</A></P>
+<P>Discussion of Extension to Non-Grid Points&#9;<A HREF="#_Toc417321394">*</A></P>
+<P>Discussion of Two-Dimensional Tracking Error&#9;<A HREF="#_Toc417321395">*</A></P></DIR>
+
+<P>EXTENSION TO TRACKING IN THREE DIMENSIONS&#9;<A HREF="#_Toc417321396">*</A></P><DIR>
+
+<P>Sample Problem&#9;<A HREF="#_Toc417321397">*</A></P>
+<P>Representative Elements Intersected by Ideal Line Examined&#9;<A HREF="#_Toc417321398">*</A></P>
+<P>Representative Elements Intersected for Sample Problem&#9;<A HREF="#_Toc417321399">*</A></P>
+<P>All Elements Intersected by Ideal Line Examined&#9;<A HREF="#_Toc417321400">*</A></P>
+<P>All Elements Intersected for Sample Problem&#9;<A HREF="#_Toc417321401">*</A></P></DIR>
+
+<P>RESULTS&#9;<A HREF="#_Toc417321402">*</A></P><DIR>
+
+<P>How the Algorithms Fared&#9;<A HREF="#_Toc417321403">*</A></P>
+<P>Error Analysis of Only Examining Representative Univels along the Ideal Line&#9;<A HREF="#_Toc417321404">*</A></P>
+<P>Analysis of Greater Distance Covered in Examining Only Representative Univels Along the Ideal Line&#9;<A HREF="#_Toc417321405">*</A></P>
+<P>Monte Carlo Transport Simulation Results&#9;<A HREF="#_Toc417321406">*</A></P></DIR>
+
+<P>CONCLUSIONS&#9;<A HREF="#_Toc417321407">*</A></P><DIR>
+
+<P>Future Directions&#9;<A HREF="#_Toc417321408">*</A></P></DIR>
+
+<P>REFERENCES&#9;<A HREF="#_Toc417321409">*</A></P>
+<P>APPENDIX&#9;<A HREF="#_Toc417321410">*</A></P><DIR>
+
+<P>Three-Dimensional Algorithm to Examine Representative Univels along Line&#9;<A HREF="#_Toc417321411">*</A></P>
+<P>Three-Dimensional Algorithm to Examine All Univels Intersected by Line&#9;<A HREF="#_Toc417321412">*</A></P>
+<P>Timing Comparisons of Various Algorithms through Same Number of Elements&#9;<A HREF="#_Toc417321413">*</A></P>
+<P ALIGN="CENTER">&nbsp;</P></DIR>
+
+<P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<B><P ALIGN="CENTER">LIST OF TABLES</P>
+</B><P>Table 1: Univel Locations and Sampling Points for Sample Problem&#9;<A HREF="#_Toc417321414">*</A></P>
+<P>Table 2: Univel Locations, Entrant Face Intersections, and Distance Inside each Univel for Sample Problem&#9;<A HREF="#_Toc417321415">*</A></P>
+<P>Table 3: Best to Worst Performance for 1000 Univels&#9;<A HREF="#_Toc417321416">*</A></P>
+<P>Table 4: Best to Worst Performance for Initialization&#9;<A HREF="#_Toc417321417">*</A></P>
+<P>Table 5: Best to Worst Performance for 10 Univels&#9;<A HREF="#_Toc417321418">*</A></P>
+<P>Table 6: Best to Worst Performance for 20 Univels&#9;<A HREF="#_Toc417321419">*</A></P>
+<P>Table 7: Processor Time Requirements for Patient Irradiation Simulation&#9;<A HREF="#_Toc417321420">*</A></P><DIR>
+
+<P ALIGN="CENTER">&nbsp;</P></DIR>
+
+<P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<B><P ALIGN="CENTER">LIST OF FIGURES</P>
+</B><P>Figure 1: Uniform Volume Element Structure and Storage&#9;<A HREF="#_Toc417321421">*</A></P>
+<P>Figure 2: From Medical Images to Univels&#9;<A HREF="#_Toc417321422">*</A></P>
+<P>Figure 3: Sides "Owned" by a Pixel and a Univel&#9;<A HREF="#_Toc417321423">*</A></P>
+<P>Figure 4: Two Possibilities for Drawing Pixels along a Line&#9;<A HREF="#_Toc417321424">*</A></P>
+<P>Figure 5: Integer-Based Algorithm to Plot Representative Line between Grid Points&#9;<A HREF="#_Toc417321425">*</A></P>
+<P>Figure 6: Integer-Based Algorithm to Plot All Pixels along Line between Grid Points&#9;<A HREF="#_Toc417321426">*</A></P>
+<P>Figure 7: Maximum Skipped Segment Length within a Pixel&#9;<A HREF="#_Toc417321427">*</A></P>
+<P>Figure 8: Sample Three-Dimensional Line&#9;<A HREF="#_Toc417321428">*</A></P>
+<P>Figure 9: Calculation of an Initial Error Term for the Centered Y-Value&#9;<A HREF="#_Toc417321429">*</A></P>
+<P>Figure 10: Graphical View of Intersected Representative Univels for Sample Problem&#9;<A HREF="#_Toc417321430">*</A></P>
+<P>Figure 11: Distances to Each Candidate Face&#9;<A HREF="#_Toc417321431">*</A></P>
+<P>Figure 12: Examination of Error Terms to find which Coordinate to Increment&#9;<A HREF="#_Toc417321432">*</A></P>
+<P>Figure 13: Graphical View of All Intersected Univels for Sample Problem&#9;<A HREF="#_Toc417321433">*</A></P>
+<P>Figure 14: Long-Term Performance of Various Tracking Algorithms&#9;<A HREF="#_Toc417321434">*</A></P>
+<P>Figure 15: Typical Performance of Candidate Tracking Algorithms&#9;<A HREF="#_Toc417321435">*</A></P>
+<P>Figure 16: Wireframe Representation of Surfaces for Head, Brain and Target Regions&#9;<A HREF="#_Toc417321436">*</A></P>
+<P>Figure 17: Two-Dimensional Slice Showing Relationship of BMRR Beam Delimiter for the rtt_MC Model of the Head with an 8-cm Depth Target&#9;<A HREF="#_Toc417321437">*</A></P><DIR>
+
+<P ALIGN="CENTER">&nbsp;</P></DIR>
+
+<P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<B><P ALIGN="CENTER">ABSTRACT</P>
+</B><P>New particle tracking methods to speed Boron Neutron Capture Therapy (BNCT) Monte Carlo treatment simulations were investigated. Presently, the Idaho National Engineering and Environmental Laboratory (INEEL) and Montana State University (MSU) treatment planning software uses Non-Uniform Rational B-Spline (NURBS) surfaces to allow construction of a patient model from medical image scans. Radiation doses are then calculated using a Monte Carlo transport method that employs a ray-tracing algorithm to find intersections in the NURBS geometry.</P>
+<P>To obtain statistically significant results, a Monte Carlo treatment simulation can easily require several hours. A profile of the simulation has revealed that between 65 and 90 percent of the time is spent in computing particle intersections with NURBS surfaces. Performance tuning in this area could result in substantial time savings.</P>
+<P>The new algorithms track rays through uniform volume elements (univels) rather than finding intersections with NURBS surfaces. Line rasterization methods have been adapted to allow fast tracking through the univels. Simulation times have been measured on Pentium Pro systems with greater than 64 MB of RAM. Resultant accuracy was measured by comparing the results to that of a problem with an accepted answer.</P>
+<P>Results indicate that the new univel-based tracking methods are approximately 50 times faster than the NURBS-based methods. By incorporating these new tracking methods into the Monte Carlo simulations, speedups by factors of 6 to 10 are common. Accuracy was maintained by scaling the univels to match the precision of the original image data. The results of the new simulations have been shown to be well within the accepted experimental error.</P>
+<P>The new univel-based particle tracking methods outperform the NURBS-based methods. The univel geometry is a simple representation that can be easily generated. The freedom of independently labeling individual univels as a particular material allows creation of arbitrarily shaped bodies not easily represented by a NURBS surface. Because of the speed and success of the newer tracking methods, the future BNCT planning process will be entirely univel-based. Many of the developed tools, methods, and representations could also be applied to non-medical problems and other transport simulations.</P>
+<B><P ALIGN="CENTER"><A NAME="_Toc417321373">BACKGROUND INFORMATION</A></P>
+</B><U><P ALIGN="CENTER"><A NAME="_Toc415992209"><A NAME="_Toc415992585"><A NAME="_Toc415994753"><A NAME="_Toc415995220"><A NAME="_Toc415995733"><A NAME="_Toc415996363"><A NAME="_Toc417321374">Boron Neutron Capture</A></A></A></A></A></A></A></P>
+</U><P>The principle of Boron Neutron Capture (BNC) is that a neutron striking a <SUP>10</SUP>B nucleus can produce <SUP>11</SUP>B which fissions into Lithium (<SUP>7</SUP>Li) and Helium (<FONT FACE="Symbol">a</FONT> -particle) nuclei. The probability of neutron capture by <SUP>10</SUP>B is orders of magnitude greater than for constituent nuclides of biological matter and this probability is inversely proportional to the neutron kinetic energy of the neutron. The Lithium and Helium nuclei are directed opposite each other with significant energy.</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc417321375">Boron Neutron Capture Therapy</A></P>
+</U><P>Boron Neutron Capture Therapy (BNCT) is a method that uses this reaction as a treatment modality. <SUP>10</SUP>B is introduced to the patient by injection of an appropriate amount of one of a variety of Boron compounds that are not toxic for prescribed doses. After some time has elapsed, the Boron compound has been delivered throughout the body through the bloodstream. The compound is engineered to target the tumor cells. Also, because cancer cells have an abnormally high growth rate, they take in more of the Boron compound than nearby healthy tissue. To produce the reactions, a neutron beam is directed at the cancer area. The treatment consists of turning the beam on for an amount of time, typically one-half to one hour, determined by the beam’s neutron intensity. The Boron Neutron Capture reaction inactivates the host cell and, with much lower probability, some nearby cells when the Boron fissions. The beam path and concentration of the Boron compound in the cancer cells focuses on destroying cancerous tumor cells and sparing healthy tissue to the greatest extent possible.</P>
+<P>&nbsp;</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc417321376">Boron Neutron Capture Therapy for Glioblastoma Multiforme</A></P>
+</U><P>Montana State University (MSU) and the Idaho National Engineering and Environmental Laboratory (INEEL) have been involved with creating the user interface to the planning software for treating patients with a specific brain tumor called Glioblastoma Multiforme since 1991. This cancer affects 7000 people in the U.S. each year and is generally considered fatal within six months if untreated or perhaps one year even with treatment.</P>
+<P>The reason Boron Neutron Capture Therapy is a treatment candidate for Glioblastoma Multiforme is multi-faceted. Conventional methods of therapy are not optimal. Removal of the tumor through surgery alone often results in tumor regrowth due to the difficulty of removing the small tumor tendrils in nearby tissue without also removing much of the surrounding healthy brain mass. In Boron Neutron Capture Therapy, some researchers consider the neutron beam as effective on the tumor tendrils as it is on the tumor bulk although the bulk is often removed through surgery prior to Boron Neutron Capture Therapy. The Boron compound concentrates in the tumor and therefore the cell kill is concentrated only in areas near the tumor. Only cells within the range of the reaction products, approximately one cell diameter, are destroyed.</P>
+<P>&nbsp;</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc415994754"><A NAME="_Toc415995221"><A NAME="_Toc415995734"><A NAME="_Toc415996364"><A NAME="_Toc417321377">Clinical Trials</A></A></A></A></A></P>
+</U><P>The early-stage clinical trials of Boron Neutron Capture Therapy for treatment of Glioblastoma Multiforme are promising. At this time, clinical trials have been conducted on only 36 patients at Brookhaven National Laboratory (BNL) during the initial U. S. clinical trials. In the future, there may be a much greater demand for this type of treatment. Additionally, the method is also being explored for treating or assisting in the treatment of other types of cancer such as lung cancer. This potential rise in demand for Boron Neutron Capture Therapy will require planning software optimized for patient throughput. Optimizations to the current software are necessary to meet these demands.</P>
+<P>&nbsp;</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc415994755"><A NAME="_Toc415995222"><A NAME="_Toc415995735"><A NAME="_Toc415996365"><A NAME="_Toc417321378">BNCT Planning Process</A></A></A></A></A></P>
+</U><P>Although Boron Neutron Capture Therapy itself can be conducted in a short session, the planning for that treatment has many stages. The patient must undergo a medical scan such as Nuclear Magnetic Resonance Imaging (NMRI) or Computed Tomography (CT). Next, physicians determine the locations of important structures such as the scalp, skull, brain, target area, and tumor by analyzing the digitized medical scans. Additionally, critical areas are marked for avoidance. The physician often does the marking by outlining structures of interest on several medical images. The stacked slices are then representative of the patient's head and internal regions of interest. Three-dimensional visualization software can be used to observe and verify the location of the defined structures. The three-dimensional views are also useful for the physician to determine an appropriate beam intensity and beam direction for the therapy.</P>
+<P>&nbsp;</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc415994756"><A NAME="_Toc415995223"><A NAME="_Toc415995736"><A NAME="_Toc415996366"><A NAME="_Toc417321379">BNCT Treatment Plan Validation</A></A></A></A></A></P>
+</U><P>Before the treatment proceeds, simulation software must determine the optimal irradiation geometry and irradiation time. A Monte Carlo simulation developed at the Idaho National Engineering and Environmental Laboratory is used to track millions of particle paths and calculate the radiation doses associated with the treatment. Radiation isodoses are then superimposed over the original medical images to aid physicians in development of a treatment plan.</P>
+<P>Although the planning software interface developed by Montana State University and the Idaho National Engineering and Environmental Laboratory is widely used throughout the world for these types of treatments, enhancements could be made to minimize the time required for the planning process.</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<B><P ALIGN="CENTER"><A NAME="_Toc417321380">INTRODUCTION</A></P>
+</B><P>The method presented here is used primarily to model neutron/photon transport for BNCT although it could be applied to model most transport processes where the geometry is first decomposed into univels.</P>
+<P>The INEEL and MSU BNCT collaboration has developed a graphical environment for reconstructing univel and NURBS-based solid models derived from medical images. These solid models form the geometric basis of the tumor-target areas and surrounding healthy tissue for the BNCT [1] treatment planning radiation transport model [2, 3]. The system manipulates and samples medical images so that accurate geometric models of imaged anatomical features can be created and viewed.</P>
+<P>&nbsp;</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc417321381">Problem Statement</A></P>
+</U><P>Computer simulations that model a proposed treatment plan to determine its efficacy are part of the planning stage of BNCT for glioblastoma treatment. It has been found that these simulations can take substantial amounts of time. One major component of these simulations is the need to track simulated rays through the materials of interest and report intersection distances to these regions. A typical simulation on a high-speed computer may require three hours to track an adequate number of particles. It has been determined that 65% to 90% of this time is spent in tracking particles from one region of interest in the NURBS geometry to the next and returning a distance to this intersection. If this bottleneck can be reduced, the overall simulation time can be reduced dramatically.</P>
+<P>This thesis is an investigation and construction of techniques to decrease the computational time required by Boron Neutron Capture Therapy Monte Carlo transport simulations by optimizing the particle tracking routines.</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<B><P ALIGN="CENTER"><A NAME="_Toc417321382">ANALYSIS OF CURRENT TRACKING TECHNIQUE</A></P>
+</B><U><P ALIGN="CENTER"><A NAME="_Toc417321383">Non-Uniform Rational B-Spline Surface Descriptions</A></P>
+</U><P>The current tracking routine is based on interrogating Non-Uniform Rational B-Spline (NURBS) surfaces. Using NURBS is one method of fitting a smooth curve to a set of control points. Many NURBS curves at different heights can be joined to produce a NURBS surface. Only a relatively small set of control points is required to describe a NURBS surface. For BNCT, the NURBS control points for a given structure are generally defined on 5 to 40 parallel medical images depending on the size of the structure. Each object in each slice may be defined with 10 to 20 control points, yielding approximately 50 to 800 control points to describe a given structure. The number of control points will depend on both the size of the structure and how accurately the structure must be represented.</P>
+<P>Given these control points and a degree for the NURBS surface, a resultant outer boundary of the structure is defined. Generally, a quadratic fit is used for the control points. A linear fit would produce a flat-faced polygon whereas a cubic or higher fit does not follow the control points as closely. Therefore, a quadratic fit seems most representative of the underlying surfaces.</P>
+<P>&nbsp;</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc417321384">Positive Aspects of NURBS</A></P>
+</U><P>For many reasons, NURBS are an appropriate representation for the surfaces of the regions of interest. Even with a small number of control points, the NURBS surface can fairly accurately depict most anatomical structures of interest. The NURBS exhibit very good local control and can be easily adjusted with the control points. The resultant structures lend themselves well to smooth three-dimensional surface renderings for visualization. The compact representation consisting of a small number of ordered control points and degree for the NURBS surface requires little memory to describe the geometry.</P>
+<P>&nbsp;</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc415994760"><A NAME="_Toc415995227"><A NAME="_Toc415995740"><A NAME="_Toc415996370"><A NAME="_Toc417321385">Problems with NURBS</A></A></A></A></A></P>
+</U><P>Until the last few years, computer memory has been at a premium. Another reason for the original selection of NURBS surfaces is due to the greater memory requirements of many other representations. Today, this is not nearly as much of a problem. On the contrary, users today suffer because of the trade-off that storage is minimized at the expense of requiring more computation time when the surface is computed or the geometry is interrogated. The control points are a minimum description for the NURBS mathematical structure. A lot of computations are required to determine if a given point is inside, outside, or on a given NURBS surface. Current methods used for determining the first point of intersection of a ray with a NURBS surface use bounding boxes of decreasing size to either hone in on the point of intersection or determine that no intersection occurs. This method of computing intersections is valid and has been used for the treatment simulations but is time-consuming and not without some other flaws.</P>
+<P>In addition to the high computation requirements of computing intersections with NURBS surfaces there are problems of lost particles and overlapping structures. Due to precision problems, lost particles are common in NURBS geometries when surfaces are near each other. Somewhat related to this is the problem of overlapping surfaces. A user could inadvertently create control points that cause close NURBS surfaces to overlap. When overlap occurs, the volume within the overlap is indeterminate as to what structure it belongs to.</P>
+<P>Another problem is that certain types of structures are difficult to represent with NURBS. Structures that branch and structures with multiple connected components produce problems. Typically, these surfaces are either approximated by something that the NURBS can describe or require multiple NURBS for their definition. If multiple NURBS are used, gaps or overlaps could be present where the underlying structures should be connected.</P>
+<P>Given these problems with both the interrogation time requirements and potential ambiguities in the description, it is worthwhile to investigate other representations for the regions of interest and associated tracking methods.</P>
+<P ALIGN="CENTER"><A NAME="_Toc415994761"><A NAME="_Toc415995228"><A NAME="_Toc415995741"><A NAME="_Toc415996371"></P>
+<B><P ALIGN="CENTER"><A NAME="_Toc417321386">UNIFORM VOLUME ELEMENTS </A></A></A></A>PROPOSED</A></P>
+</B><U><P ALIGN="CENTER"><A NAME="_Toc415994762"><A NAME="_Toc415995229"><A NAME="_Toc415995742"><A NAME="_Toc415996372"><A NAME="_Toc417321387">Description</A></A></A></A></A></P>
+</U><P>A uniform volume element (univel) will describe the volume enclosed in a right parallelepiped (or rectangular box). The term voxel is not used because just as pixels are generally considered squares, voxels are generally considered cubes. Here, each uniform volume element has the same length, width, and height but the shape is not necessarily a cube. Many univels can be placed adjacent to each other to describe a volume. Even though each univel is box-like, the elements can describe a structure of arbitrary precision determined by the univel size. Greater accuracy will require more storage. Figure 1 shows what a typical univel might look like along with its normalized representation for array storage.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;<IMG SRC="figure01.gif" WIDTH=503 HEIGHT=220></P>
+<B><P><A NAME="_Toc417321421">Figure 1: </B>Uniform Volume Element Structure and Storage</A></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc415994763"><A NAME="_Toc415995230"><A NAME="_Toc415995743"><A NAME="_Toc415996373"><A NAME="_Toc417321388">Advantages</A></A></A></A></A></P>
+</U><P>Univels are proposed as an alternative to the NURBS representation because of the following advantages. The univel representation of a volume can easily be thought of as a three-dimensional array of volume elements. In this array representation, it is computationally simple to find what structure is present at a given point in space. Intersections of a ray with an edge of a structure would require tracking the ray through the three-dimensional array until a volume element of a new material type is encountered. The array mathematics is considerably simpler and also quicker than the NURBS mathematics required for tracking an equivalent ray.</P>
+<P>The univel representation can also be made to have a simple correspondence with the original medical image slices. If the univels are to be the same resolution as the medical image slices, each pixel on a medical image slice will correspond directly to one univel. The univels can then be stored and retrieved much the same as the original medical image slices. Using univels of finer resolution is certainly possible but the structure would be determined more accurately than the original data. The amount of data available does not lend itself well to support this gain in the resolution of the resultant defined structures. Using univels of a lesser resolution would reduce geometric accuracy.</P>
+<P>Another advantage is that each univel can be labeled independently as any particular material. There cannot be a problem of overlapping regions and there is no problem of adjusting control points for a surface boundary to accurately fit an underlying structure. Rather than using control points, each individual element is labeled with an appropriate material.</P>
+<P>Finally, the memory demands of the univels are approximately the same as the original medical images and by no means a problem on today's computer systems.</P>
+<P>Figure 2 illustrates how the univels relate to the original medical images. In this case, Figure 2a shows three slices each of 4x4 resolution that comprise the stacked image set. For each pixel, a corresponding univel will be created. Figure 2b shows what the stacked univels might look like. The dashed lines indicate the positions of the original medical image slices that are usually located at the transverse midpoint of the univels. Figure 2c illustrates a graphical representation of the three-dimensional array that the univel information will be stored in.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P><IMG SRC="figure02.gif" WIDTH=529 HEIGHT=281>&nbsp;</P>
+<B><P><A NAME="_Toc417321422">Figure 2: </B>From Medical Images to Univels</A></P>
+<P>&nbsp;</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc417321389">Disadvantages</A></P>
+</U><P>Although univels are useful for the purposes described herein, they do have their disadvantages. The storage required for univels is greater than that of many other volume (or surface) representations. The box-like shape does not preserve the surface area of the represented volume. Additionally, curved surfaces are stair-stepped to a degree depending on the size of the univels. Because of the stair-steps, computation of normal vectors is not very informative. However, these are not concerns for the Monte Carlo simulations.</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<B><P ALIGN="CENTER"><A NAME="_Toc417321390">TWO-DIMENSIONAL TRACKING TECHNIQUES</A></P>
+</B><P>It is simpler to first analyze the two-dimensional problem before discussing tracking in three dimensions. The two-dimensional problem is similar to drawing a line of pixels on a computer graphics display. Because this is such a common task, many algorithms were developed for efficiently drawing lines.</P>
+<P>Some references consider a pixel as a grid point occurring at the intersection of two gridlines. Other references consider a pixel to cover the area between two adjacent horizontal and vertical gridlines. Here, the latter view will be taken. Assuming the grid is composed of horizontal and vertical lines for each integral value of <B>x</B> and <B>y</B>, the center of any pixel lies at (<B>I</B>+1/2, <B>J</B>+1/2) where <B>I</B> and <B>J</B> are arbitrary integers. However, the entire pixel can simply be referenced by (<B>I</B>, <B>J</B>). To settle the ambiguity of which edges belong to a pixel and which to its adjacent neighbors, some heuristic must be used. As recommended by the Graphics Gems series [4], the <B>floor</B> function will be used to determine which pixel (or later which volume element) contains a given floating point ordered pair (or ordered triple). In other words, the pixel denoted by (<B>I</B>, <B>J</B>) will span the area enclosed by: <B>I</B>&lt;=<B>x</B>&lt;<B>I</B>+1 and <B>J</B>&lt;=<B>y</B>&lt;<B>J</B>+1. Figure 3 gives a graphical representation of this in both two and three dimensions.</P>
+<P>&nbsp;</P>
+<P>&nbsp;<IMG SRC="figure03.gif" WIDTH=441 HEIGHT=136></P>
+<B><P><A NAME="_Toc417321423">Figure 3: </B>Sides "Owned" by a Pixel and a Univel</A></P>
+<P>&nbsp;</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc417321391">Common Integer-Based Representative Line Algorithm</A></P>
+</U><P>Many standard line algorithms plot one pixel for each integral value of whichever of <B>x</B> or <B>y</B> varies most. They typically draw a representative line rather than plot every pixel intersected by the ideal line. An early and very fast technique for plotting pixel-based lines was developed by Bresenham [5]. Other algorithms such as the midpoint scan line algorithm [6] use similar techniques. Figure 4a shows all pixels intersected by a line and Figure 4b shows the pixels that Bresenham’s algorithm would display.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;<IMG SRC="figure04.gif" WIDTH=657 HEIGHT=208>&nbsp;</P>
+<B><P><A NAME="_Toc417321424">Figure 4: </B>Two Possibilities for Drawing Pixels along a Line</A></P>
+<P>&nbsp;</P>
+<P>In Figure 4b, <B>x</B> varies most rapidly so the algorithm must compute a <B>y</B>-value for each <B>x</B>-value. Of course, these pixels can be generated many different ways. Bresenham’s algorithm is efficient because it is based on integer arithmetic and comparisons that are both very fast operations for most chip architectures. The algorithm determines when <B>y</B> changes as <B>x</B> is incremented. The code segment in Figure 5 gives a version of this algorithm in the case of <B>x</B> varying most rapidly and with both <B>x</B> and <B>y</B> increasing. Symmetry can be applied to cover all possible cases.</P>
+<P>&nbsp;</P>
+<P>&nbsp;<IMG SRC="figure05.gif" WIDTH=292 HEIGHT=402></P>
+<B><P><A NAME="_Toc417321425">Figure 5: </B>Integer-Based Algorithm to Plot Representative Line between Grid Points</A></P>
+<P>&nbsp;</P>
+<P>To understand the previous algorithm, it is important to look at the implicit equation describing a line in the <B>x</B>-<B>y</B> plane:</P>
+<B><P ALIGN="CENTER">x</B>*<B>dy</B> – <B>y</B>*<B>dx</B> +<B>c</B> = <B>err</B>(<B>x</B>, <B>y</B>)</P>
+<P>When <B>err</B>(<B>x</B>, <B>y</B>)=0, the point (<B>x</B>, <B>y</B>) lies on the line. The error is zero for the first and last pixel because the line is determined by connecting the centers of the first and last pixels. The error term is often shifted and multiplied by constant factors in order to make comparisons of it against zero. For the interior pixels, the resultant error is used to determine when <B>y</B> should be increased and when it should remain the same.</P>
+<P>&nbsp;</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc417321392">Adaptation to Investigate All Pixels Intersected by Ideal Line</A></P>
+</U><P>In the previous case, each iteration incremented <B>x</B> by 1 and the algorithm determined whether or not <B>y</B> should be incremented. A similar algorithm can be developed to investigate <I>all</I> pixels intersected by the ideal line. In the case of <B>x</B> and <B>y</B> both increasing, the value of the error at the top right corner of a pixel can be used to decide which coordinate to increment. By investigating the error at this point, the algorithm can decide if the ideal line first intersects the top horizontal line or the right vertical line. For the implicit equation as given and for positive <B>dx</B> and <B>dy</B>, increasing <B>x</B> increases the value of the error and increasing <B>y</B> decreases the error. If the error is greater than zero then <B>y</B> must be increased to lower the error. If the error is less than zero then <B>x</B> must be increased to increase the error. In the case where the error is equal to zero, the line exits the pixel through the top right corner, indicating both <B>x</B> and <B>y</B> should be increased. In this case, it is common to arbitrarily increase <B>x</B> or <B>y</B> and the other component will be increased in the next iteration. This reduces the number of comparisons with the only side effect of plotting a pixel who was only intersected by the ideal line at a corner. A version of this algorithm for both <B>x</B> and <B>y</B> increasing is given in Figure 6.</P>
+<P>&nbsp;</P>
+<P>&nbsp;<IMG SRC="figure06.gif" WIDTH=421 HEIGHT=405>&nbsp;</P>
+<B><P><A NAME="_Toc417321426">Figure 6: </B>Integer-Based Algorithm to Plot All Pixels along Line between Grid Points</A></P>
+<P>&nbsp;</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc417321393">Relation to Ray Tracking</A></P>
+</U><P>Tracking through two-dimensional uniform elements seems very similar to drawing two-dimensional lines with some key differences. Drawing of raster graphics on a computer display is mostly a matter of appearance that does not concern itself with the degree of accuracy that will be required for the univel tracking. Whereas drawing a line on a computer screen consists of specifying integer coordinates for the starting point and ending point of the line, tracing a ray through the univels must start at a specified position within the first univel. Using the computer graphics algorithms directly would require starting and ending essentially in the center of a univel. Additionally, fast line drawing algorithms on a computer are generally tailored to two dimensions rather than three because of the focus of drawing on the two-dimensional screen. Finally, some of the shortcuts taken in computer graphics cannot be applied to univel tracking. For example, it is common to draw a line segment from both ends because the line segment is symmetric about the center. This would be analogous to shooting two rays towards each other in the univel geometry, which makes no sense for the particle model. Additionally, the endpoint of the intersection is not known nor is symmetry useful because the actual ray no longer starts and ends in the center of an element. However, the fast line drawing algorithms provide an initial framework for univel tracking.</P>
+<P>&nbsp;</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc417321394">Discussion of Extension to Non-Grid Points</A></P>
+</U><P>If a general line is considered, the original algorithms must be modified to account for the arbitrary starting point and direction. Although these extensions will not be made until the next chapter on three-dimensional algorithms, some of the required techniques will be discussed.</P>
+<P>Initialization of the error terms will be more complicated. In the grid-based version, the distance from the initial point to both the horizontal and vertical edges is 0.5 units for each. <B>Floor</B> and <B>ceiling</B> operators will now be required to see how far the current pixel is from the edges. These distances will be used to calculate error terms.</P>
+<P>The slope of a line will now be determined by a unit direction vector rather than by giving starting and ending points for the line. Whereas <B>dx</B> and <B>dy</B> were previously represented as integers, a floating-point direction vector must now be represented.</P>
+<P>The use of floating point numbers to keep track of positions, direction vectors, and error terms in the new algorithms should be eliminated as much as possible. To accomplish this, integers can be used to represent floating point numbers. A fractional component <B>f</B> between –1.0 and 1.0 can be approximated by <B>M</B>/2<B><SUP>N</B></SUP> for integer <B>M</B> and <B>N</B>. Assuming 32 bit integer representations, <B>N</B>=30 will allow a sign bit and one bit for overflow. Let <B>M</B>=<B>f</B>*2<B><SUP>N</B></SUP>. Now, <B>M</B>/2<B><SUP>N</B></SUP> approximates <B>f</B> to about 9 significant decimal digits. The routines can now keep track of integer <B>M</B> to represent a fractional component.</P>
+<P>&nbsp;</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc417321395">Discussion of Two-Dimensional Tracking Error</A></P>
+</U><P>Tracking error will be important in three dimensions. A short analysis for two dimensions will be given as background. There is no concern for error in the case of the algorithm that steps through all pixels along the ideal line. The concern for error is in the case of the algorithms that examine only representative elements along the ideal line. Skipping elements in the tracking algorithms will only be allowed if the effect of the skipped elements on the Monte Carlo simulations is minimal.</P>
+<P>For the representative two-dimensional line algorithm, assume that a pixel is a 1 by 1 element. The worst case for skipping any pixel occurs when the line enters the center of any side at a 45-degree angle. In this extreme case, the length of the line segment inside the skipped pixel is 1/<B>sqrt</B>(2) which is approximately 0.707. This is shown in Figure 7. Any pixel intersected by a line segment of length greater than 0.707 will never be skipped. On the other extreme, no pixels will be skipped if the line is perfectly horizontal or vertical. The likelihood of skipping pixels increases as the lines approach 45 degrees.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;<IMG SRC="figure07.gif" WIDTH=311 HEIGHT=248></P>
+<B><P><A NAME="_Toc417321427">Figure 7: </B>Maximum Skipped Segment Length within a Pixel</A></P>
+<P ALIGN="CENTER">&nbsp;</P>
+<B><P ALIGN="CENTER"><A NAME="_Toc417321396">EXTENSION TO TRACKING IN THREE DIMENSIONS</A></P>
+<P ALIGN="CENTER">&nbsp;</P>
+</B><U><P ALIGN="CENTER"><A NAME="_Toc417321397">Sample Problem</A></P>
+</U><P>Discussion of the three-dimensional algorithms can be facilitated by a sample problem. The starting point, <B>P<SUB>0</B></SUB>, will be (0, 5/6, 2 1/2) or approximately (0.000, 0.833, 2.500). The direction vector will be (1/3, 1, 9/16) which is approximately (0.279, 0.837, 0.471) after normalization. This ray and its projections onto the <B>x</B>-<B>y</B> and <B>y</B>-<B>z</B> planes are shown in Figure 8.</P>
+<P>&nbsp;</P>
+<P>&nbsp;<IMG SRC="figure08.gif" WIDTH=471 HEIGHT=315></P>
+<B><P><A NAME="_Toc417321428">Figure 8: </B>Sample Three-Dimensional Line</A></P>
+<P>&nbsp;</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc417321398">Representative Elements Intersected by Ideal Line Examined</A></P>
+</U><P>Representative elements along an ideal line in three dimensions can be investigated much the same as those in the two-dimensional case. As before, the algorithm can step in one-unit increments in the direction varying the most and at each step find a representative value for each of the other two components. The centered value of the most rapidly varying component will be used as the point to find corresponding values for the other two components. Using a centered value is more representative than using a value near either edge. Additionally, a centered value produces the tightest bound for minimizing the lengths of skipped line segments through univels. The error analysis will be given later.</P>
+<P>Since the initial point is not likely centered in the direction of the most rapidly varying direction component, computation of the first centered point is the most time-consuming. Subsequent points do not require the costly initialization stage. The initial centered point should be the first centered point from the initial point in the direction of the ray. Initial values for the other two coordinates must be calculated for determination of the initial values of the error terms.</P>
+<P>After initialization, the algorithm proceeds by always stepping one unit in the primary direction during each iteration. The other two components are independently incremented (or decremented) when an individual error term exceeds the threshold. Here, the error is designed so the corresponding component will need to be updated when the error is greater than or equal to zero.</P>
+<P>As described earlier, a floating point value <B>f</B> between -1.0 and 1.0 will be represented by integer <B>M</B> where <B>M</B>=<B>f</B>*2<B><SUP>N</B></SUP> and <B>N</B> is equal to 2 less than the number of bits used to represent an integer. Figure 9 illustrates how the error can be calculated for <B>z</B> based on the first centered <B>y</B>. The calculation is similar for <B>x</B>. For the case of <B>z</B>, the first centered value gives <B>z</B>=2.875. Since <B>z</B> is increasing, <B>z</B> has traveled 0.875 units towards the next univel but must still travel at least 0.125 units before <B>z</B> should be increased. In the floating point version, the error could be initialized to <B>E</B>=–0.125 and would increase by 0.5625 for each step of <B>y</B> since <B>z</B> increases by 0.5625 units for every unit step in <B>y</B>, based on the direction vector. When the error is greater than or equal to 0, <B>z</B> will be increased. As described before, the algorithm presented here will use integers to represent –0.125, 0.5625, etc. The stored integer value is simply the floating-point value multiplied by a very large number.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;<IMG SRC="figure09.gif" WIDTH=562 HEIGHT=291></P>
+<B><P><A NAME="_Toc417321429">Figure 9: </B>Calculation of an Initial Error Term for the Centered <B>Y</B>-Value</A></P>
+<P>&nbsp;</P>
+<P>Since this algorithm does not examine all univels intersected by the ideal line, it is evident that a point of intersection of the line with a new material type will sometimes be skipped. However, there is an increased speed potential in examining less univels. An analysis of the speed, error, and implications of this error will be discussed later.</P>
+<P>Code for the developed algorithm is given in the appendix.</P>
+<P>&nbsp;</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc417321399">Representative Elements Intersected for Sample Problem</A></P>
+</U><P>For the sample problem depicted in Figure 8, Table 1 lists the array positions that will be examined and the actual coordinates of the sampling points based on centered values for <B>y</B>, the most rapidly varying component.</P>
+<P>&nbsp;</P>
+<B><P><A NAME="_Toc417321414">Table 1: </B>Univel Locations and Sampling Points for Sample Problem</A></P>
+<TABLE BORDER CELLSPACING=2 BORDERCOLOR="#008000" CELLPADDING=9 WIDTH=847>
+<TR><TD WIDTH="20%" VALIGN="TOP" HEIGHT=28>
+<P>Array <B>x</B></TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=28>
+<P>Array <B>y</B></TD>
+<TD WIDTH="11%" VALIGN="TOP" HEIGHT=28>
+<P>Array <B>z</B></TD>
+<TD WIDTH="16%" VALIGN="TOP" HEIGHT=28>
+<B><P>X</B></TD>
+<TD WIDTH="13%" VALIGN="TOP" HEIGHT=28>
+<B><P>Y</B></TD>
+<TD WIDTH="19%" VALIGN="TOP" HEIGHT=28>
+<B><P>Z</B></TD>
+</TR>
+<TR><TD WIDTH="20%" VALIGN="TOP" HEIGHT=48>
+<P>0</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=48>
+<P>0</TD>
+<TD WIDTH="11%" VALIGN="TOP" HEIGHT=48>
+<P>2</TD>
+<TD WIDTH="16%" VALIGN="TOP" HEIGHT=48>
+<P>0.000</TD>
+<TD WIDTH="13%" VALIGN="TOP" HEIGHT=48>
+<P>0.833</TD>
+<TD WIDTH="19%" VALIGN="TOP" HEIGHT=48>
+<P>2.500</TD>
+</TR>
+<TR><TD WIDTH="20%" VALIGN="TOP" HEIGHT=51>
+<P>0</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=51>
+<P>1</TD>
+<TD WIDTH="11%" VALIGN="TOP" HEIGHT=51>
+<P>2</TD>
+<TD WIDTH="16%" VALIGN="TOP" HEIGHT=51>
+<P>0.222</TD>
+<TD WIDTH="13%" VALIGN="TOP" HEIGHT=51>
+<P>1.500</TD>
+<TD WIDTH="19%" VALIGN="TOP" HEIGHT=51>
+<P>2.875</TD>
+</TR>
+<TR><TD WIDTH="20%" VALIGN="TOP" HEIGHT=32>
+<P>0</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=32>
+<P>2</TD>
+<TD WIDTH="11%" VALIGN="TOP" HEIGHT=32>
+<P>3</TD>
+<TD WIDTH="16%" VALIGN="TOP" HEIGHT=32>
+<P>0.556</TD>
+<TD WIDTH="13%" VALIGN="TOP" HEIGHT=32>
+<P>2.500</TD>
+<TD WIDTH="19%" VALIGN="TOP" HEIGHT=32>
+<P>3.438</TD>
+</TR>
+<TR><TD WIDTH="20%" VALIGN="TOP" HEIGHT=40>
+<P>0</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=40>
+<P>3</TD>
+<TD WIDTH="11%" VALIGN="TOP" HEIGHT=40>
+<P>4</TD>
+<TD WIDTH="16%" VALIGN="TOP" HEIGHT=40>
+<P>0.889</TD>
+<TD WIDTH="13%" VALIGN="TOP" HEIGHT=40>
+<P>3.500</TD>
+<TD WIDTH="19%" VALIGN="TOP" HEIGHT=40>
+<P>4.000</TD>
+</TR>
+<TR><TD WIDTH="20%" VALIGN="TOP" HEIGHT=5>
+<P>1</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=5>
+<P>4</TD>
+<TD WIDTH="11%" VALIGN="TOP" HEIGHT=5>
+<P>4</TD>
+<TD WIDTH="16%" VALIGN="TOP" HEIGHT=5>
+<P>1.222</TD>
+<TD WIDTH="13%" VALIGN="TOP" HEIGHT=5>
+<P>4.500</TD>
+<TD WIDTH="19%" VALIGN="TOP" HEIGHT=5>
+<P>4.563</TD>
+</TR>
+<TR><TD WIDTH="20%" VALIGN="TOP" HEIGHT=5>
+<P>1</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=5>
+<P>5</TD>
+<TD WIDTH="11%" VALIGN="TOP" HEIGHT=5>
+<P>5</TD>
+<TD WIDTH="16%" VALIGN="TOP" HEIGHT=5>
+<P>1.556</TD>
+<TD WIDTH="13%" VALIGN="TOP" HEIGHT=5>
+<P>5.500</TD>
+<TD WIDTH="19%" VALIGN="TOP" HEIGHT=5>
+<P>5.125</TD>
+</TR>
+<TR><TD WIDTH="20%" VALIGN="TOP" HEIGHT=5>
+<P>1</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=5>
+<P>6</TD>
+<TD WIDTH="11%" VALIGN="TOP" HEIGHT=5>
+<P>5</TD>
+<TD WIDTH="16%" VALIGN="TOP" HEIGHT=5>
+<P>1.889</TD>
+<TD WIDTH="13%" VALIGN="TOP" HEIGHT=5>
+<P>6.500</TD>
+<TD WIDTH="19%" VALIGN="TOP" HEIGHT=5>
+<P>5.688</TD>
+</TR>
+</TABLE>
+
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>The representative univels examined for the sample problem are depicted in Figure 10. Additionally, the univels tracked through correspond to the dark gray elements in Figure 8.</P>
+<P>&nbsp;</P>
+<P>&nbsp;<IMG SRC="figure10.gif" WIDTH=457 HEIGHT=401></P>
+<B><P><A NAME="_Toc417321430">Figure 10: </B>Graphical View of Intersected Representative Univels for Sample Problem</A></P>
+<U><P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="_Toc417321400">All Elements Intersected by Ideal Line Examined</A></P>
+</U><P>The three-dimensional algorithm that tracks through <I>all</I> univels intersected by the ideal line is a bit more complicated than its two-dimensional counterpart. For reference, a grid point-based version of this algorithm can be found in the Graphics Gems series [7]. For the time being, assume that each of <B>x</B>, <B>y</B>, and <B>z</B> are increasing positively. In order to step to the next univel, the algorithm must determine which face of the univel is pierced as the ray exits to the next univel. Because the general direction of the ray is known, the three faces in the opposite direction can be easily eliminated. Again, implicit equations are used but this time it is necessary to look at three implicit equations that together describe the line:</P>
+<B><P ALIGN="CENTER">x</B>*<B>dy</B> – <B>y</B>*<B>dx</B> + <B>c</B> = 0</P>
+<B><P ALIGN="CENTER">x</B>*<B>dz</B> – <B>z</B>*<B>dx</B> + <B>d</B> = 0</P>
+<B><P ALIGN="CENTER">y</B>*<B>dz</B> – <B>z</B>*<B>dy</B> + <B>e</B> = 0</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<P>In this case, the error terms will be denoted <B>errxy</B>, <B>errxz</B>, and <B>erryz</B>. The sign of the errors at a specific point can be used to determine the next face-adjacent univel or equivalently the next univel in the array. The point of examination for each univel is the shared point of the three candidate faces that the ray can exit.</P>
+<P>Initialization of the error terms requires looking at the distances from the starting point to each of the candidate faces and can be accomplished using <B>floor</B> and <B>ceiling</B> functions. Figure 11 shows these distances for the sample problem. Since each of <B>x</B>, <B>y</B>, and <B>z</B> are increasing, distances are those to the three positive-sided faces. The intersection of these three faces is the examination point, which is designated with a dot in Figure 11.</P>
+<P>&nbsp;</P>
+<P>&nbsp;<IMG SRC="figure11.gif" WIDTH=422 HEIGHT=260></P>
+<B><P><A NAME="_Toc417321431">Figure 11: </B>Distances to Each Candidate Face</A></P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>The initial errors at <B>P<SUB>0</B></SUB> are zero. As an example, <B>errxy</B> at (<B>x<SUB>0</B></SUB>, <B>y<SUB>0</B></SUB>) is:</P>
+<B><P ALIGN="CENTER">errxy</B>(<B>x<SUB>0</B></SUB>, <B>y<SUB>0</B></SUB>) = <B>x<SUB>0</B></SUB>*<B>dy</B> – <B>y<SUB>0</B></SUB>*<B>dx</B> + <B>c</B> (initially 0)</P>
+<P>The distance to the corner point is <B>to_yz</B> for <B>x</B> and <B>to_xz</B> for <B>y</B>. At this point, the error is:</P>
+<B><P ALIGN="CENTER">errxy</B>(<B>x<SUB>0</B></SUB>+<B>to_yz</B>, <B>y<SUB>0</B></SUB>+<B>to_xz</B>) = <B>to_yz</B>*<B>dy</B> – <B>to_xz</B>*<B>dx</P>
+<P ALIGN="CENTER">&nbsp;</P>
+</B><P>Since <B>to_xz</B> and <B>to_yz</B> are at most 1 and since <B>dy</B> and <B>dx</B>, taken from the normalized direction vector, are at most 1 in absolute value, the resultant error term can be stored as <B>E=errxy</B>*2<B><SUP>N</B></SUP> as described previously. For each step in <B>x</B> or <B>y</B>, <B>errxy</B> must now be increased by <B>dy</B>*2<B><SUP>N</B></SUP> or decreased by <B>dx</B>*2<B><SUP>N</B></SUP>, respectively.</P>
+<P>The error terms can be compared against 0 to decide which coordinate to increase. Projections from one of the univels of the sample problem are given in Figure 12. The figure helps show how the decision can be made. Any error term can be examined first. Assume that <B>errxz</B> is examined first. The sign of the error term will be positive, indicating that <B>x</B> should <I>not</I> be increased. Now, <B>y</B> and <B>z</B> remain as candidates so <B>erryz</B> is checked next. The sign of <B>erryz</B> will be negative, indicating that <B>z</B> should <I>not</I> be increased. Therefore, <B>y</B> must be increased.</P>
+<P>&nbsp;</P>
+<P><IMG SRC="figure12.gif" WIDTH=431 HEIGHT=325>&nbsp;</P>
+<B><P><A NAME="_Toc417321432">Figure 12: </B>Examination of Error Terms to find which Coordinate to Increment</A></P>
+<P>&nbsp;</P>
+<P>In the algorithm, one error is arbitrarily checked first and the sign determines which error term is to be checked next. The coordinate to update is determined after just two comparisons. As this coordinate is stepped by one unit, it has an effect on two of the three error terms. The error terms are updated to indicate a step was taken in the calculated direction.</P>
+<P>As before, not much attention is paid as to what should be done if any error is precisely zero, indicating that more than one component should be increased. Here, speed is gained by using fewer comparisons for the trade-off that a rare univel will be investigated that only touched the line at a single point. However, it is not difficult to explicitly test the case of the errors being zero and incrementing more than one component as necessary.</P>
+<P>One aspect of this algorithm can be exploited that is not of use in the case of traversal or simply marking examined univels. Since the traversal is ultimately used to determine an intersection point, knowing which face of the univel was first intersected can save time. Here, that can be easily managed. The algorithm that visits representative univels will require looking at each of three candidate faces and will therefore have some additional overhead when determining the final intersection. Although this algorithm tracks through more univels for a given segment length, the final calculation of an intersection point can be computed more quickly.</P>
+<P>Code for the developed algorithm is given in the appendix.</P>
+<U><P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="_Toc417321401">All Elements Intersected for Sample Problem</A></P>
+</U><P>For the sample problem depicted in Figure 8, Table 2 lists the array positions that will be examined and the actual coordinates of the face intersections in the case of examining all univels intersected by the ideal line. Additionally, the length of the line segment inside each univel is given.</P>
+<P>&nbsp;</P>
+<B><P><A NAME="_Toc417321415">Table 2: </B>Univel Locations, Entrant Face Intersections, and Distance Inside each Univel for Sample Problem</A></P>
+<TABLE BORDER CELLSPACING=2 BORDERCOLOR="#008000" CELLPADDING=9 WIDTH=727>
+<TR><TD WIDTH="14%" VALIGN="TOP" HEIGHT=28>
+<P>Array <B>x</B></TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=28>
+<P>Array <B>y</B></TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=28>
+<P>Array <B>z</B></TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=28>
+<B><P>X</B></TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=28>
+<B><P>Y</B></TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=28>
+<B><P>Z</B></TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=28>
+<P>Distance</TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>0</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>0</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>2</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>—</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>—</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>—</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>0.199</TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>0</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>1</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>2</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>0.056</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>1.000</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>2.594</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>0.863</TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>0</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>1</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>3</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>0.296</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>1.722</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>3.000</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>0.332</TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>0</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>2</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>3</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>0.389</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>2.000</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>3.156</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>1.195</TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>0</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>3</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>3</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>0.722</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>3.000</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>3.719</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>0.597</TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>0</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>3</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>4</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>0.889</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>3.500</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>4.000</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=48>
+<P>0.398</TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP" HEIGHT=51>
+<P>1</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=51>
+<P>3</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=51>
+<P>4</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=51>
+<P>1.000</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=51>
+<P>3.833</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=51>
+<P>4.188</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=51>
+<P>0.199</TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP" HEIGHT=32>
+<P>1</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=32>
+<P>4</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=32>
+<P>4</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=32>
+<P>1.056</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=32>
+<P>4.000</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=32>
+<P>4.281</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=32>
+<P>1.195</TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP" HEIGHT=40>
+<P>1</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=40>
+<P>5</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=40>
+<P>4</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=40>
+<P>1.389</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=40>
+<P>5.000</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=40>
+<P>4.844</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=40>
+<P>0.332</TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP" HEIGHT=5>
+<P>1</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=5>
+<P>5</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=5>
+<P>5</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=5>
+<P>1.481</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=5>
+<P>5.278</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=5>
+<P>5.000</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=5>
+<P>0.863</TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP" HEIGHT=5>
+<P>1</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=5>
+<P>6</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=5>
+<P>5</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=5>
+<P>1.722</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=5>
+<P>6.000</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=5>
+<P>5.406</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=5>
+<P>0.996</TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP" HEIGHT=5>
+<P>2</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=5>
+<P>6</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=5>
+<P>5</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=5>
+<P>2.000</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=5>
+<P>6.833</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=5>
+<P>5.875</TD>
+<TD WIDTH="14%" VALIGN="TOP" HEIGHT=5>
+<P>0.199</TD>
+</TR>
+</TABLE>
+
+<P>&nbsp;</P>
+<P>All univels examined for the sample problem are depicted in Figure 13.</P>
+<P>&nbsp;</P>
+<P><IMG SRC="figure13.gif" WIDTH=422 HEIGHT=379></P>
+<B><P><A NAME="_Toc417321433">Figure 13: </B>Graphical View of All Intersected Univels for Sample Problem</A></P>
+<P ALIGN="CENTER">&nbsp;</P>
+<B><P ALIGN="CENTER"><A NAME="_Toc417321402">RESULTS</A></P>
+</B><P>The results will be divided into two main parts. In the first part, various tracking algorithms will be compared. The algorithm that investigates representative univels along the ideal line was determined to be most appropriate for the Monte Carlo simulations. In the second part, the results of using this new technique in the Monte Carlo transport simulations will be discussed.</P>
+<P>&nbsp;</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc417321403">How the Algorithms Fared</A></P>
+</U><P>Time trials were conducted for the described algorithms as well as others. The algorithms are classified according to four categories. Two-dimensional algorithms will be designated as <B>2D</B> and three-dimensional algorithms as <B>3D</B>. Although grid point-based algorithms are not accurate enough for the tracking, they were used for comparison. ‘<B>I</B>’ will indicate that the algorithm started at an integer grid point with integer increments and ‘<B>F</B>’ will be used for an arbitrary starting point in an arbitrary direction. A second ‘<B>I</B>’ or ‘<B>F</B>’ will indicate if the algorithm uses integer arithmetic or floating point arithmetic in its inner loop. Finally, ‘<B>A</B>’ will indicate that the algorithm examines all elements along the path and ‘<B>R</B>’ will indicate only representative elements were examined. Hence, <B>3DFIR</B> will indicate the three-dimensional algorithm that starts at an arbitrary position, is directed in an arbitrary direction, uses integer arithmetic for its main stepping loop, and only tracks through representative elements.</P>
+<P>The integer starting point algorithms will be used as a basis of comparison for the floating start point algorithms. If times are close then it can be concluded that the generalized algorithms cannot perform much better. This assumes that the entirely integer-based algorithms are very near a lower bound for this type of tracking environment. Tracking through NURBS will not be analyzed in this section since it will be evident in the next section that the univel tracking methods are much faster. However, the question for the time being will be: How much of a performance trade-off do the algorithms take for the necessary added starting point precision and tracking precision?</P>
+<P>The tests are a somewhat simplified version of shooting many random rays. To avoid undue complication, the algorithms used assume that <B>x</B> is the dominant direction of the ray and that each component of the direction vector is positive. It is assumed that through symmetry the other cases need not be considered. Another simplification is that the algorithms do not calculate a precise intersection with the final univel on the path. It is the tracking that is the greatest concern here and so it is assumed that a small amount of constant time can be added to each algorithm to account for the calculation of the final intersection point. Of course, this could vary slightly between the algorithms.</P>
+<P>The test was conducted by generating a random data set of qualifying starting points and direction vectors. For the pure integer versions, the values of the starting points were truncated to integers and the value of each component of the direction vector was multiplied by a large constant and each component then truncated. The number of pixels (in the two-dimensional case) and univels (in the three-dimensional case) was varied over a large range of values and corresponding times required by each respective algorithm were recorded. The tests were run on a Linux-based Pentium Pro 150 with 96 MB of RAM. A plot of all times showing long-term performance is given in Figure 14.</P>
+<P>&nbsp;</P>
+<P>&nbsp;<IMG SRC="figure14.gif" WIDTH=718 HEIGHT=827><A NAME="_Toc417321434"><B>&nbsp;</P>
+<P>Figure 14: </B>Long-Term Performance of Various Tracking Algorithms</A></P>
+<P>&nbsp;</P>
+<P>Additionally, a plot comparing the candidate algorithms (<B>3DF--</B>) for a smaller number of univels is given in Figure 15.</P>
+<P>&nbsp;</P>
+<P><IMG SRC="figure15.gif" WIDTH=720 HEIGHT=825><A NAME="_Toc417321435"></P>
+<B><P>Figure 15: </B>Typical Performance of Candidate Tracking Algorithms</A></P>
+<P>&nbsp;</P>
+<P>There is a comparison problem that examining an equal number of univels does not mean equal distances were covered. When only representative univels are examined, a step from one element to the next is typically larger than if all stepped through univels are face-adjacent to each other. A correction factor for this will be examined later. The tests as given are intended to show how the algorithms compare for the same number of elements or, equivalently, for the same number of iterations.</P>
+<P>As expected, the long-term performance of the four algorithms that relied on floating point calculations in their main loop performed worst. The algorithms that used integer arithmetic in their main loops but added the precision of using floating point starting points and floating point direction vectors performed, on average, approximately the same as their counterparts that used integers throughout.</P>
+<P>The <B>y</B>-intercept of each line indicates the initialization time required for each algorithm. This is of importance when only a small number of univels are to be examined for a given intersection test. Fifteen univels is a good estimate of an average number of univels that must be examined for a given intersection test in the current Monte Carlo simulations.</P>
+<P>Tables 3, 4, 5, and 6 summarize the performance of four candidate algorithms in the cases of long-term performance, initialization performance, performance for 10 univels, and performance for 20 univels, respectively.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<B><P><A NAME="_Toc417321416">Table 3: </B>Best to Worst Performance for 1000 Univels</A></P>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=9 WIDTH=720>
+<TR><TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P></TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<B><P>3DFIR</B></TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<B><P>3DFIA</B></TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<B><P>3DFFA</B></TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<B><P>3DFFR</B></TD>
+</TR>
+<TR><TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P>Relative Time</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P>1.00</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P>1.32</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P>3.93</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P>7.18</TD>
+</TR>
+</TABLE>
+
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<B><P><A NAME="_Toc417321417">Table 4: </B>Best to Worst Performance for Initialization</A></P>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=9 WIDTH=720>
+<TR><TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P></TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<B><P>3DFFA</B></TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<B><P>3DFFR</B></TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<B><P>3DFIA</B></TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<B><P>3DFIR</B></TD>
+</TR>
+<TR><TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P>Relative Time</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P>1.00</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P>1.42</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P>1.65</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P>2.12</TD>
+</TR>
+</TABLE>
+
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<B><P><A NAME="_Toc417321418">Table 5: </B>Best to Worst Performance for 10 Univels</A></P>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=9 WIDTH=720>
+<TR><TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P></TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<B><P>3DFIA</B></TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<B><P>3DFIR</B></TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<B><P>3DFFA</B></TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<B><P>3DFFR</B></TD>
+</TR>
+<TR><TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P>Relative Time</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P>1.00</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P>1.14</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P>1.25</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P>2.10</TD>
+</TR>
+</TABLE>
+
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<B><P><A NAME="_Toc417321419">Table 6: </B>Best to Worst Performance for 20 Univels</A></P>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=9 WIDTH=720>
+<TR><TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P></TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<B><P>3DFIA</B></TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<B><P>3DFIR</B></TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<B><P>3DFFA</B></TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<B><P>3DFFR</B></TD>
+</TR>
+<TR><TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P>Relative Time</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P>1.00</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P>1.04</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P>1.62</TD>
+<TD WIDTH="20%" VALIGN="TOP" HEIGHT=47>
+<P>2.80</TD>
+</TR>
+</TABLE>
+
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>Somewhere between 3 to 7 univels is where both <B>3DFI</B> algorithms start having better performance than the two <B>3DFF</B> algorithms. Since it is assumed that most intersections will require investigating more than 3 to 7 univels and since the longer intersections will have more of an effect on the overall time, it is evident that the algorithms that use integer arithmetic in their inner loops should be used in most cases.</P>
+<P>For the general problem, <B>3DFIA</B> and <B>3DFIR</B> are both candidates. Of course, <B>3DFIR</B> can only be used when it is allowable to skip some univels and miss some potential intersections. Rates given so far measure univels examined. Another measure is total tracking distance. <B>3DFIA</B> does not travel as far as <B>3DFIR</B> when tracking through the same number of univels. A multiplication factor will be derived to compare these algorithms on equal terms of distance covered.</P>
+<P>More data for the timing tests are given in the appendix.</P>
+<P>&nbsp;</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc417321404">Error Analysis of Only Examining Representative Univels along the Ideal Line</A></P>
+</U><P>For the Monte Carlo problem at hand, intersections missed by <B>3DFIR</B> have been found to not be a problem. On the contrary, they have more good side effects than bad. In the case of tracking through regions of the head, locality of regions is assumed. That is, regions are generally found in localized globs rather than random spread-out points. In this case, when a new material is entered, it is typical that the continuation of this line will continue to pass through at least a few univels of the same material. For this reason, <B>3DFIR</B> does not miss most intersections although it may appear that a missed univel could result in a slightly greater distance-to-intersection reported. However, three candidate planes are examined when the point of intersection is being determined. The candidate planes do not necessarily correspond to the calculated univel. They are simply the past three <B>x-y</B>, <B>x-z</B>, and <B>y-z</B> planes, or faces, intersected by the line and so correspond to the current univel and two previous univels (not necessarily the past two intersected univels). This examination of previous univels makes it likely that the resultant intersection point will be exact.</P>
+<P>When an intersection is missed entirely, it is due to the ray entering the new material only briefly through a small portion of a univel and then immediately returning to the original material. For a univel of dimensions <B>a</B> mm x <B>b</B> mm x <B>c</B> mm, it is relatively straightforward to calculate that all univels intersected by a line segment of at least <B>sqrt</B>(<B>a</B><SUP>2</SUP>+<B>b</B><SUP>2</SUP>+<B>c</B><SUP>2</SUP>)/2 mm are examined. This is equal to half the length of the main diagonal of the univel. See Figure 7 for the two-dimensional analog. In the case of the missed intersections, the amount of material through which the ray passes is so small that it is not necessary to proceed with the transport calculations for the intersection. On the contrary, these extra calculations do little to affect the overall problem but will increase the time required for the simulation. This, of course, relies on a <I>small</I> univel size compared to the mean-free path of the particles being examined. This is satisfied in the current simulations and should hold true in the future assuming imaging devices remain unchanged or become more resolute.</P>
+<P>&nbsp;</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc417321405">Analysis of Greater Distance Covered in Examining Only Representative Univels Along the Ideal Line</A></P>
+</U><P>Earlier comparisons gave timings based on different algorithms tracking through the same number of elements. However, tracking through only representative elements rather than all elements covers more distance for the same number of univels examined. In general, however, a simple multiplication factor can be derived to estimate the proportionality constant that exists between the two distances covered for the same number of univels.</P>
+<P>It is easy to analyze the extreme cases when the ray moves parallel to an axis or when the ray moves equally in all directions. If the ray moves parallel to an axis, both algorithms track through all univels and the proportionality constant is therefore 1.0. In the case of all directions varying equally, it takes three steps for the algorithm tracking through all univels to increase each of <B>x</B>, <B>y</B>, and <B>z</B>. The algorithm investigating representative elements will increase whichever component it arbitrarily decided was changing most rapidly and at the same time see that it must also correspondingly increase each of the other two components. What was achieved in one step by the representative tracking algorithm took three steps in the other algorithm. Hence, the representative tracking algorithm covers a distance 3.0 times as great as the competing algorithm in this worst case while stepping through the same number of univels. Therefore, the average proportionality constant must lie between these two extremes of 1.0 and 3.0.</P>
+<P>To think of this another way, this is similar to considering two different metrics for distance from a source univel to a destination univel. The algorithm tracking through all elements takes the unit distance between univels in each of <B>x</B>, <B>y</B>, and <B>z</B> and sums them to calculate the number of univels examined. The representative tracking algorithm examines only the maximum of the three components.</P>
+<P>For the continuous case, assume a sphere of radius <B>r</B>. The continuous and discrete cases should be similar Assume that a ray starts at the center of the sphere and moves in an arbitrary direction to its surface. The ratio between the average number of univels tracked through in <B>3DFIA</B> and <B>3DFIR</B> is:</P>
+<B><P ALIGN="CENTER">average</B>(|<B>x</B>|+|<B>y</B>|+|<B>z</B>|) over the surface of the sphere </P>
+<P ALIGN="CENTER">_________________________________________</P>
+<B><P ALIGN="CENTER">average</B>(<B>max</B>(|<B>x</B>|, |<B>y</B>|, |<B>z</B>|)) over the surface of the sphere</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<P>In both cases, <B>x</B><SUP>2</SUP>+<B>y</B><SUP>2</SUP>+<B>z</B><SUP>2</SUP>=<B>r</B><SUP>2</SUP>. Empirical trials show that this ratio is approximately 1.95. In other words, the representative element tracking ray will travel about twice as far, on average, while investigating the same number of univels as the algorithm that tracks through all univels. Because of this substantial difference, it is optimal to use the representative tracking algorithm whenever it is estimated that more than 4 univels will be tracked through in computing an intersection. (Tracking through 4 univels with <B>3DFIR</B> takes approximately the same time as tracking through 8 univels with <B>3DFIA</B> based on the appendix data.) However, the difference is not substantial when tracking through a small number of univels. If tracking through 10 univels in the <B>3DFIR</B> algorithm requires 1 time unit, equivalent tracking through 20 univels in the <B>3DFIA</B> algorithm requires approximately 1.17 time units.</P>
+<P>&nbsp;</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc417321406">Monte Carlo Transport Simulation Results</A></P>
+</U><P>The univel geometry and representative univel tracking technique, <B>3DFIR</B>, was tested using the rtt_MC Monte Carlo module [8] of the BNCT treatment planning software. Testing was performed using Linux-based Pentium Pro systems. A model, previously constructed from medical images of a male volunteer, was used to compare processor times and accuracy in the simulated irradiation. Figure 16 shows a wire frame representation of the NURBS surfaces originally reconstructed from the images. For this simple model only the outer surfaces of the head, the brain, and a simulated target volume were represented. Figure 17 shows a two-dimensional raster image of the model including the neutron beam delimiter in use for the human clinical trials at Brookhaven National Laboratory Medical Research Reactor (BMRR) [9].</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;<IMG SRC="figure16.gif" WIDTH=132 HEIGHT=137></P>
+<P><A NAME="_Toc417321436">Figure 16: </B>Wireframe Representation of Surfaces for Head, Brain and Target Regions</A></P>
+<P>&nbsp;&nbsp;</P>
+<P>&nbsp;<IMG SRC="figure17.gif" WIDTH=265 HEIGHT=140></P>
+<B><P><A NAME="_Toc417321437">Figure 17: </B>Two-Dimensional Slice Showing Relationship of BMRR Beam Delimiter for the rtt_MC Model of the Head with an 8-cm Depth Target</A></P>
+<P>&nbsp;</P>
+<P>Three different geometric representations were calculated. For the current patient calculations, the NURBS representation is used for the patient geometry and analytical surfaces. Combinatorial Geometry (CG) [10] is used to represent the neutron beam regions. These results were compared to a case where just the patient geometry used the univel representation and to a case where all regions, including the beam geometry, were represented as univels. For each case, 2x10<SUP>6</SUP> neutron history simulations and 1x10<SUP>6</SUP> gamma ray simulations were performed. Timing comparisons are shown in Table 7.</P>
+<P>&nbsp;</P>
+<B><P><A NAME="_Toc417321420">Table 7: </B>Processor Time Requirements for Patient Irradiation Simulation</A></P>
+<TABLE BORDER CELLSPACING=2 BORDERCOLOR="#008000" CELLPADDING=9 WIDTH=729>
+<TR><TD WIDTH="22%" VALIGN="TOP">
+<P>Geometry PatientRepresentation Beam</TD>
+<TD WIDTH="27%" VALIGN="TOP">
+<P>Time (Minutes)</TD>
+<TD WIDTH="21%" VALIGN="TOP">
+<P>Time Relative to NURBS</TD>
+<TD WIDTH="29%" VALIGN="MIDDLE">&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="22%" VALIGN="TOP">
+<P>NURBS</TD>
+<TD WIDTH="27%" VALIGN="TOP">
+<P>CG</TD>
+<TD WIDTH="21%" VALIGN="TOP">
+<P>332</TD>
+<TD WIDTH="29%" VALIGN="TOP">
+<P>1/1</TD>
+</TR>
+<TR><TD WIDTH="22%" VALIGN="TOP">
+<P>Univels</TD>
+<TD WIDTH="27%" VALIGN="TOP">
+<P>CG</TD>
+<TD WIDTH="21%" VALIGN="TOP">
+<P>41</TD>
+<TD WIDTH="29%" VALIGN="TOP">
+<P>1/8</TD>
+</TR>
+<TR><TD WIDTH="22%" VALIGN="TOP">
+<P>Univels</TD>
+<TD WIDTH="27%" VALIGN="TOP">
+<P>Univels</TD>
+<TD WIDTH="21%" VALIGN="TOP">
+<P>22</TD>
+<TD WIDTH="29%" VALIGN="TOP">
+<P>1/15</TD>
+</TR>
+</TABLE>
+
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>In some cases, due to round off, the Monte Carlo software detects an impossible particle location situation and must discard the particle since it is not possible to know what to do next. This is referred to as a ‘lost particle’ and ‘lost particles’ are common in NURBS geometries when surfaces are near each other. For this simulation, there were four ‘lost particles’ for the NURBS case and none for the univel cases. Often, there are more ‘lost particles’ in NURBS geometries. Lost particles have yet to be encountered using the univel tracking routines. This indicates, with all things otherwise being equal, that the univel method will be more precise. For these three cases, a detailed check showed all results to be within the statistical errors of the Monte Carlo process.</P>
+<P>A profile of the time requirements showed that the relative ray trace time for the NURBS geometry was 64%. This was reduced to 6% for the case with univels. In another test case, a timing comparison was made using a different number of univels to determine the sensitivity of time requirements to the number of univels, or precision of the geometric representation. For this case, the geometry was an H<SUB>2</SUB>O cylinder with a simulated irradiation in the Brookhaven neutron beam. For this simple geometry problem, the CG model required about 20% less time than the univel model using 13,520 univels. When the spacing along the cylinder axis was reduced to construct a univel model having 3.28x10<SUP>6</SUP> univels (a factor of 243 increase in the number of univels), the processing time was increased by only 74%. For more complicated models where several CG objects are required to represent the geometry, univel tracking will be more efficient than CG tracking.</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<B><P ALIGN="CENTER"><A NAME="_Toc417321407">CONCLUSIONS</A></P>
+</B><P>Univel-based modeling relying on uniformity and integer-based arithmetic works well and tracking techniques based on this are substantially faster than the methods based on more compact NURBS representations that rely heavily on floating point arithmetic.</P>
+<P>Because of the significant gain in speed with no significant increase in error, the representative univel tracking method is a good method for Monte Carlo transport simulations. Skipping over some univels has little effect on accuracy. Those times that intersections were missed, it was probably better to skip them as they proved to be insignificant and would only increase computation time with little or no gain in accuracy. A typical 1 mm resolution is already quite fine and so skipping such a tiny volume element is not substantial, especially considering that the original segmentation of the images cannot be expected to be accurate to the original pixel level. Tables 1 and 2 show that the lengths of line segments through the skipped univels are short compared to the lengths through the examined univels. In the case that greater accuracy is obtained in defining the regions, the smaller univels will allow increased accuracy at the expense of requiring more space and slightly more time. With the new methods, such a small fraction of time is spent in ray tracking that further optimizations would do little to affect the simulation time. This would only be worthwhile if the number of univels used to represent the geometry grows by a substantial factor. If 20 univels were tracked through on average at a 256x256x40 resolution, 80 univels would be tracked through on average at a 1024x1024x160 resolution. Even with this tremendous jump, the amount of time spent tracking would barely double. The overall simulation would hardly be affected since tracking has now been reduced to approximately 6% of the total simulation time.</P>
+<P>&nbsp;</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc417321408">Future Directions</A></P>
+</U><P>Using a derivative of the <B>3DFIA</B> or <B>3DFFR</B> algorithms may optimize a remaining portion of the Monte Carlo simulations. The greatest percentage of simulation time is now spent in the tally portion of the code. One part of this stage requires voxels to be stepped through, one at a time, calculating the distance through each voxel. Both <B>3DFIA</B> and <B>3DFFR</B> algorithms are ideal for this type of tracking since they are fast, track through all voxels, and can quickly compute distances through voxels by keeping track of entered and exited faces. Use of these algorithms for the tally portions of the simulations is being investigated and looks promising. In the current simulations, only a small number of voxels are tracked through so the speedup may be only a small factor. However, large speedups may be anticipated in future simulations that may require deeper penetrating particles.</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<B><P ALIGN="CENTER"><A NAME="_Toc417321409">REFERENCES</A></P><DIR>
+
+</B><P>1.&#9;Wessol, D.E.; Wheeler, F.J.; Babcock, R.S; Starkey, J.D., "Medical Image Reconstruction and Geometry Generation Software", <I>5<SUP>th</SUP> International Symposium on Neutron Capture Therapy</I>, Columbus, Ohio, September 13-17, 1992.</P>
+<P>&nbsp;</P>
+<P>2.&#9;Wessol, D.E.; Babcock, R.S.; Wheeler, F.J.; Harkin, G.J.; Voss, L.L.; Frandsen, M.W., "BNCT_Rtpe: BNCT Radiation Treatment Planning Environment User’s Manual", Version 2.2, February 21, 1997, http://id.inel.gov/cart/rtpe-manual/sec00.html.</P>
+<P>&nbsp;</P>
+<P>3.&#9;Capala, J.; Chadha, M.; Wheeler, F.J.; Wessol, D.E.; Atkinson, C.A., "Radiotherapy Planning for the Brookhaven Trials of BNCT for Human Gliomas", <I>Trans. Am. Nucl. Soc., 69,</I> 470, 1995.</P>
+<P>&nbsp;</P>
+<P>4.&#9;Glassner, A.S., Graphics Gems, Academic Press, Inc., San Diego, California, pp. 246-248, 1990.</P>
+<P>&nbsp;</P>
+<P>5.&#9;Bresenham, J.E., "Algorithm for Computer Control of a Digital Plotter", <I>IBM System Journal</I>,<I> </I>Vol. 4, pp. 25-30, 1965.</P>
+<P>&nbsp;</P>
+<P>6.&#9;Foley, J.D.; van Dam, A.; Feiner, S.K.; Hughes, J.F.; Phillips, R.L., Introduction to Computer Graphics, Addison-Wesley Publishing Company, Inc., Reading, Massachusetts, pp. 70-76, 1994.</P>
+<P>&nbsp;</P>
+<P>7.&#9;Heckbert, P.S., Graphics Gems Volume IV, Academic Press, Inc., San Diego, California, pp. 366-368, 1994.</P>
+<P>&nbsp;</P>
+<P>8.&#9;Wheeler, F.J.; Wessol, D.E.; Wemple, C.A. The rtt_MC Software Module for Treatment Planning. In:Venhuizen, J.R., ed. INEEL BNCT Research Program Annual Report 1996. Idaho National Engineering and Environmental Laboratory, INEL/EXT-97-00319, 1997.</P>
+<P>&nbsp;</P>
+<P>9.&#9;Wheeler, F.J.; Parsons, D.K.; Nigg, D.W.; Wessol, D.E.; Miller, L.G.; Fairchild, R.G., Reactor Physics Design for the Brookhaven Medical Research Reactor Epithermal Neutron Source. In: Harling, O.K., Bernard, J.A., Zamenhof, R., eds., Neutron Beam Design, Development, and Performance for Neutron Capture Therapy. New York: Plenum Press, pp. 83-95, 1990.</P>
+<P>&nbsp;</P>
+<P>10.&#9;E. Straker, P. Stevens, D. Irving, and V. Cain, "MORSE-CG, General Purpose Monte-Carlo Multigroup Neutron and Gamma-Ray Transport Code with Combinatorial Geometry", Radiation Shielding Information Center <U>(ORNL) Report Number CCC-203</U>, 1976.</P>
+<P ALIGN="CENTER">&nbsp;</P></DIR>
+
+<B><P ALIGN="CENTER"><A NAME="_Toc417321410">APPENDIX</A></P>
+</B><P>&nbsp;</P>
+<U><P ALIGN="CENTER"><A NAME="_Toc417321411">Three-Dimensional Algorithm to Examine Representative Univels along Line</A></P>
+</U><P>&nbsp;</P>
+<P>&nbsp;</P>
+<FONT FACE="Courier"><P>/* This algorithm will terminate after looping through NUMSTEPS univels.</P>
+<P>* The code given is for the case of x varying most rapidly, positive</P>
+<P>* initial coordinates, and positive direction vector components. Other * cases are similar but would clutter the logic.</P>
+<P>*/</P>
+<P>void line3DFIR(double * pts, double * dir, int NUMSTEPS) {</P>
+<P>int i, incrx1, incrx2, incrxy, incrxz, px, py, pz, errxy, errxz;</P>
+<P>double x, y, z, xdir, ydir, zdir, mxy, mxz, fcx, fy, fz;</P>
+<P>&nbsp;</P>
+<P>x = *pts++;<B>&#9;&#9;&#9;</B>/* Position (x, y, z) */</P>
+<P>y = *pts++;</P>
+<P>z = *pts;</P>
+<P>xdir = <B>dir++;&#9;&#9;&#9;</B>/* Direction (xdir, ydir, zdir */</P>
+<P>ydir = *dir++;</P>
+<P>zdir = *dir;</P>
+<P>mxy = ydir/xdir;&#9;&#9;/* Slopes */</P>
+<P>mxz = zdir/xdir;</P>
+<P>incrx1 = mxy*LARGE_INT;&#9;/* Increments for error terms */</P>
+<P>incrxy = incrx1-LARGE_INT;</P>
+<P>incrx2 = mxz*LARGE_INT;</P>
+<P>incrxz = incrx2-LARGE_INT;</P>
+<P>&nbsp;</P>
+<P>px = INT_FLOOR_FCN(x+0.5);&#9;/* Center ray for primary direction */</P>
+<P>fcx = (double)px + 0.5;</P>
+<P>fy = y + mxy*(fcx-x);</P>
+<P>fz = z + mxz*(fcx-x);</P>
+<P>py = INT_FLOOR_FCN(fy);</P>
+<P>pz = INT_FLOOR_FCN(fz);</P>
+<P>&nbsp;</P>
+<P>/* Compute initial error terms */</P>
+<P>errxy = (fy - (double)py)*LARGE_INT+incrxy;</P>
+<P>errxz = (fz - (double)pz)*LARGE_INT+incrxz;</P>
+<P>&nbsp;</P>
+<P>/* Examine the material at the initial position */</P>
+<P>EXAMINE_3D(INT_FLOOR_FCN(x), INT_FLOOR_FCN(y), INT_FLOOR_FCN(z));</P>
+<P>&nbsp;</P>
+<P>/* Actual tracking loop begins here ------------------------*/</P>
+<P>for (i=0; i&lt;NUMSTEPS; i++) {</P>
+<P>/* Examine current material; typically stop when different */</P>
+<P>EXAMINE_3D(px, py, pz);</P>
+<P>px++;&#9;&#9;&#9;&#9;/* Primary direction always increased */</P>
+<P>if (errxy&gt;=0) {&#9;&#9;/* Adjust y and xy errors */</P>
+<P>errxy+=incrxy;</P>
+<P>&#9;py++;</P>
+<P>} else {</P>
+<P>errxy+=incrx1;</P>
+<P>}</P>
+<P>if (errxz&gt;=0) {&#9;&#9;/* Adjust z and xz errors */</P>
+<P>&#9;errxz+=incrxz;</P>
+<P>&#9;pz++;</P>
+<P>} else {</P>
+<P>&#9;errxz+=incrx2;</P>
+<P>}</P>
+<P>}</P>
+<P>}</P>
+</FONT><U><P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="_Toc417321412">Three-Dimensional Algorithm to Examine All Univels Intersected by Line</A></P>
+</U><P>&nbsp;</P>
+<P>&nbsp;</P>
+<FONT FACE="Courier"><P>/* This algorithm will terminate after looping through NUMSTEPS univels.</P>
+<P>* The code is for the general case of an arbitrary start position and</P>
+<P>* an arbitrary unit vector direction.</P>
+<P>* Governing Equations:&#9;x*dy - y*dx + c = 0 */</P>
+<P>* &#9;&#9;&#9;&#9;x*dz - z*dx + d = 0 */</P>
+<P>* &#9;&#9;&#9;&#9;y*dz - z*dy + e = 0 */</P>
+<P>void line3DFIA(double * pts, double * dir, int NUMSTEPS) {</P>
+<P>double x, y, z, xdir, ydir, zdir, xposdir, yposdir, zposdir,</P>
+<P>to_xy_floor, to_xz_floor, to_yz_floor, to_xy, to_xz, to_yz,</P>
+<P>inv_xdir, inv_ydir, inv_zdir;</P>
+<P>int j, px, py, pz, incrx, incry, incrz, errxy, errxz, erryz,</P>
+<P>move_x, move_y, move_z;</P>
+<P>&nbsp;</P>
+<P>x = pts++;&#9;&#9;&#9;/* Position (x, y, z) */</P>
+<P>y = *pts++;</P>
+<P>z = *pts;</P>
+<P>xdir = xposdir = dir++;&#9;/* Direction (xdir, ydir, zdir */</P>
+<P>ydir = yposdir = *dir++;</P>
+<P>zdir = zposdir = *dir;</P>
+<P>if (xposdir&lt;0.0) xposdir = -xposdir;</P>
+<P>if (yposdir&lt;0.0) yposdir = -yposdir;</P>
+<P>if (zposdir&lt;0.0) zposdir = -zposdir;</P>
+<P>&nbsp;</P>
+<P>incrx = xposdir*LARGE_INT;&#9;/* Increments for error terms */</P>
+<P>incry = yposdir*LARGE_INT;</P>
+<P>incrz = zposdir*LARGE_INT;</P>
+<P>&nbsp;</P>
+<P>px = INT_FLOOR_FCN(x);&#9;/* Current array position */</P>
+<P>py = INT_FLOOR_FCN(y);</P>
+<P>pz = INT_FLOOR_FCN(z);</P>
+<P>&nbsp;</P>
+<P>to_yz_floor = x-(double)px;&#9;/* Distances from edges */</P>
+<P>to_xz_floor = y-(double)py;</P>
+<P>to_xy_floor = z-(double)pz;</P>
+<P>&nbsp;</P>
+<P>if (xdir&gt;0.0) {&#9;&#9;&#9;/* Initialize for x */</P>
+<P>to_yz = 1.0-to_yz_floor;</P>
+<P>move_x = 1;</P>
+<P>inv_xdir = 1.0/xdir;</P>
+<P>} else if (xdir&lt;0.0) {</P>
+<P>to_yz = to_yz_floor;</P>
+<P>move_x = -1;</P>
+<P>inv_xdir = 1.0/xdir;</P>
+<P>} else {</P>
+<P>/* uncommon special case */</P>
+<P>to_yz = to_yz_floor;</P>
+<P>if (to_yz&lt;0.5) to_yz = 1.0-to_yz;</P>
+<P>move_x = 0;</P>
+<P>inv_xdir = 0.0;</P>
+<P>}</P>
+<P>if (ydir&gt;0.0) {&#9;&#9;&#9;/* Initialize for y */</P>
+<P>to_xz = 1.0-to_xz_floor;</P>
+<P>move_y = 1;</P>
+<P>inv_ydir = 1.0/ydir;</P>
+<P>} else if (ydir&lt;0.0) {</P>
+<P>to_xz = to_xz_floor;</P>
+<P>move_y = -1;</P>
+<P>inv_ydir = 1.0/ydir;</P>
+<P>} else {</P>
+<P>/* uncommon special case */</P>
+<P>to_xz = to_xz_floor;</P>
+<P>if (to_xz&lt;0.5) to_xz = 1.0-to_xz;</P>
+<P>move_y = 0;</P>
+<P>inv_ydir = 0.0;</P>
+<P>}</P>
+<P>if (zdir&gt;0.0) {&#9;&#9;&#9;/* Initialize for z */</P>
+<P>to_xy = 1.0-to_xy_floor;</P>
+<P>move_z = 1;</P>
+<P>inv_zdir = 1.0/zdir;</P>
+<P>} else if (zdir&lt;0.0) {</P>
+<P>to_xy = to_xy_floor;</P>
+<P>move_z = -1;</P>
+<P>inv_zdir = 1.0/zdir;</P>
+<P>} else {</P>
+<P>/* uncommon special case */</P>
+<P>to_xy = to_xy_floor;</P>
+<P>if (to_xy&lt;0.5) to_xy = 1.0-to_xy;</P>
+<P>to_xy = 1.0;</P>
+<P>move_z = 0;</P>
+<P>inv_zdir = 0.0;</P>
+<P>}</P>
+<P>&nbsp;</P>
+<P>/* Compute initial error terms */</P>
+<P>errxy = (yposdir*to_yz - xposdir*to_xz)*LARGE_INT;</P>
+<P>errxz = (zposdir*to_yz - xposdir*to_xy)*LARGE_INT;</P>
+<P>erryz = (zposdir*to_xz - yposdir*to_xy)*LARGE_INT;</P>
+<P>&nbsp;</P>
+<P>/* Examine the material at the initial position */</P>
+<P>EXAMINE_3D(px, py, pz);</P>
+<P>&nbsp;</P>
+<P>/* Actual tracking loop begins here ------------------------*/</P>
+<P>for (i=0; i&lt;NUMSTEPS; i++) {</P>
+<P>if (erryz&gt;0) { &#9;/* don't change y */</P>
+<P>if (errxz&gt;0) { &#9;/* don't change y or x */</P>
+<P>pz+=move_z;</P>
+<P>&#9; errxz-=incrx;</P>
+<P>&#9; erryz-=incry;</P>
+<P>} else { &#9;/* don't change y or z */</P>
+<P>&#9; px+=move_x;</P>
+<P>&#9; errxy+=incry;</P>
+<P>&#9; errxz+=incrz;</P>
+<P>}</P>
+<P>} else { &#9;/* don't change z */</P>
+<P>&#9;if (errxy&gt;0) { &#9;/* don't change z or x */</P>
+<P>&#9; py+=move_y;</P>
+<P>&#9; errxy-=incrx;</P>
+<P>&#9; erryz+=incrz;</P>
+<P>&#9;} else { &#9;/* don't change z or y */</P>
+<P>&#9; px+=move_x;</P>
+<P>&#9; errxy+=incry;</P>
+<P>&#9; errxz+=incrz;</P>
+<P>&#9;}</P>
+<P>}</P>
+<P>/* Examine current material; typically stop when different */</P>
+<P>EXAMINE_3D(px, py, pz);</P>
+<P>}</P>
+<P>}</P>
+</FONT><P>&nbsp;</P>
+<U><P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="_Toc417321413">Timing Comparisons of Various Algorithms through Same Number of Elements</A></P>
+</U><P>The following table compares various tracking algorithms with varying numbers of iterations based on the number of elements (pixels or univels) examined. The number of elements examined varies from 1 to 1000. To give representative values, each time measured is the sum of the time required to track 100,000 rays through the given number of elements. Times are given in seconds.</P>
+<P>&nbsp;</P>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=2 WIDTH=692>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<P ALIGN="RIGHT"><FONT SIZE=2>Elems.</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">2D</P>
+<P ALIGN="RIGHT">IIR</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">2D</P>
+<P ALIGN="RIGHT">FIR</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">2D</P>
+<P ALIGN="RIGHT">FFR</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">2D</P>
+<P ALIGN="RIGHT">IIA</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">2D</P>
+<P ALIGN="RIGHT">FIA</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">2D</P>
+<P ALIGN="RIGHT">FFA</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">3D</P>
+<P ALIGN="RIGHT">IIR</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">3D</P>
+<P ALIGN="RIGHT">FIR</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">3D</P>
+<P ALIGN="RIGHT">FFR</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">3D</P>
+<P ALIGN="RIGHT">IIA</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">3D</P>
+<P ALIGN="RIGHT">FIA</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">3D</P>
+<P ALIGN="RIGHT">FFA</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.05</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.36</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.27</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.04</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.26</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.15</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.07</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.55</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.37</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.07</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.43</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.26</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">2</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.07</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.37</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.32</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.06</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.28</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.18</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.09</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.57</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.48</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.09</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.45</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.31</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">3</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.08</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.38</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.38</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.08</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.29</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.20</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.11</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.59</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.59</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.11</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.48</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.37</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">4</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.10</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.39</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.45</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.10</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.31</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.23</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.12</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.61</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.68</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.14</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.50</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.43</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">5</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.11</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.41</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.50</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.11</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.32</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.26</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.16</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.62</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.78</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.17</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.54</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.50</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">6</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.13</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.43</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.58</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.12</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.35</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.28</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.17</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.66</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.91</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.19</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.55</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.57</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">7</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.14</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.44</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.64</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.14</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.35</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.31</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.19</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.67</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.01</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.22</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.58</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.62</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">8</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.15</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.45</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.70</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.15</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.37</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.33</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.21</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.68</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.11</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.24</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.59</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.68</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">9</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.17</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.47</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.76</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.17</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.38</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.35</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.23</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.70</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.22</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.26</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.62</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.73</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">10</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.19</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.48</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.82</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.18</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.40</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.37</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.24</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.72</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.32</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.29</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.63</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.79</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">20</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.30</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.59</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.42</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.30</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.52</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.59</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.40</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.87</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">2.35</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.50</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.84</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.36</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">30</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.42</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.70</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">2.01</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.43</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.65</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.80</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.55</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.01</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">3.37</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.71</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.03</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.93</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">40</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.54</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.80</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">2.61</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.56</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.76</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.01</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.70</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.15</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">4.39</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.91</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.23</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">2.49</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">50</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.66</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.91</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">3.20</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.68</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.88</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.21</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.84</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.29</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">5.42</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.11</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.42</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">3.05</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">60</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.78</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.01</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">3.80</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.80</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.00</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.42</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.99</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.42</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">6.44</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.32</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.60</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">3.62</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">70</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.89</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.11</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">4.40</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">0.92</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.12</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.63</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.14</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.56</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">7.45</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.51</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.79</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">4.18</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">80</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.01</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.22</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">4.99</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.04</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.24</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.84</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.28</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.71</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">8.48</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.71</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.97</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">4.74</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">90</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.12</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.32</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">5.58</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.17</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.36</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">2.04</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.43</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.84</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">9.51</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.91</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">2.16</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">5.30</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">100</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.24</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.43</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">6.18</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.29</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.47</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">2.24</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.58</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1.97</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">10.53</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">2.11</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">2.35</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">5.86</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">200</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">2.39</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">2.48</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">12.13</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">2.51</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">2.67</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">4.31</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">3.03</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">3.35</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">20.76</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">4.09</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">4.19</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">11.45</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">300</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">3.54</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">3.52</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">18.08</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">3.73</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">3.84</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">6.36</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">4.48</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">4.72</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">31.00</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">6.06</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">6.03</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">17.05</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">400</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">4.70</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">4.57</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">24.04</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">4.95</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">5.03</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">8.42</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">5.93</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">6.08</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">41.24</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">8.03</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">7.86</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">22.64</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">500</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">5.85</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">5.62</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">30.00</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">6.17</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">6.22</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">10.47</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">7.38</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">7.45</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">51.47</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">9.99</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">9.71</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">28.23</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">600</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">7.00</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">6.66</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">35.95</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">7.39</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">7.39</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">12.52</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">8.83</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">8.82</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">61.70</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">11.96</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">11.53</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">33.82</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">700</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">8.15</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">7.71</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">41.90</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">8.61</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">8.58</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">14.58</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">10.28</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">10.19</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">71.94</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">13.93</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">13.37</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">39.40</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">800</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">9.31</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">8.76</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">47.85</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">9.83</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">9.77</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">16.64</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">11.73</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">11.55</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">82.18</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">15.89</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">15.21</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">44.98</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">900</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">10.46</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">9.80</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">53.81</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">11.05</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">10.95</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">18.69</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">13.18</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">12.91</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">92.42</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">17.85</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">17.04</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">50.58</FONT></TD>
+</TR>
+<TR><TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">1000</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">11.62</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">10.85</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">59.76</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">12.27</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">12.13</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">20.75</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">14.63</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">14.28</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">102.60</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">19.83</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">18.87</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=20>
+<FONT SIZE=2><P ALIGN="RIGHT">56.17</FONT></TD>
+</TR>
+</TABLE>
+
+<P>&nbsp;</P></BODY>
+</HTML>

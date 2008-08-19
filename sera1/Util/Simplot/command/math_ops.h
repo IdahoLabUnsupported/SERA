@@ -1,0 +1,11 @@
+void axes_extent_compute (FILE*, col_struct *);
+float col_min (float*, int, int);
+float col_max (float*, int, int);
+float min (float, float);
+float max (float, float);
+void compute_x_coord (col_struct *);
+void renorm_dose_comps (col_struct *, float, float );
+void adjust_total (float *, float *, int, float, float );
+void renorm_boron (float *, int, float, float );
+void renorm_dose (float *, int, float );
+float nearest_whole (float, int );

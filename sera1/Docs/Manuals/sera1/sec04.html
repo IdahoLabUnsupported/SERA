@@ -1,0 +1,252 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.6 [en] (X11; U; SunOS 5.6 sun4u) [Netscape]">
+   <meta name="Description" content="This is the SERA Manual page for seraImage.">
+   <title>SERA Manual - Section 4</title>
+</head>
+<body bgcolor="#FFFFFF" background="mainbackground.gif">
+
+<center><a href="sec03.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><a href="sec03.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="sec05.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="sec05.html">Next</a></b>
+<br>&nbsp;
+<p><b><font color="#274342"><font size=+2>SERA:</font></font></b>
+<br><b><font color="#274342"><font size=+2>Simulation Environment for Radiotherapy
+Applications</font></font></b>
+<br><b><font color="#274342"><font size=+2>User's Manual</font></font></b>
+<br><b><font color="#274342"><font size=+2>Version 1C0</font></font></b>
+<br>&nbsp;
+<p><img SRC="marblebar.jpg" NOSAVE height=6 width=460></center>
+
+<p><b><font color="#274342"><font size=+2>4.&nbsp; Image Formats and Preparation</font></font></b>
+<p><b><font color="#274342">&nbsp;In order to process these images, SERA
+must know the image format.&nbsp; At this time, SERA accepts either 8/16-bit
+256x256 row-major image data or Qsh formatted images [<a href="sec15.html#6">6,</a><a href="sec15.html#7">7,</a><a href="sec15.html#8">8</a>].</font></b>
+<p><b><font color="#274342">The Qsh file format was developed by Maguire
+and Noz to provide a common image format and incorporate data generated
+by image-processing into a picture archiving and communication system (PACS).&nbsp;
+The image file format is an adaptation of the AAPM standard image format
+and consists of an ASCII header file in the form of standard key-value
+pairs for its descriptive data and a second file composed of the N-dimensional
+array of pixel values.&nbsp; The header file might include the following
+information:</font></b>
+<ul>
+<li>
+<b><font color="#274342">date of image creation.</font></b></li>
+
+<li>
+<b><font color="#274342">imaging modality</font></b></li>
+
+<li>
+<b><font color="#274342">field of view</font></b></li>
+
+<li>
+<b><font color="#274342">bytes per pixel</font></b></li>
+
+<li>
+<b><font color="#274342">All of the parameters necessary to convert the
+N-dimensional array of pixel values to the visual representation for interpretation.</font></b></li>
+</ul>
+<b><font color="#274342">Since the image series consists of two separate
+files, a naming convention was adopted such that both files have the same
+root filename with different extensions or suffixes.&nbsp; The extension
+</font><font color="#CC6600">.qhd</font><font color="#274342">
+denotes the ASCII header file, and the extension </font><font color="#CC6600">.qim</font><font color="#274342">
+is used for the actual image or pixel data.&nbsp; Both of these files must
+be present to access any Qsh-formatted image.</font></b>
+<p><b><font color="#274342">SERA has a module available which will convert
+a variety of image formats, including the dicom3 format, into Qsh. This
+same option also provides a convenient mechanism for editing existing Qsh
+header files. The capability also exists to read multiple vendor imaging
+modality data and present it in the Qsh format.</font></b>
+<br>&nbsp;
+<p><a NAME="4.1"></a><b><font color="#274342"><font size=+1>4.1.&nbsp;
+Image Formatting (seraImage)</font></font></b>
+<p><b><font color="#274342">Most of the treatment plans developed with
+SERA will begin with seraImage.&nbsp; Its basic function is to convert
+the original image format into the Qsh format, which is the internal format
+used among the SERA modules.&nbsp; The image formatter can be brought up
+by selecting the </font><font color="#FF0000">Sera Image</font><font color="#274342">
+button from the main menu (See <a href="sec03.html#3.1">Section
+3.1</a>).&nbsp; Alternatively, entering </font><font color="#FF0000">seraImage</font><font color="#274342">
+at the command line prompt will also bring up the image formatter's user
+interface, shown in Figure 4.1, with the </font><font color="#FF0000">File</font><font color="#274342">
+pulldown selected.</font></b>
+<p><img SRC="toQsh/toQsh.file.gif" NOSAVE height=868 width=920>
+<p><b><font color="#274342">Figure 4.1: seraImage with File Button Slected</font></b>
+<br>&nbsp;
+<p><a NAME="4.2"></a><b><font color="#274342"><font size=+1>4.2 File Menu</font></font></b>
+<p><b><font color="#274342">The File menu has the following parts, which
+will be discussed in turn in the following subsections:</font></b>
+<ul>
+<li>
+<b><font color="#274342">Load QSH - Loads an existing QSH-formatted file
+for editing purposes.</font></b></li>
+
+<li>
+<b><font color="#274342">Load Single Images - Reads individual raw images.
+Allows the user to guess at image format.</font></b></li>
+
+<li>
+<b><font color="#274342">Unload Images - Clears the widget of current image
+set, clearing the way for a new set.</font></b></li>
+
+<li>
+<b><font color="#274342">Generate Raw Images - Converts current QSH-formatted
+to a set of individual raw images.</font></b></li>
+
+<li>
+<b><font color="#274342">Save QSH - Saves current set of images as QSH
+files.</font></b></li>
+
+<li>
+<b><font color="#274342">Launch - Allows the user to run other sera modules.</font></b></li>
+
+<li>
+<b><font color="#274342">Check Version - Checks the version of the current
+module against the most recent version.</font></b></li>
+
+<li>
+<b><font color="#274342">Exit - Closes current session.</font></b></li>
+</ul>
+<a NAME="4.2.1"></a><b><font color="#274342">4.2.1 Load QSH Selection</font></b>
+<p><b><font color="#274342">Selecting </font><font color="#FF0000">Load
+QSH</font><font color="#274342"> brings up the widget found in Figure 4.2.&nbsp;
+The widget allows viewing and editing of the required QSH keys.</font></b>
+<p><img SRC="toQsh/toQsh.file.load_qsh.gif" NOSAVE height=626 width=1031>
+<p><b><font color="#274342">Figure 4.2.&nbsp; Load QSH selection widget.</font></b>
+<p><b><font color="#274342">In addition, the user can specify any of the
+required QSH file header information which seraImage was unable to recognize
+from the original image file, so that if required, a new Qsh file containing
+this corrected information can be created.&nbsp; It is very important,
+especially in the case of univel-based geometries, that the image locations
+be properly set, and that the image-to-image distances be uniform.&nbsp;
+This can be checked with the </font><font color="#FF0000">Show/Edit Image
+Locations</font><font color="#274342"> button in the right hand side of
+the widget.&nbsp; If necessary, the image-to-image distances can be edited,
+either one image at a time or by specifying a reference location for the
+first image and a uniform spacing.&nbsp; As with any editing feature in
+the SERA system, this must be done with extreme care, as it could destroy
+the fidelity of the model geometry.</font></b>
+<p><a NAME="4.2.2"></a><b><font color="#274342">4.2.2 Load Single Images
+Selection</font></b>
+<p><b><font color="#274342">Raw image files, each containing a single one-
+or two-byte image, can be viewed, edited, and converted to the QSH format
+with this option.&nbsp; In most cases, the user will have a group of raw
+image files in a single directory in the file system, such as depicted
+in the </font><font color="#FF0000">Select File</font><font color="#274342">
+widget shown Figure 4.3.&nbsp; The user can select the image files in the
+directory one at a time, all at once, grouped by a wildcard character,
+or as a grouping created by dragging the cursor through files listed in
+the second column of the widget under the </font><font color="#008007">Files</font><font color="#274342">
+subheading.</font></b>
+<p><img SRC="toQsh/toQsh.file.load_raw.gif" NOSAVE height=698 width=868>
+<p><b><font color="#274342">Figure 4.3.&nbsp; Load Single Images selection.</font></b>
+<p><b><font color="#274342">Once grouped, the selected files are loaded
+by pressing the button labeled with the </font><font color="#FF0000">>>></font><font color="#274342">
+symbol and choosing the </font><font color="#FF0000">Apply</font><font color="#274342">
+button.&nbsp; At this time, seraImage will only deal with square image
+sets.&nbsp; A common image size is 256 pixels x 256 pixels x 1 byte.&nbsp;
+This will yield a file size of 65536 bytes for an image of one byte per
+pixel.&nbsp; Based on the image's file size, seraImage will make a guess
+at the image format, while providing the user the opportunity to change
+the image parameters.</font></b>
+<p><img SRC="toQsh/toQsh.file.load_raw.guess.gif" NOSAVE height=695 width=868>
+<p><b><font color="#274342">Figure 4.4.&nbsp; Guess at Raw Image Format
+selection.</font></b>
+<p><b><font color="#274342">If the image contains more than just pixel
+information, the user can guess at either or both the header and footer
+sizes (see Figure 4.4).&nbsp; While this is far from a perfect solution,
+the user still can make several guesses at the image properties, until
+an acceptable display of the images is achieved.</font></b>
+<p><a NAME="4.2.3"></a><b><font color="#274342">4.2.3 Unload Images Selection</font></b>
+<p><b><font color="#274342">This is a simple operation which allows the
+user to remove a current set of images in order to work with a new set
+of images.</font></b>
+<p><a NAME="4.2.4"></a><b><font color="#274342">4.2.4 Generate Raw Images
+Selection</font></b>
+<p><b><font color="#274342">This option is provided so that the user can
+extract individual raw image files from the QSH image (</font><font color="#CC6600">qim</font><font color="#274342">)
+file.</font></b>
+<p><a NAME="4.2.5"></a><b><font color="#274342">4.2.5 Save QSH Selection</font></b>
+<p><b><font color="#274342">This option saves the current seraImage images
+as a Qsh formatted image set.</font></b>
+<p><a NAME="4.2.6"></a><b><font color="#274342">4.2.6 Launch Selection</font></b>
+<p><b><font color="#274342">From this selection, the user can run the other
+modules of the SERA system.</font></b>
+<p><a NAME="4.2.7"></a><b><font color="#274342">4.2.7 Check Version Selection</font></b>
+<p><b><font color="#274342">The most recent version number is maintained
+at the central BNCT system site at Montana State University.&nbsp; As a
+convenience to the user, this option compares the version of the currently
+operating module with the most recent version available .</font></b><b><font color="#274342"></font></b>
+<p><a NAME="4.3"></a><b><font color="#274342"><font size=+1>4.3 Options
+Menu</font></font></b>
+<p><b><font color="#274342">The </font><font color="#FF0000">Options</font><font color="#274342">
+menu has the following parts, which will be discussed in turn in following
+subsections:</font></b>
+<ul>
+<li>
+<b><font color="#274342">Edit QHD</font></b></li>
+
+<li>
+<b><font color="#274342">Tool Bar</font></b></li>
+
+<li>
+<b><font color="#274342">Reverse Images</font></b></li>
+
+<li>
+<b><font color="#274342">Manipulate Images.</font></b></li>
+</ul>
+<b><font color="#274342">Figure 4.5 shows the </font><font color="#FF0000">Options</font><font color="#274342">
+popup menu.</font></b>
+<p><img SRC="toQsh/toQsh.options.gif" NOSAVE height=695 width=868>
+<p><b><font color="#274342">Figure 4.5.&nbsp; Options Menu selection.</font></b>
+<p><a NAME="4.3.1"></a><b><font color="#274342">4.3.1 Edit QHD Selection</font></b>
+<p><b><font color="#274342">This option brings up the QSH key editing widget,
+shown in Figure 4.2, where the user can change the values of the required
+keys.</font></b>
+<p><a NAME="4.3.2"></a><b><font color="#274342">4.3.2 Tool Bar Selection</font></b>
+<p><b><font color="#274342">This option displays/undisplays the seraImage
+buttons on the right hand side of the main widget, in the case where screen
+space is limiting.</font></b>
+<p><a NAME="4.3.3"></a><b><font color="#274342">4.3.3 Messages Selection</font></b>
+<p><b><font color="#274342">When this option is enabled, an informational
+message describing the buttons function appears in the space below the
+menu bar in the main widget as the cursor passes over the widget buttons.</font></b>
+<p><a NAME="4.3.4"></a><b><font color="#274342">4.3.4 Reverse Images Selection</font></b>
+<p><b><font color="#274342">This option simply reverses the display and
+file order of the current set of images.</font></b>
+<p><a NAME="4.3.5"></a><b><font color="#274342">4.3.5 Manipulate Images
+Selection</font></b>
+<p><b><font color="#274342">This option allows the user to rotate, translate,
+or scale a single image or the entire image set, as shown in Figure 4.6.</font></b>
+<p><img SRC="toQsh/toQsh.options.manipulate.gif" NOSAVE height=897 width=868>
+<p><b><font color="#274342">Figure 4.6.&nbsp; Manipulate Images Menu selection.</font></b>
+<br>&nbsp;
+<p><a NAME="4.4"></a><b><font color="#274342"><font size=+1>4.4 Preferences
+Menu</font></font></b>
+<p><b><font color="#274342">This feature is not operational in version
+1C0.</font></b>
+<br>&nbsp;
+<br>&nbsp;
+<br>
+<br>
+<center>
+<p><img SRC="marblebar.jpg" NOSAVE height=6 width=460>
+<br>&nbsp;
+<p><a href="sec03.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><a href="sec03.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="sec05.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="sec05.html">Next</a></b></center>
+
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>

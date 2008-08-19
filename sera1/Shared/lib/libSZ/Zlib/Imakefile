@@ -1,0 +1,20 @@
+SRCS =	adler32.c  compress.c crc32.c    deflate.c  \
+	gzio.c     infblock.c infcodes.c inffast.c  \
+	inflate.c  inftrees.c infutil.c  trees.c    \
+	uncompr.c  zutil.c
+
+OBJS = adler32.o  compress.o crc32.o    deflate.o  \
+	gzio.o     infblock.o infcodes.o inffast.o  \
+	inflate.o  inftrees.o infutil.o  trees.o    \
+	uncompr.o  zutil.o
+
+INCS = -I$(TOP)/Shared/include
+
+all: 
+
+install:: $(OBJS)
+
+$(OBJS) : $(SRCS)
+	$(CC) $(INCS) -c $(SRCS)
+
+DependTarget()

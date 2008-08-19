@@ -1,0 +1,2 @@
+Shoot
+   Causes the ray to be fired from the From location and in the direction of the Dir Cosines values.  The output is displayed in the windows labeled Intersection, Distance, Region In, Region Out and Material.

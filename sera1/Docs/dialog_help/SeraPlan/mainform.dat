@@ -1,0 +1,9 @@
+SeraPlan
+
+       __________________________________________________
+
+SeraPlan is an interactive tool to perform statistical combination
+of dose results for multiple fields into a single weighted plan,
+and then perform various dose edits with the combined field data.
+It serves as a bridge utility between the SeraCalc/SeraMC transport
+module, and the SeraDose and SeraPlot dose display modules.

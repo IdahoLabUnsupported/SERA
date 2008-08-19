@@ -1,0 +1,15 @@
+Sera Image
+__________________________________________________
+
+Most of the treatment plans developed with SERA 
+will begin with the seraImage. Its basic function 
+is to convert the original image format into the 
+QSH format which is the internal format used 
+within the SERA modules.
+
+The image formatting function will accept 
+unformatted(raw) and dicom images. It will also 
+allow the user to edit images already in the QSH 
+format. Images may be deleted, image header 
+information may be changed, and the images may be 
+translated or rotated.

@@ -1,0 +1,64 @@
+<!-- 
+
+This is the password page for entering the SERA Problem Reporting Form
+
+-->
+
+<HTML>
+<HEAD>
+<TITLE>SERA Problem Login Screen</TITLE>
+
+<SCRIPT LANGUAGE = "JavaScript">
+
+<!-- Hide from none javascript browsers
+
+function ChangePassword(formInfo)
+{
+    formInfo.mode.value="change"
+    formInfo.submit()
+}
+
+// -->
+
+</SCRIPT>
+</HEAD>
+
+<BODY bgcolor = "#ccbbaa" background = "graphics/mainbackground.gif">
+
+<CENTER>
+<H3><BR>You must enter a valid username and password to enter the<BR>
+BNCT Secure Pages</H3><BR>
+</CENTER>
+
+<FORM action="cgi-bin/login.cgi" method="POST">
+
+<INPUT type=hidden name=mode value="login">
+
+<TABLE align=center border=5 cellpadding=10>
+  <TR>
+    <TD><I>
+      Username: <INPUT type=text name=username value="" maxlength="30" size="20">
+    </I></TD>
+  </TR>
+
+  <TR>
+    <TD><I>
+      Password: <INPUT type=password name=password value="" maxlength="30" size="20">
+    </I></TD>
+  </TR>
+</TABLE>
+
+<CENTER>
+<H3>
+<I>
+<INPUT type=submit value=" Enter ">
+<INPUT type=reset value=" Clear ">
+<INPUT type=button value=" Change Password " onClick="ChangePassword(this.form)" >
+</I>
+</H3>
+</CENTER>
+
+</FORM>
+
+</BODY>
+</HTML>

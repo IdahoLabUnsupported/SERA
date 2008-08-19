@@ -1,0 +1,17 @@
+The Dose Calculations menu provides rtt_MC and rttPP options.  The options for Dose Calculations are:
+
+rtt_MC
+   After all bodies are created, the rtt_MC selection prepares, submits, and monitors the radiation transport simulation calculation.  Selecting this option produces the rtt_MC interface with which one can build a new rtt_MC input file from scratch or open an existing input file to modify and produce an updated input file.  The input can then be tested and run from this interface.  Further help for this topic is provided within the rtt_MC application itself.
+
+rttPP
+   This selection will present a form which is used to statistically combine the results of simulations of several fields and/or multiple fractions for the same patient.  Instructions for this application follow:
+   
+   rttPP:  Once loaded, the user may either load a previously saved file created with rttPP or begin a new plan by selecting "Make Plan."  If "Make Plan" is slected, the user will be prompted to enter the number of fractions and fileds per fraction using slider widgets.  
+   Once an old rttPP file has been loaded, or the fractions and fields per fraction are set by the "Make Plan" option, the user will be prompted for the patient's ID and the time and date for each fraction.  After selecting "Done," the user will be prompted for a filename with a file selection widget.  When the file is selected, its name will be displayed.  The "Weight," "B-10," and "Gamma Repair fields can be entered by selecting the box to change by clicking on it and entering a new value at the keyboard.  The fields can set their active values by pressing the desired "Active" toggle once to turn it on and again to turn it back off.
+   After resetting all the fields for every fraction, the bottom series of buttons can be used:
+      Set - sets all the fields' active buttons to "On."
+      Unset - sets all the fields' active buttons to "Off."
+      Load Plan - allows the user to load a previously saved rttPP file.
+      Save Plan - saves the current rttPP plan.  
+      Apply - runs the program "Combine" with the current data.  
+      Dismiss - returns the user to the Main Menu.

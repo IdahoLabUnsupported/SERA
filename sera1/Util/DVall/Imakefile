@@ -1,0 +1,10 @@
+SRCS = DVall.c
+OBJS = DVall.o
+
+SERA_DEPS = $(D_COMMON)
+
+LOCAL_LIBRARIES  = -lcommon $(DEFAULT_X_LIBS) MathLibrary
+SYS_LIBRARIES    = $(EXTRA_X_LIBS)
+DEPLIBS          = $(DEFAULT_DEP_X_LIBS) $(EXTRA_DEP_X_LIBS) $(SERA_DEPS)
+
+ComplexProgramTarget(DVall)

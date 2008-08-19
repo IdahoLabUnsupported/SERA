@@ -1,0 +1,11 @@
+SRCS = seraplot.c 
+OBJS = seraplot.o 
+
+SERA_DEPS = $(D_COMMON)
+
+LOCAL_LIBRARIES = -lcommon $(DEFAULT_X_LIBS)
+SYS_LIBRARIES   = $(EXTRA_X_LIBS)
+DEPLIBS         = $(DEFAULT_DEP_X_LIBS) $(EXTRA_DEP_X_LIBS) $(SERA_DEPS)
+
+
+ComplexProgramTarget(seraPlot)

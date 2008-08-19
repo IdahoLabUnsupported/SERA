@@ -1,0 +1,46 @@
+To upload this web site to esus you MUST do the following
+to make the cgi scripts work properly and for security:
+
+1) The directory ~/sera1/Docs/Manuals is the bnct website.
+   Tar this directory and ftp is to esus.
+
+2) Untar it on esus.
+
+   > tar xfv Manuals.tar
+
+3) Backup the old www on esus directory or remove it:
+   
+   > mv www www_old
+
+4) Rename the Manuals directory to www:
+
+   > mv Manuals www
+   
+5) Change into the www directory and rename sera1 to manual:
+
+   > cd www
+   > mv sera1 manual
+
+6) Run the install script in the www directory:
+
+   > ./install
+
+
+NOTES:
+------
+
+The data files for the cgi scripts are only on esus and are kept in
+~bnct/secure/data.
+
+The binaries for upload are also on esus and are kept in
+~bnct/secure/bin
+
+Links to these directorys are made when the install directory is run.
+
+Our "secure" areas and files are not completely secure.  This is because
+the nature of cgi-scripting.  To be able to write to files via cgi-scripts,
+the files need to be world writable.  I have attempted to hide the files
+as much as possible, but am looking into better methods to secure our files.
+
+-Matt Cohen 3/15/2000
+

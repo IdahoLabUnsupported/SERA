@@ -1,0 +1,18 @@
+!
+!  SERAPLAN main control panel settings
+!
+seraPlan*Attachment:                             attach_form
+seraPlan*mainframe.Offset:                       10
+seraPlan*buttonform.construct.topOffset:         10
+seraPlan*buttonform.construct.bottomOffset:      10
+seraPlan*buttonform.XmPushButton.leftOffset:     10
+seraPlan*buttonform.XmPushButton.rightOffset:    10
+seraPlan*multiClick:                             XmMULTICLICK_DISCARD
+!
+!  Construction panel settings
+!
+seraPlan*constform*XmToggleButton.selectColor:      red
+!
+!  Edit panel settings
+!
+seraPlan*editform*XmToggleButton.selectColor:       red

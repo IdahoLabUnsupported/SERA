@@ -1,0 +1,86 @@
+The Nurbs
+
+    	  The nurbs are a smooth-surface representation
+    	of a mesh of control pts.  
+    	The nurb control panel allows the user to control
+    	four main areas of the nurb properties, the order,
+    	the quality, how the control points are sampled,
+    	and whether the nurb is rendered as mesh or solid.
+      	________________________________________________
+
+    	Order:
+
+         The three orders of the nurb are Linear, 
+       Quadratic, and Cubic.  The Linear option 
+       actually connects the control points into
+       flat polygons.  The Quadratic and Cubic both
+       approximate the control points making a smooth
+       surface.  The Cubic gives a smoother surface 
+       than the Quadratic, but with the expense of 
+       varying a little farther from the control
+       points.
+      	________________________________________________
+
+	Quality:
+
+          The quality of the nurb can be Low, Medium,
+       	or High.  What this means is the number of 
+       	sampled points in between the control points.
+       	The High quality has a larger number of polygons
+       	producing a better quality nurb.
+      	________________________________________________
+
+    	Sampling:
+
+   	  Currently there are two methods or algorithms
+      	for sampling control points.  The first method 
+      	is the Direct Method.  The Direct Method breaks
+      	the current points for a given body (and slice)
+      	up into sections, each containing the same number
+      	of points.  Then a control point is chosen from
+      	each section.  The point that is chosen is the 
+      	"odd" point, or in other words the point that 
+      	varies the most from the others.  When there is
+      	a long stretch of points that are contained in a 
+      	small section, the Direct Method will tend to 
+      	conform into that area, resulting in large and
+      	deep stretch marks on the whole nurb.  This 
+      	problem can be avoided with the Degree Method.
+      	The Degree Method also divides the bodies points
+      	into groups, but here the groups do not have an
+      	equal number of points.  The groups represent 
+      	equal degree intervals around a circle. Then
+      	again from the groups, the odd point out is
+      	chosen.  Because only one control point comes
+      	out of a group, the long stretch of points in 
+      	a small region will not produce many control 
+      	control points like in the Direct Method. This 
+      	ultimately results in a smoother nurb surface.
+      	________________________________________________
+
+	Nurb Type:
+
+  	  The nurb type is simply how the nurb is to 
+      	be rendered, as a Mesh, or as a Solid surface.
+      	________________________________________________
+
+	Number of Control Points:
+
+	  This menu controls how many sampled control 
+	points will be taken from the region outlines
+	in the construction of the nurbs.
+      	________________________________________________
+
+	Draw Control Points:
+
+	  This option will display the selection control
+	points from the regions as spheres to see how the
+	control points are being selected.
+      	________________________________________________
+
+ 	"Rebuild Nurbs" button -
+       
+          After the settings have been modified, the 
+     	Nurbs must be rebuild to the new specifications.
+     	This button will rebuild and redisplay the nurbs.  
+      	________________________________________________

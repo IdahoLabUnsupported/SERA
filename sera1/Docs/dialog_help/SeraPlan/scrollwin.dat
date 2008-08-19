@@ -1,0 +1,8 @@
+Scrolled Window Display
+
+       __________________________________________________
+
+The scrolled window display holds the various input parameters
+(.rst files, boron concentrations, exposures, etc.) for the
+field combination.  Fraction and plan averages and sums for
+boron concentration and exposure are also displayed.

@@ -1,0 +1,35 @@
+PROGRAM =	rt_test
+CFLAGS	=	-Iinclude/libnurb_aux_includes \
+		-Iinclude/jrt_includes \
+		-Iinclude/libjrt_includes \
+		-Iinclude/libnurb_includes \
+		-Iinclude/bnct_ds_defs_includes \
+		-Iinclude/bnct_ds_defs_includes -O2 -DDOUBLE
+#                -Aa -D_HPUX_SOURCE
+FFLAGS =        -O2
+#FFLAGS =        -O2 -DDOUBLE
+
+RTLIBS =	lib/libjrt/libjrt.a \
+		lib/libnurb_aux/libnurb_aux.a \
+		lib/libnurb/libnurb.a 
+ 
+OBJS   =	mc_rt_mc.o  \
+		ray_trace.o local_memory_routines.o 
+
+.f.o:
+	f77 -c $(FFLAGS) $*.f
+
+.c.o:
+	cc -c  -O2 $(CFLAGS) $*.c
+
+all:	$(OBJS) 
+	f77 -O2 -o  $(PROGRAM) \
+        $(OBJS) \
+	$(RTLIBS)
+#       -lm /usr/lib/end.o
+
+clean:
+	rm -f *.o
+
+cleanall:	clean
+	rm -f $(PROGRAM)

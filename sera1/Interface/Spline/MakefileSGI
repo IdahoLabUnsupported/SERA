@@ -1,0 +1,49 @@
+PROGRAM =	rt_test
+PROGRAM_UV =	rt_test_univel
+CFLAGS	=	-Iinclude/libnurb_aux_includes \
+		-Iinclude/jrt_includes \
+		-Iinclude/libjrt_includes \
+		-Iinclude/libnurb_includes \
+		-Iinclude/bnct_ds_defs_includes \
+		-Ilib/libuv \
+		-O2 -DDOUBLE
+#                -Aa -D_HPUX_SOURCE
+FFLAGS =        -O2 -DDOUBLE
+
+RTLIBS =	lib/libjrt/libjrt.a \
+		lib/libnurb_aux/libnurb_aux.a \
+		lib/libnurb/libnurb.a 
+
+RTLIBS_UV =	lib/libuv/libuv.a \
+		lib/libnurb/libnurb.a
+ 
+OBJS   =	mc_rt_mc.o \
+		ray_trace.o local_memory_routines.o
+
+OBJS_UV =	mc_rt_mc_univel.o
+
+.f.o:
+	f77 -c $(FFLAGS) $*.f
+
+.c.o:
+	cc -c  -O2 $(CFLAGS) $*.c
+
+all:	$(PROGRAM) $(PROGRAM_UV)
+
+$(PROGRAM): $(OBJS)
+	f77 -O2 -o  $(PROGRAM) \
+        $(OBJS) \
+	$(RTLIBS)
+#       -lm /usr/lib/end.o
+
+$(PROGRAM_UV):	$(OBJS) $(OBJS_UV)
+	f77 -O2 -o  $(PROGRAM_UV) \
+        $(OBJS_UV) \
+	$(RTLIBS_UV)
+#       -lm /usr/lib/end.o
+
+clean:
+	rm -f *.o
+
+cleanall:	clean
+	rm -f $(PROGRAM) $(PROGRAM_UV)

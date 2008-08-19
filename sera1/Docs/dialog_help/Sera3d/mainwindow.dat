@@ -1,0 +1,75 @@
+Sera3D
+
+	________________________________________________
+
+      Sera3D is an interactive viewing tool to visualize 
+    the newly adopted univel files for the BNCT project.  
+    The program requires a univel file (.uv) and its 
+    corresponding univel header file (.uvh).  
+   
+      Sera3D extracts the size and spacing info from the
+    uvh file, then extract the univels from the univel 
+    file.  The univel information can then be visualized 
+    in 3D in a variety of viewing forms.
+
+	________________________________________________
+
+   Viewing Forms:
+      The viewing forms that are currently available are 
+      Points, Lines, Voxels, Nurb Mesh, and Nurb Filled.  
+
+      Points :
+           This is the default viewing form.  It takes 
+           the univel information and draws an outline 
+           of points for each body, and for each slice.  
+           This gives the 3d image a "ringed" appearance 
+           where the "rings" are the outlines of the
+           bodies. 
+
+      Lines : 
+           This viewing form is very close to the Points 
+           form.  With this method, the points are simply 
+           connected with lines, which results in a bolder 
+           outline of the bodies.
+
+      Voxels : 
+           Viewing the univel information as voxels is 
+           the most representative of what the univels 
+           look like.  Due to the larger number of polygons 
+           in this mode, the rendering speed is greatly 
+           slowed.  The voxels are actually tall rectangular 
+           cubes, their height based on the spacing
+           between the slices.  
+
+      Nurb Mesh :
+           The use of nurbs to approximate the boundaries 
+           of the bodies results in a smooth surface 
+           wrapping.  The visual results are a more 
+           life-life surface. The nurb surface is
+           wrapped completely around the body, based 
+           on sampled control points taken from the body 
+           points. The surface is closed in the horizontal 
+           direction, but stops at the control points for 
+           the top and bottom slices of the defined body.  
+           The nurb was not close at the top and bottom to 
+           keep the surface as close to the actual univel 
+           information as possible.
+	   The nurbs can be rendered based on either a 
+           linear, quadratic, or cubic function.  The default 
+           is the quadratic which give the closest 
+           approxiamation to the control points. This viewing 
+           type uses the nurbs, but displayes them as a wire 
+           mesh allowing the viewer to look through to the
+           inner bodies.
+
+      Nurb Filled :
+           The last viewing method is the same as the 
+           Nurb Mesh, only the nurb is rendered as 
+           filled polygons and a smooth
+           surface is the result.
+
+	________________________________________________
+
+
+
+

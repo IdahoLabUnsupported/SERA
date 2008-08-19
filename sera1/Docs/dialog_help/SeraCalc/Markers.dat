@@ -1,0 +1,13 @@
+The Markers menu provides options to add and modify Fiducial Markers and Constraint Markers.  The following options are provided to perform these tasks:
+
+Set Fiducial Markers
+   Fiducial Markers can be created to provide reference pointings to the patient in the beam.  
+
+Modify Fiducial Markers
+   This option can be selected to change the positions of the fiducial markers if they have already been set.  
+   
+Set Constraint Markers
+   Constraint markers can be created to provide specialized dose edits at specific locations.  
+   
+Modify Constraint Markers
+   This option can be selected to change the positions of the constraint markers if they have already been set.  

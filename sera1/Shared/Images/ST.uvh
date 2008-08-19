@@ -1,0 +1,28 @@
+uvh1.0           # Must indicate file is of type uvh and give version number
+  48             # number of slices
+ 256             # number of pixels in x direction
+ 256             # number of pixels in y direction
+   0.1015620     # x pixel size
+   0.1015620     # y pixel size
+   0.5499910     # z pixel size
+ -13.0000000     # x minimum
+ -13.0000000     # y minimum
+ -26.7749100     # z minimum
+
+# Body information follows:
+
+uvval 1
+  regionnum 1
+  bodyname 'buffer'
+
+uvval 2
+  regionnum 2
+  bodyname 'scalp'
+
+uvval 3
+  regionnum 3
+  bodyname 'brain'
+
+uvval 4
+  regionnum 4
+  bodyname 'tumor'

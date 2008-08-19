@@ -1,0 +1,6 @@
+regn_in "regn name" "matl name" regn_out cap_style min_z max_z type color
+1 "buffer" "buffer" 0
+2 "head" "Fairchild_tissue+10ppm" 1 1 0.0000 0.0000 approx  (0, 0, 0)
+3 "brain" "brain_MIT+10ppm" 2 1 0.0000 0.0000 approx  (0, 0, 0)
+4 "target" "brain_MIT+10ppm" 3 1 0.0000 0.0000 approx  (0, 0, 0)
+-1 "eof" "eof" -1 -1 -1.0 -1.0 "eof" "eof"

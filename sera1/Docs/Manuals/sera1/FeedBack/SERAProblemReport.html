@@ -1,0 +1,394 @@
+<!-- 
+
+This web page was created for user error reporting of problems
+with SERA software.
+
+Once the user fills in all the fields and submits the form,
+the Perl script, cgi-bin/report.cgi is run. 
+
+This form includes the following fields:
+
+  ****** User Info ******
+  lastName
+  firstName
+  date
+  organization
+  address1
+  address2
+  city
+  state
+  country
+  zip
+  telephone
+  fax
+  email
+
+  ****** Computer Info ******
+  computer
+  memory
+  operatingSystem
+
+  ****** Problem Info ******
+  module
+  version
+  errorRepeat
+  files
+  problemDescription
+  priority
+  userImpact
+
+Matt Cohen June 2, 1999
+  
+-->
+
+<HTML>
+<HEAD>
+<TITLE>SERA Problem Reporting Form</TITLE>
+
+<SCRIPT LANGUAGE = "JavaScript">
+
+<!-- Hide from none javascript browsers
+
+// This procedure is called upon submitting the form
+function SubmitForm ( formInfo )
+{
+    var infostr = "\nThe following fields are missing:\n\n"
+    var complete = true;
+    
+    // Check if all required fields have been filled in
+    if ( !formInfo.lastName.value.length )
+    {
+        infostr += "Last Name\n"
+	complete = false;
+    }    
+    if ( !formInfo.firstName.value.length )
+    {
+        infostr += "First Name\n"
+	complete = false;
+    }    
+    if ( !formInfo.date.value.length )
+    {
+        infostr += "Date\n"
+	complete = false;
+    }  
+    if ( !formInfo.organization.value.length )
+    {
+        infostr += "Organization\n"
+	complete = false;
+    }      
+    if ( !(formInfo.address1.value.length || formInfo.address2.value.length) )
+    {
+        infostr += "Address\n"
+	complete = false;
+    }      
+    if ( !formInfo.city.value.length )
+    {
+        infostr += "City\n"
+	complete = false;
+    }      
+    if ( !formInfo.state.value.length )
+    {
+        infostr += "State\n"
+	complete = false;
+    }      
+    if ( !formInfo.zip.value.length )         
+    {
+        infostr += "Zip Code\n"
+	complete = false;
+    }      
+    if ( !formInfo.country.value.length )         
+    {
+        infostr += "Country\n"
+	complete = false;
+    }      
+    if ( !formInfo.telephone.value.length )
+    {
+        infostr += "Telephone\n"
+	complete = false;
+    }      
+    if ( !formInfo.email.value.length )
+    {
+        infostr += "E-mail Address\n"
+	complete = false;
+    }  
+    if ( !formInfo.computer.value.length )
+    {
+        infostr += "Computer\n"
+	complete = false;
+    }  
+    if ( !formInfo.memory.value.length )
+    {
+        infostr += "System Memory\n"
+	complete = false;
+    }      
+    if ( !formInfo.operatingSystem.value.length )
+    {
+        infostr += "Operating System\n"
+	complete = false;
+    }  
+    if ( !(formInfo.errorRepeat[0].checked || formInfo.errorRepeat[1].checked ) ) 
+    {
+        infostr += "Error Replication\n"
+	complete = false;
+    }  
+    if ( !formInfo.problemDescription.value.length )
+    {
+        infostr += "Problem Description\n"
+	complete = false;
+    }  
+
+    GetUsername ( formInfo )
+
+    var validEmail = formInfo.email.value.indexOf("@",0)
+
+    if ( formInfo.username.value == "" )
+    {
+        alert ( "\nIt does not appear you entered this form correctly.\nYou must enter through the login screen.\n" )
+	window.location.replace("SERAProblemLogin.html")   
+    }
+    // If all fields are not complete alert user
+    else if ( !complete )
+    {
+        alert ( infostr )
+    }
+    // Make sure the email address at least looks correct
+    else if ( (validEmail < 1) || (formInfo.email.value.length <= validEmail+1) )
+    {
+        alert ( "The e-mail address '" + formInfo.email.value + "' is not complete.\n" ) 
+    }
+    // Otherwise confirm the user wants to submit report
+    else if ( confirm ( "Continue with error report?" ) )
+    {
+	formInfo.method = "post"
+	formInfo.action = "cgi-bin/SubmitSERAProblem.cgi"
+	formInfo.submit()
+    }
+}
+
+function GetUsername ( formInfo )
+{
+    formInfo.username.value = location.search.substring(1, location.search.length)
+}
+
+// Stop Hiding -->
+
+</SCRIPT>
+</HEAD>
+
+
+<BODY bgcolor = "#ccbbaa" background = "../mainbackground.gif">
+
+<CENTER>
+<H1><FONT color = "red">
+SERA Problem Reporting Form
+</FONT></H1>
+<I>
+<H3>
+To report a problem in any SERA Module, fill in the following information.<BR>
+Please be as descriptive as possible.<BR>
+All required fields (<FONT color=red>*</FONT>) must be filled before submitting.<BR>
+</H3>
+</I>
+</CENTER>
+
+<HR>
+
+<CENTER>
+<H3><FONT color = "blue">User Information</FONT></H3>
+</CENTER>
+
+<FORM name = "problemForm">
+
+<INPUT type="hidden" name="username">
+
+<TABLE border=5 align=center cellpadding=10 width="100%">
+
+  <TR>
+    <TD align=center><I>
+      <FONT color=red>*</FONT>Last name: <INPUT type = "text" name = "lastName" value = "" maxlength = "25" size = "18">
+      <FONT color=red>*</FONT>First name: <INPUT type = "text" name = "firstName" value = "" maxlength = "25" size = "18">
+    </I></TD>
+  </TR>
+
+  <TR>
+    <TD align=center><I>
+      <FONT color=red>*</FONT>Organization: <INPUT type="text" name = "organization" value = "" maxlegth = "50" size = "30">
+      <FONT color=red>*</FONT>Date: <INPUT type = "text" name = "date" value = "" maxlength = "25" size = "15">
+    </I></TD>
+  </TR>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!-- HIDE ****** Puts the date in the date field *******
+
+var today = new Date()
+var month = today.getMonth()
+var day = today.getDate()
+var year = today.getYear()
+
+document.problemForm.date.value = (month + 1) + "/" + day + "/" + year
+
+// STOP HIDING -->
+</SCRIPT>
+
+  <TR>
+    <TD align=center><I>
+      <FONT color=red>*</FONT>Address: <INPUT type = "text" name = "address1" value = "" maxlength="60" size = "50">
+      <BR>
+      Address: <INPUT type = "text" name = "address2" value = "" maxlength="60" size = "50">
+    </I></TD>
+  </TR>
+
+  <TR>
+    <TD align=center><I>
+      <FONT color=red>*</FONT>City: <INPUT type = "text" name = "city" value = "" maxlength = "25" size = "18">
+      <FONT color=red>*</FONT>State: <INPUT type = "text" name = "state" value = "" maxlength = "25" size = "10">
+    </I></TD>
+  </TR>
+
+  <TR>
+    <TD align=center><I>
+      <FONT color=red>*</FONT>Country: <INPUT type = "text" name = "country" value = "" maxlength = "25" size = "18">
+      <FONT color=red>*</FONT>Zip Code: <INPUT type = "text" name = "zip" value = "" maxlength = "15" size = "10">
+    </I></TD>
+  </TR>
+
+  <TR>
+    <TD align=center><I>
+      <FONT color=red>*</FONT>Telephone: <INPUT type = "text" name = "telephone" value = "" maxlength = "30" size = "15">
+      Fax: <INPUT type = "text" name = "fax" value ="" maxlength = "30" size = "15">
+    </I></TD>
+  </TR>
+
+  <TR>
+    <TD align=center><I>
+      <FONT color=red>*</FONT>E-mail Address: <INPUT type = "text" name = "email" value ="" maxlength = "60" size = "40">
+    </I></TD>
+  </TR>
+
+</TABLE>
+
+<BR>
+<HR>
+
+<CENTER>
+<H3><FONT color = "blue">System Information</FONT></H3>
+</CENTER>
+
+<TABLE border=5 align=center cellpadding=10 width="100%">
+  <TR>
+    <TD align=center><I>
+      <FONT color=red>*</FONT>Computer: <INPUT type="text" name="computer" value="" maxlength="60" size="30">
+      <FONT color=red>*</FONT>System Memory: <INPUT type="text" name="memory" value="" maxlength="20" size="10">
+    </I></TD>
+  </TR>
+
+  <TR>
+    <TD align=center><I>
+      <FONT color=red>*</FONT>Operating System: <INPUT type="text" name="operatingSystem" value="" maxlength="60" size="40">
+    </I></TD>
+  </TR>
+</TABLE>
+
+<BR>
+<HR>
+
+<CENTER>
+<H3><FONT color = "blue">Problem Information</FONT></H3>
+</CENTER>
+
+<TABLE border=5 align=center cellpadding=10 width="100%">
+
+  <TR>
+    <TD align=center><I>
+      <FONT color=red>*</FONT>Module:
+      <SELECT Name = "module" >
+        <OPTION selected> seraMenu  </OPTION>
+	<OPTION>          seraImage </OPTION>
+	<OPTION>          seraModel </OPTION>
+	<OPTION>          sera3d    </OPTION>
+	<OPTION>          seraDose  </OPTION>
+	<OPTION>          seraPlot  </OPTION>
+	<OPTION>          seraCalc  </OPTION>
+	<OPTION>          seraPlan  </OPTION>
+      </SELECT>
+
+      <FONT color=red>*</FONT>Version:
+      <SELECT Name = "version" >
+	<OPTION selected> 1A0 </OPTION>
+	<OPTION>          1A1x </OPTION>
+	<!--
+	   Add Future Version Numbers Here!
+	                .
+	                .
+	                .
+        -->
+      </SELECT>
+
+      <FONT color=red>*</FONT>Can you replicate the error?
+      <INPUT type="radio" name="errorRepeat" value="yes"> Yes
+      <INPUT type="radio" name="errorRepeat" value="no"> No
+    </I></TD>
+  </TR>
+
+  <TR>
+    <TD align=center colspan=2>
+      <I>Location of Any Files Necessary to Duplicate Problem</I><BR>
+      <TEXTAREA name="files" rows=5 cols=60></TEXTAREA>
+    </TD>
+  </TR>
+
+  <TR>
+    <TD align=center colspan=2>
+      <FONT color=red>*</FONT><I>Problem Description: (please be as descriptive as possible)</I><BR>
+      <TEXTAREA name="problemDescription" rows=10 cols=60></TEXTAREA>
+    </TD>
+  </TR>
+
+  <TR>
+    <TD align=center colspan=2><I>
+      <FONT color=red>*</FONT>User Impact Priority:
+      <SELECT Name = "priority" >
+	<OPTION>          Urgent </OPTION>
+	<OPTION>          High   </OPTION>
+	<OPTION selected> Medium </OPTION>
+	<OPTION>          Low    </OPTION>
+      </SELECT>
+      <BR>
+      User Impact Description:
+      <BR>
+      <TEXTAREA name="userImpact" rows=5 cols=60></TEXTAREA>
+    </I></TD>
+  </TR>
+
+</TABLE>
+
+<BR>
+<HR>
+
+<CENTER>
+<H3><FONT color = "blue">To submit your report, click <I>Submit</I>.  To start over, click <I>Reset</I>.</FONT></H3>
+</CENTER>
+
+<CENTER>
+<H3>
+<I>
+<INPUT type="button" value = " Submit " onClick = "SubmitForm(this.form)">
+<INPUT type="reset" value = " Reset ">
+</I>
+</H3>
+</CENTER>
+
+</FORM>
+
+<DIV align=right>
+<FONT color=red>*Required fields</FONT>
+</DIV>
+
+</BODY>
+</HTML>
+
+
+
+
+
+

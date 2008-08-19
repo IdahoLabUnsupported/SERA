@@ -1,0 +1,17 @@
+SRCS = \
+rtt.c rtt_mc.c new_rtt_popup.c rtt_output.c rtt_input.c rtt_monitor.c \
+create_rtt_forms.c create_rtt_monitor.c rtt_check_files.c \
+blank_trim.c ControlCB.c views.c color_support.c
+
+OBJS = \
+rtt.o rtt_mc.o new_rtt_popup.o rtt_output.o rtt_input.o rtt_monitor.o \
+create_rtt_forms.o create_rtt_monitor.o rtt_check_files.o \
+blank_trim.o ControlCB.o views.o color_support.o
+
+SERA_DEPS = $(D_COMMON)
+
+LOCAL_LIBRARIES = -lcommon $(DEFAULT_X_LIBS) MathLibrary
+SYS_LIBRARIES   = $(EXTRA_X_LIBS)
+DEPLIBS         = $(DEFAULT_DEP_X_LIBS) $(EXTRA_DEP_X_LIBS) $(SERA_DEPS)
+
+ComplexProgramTarget(seraCalc)

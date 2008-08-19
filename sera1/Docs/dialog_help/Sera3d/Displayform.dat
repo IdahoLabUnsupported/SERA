@@ -1,0 +1,45 @@
+The Main Rendering Window:
+
+    This area is an OpenGL specific drawing area. 
+	
+
+    Controls:
+         After right-clicking on the main drawing area, 
+         a "Mouse Control" menu appears.  The options 
+         in this menu are : 
+	       
+         Pull Axis -
+             This option displays the X,Y,Z axis in the 
+             image each with two colored spheres on the 
+             ends.  The colored spheres on the end of an 
+             axis correspond to the colors of the other 
+             two axis.  By holding down the mouse button 
+             on a sphere, the rotation will be around that 
+             colored axis. Then, dragging the axis with the 
+             mouse button down will rotated the image around 
+             the axis.
+
+         Sliders -
+             This option brings up the X,Y,Z rotational 
+             sliders to the bottom of the main Drawing area.  
+             Rotating by these will rotate the image the 
+             corresponding amount between 0 and 360 degrees.
+
+         Mouse Buttons -
+             The mouse buttons used are button 1 and 
+             button 2.  Holding down button 1 and moving 
+             in the y direction (up and down) will rotate 
+             the image around the x_axis.  Holding down 
+             button 2 and moving the mouse in the x direction 
+             (right and left) will rotate the image around 
+             the z_axis.
+	
+    Double-Buffered:
+         It is a double-buffered drawing area, which 
+         means that when an image is being drawn, it 
+         is drawn into a "back" buffer, hidden from 
+         the viewer.  As soon as the image is drawn,
+         it is move to the front buffer.  This allows 
+         a smooth animation for simpler images.  
+
+

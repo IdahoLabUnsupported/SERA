@@ -1,0 +1,19 @@
+The Rotational Sliders
+
+     One of the methods of rotating the rendered 
+   bodies is through the use of the sliders.  The
+   sliders are toggled by right clicking on the 
+   main display area to display the "Mouse Controls"
+   menu and choosing "Sliders".
+
+     Three sliders are made available for controls.  The
+   sliders rotate around the X, Y and Z, axis.  To the
+   right of the slider is the number of degrees for which
+   the rotation will be (around the corresponding axis).
+   The rotation will not be applied to the object until
+   the mouse button has been release.
+
+     NOTE:  Remember when using voxels or nurbs, the
+            rendering speed is quite slow, so the
+            changing of the body rotation is not 
+            immediate.

@@ -1,0 +1,10 @@
+f77 -o therm_a-b.e therm_a-b.f;
+f77 -o fast_a-b.e fast_a-b.f;
+therm_a-b.e;
+cp neutlib.cds fastlib.cds;
+fast_a-b.e >neut.list;
+mv raf.tape15 neut.tape15;
+rm -rf fastlib.cds;
+cp gamlib.cds fastlib.cds;
+fast_a-b.e >gam.list;
+mv raf.tape15 gam.tape15;

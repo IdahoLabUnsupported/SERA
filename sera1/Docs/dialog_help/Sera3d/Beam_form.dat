@@ -1,0 +1,90 @@
+Beam Controls:
+
+	________________________________________________
+
+	Beam in Use:
+	    
+	   The beam that is currently drawn and 
+	 controlled is the the active menu item.  The 
+         beams that can be used are the beam loaded
+         from the file (.pp) or the interactive beam.
+	________________________________________________
+	Beam Line View:
+
+	   The beam line view button toggles the camera
+         view to and fromt the beam line.  When the 
+         beam line view is on, rendering rotation is not
+         allowed.
+	________________________________________________
+
+	Sliders:
+
+	   The two sliders below the Beam Line View
+         toggle button provide beam viewing control.  
+         The left slider is the beam camera slider, it
+         will slide the beam camera up and down the beam
+         line.  The slider value shows the distance from
+         the starting end of the beam in the direction 
+         of the beam.
+	  The second slider (right) is the beam slice
+         slider.  This slider determines the position
+         of the beam slice, also measured from the
+         starting end of the beam in the direction of
+         the beam.
+	________________________________________________
+	
+	Crosshair Buttons:
+
+	   The Crosshair buttons will toggle between 
+          a thin line crosshair, a rifle scope crosshair,
+	  a diamond centered crosshair (to allow view 
+          through the center, and no crosshair.
+	   The Crosshairs will not be displayed if the
+          Beam Line View is not enabled.	
+
+	________________________________________________
+
+	Inlay Beam Slice:
+
+	   The inlay beam slice toggle button enables/
+          disables a beam slice from being inlaid.
+	________________________________________________
+	
+	Clip with Beam Slice:
+	
+	   The clip with beam slice toggle enables/
+          disables a clipping plane in the position
+          of the inlaid beam slice. A beam slice 
+          does not have to be inlaid to clip with it.
+	________________________________________________
+
+	I-Beam Controls:
+
+	   The Interactive Beam controls button will
+          bring up a control window for controlling the
+          direction of the beam line.  
+	    The control window consists of a menu and
+          three sliders.  The menu switches between the
+          current endpoint of the beam, while the three
+          sliders. 
+	________________________________________________
+
+	Use Aperture:
+
+	   The use Aperture toggle turns on the aperture
+          viewing option.   The rendering window becomes
+          a circle as if viewing through the beam.
+	   A second ring aperture will be viewable in
+          the rendering, while the diameter of the
+          rendering window and the diameter of the 
+          ring aperture will be displayed in the upper
+          left corner of the main window.
+	________________________________________________
+
+	Aperture Settings:
+
+	   The aperture Setting button will bring up 
+          an aperture control window in which two 
+          sliders are available to control the sizes of
+          both the viewing aperture and the ring aperture.
+	________________________________________________

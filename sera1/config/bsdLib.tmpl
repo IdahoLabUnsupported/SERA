@@ -1,0 +1,15 @@
+XCOMM $XConsortium: bsdLib.tmpl,v 1.2 95/01/23 19:07:12 kaleb Exp $
+
+/*
+ * NetBSD/FreeBSD shared library template
+ */
+
+#ifndef SharedXtReqs
+#define SharedXtReqs /**/
+#endif
+#ifndef SharedXawReqs
+#define SharedXawReqs /**/
+#endif
+#ifndef SharedXmuReqs
+#define SharedXmuReqs $(LDPRELIB) $(XTOOLONLYLIB) $(XONLYLIB)
+#endif

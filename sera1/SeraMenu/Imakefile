@@ -1,0 +1,19 @@
+SRCS = \
+callbacks.c initialize_top_level.c make_main_menu_widget.c InstallLogo.c \
+create_main_menu.c sera.c advanced_mode.c load_program.c \
+pids.c preferences.c references.c
+
+
+OBJS = \
+callbacks.o initialize_top_level.o make_main_menu_widget.o InstallLogo.o \
+create_main_menu.o sera.o advanced_mode.o load_program.o \
+pids.o preferences.o references.o
+
+SERA_DEPS = $(D_COMMON)
+
+LOCAL_LIBRARIES = -lcommon $(DEFAULT_X_LIBS) -lXpm
+SYS_LIBRARIES   = $(EXTRA_X_LIBS)
+DEPLIBS         = $(DEFAULT_DEP_X_LIBS) $(EXTRA_DEP_X_LIBS) $(SERA_DEPS)
+
+
+ComplexProgramTarget(seraMenu)

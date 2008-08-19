@@ -1,0 +1,11 @@
+
+
+Perform standard edits Button
+
+       __________________________________________________
+
+The Perform standard edits button allows the user to decide
+whether to perform the standard edits and user-specified
+edits, or only the user-specified edits.  If the button is
+toggled on, the standard edits are performed.  If it is
+toggled off, the standard edits are not performed.

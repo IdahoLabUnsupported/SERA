@@ -1,0 +1,38 @@
+SRCS =  arl_surface_routines.c		capping_routines.c \
+	file_routines.c			memory_routines.c \
+	surface_refinement.c
+
+OBJS =  arl_surface_routines.o		capping_routines.o \
+	file_routines.o			memory_routines.o \
+	surface_refinement.o
+
+
+machine=i386
+
+TOP = $(SERA_HOME)/Interface/Spline
+
+# 
+# The DSINGLE flag triggers single precision usage for the "fastest
+# float" (fastf_t) data type defined by the ARL libraries.
+#
+DEFINES = -DDOUBLE
+
+INCLUDES = -I/usr/X11R6/include \
+           -I$(TOP)/include/libnurb_aux_includes \
+	   -I$(TOP)/include/libnurb_includes  \
+	   -I$(TOP)/include/bnct_ds_defs_includes
+
+LIBLOCATION = .
+USRLIBDIR = /usr/lib
+INCROOT = /usr/include
+SYS_LIBRARIES = -lm 
+CCOPTIONS = 
+DEPLIBS = 
+#CDEBUGFLAGS= -g  -Aa -D_HPUX_SOURCE
+#CDEBUGFLAGS= -g -cckr -common -prototypes 
+CDEBUGFLAGS = 	-O2
+NormalLibraryTarget(nurb_aux,$(OBJS))
+InstallLibrary(nurb_aux, $(LIBLOCATION));
+DependTarget()
+LintTarget()
+all::

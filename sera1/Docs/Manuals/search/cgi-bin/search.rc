@@ -1,0 +1,39 @@
+##############################################################################
+# This file contains resources for the search.cgi script                     #
+# Use spaces as delimiters in lists.  All items must be on one line.         #
+##############################################################################
+
+
+##########################################################
+# The base directory to begin the search                 #
+# Must have the ending "/"                               #
+##########################################################
+baseDirectory := /usr/users/bnct/www/
+
+
+##########################################################
+# The base URL.  This is for providing a list of results #
+# Must have the ending "/"                               #
+##########################################################
+baseURL := http://www.cs.montana.edu/~bnct/
+
+
+##########################################################
+# What types files to search.                            #
+# No wildcards allowed!                                  #
+##########################################################
+fileTypes := .html .htm .txt
+
+
+##########################################################
+# These are directories to omit.                         #
+# All subdirectories will also be omitted.               #
+##########################################################
+omitDirectories := manual/FeedBack oldBNCT
+
+
+##########################################################
+# This is the URL of the search page.                    #
+# Basically, this where the "BACK" will point.           #
+##########################################################
+searchURL := http://www.cs.montana.edu/~cohen/search/search.html

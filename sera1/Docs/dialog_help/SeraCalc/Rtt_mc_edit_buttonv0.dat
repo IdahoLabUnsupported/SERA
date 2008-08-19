@@ -1,0 +1,16 @@
+The "File" menu has five options:
+
+New
+   - starts the creation of a rtt input file with a standard set of values
+   
+Open
+   - allows the user to start with values from a previous session
+   
+Save
+   - saves the current rtt session's values
+   
+Save As
+   - similar to the "Save" option but confirms the name and path of the file to be saved
+   
+Exit
+   - exits the rtt_MC window

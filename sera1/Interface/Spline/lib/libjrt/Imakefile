@@ -1,0 +1,34 @@
+SRCS =		ray_tracing_routines.c	subdivision_routines.c 	
+
+OBJS =          ray_tracing_routines.o	subdivision_routines.o 	
+
+machine = 	i386
+
+TOP = $(SERA_HOME)/Interface/Spline
+
+# 
+# The DSINGLE flag triggers single precision usage for the "fastest
+# float" (fastf_t) data type defined by the ARL libraries.
+#
+DEFINES = -DDOUBLE
+#INCLUDE_PATH = /usr/people/astrakan/mynurbs/mdproj/include
+INCLUDES = -I$(TOP)/include/libjrt_includes \
+		-I$(TOP)/include/libnurb_aux_includes \
+	   	-I$(TOP)/include/libnurb_includes \
+		-I$(TOP)/include/bnct_ds_defs_includes \
+	   	-I$(TOP)/include/jrt_includes 
+
+LIBLOCATION = 	.
+USRLIBDIR = 	/usr/lib
+INCROOT = 	/usr/include
+SYS_LIBRARIES = -lm 
+CCOPTIONS = 
+DEPLIBS = 
+#CDEBUGFLAGS=    -g  -Aa -D_HPUX_SOURCE
+#CDEBUGFLAGS=	-g -cckr -common -prototypes
+CDEBUGFLAGS = 	-O2
+NormalLibraryTarget(jrt,$(OBJS))
+InstallLibrary(jrt, $(LIBLOCATION));
+DependTarget()
+LintTarget()
+all::

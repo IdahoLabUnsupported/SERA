@@ -1,0 +1,7 @@
+Fraction Effective Boron
+
+       __________________________________________________
+
+The fraction effective boron text widget displays the exposure-weighted
+average boron concentration for the fraction.  This widget is not editable
+by the user, as this quantity is computed by seraPlan.

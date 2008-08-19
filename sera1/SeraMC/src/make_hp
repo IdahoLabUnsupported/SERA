@@ -1,0 +1,33 @@
+PROGRAM =	rtt_MC_107
+
+BNCT_PATH =	/users/czech/bnct/bnct2.2
+#CFLAGS	=	-g -Aa -D_HPUX_SOURCE
+CFLAGS	=	-O
+FFLAGS = +O3 +E1 -K
+#FFLAGS = -g +E1 -K
+LIBDIR =        $(BNCT_PATH)/src/interface/lib
+
+LIBS =          $(LIBDIR)/libjrt/libjrt.a \
+		$(LIBDIR)/libnurb_aux/libnurb_aux.a \
+		$(LIBDIR)/libnurb/libnurb.a
+
+RBS    =        $(BNCT_PATH)/src/interface
+
+OBJS =        cg.o scatter.o rand.o source.o  epmc.o \
+	image.o Tlook.o DoseOpt.o ultraxs.o \
+	tyme_hp.o cputime.o envr.o mod_date.o\
+	track.o locate.o rtt_MC.o rst_edit.o volume.o \
+        libin.o gampro.o proptd.o write_row.o \
+	$(RBS)/ray_trace.o $(RBS)/local_memory_routines.o
+
+.f.o:
+	f77 $(FFLAGS) -c $*.f
+
+.c.o:
+	cc -c $(CFLAGS) $*.c
+
+all:	$(OBJS) 
+	f77 -o $(PROGRAM) \
+        $(OBJS) \
+        $(LIBS) \
+	/lib/libm.a /usr/lib/end.o

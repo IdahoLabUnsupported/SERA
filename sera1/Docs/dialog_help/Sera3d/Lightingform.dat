@@ -1,0 +1,44 @@
+The Lighting
+
+     First of all, the lighting is only used when
+   the view style is voxels or nurbs.  The lighting
+   is used to give a must more realistic rendering
+   of the data.  When the view style is only lines
+   or points, the lighting is disabled, this also
+   helps to keep the drawing speed up.
+     There are 5 available lights to toggle.  They 
+   are located at the front right, front left,
+   back right, back left, and above.  These positions
+   are given in reference to the viewer looking at the
+   head.  The light positions are fixed, which means
+   that when the object is rotated, the lights do not
+   move.  
+	Positions:
+
+
+          bl           br
+       
+
+               topl
+               HEAD
+
+
+          fl          fr
+
+
+   Ambient Slider:
+       To control the ambient lighting, an ambient 
+     slider is provided.  The value of the slider
+     ranges from 0 (no ambient) to 1 (full ambient).
+     Ambient values near .4 give the best results.
+
+
+   Default:
+       By default the front right and back left lights 
+     are turned on, while the other three are turned 
+     off.  The default setting for the ambient light 
+     is .4 .
+
+           
+  
+   

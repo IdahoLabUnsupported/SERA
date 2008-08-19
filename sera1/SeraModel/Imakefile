@@ -1,0 +1,21 @@
+SRCS = \
+image_tools.c image_matrix.c MenuSupport.c gui_tools.c \
+menu_cb.c functions.c gen_resize.c segment.c \
+iconCB.c read_rs_for_univels.c color.c undo.c helpers.c \
+choose_text_files.c body_materials.c launch_apps.c pixel_mapping.c \
+slice_orientation.c histo.c load_and_save.c overlay_info.c
+
+OBJS = \
+image_tools.o image_matrix.o MenuSupport.o gui_tools.o \
+menu_cb.o functions.o gen_resize.o segment.o \
+iconCB.o read_rs_for_univels.o color.o undo.o helpers.o \
+choose_text_files.o body_materials.o launch_apps.o pixel_mapping.o \
+slice_orientation.o histo.o load_and_save.o overlay_info.o
+
+SERA_DEPS = $(D_COMMON) $(D_QSH) $(D_UV) $(D_SZ)
+
+LOCAL_LIBRARIES = -lcommon -lqsh -luv -lsz $(DEFAULT_X_LIBS)
+SYS_LIBRARIES   = $(EXTRA_X_LIBS) MathLibrary
+DEPLIBS         = $(DEFAULT_DEP_X_LIBS) $(EXTRA_DEP_X_LIBS) $(SERA_DEPS)
+
+ComplexProgramTarget(seraModel)

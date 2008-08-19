@@ -1,0 +1,29 @@
+SRCS = \
+callbacks.c dismiss.c select.c contours.c \
+convenience.c create_widgets.c functions.c doseplay.c \
+InstallLogo.c picshell.c commonfcns.c \
+read_raw.c contours_calc.c draw_connected_points.c \
+font_functions.c line_labels.c scale_points.c stack.c \
+preferences.c contours_file.c color.c autoload.c \
+filenames.c colorwash_file.c file_select.c dose_factor_widget.c \
+load_qsh.c load_concat.c print.c remember_files.c
+
+
+OBJS = \
+callbacks.o dismiss.o select.o contours.o \
+convenience.o create_widgets.o functions.o doseplay.o \
+InstallLogo.o picshell.o commonfcns.o \
+read_raw.o contours_calc.o draw_connected_points.o \
+font_functions.o line_labels.o scale_points.o stack.o \
+preferences.o contours_file.o color.o autoload.o \
+filenames.o colorwash_file.o file_select.o dose_factor_widget.o \
+load_qsh.o load_concat.o print.o remember_files.o
+
+SERA_DEPS = $(D_COMMON) $(D_QSH) $(D_SZ)
+
+LOCAL_LIBRARIES = -lcommon -lqsh -lsz $(DEFAULT_X_LIBS) -lXpm
+SYS_LIBRARIES   = $(EXTRA_X_LIBS) MathLibrary
+DEPLIBS         = $(DEFAULT_DEP_X_LIBS) $(EXTRA_DEP_X_LIBS) $(SERA_DEPS)
+
+
+ComplexProgramTarget(seraDose)

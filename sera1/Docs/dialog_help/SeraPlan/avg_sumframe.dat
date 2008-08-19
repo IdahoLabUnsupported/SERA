@@ -1,0 +1,7 @@
+Plan Average Boron
+
+       __________________________________________________
+
+The plan average boron text widget displays the linear average
+boron concentration for the plan.  This widget is not editable
+by the user, as this quantity is computed by seraPlan.

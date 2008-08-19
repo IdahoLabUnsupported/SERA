@@ -1,0 +1,12 @@
+
+Volume Button
+
+       __________________________________________________
+
+The Volume button selects the volume search option for the
+reference dose location calculation.  This search finds the
+1.0cc volume with the highest reference dose component,
+where the reference dose component is selected by the user
+with the reference dose type menu.  The boron concentration
+at all locations can be specified, and a subset of the regions
+defined in the problem can be included in the search.

@@ -1,0 +1,22 @@
+Center-to-center slice distance->Uniform Spacing
+Number of Images in Sequence->Size of dimension[0]
+Uniform Slice Spacing in mm->Uniform Spacing
+Slice Thickness - Zmm[->Slice Thickness in mm[
+byte order->Byte Order
+Uniform Pixel Size X in mm->X Pixel Size
+Uniform Pixel Size Y in mm->Y Pixel Size
+Number of echos->Number Of Echos
+Uniform Slice Thickness in mm->Uniform Thickness
+Image Location->Reference Location
+Minimum pixel->Minimum Pixel Value
+Maximum pixel->Maximum Pixel Value
+Minimum pixel in slice[->Minimum Pixel Value[
+Maximum pixel in slice[->Maximum Pixel Value[
+Slice Position in mm[->Image Location[
+Patient name->Patient Name
+Plane type 0-axial, 1-sagittal, 2-cor, 3-oblique->View
+Study date->Date
+Number of beads->Number Of Beads
+Bead X location in mm[->Bead X Location[
+Bead Y location in mm[->Bead Y Location[
+Bead Z location in mm[->Bead Z Location[

@@ -1,0 +1,76 @@
+Texture Mapping Controls:
+
+	The ability to inlay slices in orthogonal and arbitrary
+       directions is through the use of 3D texture mapping.  The
+       slices are stacked upon one another creating a "block" or 
+       volume texture.  Then when a plane is drawn, it can be 
+       colored or texture mapped based on its position within the
+       block.  
+	
+      	__________________________________________________________
+
+	When drawing the arbitrary plane through the "block"
+      oF slices, determining how the slice values are mapped 
+      to the plane can be done two ways:
+
+	NEAREST: The value used to color the particular pixel 
+	 of the plane is by using the nearest value from the
+         "block" of slices. This provides the fastest rendering
+         rates.
+
+	LINEAR:  The value used to color the pixel in this case
+	  is by linearly interpolating between the 4 nearest
+	  pixel values in the "block" of slices. The rendering 
+          speed is sacrificed for a smoother rendering.
+
+	__________________________________________________________
+
+	If the plane or object to be texture mapped partially or 
+       completely lies outside of the texture map volume, determining
+       how the extruding portion is colored is also done one of 
+       two ways.
+
+	REPEAT:  The texture map will repeat, the extruding portion
+                will act as if it is extruding back into the texture
+	        volume from the opposite side.
+
+	CLAMP:   The texture map will be clamped to the last pixel
+                of the map for all extruding portions.  If the last
+                pixel is black in the texture map and a portion of
+                the plane extrudes out, the portion will be drawn in
+                black.
+
+	__________________________________________________________
+
+	Alpha Culling:
+	  
+	  Alpha Culling allows certain values of the textured 
+         object to be discarded.  This is used to remove the black
+	 from around the slice, so that just the slice can be 
+         drawn into the scene.  The slider underneath controls 
+         which values are to be discarded.  All values less than
+         the slider will be discarded.
+
+	__________________________________________________________
+
+	Volume Rendering:
+		
+	  Volume Rendering is done with the texture map.  With
+         alpha culling enabled, 256 planes (inlaid slices) are 
+	 drawn cutting through the texture map.  The adjacent slices
+         stack together rebuilding the original structure (head).
+	  The direction of the slices is determined by the direction
+         chosen in the slice control panel for inlaying a single 
+         slice.  The only exception is when a beam slice is enabled,
+	 the volume rendering will be done with beam slices.
+	__________________________________________________________
+
+	Texturing the Bodies:
+
+	  The check box for texturing the bodies will toggle the
+         texture map from being applied to the bodies.  
+
+	__________________________________________________________
+
+
+

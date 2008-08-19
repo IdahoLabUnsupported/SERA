@@ -1,0 +1,97 @@
+The Viewform
+
+	  The default control panel is the viewing 
+	control panel.  Starting from the top of the 
+	viewing control panel and working down, the 
+	controls are as follow:
+
+	________________________________________________
+
+	View Style :
+ 
+	  This drop-down menu currently has 4 viewing 
+	options. The viewing options are how the data is 
+	to be displayed to the screen.  The options are 
+	Points, Lines, Voxels, and Nurbs.
+	________________________________________________
+
+	Viewing Forms:
+
+	  The viewing forms that are currently available 
+	are Points, Lines, Voxels, Nurb Mesh, and Nurb 
+	Filled.  
+
+      	Points :
+           This is the default viewing form.  It takes 
+           the univel information and draws an outline 
+           of points for each body, and for each slice.  
+           This gives the 3d image a "ringed" appearance 
+           where the "rings" are the outlines of the
+           bodies. 
+
+      	Lines : 
+           This viewing form is very close to the Points 
+           form.  With this method, the points are simply 
+           connected with lines, which results in a bolder 
+           outline of the bodies.
+
+      	Voxels : 
+           Viewing the univel information as voxels is 
+           the most representative of what the univels 
+           look like.  Due to the larger number of polygons 
+           in this mode, the rendering speed is greatly 
+           slowed.  The voxels are actually tall rectangular 
+           cubes, their height base on the spacing
+           between the slices.  
+
+      	Nurbs :
+           The use of nurbs to approximate the boundaries 
+           of the bodies results in a smooth surface 
+           wrapping.  The visual results are a more 
+           life-life surface. The nurb surface is
+           wrapped completely around the body, based 
+           on sampled control points taken from the body 
+           points. The surface is closed in the horizontal 
+           direction, but stops at the control points for 
+           the top and bottom slices of the defined body.  
+           The nurb was not closed at the top and bottom to 
+           keep the surface as close to the actual univel 
+           information as possible.
+	   The nurbs can be rendered based on either a 
+           linear, quadratic, or cubic function.  The default 
+           is the quadratic which give the closest 
+           approxiamation to the control points. 
+           For detailed control of the nurbs, the Nurbs
+           control panel is available.
+	________________________________________________  
+
+	Scaling :
+
+	  The next control down on the control panel is the 
+	scaling slider.  The scaling slider will scale the 
+	3d bodies between .5 and 2 times the actual size.  
+	The slider defaults to 1.
+	________________________________________________
+
+	The View Buttons:
+
+	  Below the scaling slider are the view buttons.  
+	They allow the camera to be moved into different 
+	locations, changing the view in the main window.  
+	Remeber, the camera is the only thing to move when 
+	the buttons are used, so the rotation to the bodies, 
+	and the postitions of the lights are not modified. 
+	The default camera position is in front of the bodies, 
+	and slightly above.
+	________________________________________________
+
+	The Reset Button:
+
+	  At the bottom of the viewing controls is the reset 
+	button.  This button simply sets all the viewing controls 
+	back to their default, exluding the viewing style.
+	________________________________________________
+
+
+
+

@@ -1,0 +1,2 @@
+Output Area
+   Displays the results of pressing the Shoot button.  If the ray strikes a body, the message HIT is displayed and the location of the hit is shown in the Intersection area.  The distance from the start to the end of the ray is shown in the Distance area.  The attributes of the regions involved are shown in the Region In, Region Out, and Material areas.

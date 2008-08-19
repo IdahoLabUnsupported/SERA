@@ -1,0 +1,13 @@
+Sera Dose
+__________________________________________________
+
+The SERA Dose contouring utility function contours, 
+registers, and displays two dimensional isodose 
+curves superimposed over the original image set. It
+will also display user selectable dose components 
+and allows for dose component editing. Sera Dose 
+allows for user specified contour levels and will 
+report contour values at the current cursor location.
+Isodose contours can be represented either as lines 
+or color washed regions. A unique dose masking 
+feature is provided to remove unwanted dose curves.

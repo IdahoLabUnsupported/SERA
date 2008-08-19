@@ -1,0 +1,188 @@
+<HTML>
+
+<HEAD>
+<TITLE>SERA Updates</TITLE>
+</HEAD>
+
+<BODY bgcolor = "#ccbbaa" background = "../../../graphics/mainbackground.gif">
+
+<H3><U>1B1 to 1B3 module updates to SERA 1B0:</U></H3>
+After the 1B0 release the following problems were found with the
+following modules:
+<BR>       
+
+<UL><U>simplot.1B1:</U>
+This update fixes a long-standing bug in the dose-depth plot utility, 
+which caused simplot to fail when it reached end-of-file.
+
+<LI><A HREF = "bin/simplot.1B1.solaris">simplot 1B1 for solaris</A> (Feb. 8, 2001)<BR>
+<LI><A HREF = "bin/simplot.1B1.linux">simplot 1B1 for linux</A> (Feb. 8, 2001)<BR>
+
+<BR> 
+
+<U>seraMC.1B7:</U>
+This update increases the allowed tally grid from 30x30x30 to
+120x120x120.  Also, fixes some hidden bugs related to this,
+which were disguised by the use of 1cc voxels.
+<B>USERS SHOULD EXERCISE EXTREME CAUTION WITH THIS NEW OPTION!!</B>
+
+<LI><A HREF = "bin/seraMC.1B7.solaris">seraMC 1B7 for solaris</A> (Feb. 8, 2001)<BR>
+<LI><A HREF = "bin/seraMC.1B7.linux">seraMC 1B7 for linux</A> (Feb. 8, 2001)<BR>
+
+<BR>  
+
+<U>seraCalc.1B3:</U>
+This update makes modifications to seraCalc to accomodate the new tally
+grid limits in seraMC.  It also "improves" the Kill functionality. 
+
+<LI><A HREF = "bin/seraCalc.1B3.solaris">seraCalc 1B3 for solaris</A> (Feb. 8, 2001)<BR>
+<LI><A HREF = "bin/seraCalc.1B3.linux">seraCalc 1B3 for linux</A> (Feb. 8, 2001)<BR>
+
+<BR> 
+
+<U>seraPlan.1B4:</U>
+This update makes modifications to accomodate the expanded tally grid,
+and fixes associated hidden bugs (again, disguised by use of 1cc voxels).
+Also, this update fixes a bug in the dose interpolation routine, which
+caused improper handling of all dose components when one component had a
+neighboring voxel with a zero dose value.    
+
+<LI><A HREF = "bin/seraPlan.1B4.solaris">seraPlan 1B4 for solaris</A> (Feb. 8, 2001)<BR>
+<LI><A HREF = "bin/seraPlan.1B4.linux">seraPlan 1B4 for linux</A> (Feb. 8, 2001)<BR>
+</UL>
+<BR><BR>
+
+<UL>
+<U>SeraModel and Sera3d:</U> A problem was discovered in SeraModel
+and Sera3d relating to slice orientations different than Transverse.
+In SeraModel, with a slice orientation other than Transverse, the
+bounding boxes for regions were not being computed correctly when
+being saved to the .uvh file. In Sera3d, the axes were being labelled
+incorrectly when a slice orientation other than Transverse was supplied
+in the .uvh file. A help file has been included to describe how the
+slice orientations are determined. This file should be downloaded
+into the $SERA_HOME/Resources/SeraModel directory. When placed here,
+it will be viewable when specifying the slice orientation in SeraModel
+by pressing the "Help" button. The new version file should also be
+downloaded and placed in the $SERA_HOME/Resources/Shared directory.
+
+<LI><A HREF = "bin/seraMC.1B6.solaris">seraMC 1B6 for solaris</A> (Oct. 16, 2000)<BR>
+<LI><A HREF = "bin/seraMC.1B6.linux">seraMC 1B6 for linux</A> (Oct. 16, 2000)<BR>
+<LI><A HREF = "bin/seraDose.1B2.solaris">seraDose 1B2 for solaris</A> (Oct. 16, 2000)<BR>
+<LI><A HREF = "bin/seraDose.1B2.linux">seraDose 1B2 for linux</A> (Oct. 16, 2000)<BR>
+<LI><A HREF = "bin/seraPlan.1B3.solaris">seraPlan 1B3 for solaris</A> (Oct. 16, 2000)<BR>
+<LI><A HREF = "bin/seraPlan.1B3.linux">seraPlan 1B3 for linux</A> (Oct. 16, 2000)<BR>
+
+<BR>
+
+<LI><A HREF = "bin/seraMC.1B5.solaris">seraMC 1B5 for solaris</A> (Sept. 19, 2000)<BR>
+<LI><A HREF = "bin/seraMC.1B5.linux">seraMC 1B5 for linux</A> (Sept. 19, 2000)<BR>
+
+<BR>
+
+<LI><A HREF = "bin/seraMC.1B4.solaris">seraMC 1B4 for solaris</A> (July 26, 2000)<BR>
+<LI><A HREF = "bin/seraMC.1B4.linux">seraMC 1B4 for linux</A> (July 26, 2000)<BR>
+<LI><A HREF = "bin/seraCalc.1B2.solaris">seraCalc 1B2 for solaris</A> (July26, 2000)<BR>
+<LI><A HREF = "bin/seraCalc.1B2.linux">seraCalc 1B2 for linux</A> (July 26, 2000)<BR>
+
+<BR>
+
+<LI><A HREF = "bin/seraMC.1B3.solaris">seraMC 1B3 for solaris</A> (May 3, 2000)<BR>
+<LI><A HREF = "bin/seraMC.1B3.linux">seraMC 1B3 for linux</A> (May 3, 2000)<BR>
+<BR>
+<LI><A HREF = "bin/seraModel.1B2.solaris">seraModel 1B2 for solaris</A> (April 28, 2000)<BR>
+<LI><A HREF = "bin/seraModel.1B2.linux">seraModel 1B2 for linux</A> (April 28, 2000)<BR>
+<BR>
+<LI><A HREF = "bin/sera3d.1B2.solaris">sera3d 1B2 for solaris</A> (April 28, 2000)<BR>
+<LI><A HREF = "bin/sera3d.1B2.linux">sera3d 1B2 for linux</A> (April 28, 2000)<BR>
+<BR>
+<LI><A HREF = "bin/seraPlan.1B2.solaris">seraPlan 1B2 for solaris</A> (April 28, 2000)<BR>
+<LI><A HREF = "bin/seraPlan.1B2.linux">seraPlan 1B2 for linux</A> (April 28, 2000)<BR>
+<BR>
+<LI><A HREF = "bin/seraCalc.1B1.solaris">seraCalc 1B1 for solaris</A> (April 28, 2000)<BR>
+<LI><A HREF = "bin/seraCalc.1B1.linux">seraCalc 1B1 for linux</A> (April 28, 2000)<BR>
+<BR>
+<LI><A HREF = "bin/orientation.info">Help file describing slice orientations</A> (April 28, 2000)<BR>
+<LI><A HREF = "bin/Versions.txt">Version file for new modules</A> (April 28, 2000)<BR>
+</UL>
+
+<UL>
+<U>Sera3d and SeraDose:</U> A problem was found during the reading
+of the 3D dose contour header file (.chd). This problem applied
+to both sera3d and seraDose. The problem occured when the number of
+planes specified in the .chd file did not match the number of image
+slices from the QSH data. The user is now warned if this condition
+occurs, and they must correct their .chd file before continuing.
+
+
+<LI><A HREF = "bin/sera3d.1B1.solaris">sera3d 1B1 for solaris</A> (March 29, 2000)<BR>
+<LI><A HREF = "bin/sera3d.1B1.linux">sera3d 1B1 for linux</A> (March 29, 2000)<BR>
+<BR>
+<LI><A HREF = "bin/seraDose.1B1.solaris">seraDose 1B1 for solaris</A> (March 29, 2000)<BR>
+<LI><A HREF = "bin/seraDose.1B1.linux">seraDose 1B1 for linux</A> (March 29, 2000)<BR>
+</UL>
+
+<UL>
+<U>SeraMC and SeraPlan:</U> The edit isotope identifiers and atom 
+densities for the new activity edits
+in seraMC were not being written to the .rst file(s) created by seraMC.
+As seraPlan was expecting this information, all combinations and edits
+performed by seraPlan using .rst files generated by seraMC version 1B0
+were incorrect - the resulting edits returned garbage.
+
+No multiple field irradiation plans were possible using the entire 1B0
+path. However, pre-1B0 .rst files from seraMC (1A0, 1A1, etc.) would produce
+correct results in seraPlan combinations and edits.  All edits generated
+by seraMC would be correct in 1B0.
+
+
+<LI><A HREF = "bin/seraMC.1B2.solaris">seraMC 1B2 for solaris</A> (March 24, 2000)<BR>
+<LI><A HREF = "bin/seraMC.1B2.linux">seraMC 1B2 for linux</A> (March 24, 2000)<BR>
+<BR>
+<LI><A HREF = "bin/sera1B1.sigma.sun">sera1B1.sigma for solaris</A> (March 24, 2000)<BR>
+<LI><A HREF = "bin/sera1B1.sigma.linux">sera1B1.sigma for linux</A> (March 24, 2000)<BR>
+</UL>
+
+<UL>
+<U>SeraModel:</U> This update fixes problems when loading QSH files
+which contain both image locations and reference location/image spacing.
+Prior to this fix, the reference location/image spacing was taking precedence
+over the image locations.  Now, the user can use the image locations given
+in the .qhd file or use the reference location
+and image spacing, update the image locations, and then use these locations
+in seraModel.
+<LI><A HREF = "bin/seraModel.1B1.solaris">seraModel 1B1 for solaris</A> (March 6, 2000)<BR>
+<LI><A HREF = "bin/seraModel.1B1.linux">seraModel 1B1 for linux</A> (March 6, 2000)<BR>
+</UL>
+
+<BR>
+
+<UL>
+<U>SeraPlan:</U> See the note above for <U>SeraMC and SeraPlan</U>
+<LI><A HREF = "bin/seraPlan.1B1.solaris">seraPlan 1B1 for solaris</A> (March 1, 2000)<BR>
+<LI><A HREF = "bin/seraPlan.1B1.linux">seraPlan 1B1 for linux</A> (March 1, 2000)<BR><BR>
+</UL>
+
+<BR>
+<p><A HREF ="README.1B2">Readme for the 1B2 update</a>The 1B2 update adds a fix for the activation edits and also includes a new cross section library.  To update to this version download the correct seraMC file and the correct sera1B1.sigma file and a ne
+
+
+
+
+
+
+
+w <a href="bin/Versions.txt">Versions.txt</a>.  See the <a href= README.1B2>readme</a> for details</P>
+
+<BR>
+<FONT Color="red">Directions for downloading and installing:</FONT> 
+<LI>Right click on link and choose "Save Link As..." or press shift while clicking the link.
+<LI>Replace your 1B0 versions in the sera1/Target/bin directory with these updates.
+<BR>
+
+
+
+</BODY>
+</HTML>
+
+

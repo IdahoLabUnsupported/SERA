@@ -1,0 +1,17 @@
+Sera 3D
+__________________________________________________
+
+After all of the bodies are created with seraModel,
+the three dimensional viewer provides flexible 
+three dimensional displays of the univel-based 
+solid models and isodose contour data. Points/lines, 
+solid volume elements, or hollow volume elements 
+can be used to view the geometry. Two clipping 
+planes in the three orthogonal directions are 
+provided. The images used to define the regions
+in the image editing step may be inlaid into the 
+viewing window via the texture map. The beam line 
+and selected particles may also be displayed in the 
+viewing window. A very unique feature for viewing 
+two and three dimensional isodose contours is 
+also provided.

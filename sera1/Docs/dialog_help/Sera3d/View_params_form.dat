@@ -1,0 +1,35 @@
+Viewing Parameters Control Panel:
+
+	________________________________________________
+
+	Double Buffered vs. Single Buffered
+
+	  When in single buffered mode, the rendering 
+         (drawing) is done directly to the screen, 
+         allowing the user to watch the drawing process.
+	  When in double buffered mode, the rendering
+         (drawing) of the scene is done to a "back" 
+         buffer first, then when finished it is 
+         swapped to the screen during a screen refresh.
+         This method provides no view of the drawing 
+         process and gives a smooth animation, such
+         as when rotating.
+	________________________________________________
+	
+	Show Frame Rate:
+
+	  The show frame rate toggle button toggle the
+         frame rate in the bottom left corner of the
+         rendering window from being drawn. The frame 
+         rate is in frames per second.
+	________________________________________________
+	
+	Testing the Polygon Speed
+	
+	  The test polygon speed button will determine 
+         the rate at which your system is drawing polygons.
+	  The test first draws 50,000 points, then 
+         50,000 triangles, then 50,000 lit triangles
+         and returns the speed results.
+ 
+	________________________________________________

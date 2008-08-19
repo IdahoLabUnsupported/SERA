@@ -1,0 +1,12 @@
+The BodyList
+
+    The body list displays all of the body names defined
+  in the uv file.  The main purpose of the body list
+  is to allow the toggling on and off of the available
+  bodies. 
+
+    When a file is loaded, the names of the bodies are 
+  filled in, and all are toggled to "on" (highlighted).
+  By clicking on the body name, the name will
+  unhighlight, and the body will not be rendered, until
+  it has been re-highlighted.

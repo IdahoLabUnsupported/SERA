@@ -1,0 +1,34 @@
+#Get mesa4
+#untar:
+tar -xvjf download/MesaLib-4.0.4.tar.bz2
+#Go into the mesa4 directory:
+cd Mesa-4.0.4/
+#Configure:
+rpm -e Glide3-devel
+./configure --prefix=/usr/local/mesa4 --disable-3dnow
+
+
+#Make:
+make
+#Install (as root):
+make install
+#Add library path /usr/local/mesa4/lib to /etc/ld.so.conf
+echo /usr/local/mesa4/lib >> /etc/ld.so.conf
+#add an environmental variable LD_LIBRARY_PATH
+export LD_LIBRARY_PATH='/usr/local/mesa4/lib'
+
+#Get into the widgets-mesa directory
+cd widgets-mesa
+#Configure:
+./configure --prefix=/usr/local/mesa4 --with-motif --with-mesadir=/usr/local/mesa4
+#Make:
+make
+#Make install as root:
+mkdir /usr/local/mesa4/man
+mkdir /usr/local/mesa4/man/man3
+make install
+#Link GL to GLw so that sera can find include files.
+cd /usr/local/mesa4/include 
+ln -s GL GLw
+
+#All done.

@@ -1,0 +1,46 @@
+if
+   [ $2 ]
+then
+   serain=$2/$1.input
+   cd $2
+else
+   serain=$1.input
+fi
+
+if
+   [ -f RUN.INPUT ]
+then
+   echo 'can not run seraMC while 'RUN.INPUT' file exists in working directory'
+   exit
+fi
+
+if
+   [ -f $serain ]
+then
+   touch $serain
+else
+   echo ' file ' $serain ' does not exist'
+   echo ' usage: run_seraMC  prefix  workingDirectory {seraMC input is prefix.input}'
+   exit
+fi
+
+cp $1.input sera.input
+chmod 666 sera.input
+rm -f  $1.rst* $1.out sur_plot ultra_gamma_src sera.mon history
+$SERA_HOME/Target/bin/seraMC > $1.out
+
+if 
+   [ -f track.pp ]
+then
+   mv track.pp $1.pp
+fi
+
+if
+   [ -f ottocon.cmf.sz ]
+then
+   mv ottocon.chd $1.chd
+   mv ottocon.cdf.sz $1.cdf.sz
+   mv ottocon.cmf.sz $1.cmf.sz
+fi
+
+rm -f RUN.INPUT sera.input

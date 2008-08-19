@@ -1,0 +1,434 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.6 [en] (X11; U; SunOS 5.6 sun4u) [Netscape]">
+   <meta name="Description" content="This is the SERA Manual Appendix B page.">
+   <title>SERA Manual - Appendix B</title>
+</head>
+<body text="#274342" bgcolor="#C0C0C0" link="#0000EE" vlink="#551A8B" alink="#FF0000" background="mainbackground.gif" nosave>
+
+<center><a href="appA.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><a href="appA.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="appC.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="appC.html">Next</a></b>
+<p><b><font color="#274342"><font size=+2>SERA:</font></font></b>
+<br><b><font color="#274342"><font size=+2>Simulation Environment for Radiotherapy
+Applications</font></font></b>
+<br><b><font color="#274342"><font size=+2>User's Manual</font></font></b>
+<br><b><font color="#274342"><font size=+2>Version 1C0</font></font></b>
+<p><img SRC="marblebar.jpg" NOSAVE height=6 width=460></center>
+
+<center>
+<h1>
+<font size=+2>Appendix B.&nbsp; seraMC Combinatorial Geometry</font></h1></center>
+
+<h1>
+<a NAME="B.1"></a><b><font size=+1>B.1.&nbsp; Introduction</font></b></h1>
+
+<h1>
+<b><font size=+0>The Combinatorial Geometry method describes three-dimensional
+region configurations by considering unions, differences, and intersections
+of simple bodies such as spheres, boxes and cylinders.&nbsp; The geometry
+description subdivides the problem space into unique regions.&nbsp; In
+all descriptions, there must be a region, completely enveloping all other
+regions, which contains the material <font color="#FF0000">fictitious</font>.&nbsp;
+When particles enter this region, they are tossed away (i.e., leak from
+the system).&nbsp; Each region is the result of combining one or more of
+the following geometric bodies:</font></b></h1>
+
+<ul><b><font color="#000000">1. RPP - Rectangular Parallelepiped aligned
+with axes</font></b>
+<br><b><font color="#000000">2. BOX - an RPP randomly oriented in space</font></b>
+<br><b><font color="#000000">3. SPH - Sphere</font></b>
+<br><b><font color="#000000">4. RCC - Right Circular Cylinder</font></b>
+<br><b><font color="#000000">5. REC - Right Elliptical Cylinder</font></b>
+<br><b><font color="#000000">6. TRC - Truncated Right Angle Cone</font></b>
+<br><b><font color="#000000">7. ELL - Ellipsoid</font></b>
+<br><b><font color="#000000">8. RAW/WED - Right Angle Wedge</font></b>
+<br><b><font color="#000000">9. ARB - Arbitrary Polyhedron of 4, 5, or
+6 sides</font></b>
+<br><b><font color="#000000">10. RVW - Right Vertical Wedge</font></b>
+<br><b><font color="#000000">11. RGE - Restricted General Ellipsoid.</font></b></ul>
+<b>Body types <font color="#FF0000">2-9</font> may be arbitrarily oriented
+with respect to the x, y, and z reference coordinate axes.&nbsp; Body type
+<font color="#FF0000">1</font>
+must have sides parallel to the xy, xz, and yz planes.&nbsp; Body type
+<font color="#FF0000">10</font>
+must have an axis parallel to the z axis and top and bottom planes parallel
+to the xy plane. Body type 11 must have all three axes parallel to the
+three coordinate axes, but may be centered at an arbitrary point in space.&nbsp;
+<font color="#990000"><font size=+0>It is important to remember that every
+spatial point in the geometry must be located in one, and only one, region.</font></font></b>
+<br>&nbsp;
+<p><a NAME="B.2"></a><b><font size=+1>B.2.&nbsp; Body Input Specifications</font></b>
+<p><b>In general, a point is specified as a triplet of values (x,y,z) defining
+the point in space.&nbsp; A vector is defined by specifying its x, y, and
+z components.&nbsp; All angles are given in degrees, and coordinates and
+other dimensions in space are given in centimeters.</b>
+<p><b>The general format for defining a CG body is:</b>
+<p><b><tt><font color="#000000">&nbsp; DIR&nbsp;&nbsp;&nbsp; N&nbsp; data
+for body</font></tt></b>
+<p><b><font color="#274342">where </font><font color="#008007">DIR</font><font color="#274342">
+is the body specification type in </font><font color="#990000">(2x,a5)</font><font color="#274342">
+format, </font><font color="#008007">N</font><font color="#274342"> is
+a body number in </font><font color="#990000">(i5)</font><font color="#274342">
+format, and the data for the body are given in </font><font color="#990000">(6e10.3)</font><font color="#274342">
+format.&nbsp; Note that when more than six entries are needed for a body,
+the remaining entries are entered on additional lines, with </font><font color="#990000">(10x,6e10.3)</font><font color="#274342">
+format.&nbsp; The entries for each body are described in the order in which
+they must be entered on the CG body specifications.</font></b>
+<p><a NAME="B.2.1"></a><b>B.2.1.&nbsp; Rectangular Parallelepiped (RPP)</b>
+<p><img SRC="SeraMC/RPP.gif" NOSAVE height=245 width=397>
+<p><b>Specify the minimum and maximum values of the x, y, and z coordinates
+which bound the parallelepiped, i.e., <font color="#008007">x<sub>min</sub>,
+x<sub>max</sub>, y<sub>min</sub>, y<sub>max</sub>, z<sub>min</sub>,z<sub>max</sub></font>.</b>
+<p><a NAME="B.2.2"></a><b>B.2.2.&nbsp; Box (BOX)</b>
+<p><img SRC="SeraMC/BOX.gif" NOSAVE height=235 width=404>
+<p><b>Specify the vertex <font color="#008007">V</font> at one of the corners
+by its (x,y,z) coordinates. Specify a set of three mutually perpendicular
+vectors (<font color="#008007">a<sub>1</sub>, a<sub>2</sub>, </font><font color="#274342">and</font><font color="#008007">
+a<sub>3</sub></font>), representing the height, width, and length of the
+box, respectively.</b>
+<br>&nbsp;
+<p><a NAME="B.2.3"></a><b>B.2.3.&nbsp; Sphere (SPH)</b>
+<p><img SRC="SeraMC/SPH.gif" NOSAVE height=232 width=411>
+<p><b>Specify the point <font color="#008007">V</font> at the center of
+the sphere, and the scalar <font color="#008007">R</font> denoting the
+radius.</b>
+<p><a NAME="B.2.4"></a><b>B.2.4.&nbsp; Right Circular Cylinder (RCC)</b>
+<p><img SRC="SeraMC/RCC.gif" NOSAVE height=247 width=360>
+<p><b>Specify the point <font color="#008007">V</font> at the center of
+one base, a height vector <font color="#008007">H</font>, and a scalar
+<font color="#008007">R</font>
+denoting the radius.</b>
+<p><a NAME="B.2.5"></a><b>B.2.5. Right Elliptical Cylinder (REC)</b>
+<p><img SRC="SeraMC/REC.gif" NOSAVE height=271 width=378>
+<p><b>Specify the point <font color="#008007">V</font> at the center of
+the base ellipse, a height vector <font color="#008007">H</font>, and two
+vectors <font color="#008007">R<sub>1</sub></font> and <font color="#008007">R<sub>2</sub></font>
+in the plane of the base, defining the major and minor axes.</b>
+<p><a NAME="B.2.6"></a><b>B.2.6. Truncated Right Angle Cone (TRC)</b>
+<p><img SRC="SeraMC/TRC.gif" NOSAVE height=315 width=440>
+<p><b>Specify a point <font color="#008007">V</font> at the center of the
+lower base, the height vector <font color="#008007">H</font>, and two scalars
+<font color="#008007">R<sub>1</sub></font>
+and <font color="#008007">R<sub>2</sub></font> denoting the radii of the
+lower and upper bases.</b>
+<p><a NAME="B.2.7"></a><b>B.2.7. Ellipsoid (ELL)</b>
+<p><img SRC="SeraMC/ELL.gif" NOSAVE height=240 width=434>
+<p><b>Specify two points <font color="#008007">V<sub>1</sub></font> and
+<font color="#008007">V<sub>2</sub></font>
+denoting the coordinates of the foci, and the scalar <font color="#008007">L</font>
+denoting the length of the major axis.</b>
+<p><a NAME="B.2.8"></a><b>B.2.8. Right Angle Wedge (WED)</b>
+<p><img SRC="SeraMC/WED.gif" NOSAVE height=281 width=446>
+<p><b>Specify the vertex <font color="#008007">V</font> at one of the corners,
+and a set of three mutually perpendicular vectors <font color="#008007">a<sub>i</sub></font>,
+with the vectors <font color="#008007">a<sub>1</sub></font> and <font color="#008007">a<sub>2</sub></font>
+describing the two legs of the right triangle of the wedge.</b>
+<p><a NAME="B.2.9"></a><b>B.2.9. Arbitrary Polyhedron of 4, 5, or 6 sides
+(ARB)</b>
+<p><img SRC="SeraMC/ARB.gif" NOSAVE height=313 width=435>
+<p><b>Assign an index (<font color="#FF0000">1-8</font> for a six-sided
+<font color="#FF0000">ARB</font>)
+to each vertex.&nbsp; For each vertex, give the x, y, and z coordinates.
+Each of the faces is then described by a four-digit number giving the indices
+of the four vertex points in that face. For each face, these indices must
+be entered consistently in either clockwise or counterclockwise order.</b>
+<p><b>An example of the ARB body, in this case, describing a simple unit
+cube, looks as follows:</b>
+<p><b><tt>&nbsp; <font color="#000000">ARB&nbsp;&nbsp;&nbsp; 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.0</font></tt></b>
+<br><b><tt><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.0</font></tt></b>
+<br><b><tt><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.0</font></tt></b>
+<br><b><tt><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.0</font></tt></b>
+<br><b><tt><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1234&nbsp;&nbsp;&nbsp;&nbsp; 1584&nbsp;&nbsp;&nbsp;&nbsp; 1562&nbsp;&nbsp;&nbsp;
+5678&nbsp;&nbsp;&nbsp;&nbsp; 2673&nbsp;&nbsp;&nbsp; 4873</font></tt></b>
+<p><a NAME="B.2.10"></a><b><tt>B.2.10. Right Vertical Wedge (RVW)</tt></b>
+<p><img SRC="SeraMC/RVW.gif" NOSAVE height=317 width=456>
+<p><b>Specify the vertex <font color="#008007">V</font> at the lower plane
+of the wedge.&nbsp; Specify a scalar defining the width of the side joining
+the vertex and the right-angled corner (<font color="#008007">a<sub>2</sub></font>).&nbsp;
+Specify theta, the angle subtended by the wedge at the vertex.&nbsp; Specify
+<font color="#008007">phi</font>,
+the angle between the x-axis and the wedge face opposite the right-angled
+corner, and <font color="#008007">H<sub>z</sub></font>, the scalar height
+of the wedge.&nbsp; This body could also be obtained with the <font color="#FF0000">WED</font>
+body, but the <font color="#FF0000">RVW</font> is easier to specify and
+has been found to give fewer round-off problems.</b>
+<p><a NAME="B.2.11"></a><b>B.2.11.&nbsp; Restricted General Ellipsoid (RGE)</b>
+<p><img SRC="SeraMC/RGE.gif" NOSAVE height=215 width=332>
+<p><b>Specify the half-lengths of the three major elliptical axes A, B,
+and C, and the center point V.&nbsp; This will generate a general ellipsoid
+(not an ellipsoid of revolution, as for the ELL body) with axes parallel
+to the three coordinate axes, centered at V.&nbsp; The elliptical axes
+A, B, and C are parallel to the x-, y-, and z-axis, respectively.&nbsp;
+This body is particularly useful for modelling the so-called Snyder phantom,
+which is commonly used for beam measurements.</b>
+<br>&nbsp;
+<p><a NAME="B.3"></a><b><font size=+1>B.3.&nbsp; Combinatorial Geometry
+Descriptions</font></b>
+<p><b>The basic technique for the description of the geometry consists
+of defining the location and shape of the various regions in terms of the
+intersections and unions of the geometric bodies.&nbsp; A special operator
+notation involving the symbols <font color="#FF0000">+</font>, <font color="#FF0000">-</font>,
+and <font color="#FF0000">OR</font> is used to describe the intersections
+and unions.&nbsp; These symbols are used by the program to construct information
+relating material descriptions to the body definitions.&nbsp; If a body
+appears in a region description with a <font color="#FF0000">+</font> operator,
+it means that the region being described is wholly contained in the body.&nbsp;
+If a body appears in a region description with a <font color="#FF0000">-</font>
+operator, it means that the region being described is wholly outside the
+body.&nbsp; If the body appears with an <font color="#FF0000">OR</font>
+operator, it means that the region being described includes all points
+in the body- union list.&nbsp; <font color="#FF0000">OR</font> may be considered
+as a union operator.&nbsp; In some instances, a region may be described
+in terms of zones lumped together by a union of these zones.&nbsp; When
+<font color="#FF0000">OR</font>
+operators are used there are always two or more of them, and they refer
+to all body numbers following them, either
+<font color="#FF0000">+</font>
+or <font color="#FF0000">-</font>, that is, all body numbers between <font color="#FF0000">OR</font>s
+or until the end of the region input for that region are intersected together
+before
+<font color="#FF0000">OR</font>s are performed.&nbsp; Figure 1 visually
+demonstrates the results of the Boolean operators.</b>
+<p><img SRC="SeraMC/Boolean.gif" NOSAVE height=460 width=497>
+<p><b>Figure 1.&nbsp; Results of Boolean operations in CG geometry.</b>
+<br>&nbsp;
+<h1>
+<a NAME="B.4"></a><b><font size=+1>B.4.&nbsp; Examples of CG Descriptions</font></b></h1>
+
+<h1>
+<b><font size=+0>Techniques for describing a particular geometry are best
+illustrated by examples.</font></b></h1>
+
+<h1>
+<a NAME="B.4.1"></a><font size=+0>B.4.1.&nbsp; E<b>xample 1</b></font></h1>
+
+<h1>
+<b><font size=+0>This example is an object composed of a sphere and a cylinder,
+as shown in Figure 2.</font></b></h1>
+
+<h1>
+<br>
+<img SRC="SeraMC/ex1.gif" ALT="[Picture]" NOSAVE height=446 width=434></h1>
+
+<h1>
+<font size=+0>Figure 2.&nbsp; Geometry for Example 1.</font></h1>
+
+<h1>
+<font size=+0>To describe the object, assume a spherical body penetrated
+by a cylindrical body (Figure 2a).&nbsp; If the materials in the sphere
+and cylinder are the same, then they can be considered as one region, say
+region i (Figure 2b).&nbsp; The description of region i would be;</font></h1>
+
+<ul><b><font color="#000000">i = OR + 2OR + 3</font></b></ul>
+<b>This means that a point is in region i if it is either inside body 2
+or inside body 3.&nbsp; If different materials are used in the sphere and
+cylinder, then the sphere with a cylindrical hole in it would be given
+a different region assignment (say j in Figure 2c) from that of the cylinder
+(k in Figure 2d).&nbsp; The description of region j would be;</b>
+<ul><b><font color="#000000">j = +2 -3</font></b></ul>
+<b>This means that points in region j are all those points inside body
+2 which are not inside body 3.&nbsp; The description of region k (Figure
+d) is simply;</b>
+<ul><b><font color="#000000">k = +3</font></b></ul>
+<b>That is, all points in region k lie inside body 3.</b>
+<h1>
+<font size=+0>Combinations of more than two bodies and similar region descriptions
+could contain a long string of <font color="#FF0000">+</font>, <font color="#FF0000">-</font>,
+and <b><font color="#FF0000">OR</font></b> operators.</font></h1>
+
+<center>
+<h1>
+<img SRC="marblebar.jpg" NOSAVE height=6 width=460></h1></center>
+
+<h1>
+<a NAME="B.4.2"></a><font size=+0>B.4.2.&nbsp; Example 2</font></h1>
+
+<h1>
+<font size=+0>As a more complicated example of the use of the <b><font color="#FF0000">OR</font></b>
+operator, consider the system shown below, consisting of the shaded region
+A and the unshaded region B, as shown in Figure 3.</font></h1>
+<img SRC="SeraMC/ex2.gif" ALT="[Picture]" NOSAVE height=249 width=462 align=CENTER>
+<p><b>Figure 3.&nbsp; Geometry for Example 2.</b>
+<p><b>These regions can be described by the two <font color="#008007">RPP</font>'s,
+bodies 1 and 3, and the RCC, body 2.&nbsp; The region description would
+be:</b>
+<ul><b><font color="#000000">A = +1 +2</font></b></ul>
+
+<ul><b><font color="#000000">B = OR +3 -1OR +3 -2</font></b></ul>
+<b>Notice that the <font color="#FF0000">OR</font> operator refers to all
+following body numbers until the next <font color="#FF0000">OR</font> operator
+is reached.</b>
+<br>&nbsp;
+<center>
+<h1>
+<img SRC="marblebar.jpg" NOSAVE height=6 width=460></h1></center>
+
+<h1>
+<a NAME="B.4.3"></a><font size=+0>B.4.3.&nbsp; Example 3</font></h1>
+
+<h1>
+<font size=+0>This example consists of two overlapping spheres within a
+rectangular parallelepiped, as shown below in Figure 4.</font></h1>
+
+<h1>
+<img SRC="SeraMC/ex3.gif" ALT="[Picture]" NOSAVE height=181 width=380 align=CENTER></h1>
+
+<h1>
+<b><font size=+0>Figure 4.&nbsp; Geometry for Example 3.</font></b></h1>
+
+<h1>
+<b><font size=+0>Five regions may be described, as shown below.</font></b></h1>
+
+<h1>
+<b><font size=+0>Region A - composed of all points interior to body 1 and
+exterior to bodies 2 and 3.</font></b></h1>
+
+<blockquote>
+<h1>
+<b><font color="#000000"><font size=+0>A = +1 -2 -3</font></font></b></h1>
+</blockquote>
+
+<h1>
+<b><font size=+0>Region B - composed of all points interior to body 2 and
+exterior to body 3.</font></b></h1>
+
+<blockquote>
+<h1>
+<b><font color="#000000"><font size=+0>B = +2 -3</font></font></b></h1>
+</blockquote>
+
+<h1>
+<b><font size=+0>Region C - composed of all points which are common to
+bodies 2 and 3.</font></b></h1>
+
+<blockquote>
+<h1>
+<b><font color="#000000"><font size=+0>C = +2 +3</font></font></b></h1>
+</blockquote>
+
+<h1>
+<b><font size=+0>Region D - composed of all points interior to body 3 and
+exterior to body 2.</font></b></h1>
+
+<blockquote>
+<h1>
+<b><font color="#000000"><font size=+0>D = +3 -2</font></font></b></h1>
+</blockquote>
+
+<h1>
+<b><font size=+0>and Region E - composed of all points interior to bodies
+2 and 3.</font></b></h1>
+
+<blockquote>
+<h1>
+<b><font color="#000000"><font size=+0>E = OR +2OR +3</font></font></b></h1>
+</blockquote>
+
+<center>
+<h1>
+<img SRC="marblebar.jpg" NOSAVE height=6 width=460></h1></center>
+
+<h1>
+<a NAME="B.4.4"></a><font size=+0>B.4.4.&nbsp; Example 4</font></h1>
+
+<h1>
+<font size=+0>Example 4 consists of a cylinder divided into two regions
+by a box and with a sphere at one end, as shown below in Figure 5.</font></h1>
+
+<h1>
+<img SRC="SeraMC/ex4.gif" ALT="[Picture]" NOSAVE height=232 width=358 align=CENTER></h1>
+<b>Figure 5.&nbsp; Geometry for Example 4.</b>
+<p><b>Region A - all points interior to the circumscribed parallelepiped
+and exterior to the cylinder and sphere.&nbsp; Note that region A includes
+all of the space contained inside the box except that portion inside the
+cylinder</b>
+<ul><b><font color="#000000">A = +1 -2 -3</font></b></ul>
+<b>Region B - all points interior to the cylinder and exterior to the box.</b>
+<ul><b><font color="#000000">B = +2 -4</font></b></ul>
+<b>Region C - all points interior to the sphere and external to the cylinder.</b>
+<ul><b><font color="#000000">C = +3 -2</font></b></ul>
+<b>Region D - all points interior to the cylinder and also inside the box.</b>
+<ul><b><font color="#000000">D = +2 +4</font></b></ul>
+
+<center>
+<h1>
+<img SRC="marblebar.jpg" NOSAVE height=6 width=460></h1></center>
+
+<h1>
+<a NAME="B.4.5"></a><font size=+0>B.4.5.&nbsp; Example 5</font></h1>
+
+<h1>
+<font size=+0>Example 5 consists of a cylinder containing two spheres,
+enclosed inside a parallelepiped, as shown in Figure 6.</font></h1>
+
+<h1>
+<img SRC="SeraMC/ex5.gif" ALT="[Picture]" NOSAVE height=195 width=343 align=CENTER></h1>
+<b>Figure 6.&nbsp; Geometry for Example 5.</b>
+<p><b>Region A - all points interior to the parallelepiped but exterior
+to the cylinder.</b>
+<ul><b><font color="#000000">A = +1 -2</font></b></ul>
+<b>Region B - all points interior to the two spheres.</b>
+<ul><b><font color="#000000">B = OR +3OR +4</font></b></ul>
+<b>Region C - all points interior to the cylinder but exterior to the spheres.</b>
+<ul><b><font color="#000000">C = +2 -3 -4</font></b></ul>
+
+<p><br><a NAME="B.5"></a><b><font size=+1>B.5.&nbsp; Format of Combinatorial
+Geometry File</font></b>
+<p><b>The format of the CG file is given below.&nbsp; Basically, it consists
+of a title record, several records defining the bodies, and several more
+records defining the Boolean operations to describe physical regions.</b>
+<br>&nbsp;
+<blockquote><b><u>Record</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <u>Format</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<u>Description of entries</u></b>
+<p><b>&nbsp;&nbsp;&nbsp;&nbsp; 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(20x,10a6)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Title record - enter any descriptive information desired in columns 21-80.</b>
+<p><b>&nbsp;&nbsp;&nbsp;&nbsp; 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(2x,a3,i5,6e10.3,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Body type directive
+(three characters), body number, data for particular</b>
+<br><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+body type specified.</b>
+<br><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(10x,6e10.3))</b>
+<p><b>&nbsp;&nbsp;&nbsp;&nbsp; 3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(2x,a3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Enter <font color="#FF0000">END</font> in columns 3-5 to denote end of
+body descriptions.</b>
+<p><b>&nbsp;&nbsp;&nbsp;&nbsp; 4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(2x,a3,i5,9(a2,i5))&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Region name (three characters),
+region number, and the Boolean directives</b>
+<br><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+to describe the region in terms of the bodies defined above.&nbsp; Body
+numbers</b>
+<br><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+from other files with geometry information, i.e., source file, may also
+be</b>
+<br><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+used in these operations.</b>
+<p><b>&nbsp;&nbsp;&nbsp;&nbsp; 5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(2x,a3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Enter <font color="#FF0000">END </font>in columns 3-5 to denote the end
+of the CG file.</b>
+<br>&nbsp;
+<br>&nbsp;</blockquote>
+
+<center><img SRC="marblebar.jpg" NOSAVE height=6 width=460>
+<p><a href="appA.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a><b><a href="appA.html">Previous<a href="toc.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="toc.html">Contents<a href="appC.html"><img SRC="bullet10.gif" NOSAVE height=17 width=17></a></a><a href="appC.html">Next</a></b></center>
+
+</body>
+</html>

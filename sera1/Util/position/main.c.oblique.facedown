@@ -1,0 +1,110 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "transform.h"
+
+main()
+{
+
+  float coord[3],
+        source[3],
+        sourceOrig[3],
+
+        /*
+         * 75/167 oblique beam
+         */
+        xbs = -20.92, ybs = 71.77, zbs = 56.24,
+
+        /*
+         * lateral left side beam
+         */
+        /* xbs = -14.0,  ybs = 74.65, zbs = 48.0, */
+
+        /*
+         * target point
+         */
+        xp =  -14.00, yp =  41.80, zp =  48.0;
+
+/*
+ * 75/167 oblique beam
+ */
+  sourceOrig[0] = -20.92;
+  sourceOrig[1] =  71.77;
+  sourceOrig[2] = 56.24;
+
+ /*
+  * lateral left side beam
+  */
+  /*
+  sourceOrig[0] = -14.0;
+  sourceOrig[1] =  74.65;
+  sourceOrig[2] =  48.0;
+   */
+
+  while (1) {
+
+    /*
+     * 75/167 oblique beam
+     */
+     xbs = -20.92, ybs = 71.77, zbs = 56.24,
+
+    /*
+     * lateral left side beam
+     */
+     /* xbs = -14.0,  ybs = 74.65, zbs = 48.0, */
+
+      xp =  -14.00, yp =  41.80, zp =  48.0;
+
+    printf ("Input the coordinate.\n");
+    scanf ("%f %f %f", &coord[0], &coord[1], &coord[2]);
+
+    source[0] = sourceOrig[0];
+    source[1] = sourceOrig[1];
+    source[2] = sourceOrig[2];
+
+    scale (coord, -1.0, 1.0, 1.0);
+    translate (coord, 128, -127, 0.0);
+    scale (coord, -1.0, -1.0, 1.0);
+    fswap (&coord[0], &coord[1]);
+    display (coord, "transformation I:  image space");
+
+
+    scale (coord, 0.9765625, 0.9765625, 125.0);
+    display (coord, "transformation II:  proper units");
+
+
+    printf ("Beam has been rotated 75 polar, 167 azimuth.\n");
+    printf ("Beam source now at %f \t%f \t%f\n\n", xbs, ybs, zbs);
+
+
+    translate (coord, -xp, -yp, -zp);
+    display (coord, "transformation III:  target point now at origin");
+    rotate_z (coord, 2.914699851);
+    /* rotate_z (coord, -0.2268928); -13 degrees */
+    display (coord, "transformation IV:  rotate around z, +167 deg.");
+    /* rotate_x (coord, +1.308996); 75 degrees */ 
+    /* rotate_x (coord, 1.5707963); 90 degrees */
+    rotate_x (coord, -1.308996);
+    display (coord, "transformation V:  rotate around x, -75 deg.");
+    translate (coord, xp, yp, zp);
+    display (coord, "target point added back to bead point");
+
+    translate (source, -xp, -yp, -zp);
+    display (source, "subtracted target point from beam source"); 
+    rotate_z (source, 2.914699581);
+    /* rotate_z (source, -0.2268928); -13 degrees */
+    display (source, "rotated beam source around z axis +167 degrees");
+    /* rotate_x (source, +1.308996); 75 degrees */ 
+    /* rotate_x (source, 1.5707963); 90 degrees*/
+    rotate_x (source, -1.308996);
+    display (source, "rotated beam source around x axis-75 degrees");
+    translate (source, xp, yp, zp);
+    display (source, "beam source rotated, target point translated back");
+    display (source, "rotated beam source");
+
+    translate (coord, -source[0], -source[1], -source[2]);
+    display (coord, "transformation VI:  final translation");
+
+  }
+
+}

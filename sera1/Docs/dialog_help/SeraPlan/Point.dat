@@ -1,0 +1,11 @@
+
+
+Point Button
+
+       __________________________________________________
+
+The Point button selects the point option for the reference
+dose location calculation.  This option uses the dose at
+the specified (x,y,z) location for the reference dose.
+The boron concentration at the point is used, and cannot
+be changed by the user.

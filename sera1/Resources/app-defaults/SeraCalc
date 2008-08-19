@@ -1,0 +1,78 @@
+! Resource file for seraCalc package
+
+SeraCalc*fontList: -*-helvetica-bold-r-normal-*-14-*-*-*-*-*-*-*
+
+SeraCalc*error*background: red
+SeraCalc*error*foreground: white
+
+SeraCalc*acceptdialog*background: #dd0000
+SeraCalc*acceptdialog*foreground: #000000
+
+!
+! seraCalc
+!
+SeraCalc*seraCalc*font:                   7x14               
+
+SeraCalc*seraCalc*file_button1*labelString:         Save Directory
+SeraCalc*seraCalc*file_button1*labelString*font:    7x14      
+SeraCalc*seraCalc*field1*sensitive:         False
+
+SeraCalc*seraCalc*file_button2*labelString:         CG Geom File Name
+SeraCalc*seraCalc*file_button2*labelString*font:    7x14 
+SeraCalc*seraCalc*field2*sensitive:         False
+
+SeraCalc*seraCalc*file_button3*labelString:         Patient Geom File Name
+SeraCalc*seraCalc*file_button3*labelString*font:    7x14
+SeraCalc*seraCalc*field3*sensitive:         False
+
+SeraCalc*seraCalc*file_button4*labelString:         Old RST File Name
+SeraCalc*seraCalc*file_button4*labelString*font:    7x14
+SeraCalc*seraCalc*field4*sensitive:         False
+
+SeraCalc*seraCalc*file_button5*labelString:         New RST File Name
+SeraCalc*seraCalc*file_button5*labelString*font:    7x14
+SeraCalc*seraCalc*field5*sensitive:         False
+
+SeraCalc*seraCalc*file_button6*labelString:         Source File Name
+SeraCalc*seraCalc*file_button6*labelString*font:    7x14
+SeraCalc*seraCalc*field6*sensitive:         False
+
+SeraCalc*seraCalc*file_button7*labelString:         Material File Name
+SeraCalc*seraCalc*file_button7*labelString*font:    7x14
+SeraCalc*seraCalc*field7*sensitive:         False
+
+SeraCalc*seraCalc*file_button8*labelString:         Cross Section File Name
+SeraCalc*seraCalc*file_button8*labelString*font:    7x14
+SeraCalc*seraCalc*field8*sensitive:         False
+
+SeraCalc*seraCalc*file_button9*labelString:         seraMC Run Script
+SeraCalc*seraCalc*file_button9*labelString*font:    7x14
+SeraCalc*seraCalc*field9*sensitive:         False
+
+SeraCalc*seraCalc*file_button10*labelString:         Proton Range File
+SeraCalc*seraCalc*file_button10*labelString*font:    7x14
+SeraCalc*seraCalc*field10*sensitive:         False
+
+SeraCalc*seraCalc*file_button11*labelString:         Ultrafast XS Directory
+SeraCalc*seraCalc*file_button11*labelString*font:    7x14
+SeraCalc*seraCalc*field11*sensitive:         False
+
+SeraCalc*seraCalc*file_button12*labelString:         Ultrafast XS File
+SeraCalc*seraCalc*file_button12*labelString*font:    7x14
+SeraCalc*seraCalc*field12*sensitive:         False
+
+SeraCalc*seraCalc*rtt_runbutton*labelString:       Run seraCalc
+SeraCalc*seraCalc*rtt_runbutton*labelString*font:  7x14
+
+SeraCalc*seraCalc*rtt_killbutton*labelString:       Kill seraCalc
+SeraCalc*seraCalc*rtt_killbutton*labelString*font:  7x14
+
+!
+! quit button
+!
+SeraCalc*seraCalc*rtt_quit*labelString:            Quit
+
+!
+! iop popup
+!
+SeraCalc*XmToggleButton.selectColor:  red

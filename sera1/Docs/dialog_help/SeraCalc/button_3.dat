@@ -1,0 +1,14 @@
+The Dosimetry Display option when functional will control the three-dimensional display of dosimetry information in the graphics window.  The options of Dosimetry Display are:
+
+Simplot 
+   An ancilliary program that reads the rtt_MC standard output and invokes the xmgr plot code for each encounter of a line edit.  To use:
+   1. Select the rtt_MC output file.
+   2. A new popup will be displayed which contains further help.
+
+Histo 
+   An ancilliary program that reads the rtt_MC standard output and invokes the xmgr plot code for each encounter of a volume edit.  To use:
+   1. Select the rtt_MC output file.
+   2. A new popup will be displayed which contains further help.
+
+XContours (also referred to as Dose Contours)
+   An option that displays the radiation doses that have been calculated for the various regions of the scans.

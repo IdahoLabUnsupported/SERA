@@ -1,0 +1,261 @@
+XCOMM platform:  $XConsortium: NetBSD.cf /main/14 1996/01/28 07:42:14 kaleb $
+
+
+
+
+
+XCOMM platform:  $XFree86: xc/config/cf/NetBSD.cf,v 3.30 1996/01/28 07:27:35 dawes Exp $
+
+#ifndef OSName
+#define OSName		NetBSD 1.1
+#endif
+#ifndef OSVendor
+#define	OSVendor	/**/
+#endif
+XCOMM operating system:  OSName
+#ifndef OSMajorVersion
+#define OSMajorVersion    1
+#endif
+#ifndef OSMinorVersion
+#define OSMinorVersion    1
+#endif
+/* 1 = A, 2 = B, 3 = C */
+#ifndef OSTeenyVersion
+#define OSTeenyVersion	  0
+#endif
+
+/*
+ * C library features
+ */
+
+#define HasNdbm         	YES
+#define HasPutenv       	YES
+#define HasBSD44Sockets 	YES
+#define Malloc0ReturnsNull	NO
+#define SetTtyGroup     	YES
+#define DBMLibrary		/**/
+#ifndef HasLibCrypt
+# define HasLibCrypt		YES
+#endif
+#ifndef HasShm
+# if OSMajorVersion == 0 && OSMinorVersion == 9 && OSTeenyVersion == 2
+/*
+ * Shm memory was removed in 0.9B because it was encumbered.
+ * A free version was added in 0.9C
+ */
+#  define HasShm          	NO
+# else
+#  define HasShm          	YES
+# endif
+#endif
+#define HasWChar32		YES
+
+/*
+ * Compiler Features
+ */
+#undef HasGcc
+#define HasGcc			YES
+#define HasGcc2			YES
+#ifndef HasGcc2ForCplusplus
+#define HasGcc2ForCplusplus	YES
+#endif
+#define GccUsesGas		YES
+#define UseGas			YES
+#define GnuCpp			YES
+
+#define NeedConstPrototypes	YES
+#define NeedFunctionPrototypes	YES
+#define NeedNestedPrototypes	YES
+#define NeedVarargsPrototypes	YES
+#define NeedWidePrototypes	NO
+
+#define MkdirHierCmd		mkdir -p
+
+#define CppCmd          	/usr/libexec/cpp
+#define StandardCppDefines	-traditional
+#define PreProcessCmd   	CppCmd
+
+#undef CcCmd
+#define CcCmd 			gcc
+#if UseInstalled
+#define DefaultCCOptions 	/**/
+#else
+#define DefaultCCOptions 	-ansi -Dasm=__asm
+#endif
+
+#define GccGasOption 		-DGCCUSESGAS
+#define AsmDefines 		-DUSE_GAS
+
+
+#ifdef i386Architecture
+# define OptimizedCDebugFlags 	-m486 DefaultGcc2i386Opt
+# if OSMajorVersion < 1
+#  define ServerOSDefines	XFree86ServerOSDefines -DDDXTIME -DXNO_SYSCONF
+# else
+#  define ServerOSDefines	XFree86ServerOSDefines -DDDXTIME
+# endif
+#else
+# define OptimizedCDebugFlags 	-O2
+# if defined(SparcArchitecture)
+#  define ServerOSDefines 	-DDDXOSINIT
+# else
+#  define ServerOSDefines 	/**/
+# endif
+# ifndef XFree86ConsoleDefines
+#  define XFree86ConsoleDefines -DPCCONS_SUPPORT -DPCVT_SUPPORT
+# endif
+#endif
+#ifdef i386Architecture
+#define ServerExtraDefines GccGasOption XFree86ServerDefines
+#else
+#define ServerExtraDefines GccGasOption
+#endif
+
+#define StandardDefines	-DCSRG_BASED
+#define XawI18nDefines	-DUSE_XWCHAR_STRING -DUSE_XMBTOWC
+
+#ifndef ExtraLibraries
+#define ExtraLibraries		/**/
+#endif
+#ifndef UseGnuMalloc
+#define UseGnuMalloc		YES
+#endif
+#ifndef GnuMallocLibrary
+#define GnuMallocLibrary	-lgnumalloc
+#endif
+
+/*
+ * Make & install Features
+ */
+
+#define AvoidNullMakeCommand 	YES
+#define StripInstalledPrograms	YES
+#define CompressAllFonts	YES
+#define DefaultUserPath		.:/bin:/usr/bin:/usr/local/bin:$(BINDIR)
+#define DefaultSystemPath	/sbin:/usr/sbin:/bin:/usr/bin:$(BINDIR)
+
+#ifdef  InstallCmd
+# undef  InstallCmd
+# define InstallCmd 		/usr/bin/install
+#endif
+
+#ifndef ExtraFilesToClean
+# define ExtraFilesToClean 	*.core
+#endif
+
+/*
+ * Documentation formatting
+ */
+#define	EqnCmd 			eqn -Tps
+          COL = col
+         NEQN = neqn
+        NROFF = nroff
+#define TroffCmd        	groff -Tps
+
+/*
+ * To use the NetBSD Aperture driver
+ */
+#if defined(i386Architecture)
+#ifndef HasNetBSDApertureDrv
+#define HasNetBSDApertureDrv	NO
+#endif
+#endif
+
+/*
+ * ForceSubdirs - force make to build subdirectories
+ * 
+ * For BSD 4.4 make 
+ */
+#define ForceSubdirs(dirs)						@@\
+dirs:	.EXEC								@@\
+	@cd $@ ; echo "making all in $(CURRENT_DIR)/$@..."; \		@@\
+	$(MAKE) $(MFLAGS) PassCDebugFlags all
+
+
+XCOMM Man pages need to be formatted when installed, so override the default
+XCOMM imake rules.
+
+#define ManSuffix	1
+#define FileManSuffix	5
+#define ManSourcePath	$(MANPATH)/cat
+
+#define InstallManPageLong(file,destdir,dest)                           @@\
+all:: file.0								@@\
+									@@\
+file.0:: file.man							@@\
+	@if [ -f file.man ]; \						@@\
+	then \								@@\
+	cat file.man | $(NEQN) | $(TBL) | $(NROFF) $(MANMACROS) | $(COL) >/tmp/$$$$.man; \	@@\
+	cp /tmp/$$$$.man file.0; \					@@\
+	$(RM) /tmp/$$$$.man; \						@@\
+	fi 								@@\
+									@@\
+file.man::								@@\
+									@@\
+install.man::                                                           @@\
+	MakeDir($(DESTDIR)destdir)					@@\
+	-@if [ -f file.0 ]; \						@@\
+	then \								@@\
+	$(INSTALL) -c $(INSTMANFLAGS) file.0 $(DESTDIR)destdir/dest.0; \@@\
+	fi
+
+#define InstallGenManPageLong(file,destdir,dest,suffix)			@@\
+	InstallManPageLong(file,destdir,dest)
+
+#define InstallMultipleManSuffix(list,dest,suff)                        @@\
+install.man:: 								@@\
+	MakeDir($(DESTDIR)dest)						@@\
+	case '${MFLAGS}' in *[i]*) set +e;; esac; \			@@\
+	for i in list; do \                                             @@\
+	  (set -x; \							@@\
+	  cat $$i.suff | $(NEQN) | $(TBL) | $(NROFF) $(MANMACROS) | $(COL) >/tmp/$$$$.suff; \	@@\
+	  $(INSTALL) -c $(INSTMANFLAGS) /tmp/$$$$.suff $(DESTDIR)dest/$$i.0; \	@@\
+	  $(RM) /tmp/$$$$.suff); \						@@\
+	done
+
+#define InstallMultipleMan(list,dest)                                   @@\
+	InstallMultipleManSuffix(list,dest,man)
+
+#define InstallManPageAliases(file,destdir,aliases)                     @@\
+install.man:: 								@@\
+	@case '${MFLAGS}' in *[i]*) set +e;; esac; \                    @@\
+	for i in aliases; do \                                          @@\
+		(set -x; \						@@\
+		$(RM) $(DESTDIR)destdir/$$i.0;\  			@@\
+		(cd $(DESTDIR)/destdir; $(LN) file.0 $$i.0);\ 		@@\
+		); \							@@\
+	done
+
+#define InstallGenManPageAliases(file,destdir,suffix,aliases)		@@\
+	InstallManPageAliases(file,destdir,aliases)
+
+#include <bsdLib.rules>
+
+/*
+ * Definitions for the SUN server on NetBSD/sparc
+ */
+#ifdef SparcArchitecture
+#ifndef Xsun24Server
+#define Xsun24Server	NO
+#endif
+#ifndef XsunServer
+#define XsunServer	YES
+#endif
+#ifndef XsunMonoServer
+#define XsunMonoServer	YES
+#endif
+/*
+ * XFree86 uses its own (more portable) database routines to speed up 
+ * the RGB database lookups
+ * However, if you want to use ndbm anyway, you can set that to NO in 
+ * site.def
+ */
+#ifndef UseRgbTxt
+#define UseRgbTxt	YES
+#endif
+#endif
+
+#ifdef i386Architecture
+# include <xfree86.cf>
+#endif
+

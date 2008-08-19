@@ -1,0 +1,170 @@
+# HFR 12-cm Source for 1995 Petten HB11 configuration
+# 6 deg cone
+# $                                                  $
+#
+ HFR source from Peter Watkins (Oct. 2, 1991) adjusted 1993,1995
+# The neutron source intensities have been adjusted by the FERRET
+# results obtained from 93 measurements by Harker and MCNP foil
+# cross sections calculations. Harker and Anderl slightly modified
+# the source-energy structure to match the SAND structure
+#  These ratios are, from high to low energy are:
+#  1.22 1.24 1.25 1.28 1.25 1.23 1.21 1.19 1.16 1.15
+#  1.13 1.12 1.11 1.10 1.10 1.09 1.08 1.07 1.05 1.03
+#  0.99 0.95 0.91 0.86 0.81 0.75 0.74 0.73 0.70 0.79
+#  0.81 1.05 0.81 1.59 1.35 1.33 1.14 1.25 1.18 0.92
+#  1.20 1.34 1.49 1.09 1.09
+# also a fictitious 1-9 MeV gamma source
+# is added to estimate incident gamma
+# The next entries are xc,yc,and zc which is the center of the beam
+# in source-geometry coordinates, (xc,yc,zc). The flag in col. 48
+# is the source type, 0=disc, 1=square.
+# col 60  interpolation flag (0=1/E, 1=linear)
+# col 72 is NR (#radial ints for cosine dist) BR in 72-80
+#
+@@ This is a poison line to prevent this source being used by pre 104 versions @@
+  0.0        0.0         49.6                  0           0          10 13.5
+#
+#  No. sources, no. neutron source groups, no. gamma source groups,
+#   no. spectra, no. cuttpoints on cos(theta) halfspace
+           1          45           1           1           1
+#  Source no., neutron intensity, gamma intensity, upper radius
+#  The intensities are particles/(cm**2-MW-min)  {current, not flux}
+#    The normalization corresponds to an adjusted source of
+#    7.6E+10 neutron
+#      this is integrated over the 6-cm source disc
+# 3 apr 95, renormalized to 4.760E+08 to compensate for 6 deg cone
+# note that the below 0.5 eV flux is set to 0.0. The flux is higher
+#      than this but is low enough to be insignificant
+#
+           1  4.7600E+08  2.7000E+07  9.00
+  1.4500E+07  7.2400E+06  3.6200E+06  1.8100E+06  9.0500E+05  6.4000E+05
+  4.5300E+05  3.2000E+05  2.2600E+05  1.6000E+05  1.1300E+05  8.0000E+04
+  5.6600E+04  4.0000E+04  3.3600E+04  2.8300E+04  2.3800E+04  2.0000E+04
+  1.6800E+04  1.4100E+04  1.1900E+04  1.0000E+04  7.0700E+03  5.0000E+03
+  3.5400E+03  2.5000E+03  1.7700E+03  1.2500E+03  6.9000E+02  5.5000E+02
+  4.5400E+02  2.7500E+02  1.5600E+02  1.2000E+02  7.8100E+01  3.9100E+01
+  2.2600E+01  1.3400E+01  9.7700E+00  6.6000E+00  3.4000E+00  2.4400E+00
+  1.0000E+00  5.0000E-01  1.0000E-01  1.000E-03
+  9.0000E+06  1.0000E+06
+ 5.76500E+04 7.66900E+04 3.23900E+04 6.66500E+05 9.57000E+05 1.16000E+06
+ 2.01100E+06 2.71500E+06 3.82900E+05 6.26500E+05 4.00800E+04 8.73600E+06
+ 8.67700E+06 1.80700E+05 5.54000E+06 8.78800E+06 3.93800E+06 4.44000E+05
+ 5.10400E+05 1.30500E+06 2.44300E+06 8.59700E+06 1.06800E+07 1.00100E+07
+ 8.94400E+06 1.13700E+07 1.13400E+07 1.84300E+07 6.71400E+06 6.56400E+06
+ 1.74500E+07 2.45100E+07 8.50800E+06 2.64300E+07 3.46800E+07 2.80500E+07
+ 2.17100E+07 1.42300E+07 1.68100E+07 1.86200E+07 8.46600E+06 1.49200E+07
+ 6.16900E+06 1.09000E-10 1.09000E-10
+ 2.40000E+07
+#
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+  9.9452E-01
+#
+# Next, the source geometry is given. This is entered such that
+#  the planar source is at x=xc, y=yc, z=zc and is normal to the z axis
+#  This convention must be followed to allow proper transformation
+#  in the code
+#
+#*************************************************************
+# no. regions for this source, followed by material names, in
+#  increasing-region no. order
+    9
+# Region 1 is the delimiter opening
+ void_edit                               Aperture
+# Region 2 is the delimiter
+ Rx_215_nat                              Delimiter
+# Region 3 is the final polybor
+ polybor                                 PolyBorDelim
+# Region 4 is the space left by the 5 deg gap
+ void_edit                               Mouth
+# Region 5 is external
+ fictitious                              External
+# Region 6 is buffer
+ buffer                                  BUFFER
+# Region 7 is concrete
+ fictitious                              Concrete
+# Region 8 is TRC source cone
+ void_edit                               Collimator
+# Region 9 is the TRC final aperture
+ void_edit                               Aperture
+#*************************************************************
+#
+          beam source as per Watkins                                  
+  RCC    1 0.0       0.0       0.0       0.0       0.0       5.0
+            10.0
+  RPP    2 -30.3     30.3      -30.3     30.3      0.0       5.0
+  RPP    3 -51.4     51.4      -70.0     70.0      0.0       5.0
+  RPP    4 -70.0     70.0      -70.0     70.0      3.5       60.0
+  RPP    5 -70.0     70.0     -70.0      70.0     -100.0      4.0
+# concrete/fictitious
+  BOX    6-69.102258 -70.0    16.5616807139.467258 0.0      -12.201804
+            0.0       140.0    0.0      3.49494528 0.0      39.9476407
+# upper TRC collimator
+  TRC    7 0.0       0.0       30.0      0.0       0.0      25.0 
+           8.10921   8.90526   
+# final 12-cm TRC collimator
+  TRC    8 0.0       0.0       0.0       0.0       0.0      30.01
+           5.614006  6.7150633
+  END
+# opening in delimiter slab
+    1    5     +1     -8
+# lithiated poly delimiter
+    2    5     +2     -1
+# polybor outer delimiter slab
+    3    5     +3     -2
+# Region 4 is the space left by the 5 deg gap
+    4    5     +4     -3     -5     -6     -8
+# Region 5 is external
+    5   10     -3     -4     -5
+# buffer
+    6   10     +5     -3     -9
+# concrete
+    7   10     +6     -7     -8
+# TRC aperture
+    8   10     +7
+# TRC aperture
+    9   10     +8     -7
+  END

@@ -1,0 +1,82 @@
+CHANGES MADE TO LIBNURB LIBRARY.
+================================
+
+The NURB control points defined in nurb.h were originally declared to be
+double precision.  Because the ray tracing algorithm designed by John
+Peterson of the University of Utah involves refining a NURB surface by
+splitting it into subsurfaces, memory constraints became a problem.
+This was partially alleviated by changing the type definition of the
+control points from double to single.  This introduced a number of new
+problems, however, that need to be recorded for anyone needing to do any
+programming using the libnurb library.
+
+These changes can be most easily undone by simply replacing the altered
+arl libraries.  This should not affect any of the ray tracing code
+written, except to double memory requirements because of the double
+precision.  Also, one would need to replace the original *.h files.
+
+These changes did not appear to affect speed at all.
+
+The changes I made are outlined below.
+
+
+
+1)  	Some internal ARL routines seemed to depend on the control
+points being double precision.  The routines that seemed to be causing
+the problems had to do with the include file "nmg.h".  Since
+non-manifold geometry does not appear to be necessary at this moment, I
+decided to eliminate all references to this file.  This meant I had to
+go through each file in libnurb and remove the include file reference to
+"nmg.h" and also to comment out each macro call to "NMG-whatever".
+These calls seem to validate a pointer structure, but the nurb library
+seems to be performing just fine without them.
+
+2)	Some of the include files, particularly "nurb.h", had to
+be hacked in order to make the changes work.  In particular, certain
+macros had to be commented out or changed in order to prevent usage of
+anything in "nmg.h".   Also had to cut and paste the type definition of
+knot vectors into "nurb.h" from "nmg.h".  Another include file that had
+to be commented out was "conf.h".
+
+
+3)	I deemed it desirable to exclude all the ARL libraries
+but the libnurb library, since that one was being used 99.99999% of the
+time.  Most of the other libraries, such as libsysv, libplot3, etc., had
+to be included in order to allow compilation of those few pieces of code
+in libnurb that used them.  For example, there is a utility to plot a
+nurb using mged.  This nurb routine need the library "libplot3" in order
+to be linked properly.  But we will never use this routine as far as I
+can tell, so why include it?  By not including the file "nurb_plot.c" in
+libnurb, we can avoid having to compile and link in a whole extra
+library.  I took this game plan to some extremes, but managed to get rid
+of all libraries but libnurb.  
+
+	Probably the biggest savings gained was when I managed
+to untangle libnurb from librt.  Librt is mostly devoted to ray tracing,
+which we are doing ourselves.  However, there are a few routines that
+WERE used rather heavily, such as rt_bomb, rt_log, rt_magic, rt_malloc, and
+rt_free.  Some of these routines also required "nmg.h", so it made sense
+to get rid of them.
+
+	rt_bomb is used to gracefully exit when some sort of
+exception arises.  Well, I altered all calls to rt_bomb in libnurb to
+just exit when an error condition arises.  
+
+	rt_log just prints out information to the screen.  We
+hardly need this.  I replaced all rt_log calls with just plain old
+printf's.  
+
+	rt_magic does something weird with magic numbers, or something
+similarly esoterical.  Seemed to be unneeded, so I got rid of it.
+
+	rt_malloc and rt_free are memory allocation routines
+that ARL uses for all their data structures.  They may be more efficient
+than regular malloc and free system calls, but they are hardly
+absolutely necessary.  Regular old malloc and free do just fine.  So
+every call to rt_malloc and rt_free in libnurb was changed to malloc and
+free.   
+
+
+
+
+

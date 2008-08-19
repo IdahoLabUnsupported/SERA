@@ -1,0 +1,3 @@
+trans_bs
+
+This option allows for a simple transformation from image coordinates to model coordinates.  This transformation is automatic but can be specified, in this dialog box, to override the automatic mode.

@@ -1,0 +1,782 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.5 [en] (X11; U; SunOS 5.6 sun4u) [Netscape]">
+   <title> seraMC library : KERMA FACTORS </title>
+</head>
+<body text="#274342" bgcolor="#C0C0C0" link="#0000EE" vlink="#551A8B" alink="#FF0000" background="../../mainbackground.gif" nosave>
+
+<center><b><font size=+2>KERMA Factors</font></b></center>
+
+<center><table BORDER >
+<caption><b><font size=+1></font></b>&nbsp;
+<br><b><font size=+1>Neutron KERMA Factors for Nitrogen</font></b></caption>
+
+<tr ALIGN=CENTER>
+<th>Upper Energy (eV)</th>
+
+<th>Lower Energy (eV)</th>
+
+<th>KERMA Factor (eV / collision)</th>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.69046E+07</b></td>
+
+<td><b>1.49182E+07</b></td>
+
+<td><b>4.10828E+06</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.49182E+07</b></td>
+
+<td><b>1.34986E+07</b></td>
+
+<td><b>3.72057E+06</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.34986E+07</b></td>
+
+<td><b>1.19125E+07</b></td>
+
+<td><b>3.32797E+06</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.19125E+07</b></td>
+
+<td><b>1.00000E+07</b></td>
+
+<td><b>2.55772E+06</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.00000E+07</b></td>
+
+<td><b>7.78801E+06</b></td>
+
+<td><b>1.45001E+06</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>7.78801E+06</b></td>
+
+<td><b>6.06531E+06</b></td>
+
+<td><b>1.12253E+06</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>6.06531E+06</b></td>
+
+<td><b>4.72367E+06</b></td>
+
+<td><b>1.16012E+06</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>4.72367E+06</b></td>
+
+<td><b>3.67879E+06</b></td>
+
+<td><b>1.22840E+06</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>3.67879E+06</b></td>
+
+<td><b>2.86505E+06</b></td>
+
+<td><b>9.78226E+05</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>2.86505E+06</b></td>
+
+<td><b>2.23130E+06</b></td>
+
+<td><b>5.89388E+05</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>2.23130E+06</b></td>
+
+<td><b>1.73774E+06</b></td>
+
+<td><b>3.27055E+05</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.73774E+06</b></td>
+
+<td><b>1.35335E+06</b></td>
+
+<td><b>2.42185E+05</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.35335E+06</b></td>
+
+<td><b>1.05399E+06</b></td>
+
+<td><b>1.50643E+05</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.05399E+06</b></td>
+
+<td><b>8.20850E+05</b></td>
+
+<td><b>1.19955E+05</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>8.20850E+05</b></td>
+
+<td><b>6.39279E+05</b></td>
+
+<td><b>1.25145E+05</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>6.39279E+05</b></td>
+
+<td><b>4.97871E+05</b></td>
+
+<td><b>9.36552E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>4.97871E+05</b></td>
+
+<td><b>3.87742E+05</b></td>
+
+<td><b>6.21705E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>3.87742E+05</b></td>
+
+<td><b>3.01974E+05</b></td>
+
+<td><b>4.42603E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>3.01974E+05</b></td>
+
+<td><b>2.35177E+05</b></td>
+
+<td><b>3.43147E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>2.35177E+05</b></td>
+
+<td><b>1.83156E+05</b></td>
+
+<td><b>2.66860E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.83156E+05</b></td>
+
+<td><b>1.42642E+05</b></td>
+
+<td><b>2.07720E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.42642E+05</b></td>
+
+<td><b>1.11090E+05</b></td>
+
+<td><b>1.61838E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.11090E+05</b></td>
+
+<td><b>8.65170E+04</b></td>
+
+<td><b>1.26151E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>8.65170E+04</b></td>
+
+<td><b>6.73795E+04</b></td>
+
+<td><b>9.84753E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>6.73795E+04</b></td>
+
+<td><b>5.24752E+04</b></td>
+
+<td><b>7.68796E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>5.24752E+04</b></td>
+
+<td><b>4.08677E+04</b></td>
+
+<td><b>6.01683E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>4.08677E+04</b></td>
+
+<td><b>3.18278E+04</b></td>
+
+<td><b>4.72141E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>3.18278E+04</b></td>
+
+<td><b>2.47875E+04</b></td>
+
+<td><b>3.71723E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>2.47875E+04</b></td>
+
+<td><b>1.93045E+04</b></td>
+
+<td><b>2.94307E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.93045E+04</b></td>
+
+<td><b>1.50344E+04</b></td>
+
+<td><b>2.34437E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.50344E+04</b></td>
+
+<td><b>1.17088E+04</b></td>
+
+<td><b>1.88843E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.17088E+04</b></td>
+
+<td><b>9.11882E+03</b></td>
+
+<td><b>1.54178E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>9.11882E+03</b></td>
+
+<td><b>7.10174E+03</b></td>
+
+<td><b>1.28059E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>7.10174E+03</b></td>
+
+<td><b>5.53084E+03</b></td>
+
+<td><b>1.08626E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>5.53084E+03</b></td>
+
+<td><b>4.30743E+03</b></td>
+
+<td><b>9.44847E+02</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>4.30743E+03</b></td>
+
+<td><b>3.35463E+03</b></td>
+
+<td><b>8.45854E+02</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>3.35463E+03</b></td>
+
+<td><b>2.61259E+03</b></td>
+
+<td><b>7.80946E+02</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>2.61259E+03</b></td>
+
+<td><b>2.03468E+03</b></td>
+
+<td><b>7.44045E+02</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>2.03468E+03</b></td>
+
+<td><b>1.58461E+03</b></td>
+
+<td><b>7.30472E+02</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.58461E+03</b></td>
+
+<td><b>1.23410E+03</b></td>
+
+<td><b>7.36827E+02</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.23410E+03</b></td>
+
+<td><b>9.61117E+02</b></td>
+
+<td><b>7.60616E+02</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>9.61117E+02</b></td>
+
+<td><b>7.48518E+02</b></td>
+
+<td><b>8.03371E+02</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>7.48518E+02</b></td>
+
+<td><b>5.82947E+02</b></td>
+
+<td><b>8.63449E+02</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>5.82947E+02</b></td>
+
+<td><b>4.53999E+02</b></td>
+
+<td><b>9.38832E+02</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>4.53999E+02</b></td>
+
+<td><b>3.53575E+02</b></td>
+
+<td><b>1.02957E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>3.53575E+02</b></td>
+
+<td><b>2.75365E+02</b></td>
+
+<td><b>1.13616E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>2.75365E+02</b></td>
+
+<td><b>2.14454E+02</b></td>
+
+<td><b>1.25942E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>2.14454E+02</b></td>
+
+<td><b>1.67017E+02</b></td>
+
+<td><b>1.40042E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.67017E+02</b></td>
+
+<td><b>1.30073E+02</b></td>
+
+<td><b>1.56079E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.30073E+02</b></td>
+
+<td><b>1.01301E+02</b></td>
+
+<td><b>1.74213E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.01301E+02</b></td>
+
+<td><b>7.88932E+01</b></td>
+
+<td><b>1.95503E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>7.88932E+01</b></td>
+
+<td><b>6.14421E+01</b></td>
+
+<td><b>2.20666E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>6.14421E+01</b></td>
+
+<td><b>4.78512E+01</b></td>
+
+<td><b>2.49221E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>4.78512E+01</b></td>
+
+<td><b>3.72665E+01</b></td>
+
+<td><b>2.81572E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>3.72665E+01</b></td>
+
+<td><b>2.90232E+01</b></td>
+
+<td><b>3.17728E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>2.90232E+01</b></td>
+
+<td><b>2.26033E+01</b></td>
+
+<td><b>3.59172E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>2.26033E+01</b></td>
+
+<td><b>1.76035E+01</b></td>
+
+<td><b>4.06635E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.76035E+01</b></td>
+
+<td><b>1.37096E+01</b></td>
+
+<td><b>4.59716E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.37096E+01</b></td>
+
+<td><b>1.06770E+01</b></td>
+
+<td><b>5.19823E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.06770E+01</b></td>
+
+<td><b>8.31529E+00</b></td>
+
+<td><b>5.87747E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>8.31529E+00</b></td>
+
+<td><b>6.47595E+00</b></td>
+
+<td><b>6.64437E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>6.47595E+00</b></td>
+
+<td><b>5.04348E+00</b></td>
+
+<td><b>7.51238E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>5.04348E+00</b></td>
+
+<td><b>3.92786E+00</b></td>
+
+<td><b>8.49304E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>3.92786E+00</b></td>
+
+<td><b>3.05902E+00</b></td>
+
+<td><b>9.60276E+03</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>3.05902E+00</b></td>
+
+<td><b>2.38237E+00</b></td>
+
+<td><b>1.08566E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>2.38237E+00</b></td>
+
+<td><b>1.85539E+00</b></td>
+
+<td><b>1.22758E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.85539E+00</b></td>
+
+<td><b>1.44498E+00</b></td>
+
+<td><b>1.38784E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.44498E+00</b></td>
+
+<td><b>1.12535E+00</b></td>
+
+<td><b>1.56907E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.12535E+00</b></td>
+
+<td><b>8.76425E-01</b></td>
+
+<td><b>1.81540E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>8.76425E-01</b></td>
+
+<td><b>6.82560E-01</b></td>
+
+<td><b>2.14068E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>6.82560E-01</b></td>
+
+<td><b>5.31579E-01</b></td>
+
+<td><b>2.27502E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>5.31579E-01</b></td>
+
+<td><b>4.13994E-01</b></td>
+
+<td><b>2.56502E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>4.13994E-01</b></td>
+
+<td><b>3.80000E-01</b></td>
+
+<td><b>2.78891E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>3.80000E-01</b></td>
+
+<td><b>3.60000E-01</b></td>
+
+<td><b>2.88421E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>3.60000E-01</b></td>
+
+<td><b>3.30000E-01</b></td>
+
+<td><b>2.98184E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>3.30000E-01</b></td>
+
+<td><b>3.10000E-01</b></td>
+
+<td><b>3.09037E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>3.10000E-01</b></td>
+
+<td><b>3.00000E-01</b></td>
+
+<td><b>3.16158E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>3.00000E-01</b></td>
+
+<td><b>2.90000E-01</b></td>
+
+<td><b>3.21191E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>2.90000E-01</b></td>
+
+<td><b>2.80000E-01</b></td>
+
+<td><b>3.26476E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>2.80000E-01</b></td>
+
+<td><b>2.60000E-01</b></td>
+
+<td><b>3.34919E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>2.60000E-01</b></td>
+
+<td><b>2.40000E-01</b></td>
+
+<td><b>3.47300E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>2.40000E-01</b></td>
+
+<td><b>2.20000E-01</b></td>
+
+<td><b>3.61193E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>2.20000E-01</b></td>
+
+<td><b>1.80000E-01</b></td>
+
+<td><b>3.85418E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.80000E-01</b></td>
+
+<td><b>1.60000E-01</b></td>
+
+<td><b>4.15898E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.60000E-01</b></td>
+
+<td><b>1.40000E-01</b></td>
+
+<td><b>4.40732E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.40000E-01</b></td>
+
+<td><b>1.00000E-01</b></td>
+
+<td><b>4.87811E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.00000E-01</b></td>
+
+<td><b>8.00000E-02</b></td>
+
+<td><b>5.57293E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>8.00000E-02</b></td>
+
+<td><b>6.00000E-02</b></td>
+
+<td><b>6.24070E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>6.00000E-02</b></td>
+
+<td><b>4.00000E-02</b></td>
+
+<td><b>7.24016E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>4.00000E-02</b></td>
+
+<td><b>2.53000E-02</b></td>
+
+<td><b>8.71283E+04</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>2.53000E-02</b></td>
+
+<td><b>1.50000E-02</b></td>
+
+<td><b>1.06788E+05</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>1.50000E-02</b></td>
+
+<td><b>7.00000E-03</b></td>
+
+<td><b>1.36104E+05</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>7.00000E-03</b></td>
+
+<td><b>4.00000E-03</b></td>
+
+<td><b>1.76421E+05</b></td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td><b>4.00000E-03</b></td>
+
+<td><b>.00000E+00</b></td>
+
+<td><b>2.54331E+05</b></td>
+</tr>
+
+<tr ALIGN=LEFT>
+<td COLSPAN="3"><b>KERMA Factors from MACLIB (ENDF/B IV)</b></td>
+</tr>
+</table></center>
+
+</body>
+</html>

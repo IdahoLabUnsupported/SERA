@@ -1,0 +1,189 @@
+# HFR 8-cm Source for Petten irradiations 
+#
+ HFR source from Peter Watkins (Oct. 2, 1991) adjusted 1993
+# The neutron source intensities have been adjusted by the FERRET
+# results obtained from 93 measurements by Harker and MCNP foil
+# cross sections calculations. Harker and Anderl slightly modified
+# the source-energy structure to match the SAND structure
+#  These ratios are, from high to low energy are:
+#  1.22 1.24 1.25 1.28 1.25 1.23 1.21 1.19 1.16 1.15
+#  1.13 1.12 1.11 1.10 1.10 1.09 1.08 1.07 1.05 1.03
+#  0.99 0.95 0.91 0.86 0.81 0.75 0.74 0.73 0.70 0.79
+#  0.81 1.05 0.81 1.59 1.35 1.33 1.14 1.25 1.18 0.92
+#  1.20 1.34 1.49 1.09 1.09
+# also a fictitious 1 MeV gamma source (causing 1 Gy/hr peak dose)
+# is added to estimate incident gamma
+# The next entries are xc,yc,and zc which is the center of the beam
+# in source-geometry coordinates, (xc,yc,zc). The flag in col. 48
+# is the source type, 0=disc, 1=square.
+#
+ 0.0         0.0         50.9999               0
+#
+#  No. sources, no. neutron source groups, no. gamma source groups,
+#   no. spectra, no. cuttpoints on cos(theta) halfspace
+           1          45           1           1           1
+#  Source no., neutron intensity, gamma intensity, upper radius
+#  The intensities are particles/(cm**2-MW-min)  {current, not flux}
+#    The normalization corresponds to an adjusted source of
+#    7.6E+10*1.027  = 7.8E+10 neutron, 4.6E+10 gamma
+#      this is integrated over the 6-cm source disc
+# note that the below 0.5 eV flux is set to 0.0. The flux is higher
+#      than this but is low enough to be insignificant
+#
+           1  9.3135E+08  5.4231E+08  6.00
+  1.4500E+07  7.2400E+06  3.6200E+06  1.8100E+06  9.0500E+05  6.4000E+05
+  4.5300E+05  3.2000E+05  2.2600E+05  1.6000E+05  1.1300E+05  8.0000E+04
+  5.6600E+04  4.0000E+04  3.3600E+04  2.8300E+04  2.3800E+04  2.0000E+04
+  1.6800E+04  1.4100E+04  1.1900E+04  1.0000E+04  7.0700E+03  5.0000E+03
+  3.5400E+03  2.5000E+03  1.7700E+03  1.2500E+03  6.9000E+02  5.5000E+02
+  4.5400E+02  2.7500E+02  1.5600E+02  1.2000E+02  7.8100E+01  3.9100E+01
+  2.2600E+01  1.3400E+01  9.7700E+00  6.6000E+00  3.4000E+00  2.4400E+00
+  1.0000E+00  5.0000E-01  1.0000E-01  1.000E-03
+  1.0010E+06  9.9999E+05
+ 5.76500E+04 7.66900E+04 3.23900E+04 6.66500E+05 9.57000E+05 1.16000E+06
+ 2.01100E+06 2.71500E+06 3.82900E+05 6.26500E+05 4.00800E+04 8.73600E+06
+ 8.67700E+06 1.80700E+05 5.54000E+06 8.78800E+06 3.93800E+06 4.44000E+05
+ 5.10400E+05 1.30500E+06 2.44300E+06 8.59700E+06 1.06800E+07 1.00100E+07
+ 8.94400E+06 1.13700E+07 1.13400E+07 1.84300E+07 6.71400E+06 6.56400E+06
+ 1.74500E+07 2.45100E+07 8.50800E+06 2.64300E+07 3.46800E+07 2.80500E+07
+ 2.17100E+07 1.42300E+07 1.68100E+07 1.86200E+07 8.46600E+06 1.49200E+07
+ 6.16900E+06 1.09000E-10 1.09000E-10
+ 1.0000
+#
+# Peter says the beam is spread into 10 degrees with a cosine  
+# distribution (flat current ?)
+# therfore we have one lower cosine bin at 10 degrees
+#
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+  9.8481E-01
+#
+# Next, the source geometry is given. This is entered such that
+#  the planar source is at x=xc, y=yc, z=zc and is normal to the z axis
+#  This convention must be followed to allow proper transformation
+#  in the code
+#
+#*************************************************************
+# no. regions for this source, followed by material names, in
+#  increasing-region no. order
+    4
+# Region 1 is the collimator
+ Pb-B-Wax
+# Region 2 is the conical aperture
+ void_edit
+# Region 3 is the delimiter opening
+ void_edit
+# Region 4 is the delimiter
+ polybor
+#*************************************************************
+#
+                    HFR 8-cm beam source as per Wadkins     
+  RPP    1 -40.0     40.0      -40.0     40.0     11.0       51.0
+  TRC    2 0.0       0.0       10.9999   0.0      0.0        40.01
+           4.0       5.8
+  RPP    3 -10.0     10.0      -10.0     10.0     6.0        11.0
+  RPP    4 -40.0     40.0      -40.0     40.0     6.0        11.0
+  END
+    1    5     +1     -2
+    2    5     +2
+    3    5     +3     -2
+    4    5     +4     -3     -2     -1
+  END
+#
+# Partial email from Peter Wadkins
+# Aperture Specification
+# ----------------------
+#
+# This may, or may not, help.
+#
+#
+#     
+#                                   Source Plane (6-cm radius source)
+#                                    /
+#                                   /
+#            <---------- 11.8 cm --/----->                      rtt_MC model
+#                                 /                             ------------
+#     ----------------------------------------------    ^        --Z=45.0
+#     |      \                           /         |    |
+#     |       \                         /          |    |
+#     |        \                       /           |    |
+#     |         \        Void         /            |   40 cm
+#     |          \                   /             |    |
+#     |           \                 /   Pb/B/Wax   |    |
+#     |   1        \      2        /               |    |
+#     |             \             /                |    |
+#     |              \           /                 |    |
+#     ----------------------------------------------    v ^       __Z=5.0
+#          4      |       3          |  Polybor           | 5 cm
+#     ____________|                  |______________      v       __Z=0.0
+#                     <-- 8 cm ->
+#                 <----- 20 cm ------>
+#
+#
+#
+#
+#In the X direction the delimiter is 40 cm thick plus a 5 cm thick
+#polybor plate. The aperture starts at 11.8 cm diameter at the source
+#plane and narrows to 8 cm diameter at exit. In the Y and Z directions
+#the delimiter extends more than +/- 30 cm.
+#
+#
+#Position of dog/phantom
+#-----------------------
+#
+#
+#      4          |       3          |  Polybor
+#_________________|_________________ |___________________________
+      |              -------------                   |
+#     | 5(buffer)   /              \                 |       6(fictitious)
+#     |           _/      7         \                |
+#     |                              \____________   |
+#     |                                           |  |
+#     |                   Dog                     |  |
+#     |                                          /   |
+#     |           ______________________________/    |
+#     |______________________________________________|
+#

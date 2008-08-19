@@ -1,0 +1,33 @@
+
+
+Edit parameter input
+
+       __________________________________________________
+
+Blood B10
+
+Blood boron-10 level, in ppm.
+
+       __________________________________________________
+
+N_avg
+
+The number of equal-volume bins into which the DV histogram
+edits are divided, as a supplemental edit.  The average
+dose in each equal-volume bin is computed and written to
+the .dvh file.
+
+       __________________________________________________
+
+Upper DV bin (%)
+
+The upper value for the last dose-volume bin, in %.  There
+will also be one additional bin, which will be the fraction
+of univels with dose greater than this value.
+
+       __________________________________________________
+
+Nbin_DV
+
+The number of bins into which the dose-volume histogram edit
+is divided.  Each bin will have width Nbin_DV/Upper DV bin.

@@ -1,0 +1,369 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+      "http://www.w3.org/TR/REC-html40/loose.dtd"> 
+
+<HTML>
+
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.05 [en] (X11; I; OSF1 V4.0 alpha) [Netscape]">
+   <TITLE>Left side of BNCT Web Page</TITLE>
+</HEAD>
+
+<BODY BACKGROUND="graphics/mainbackground.gif">
+
+<SCRIPT LANGUAGE="JavaScript" type="text/javascript">
+
+<!--
+
+function SubmitSearch ( formInfo )
+{
+    if ( formInfo.search.value.length < 1 )
+    {
+        alert ( "Search for what?" )
+    }
+    else if ( formInfo.searchType[0].checked )
+    {
+        formInfo.action = "cgi-bin/search.cgi"
+        formInfo.submit()
+    }
+    else
+    {
+        // Remove quotes first
+	if ( formInfo.search.value.charAt(0) == '\"' )
+	{
+	    formInfo.search.value 
+	        = formInfo.search.value.substring(1,formInfo.search.value.length)
+	}
+	if ( formInfo.search.value.charAt(formInfo.search.value.length-1) == '\"' )
+	{
+	    formInfo.search.value 
+	        = formInfo.search.value.substring(0,formInfo.search.value.length-1)
+	}
+
+	// Add quotes if searching exact
+        if ( formInfo.searchLogic[1].checked )
+	{
+	    formInfo.search.value = "\""+formInfo.search.value+"\""
+	}
+
+        formInfo.action = "http://www.excite.com/search.gw"
+        formInfo.submit()
+    }
+}
+
+//-->
+
+</SCRIPT>
+
+<CENTER>
+<IMG SRC="graphics/Sera_logo_sm.gif" HEIGHT=145 WIDTH=144 alt="">
+</CENTER>
+
+<BR><BR>
+
+<A HREF="right.html" TARGET="display_right">
+<IMG SRC="graphics/bullet10.gif" border=0 HEIGHT=17 WIDTH=17 alt="">
+<B><FONT SIZE="+1">Home</FONT></B>
+</A>
+
+<BR><BR>
+
+<A HREF="login.html" TARGET="display_right">
+<IMG SRC="graphics/bullet10.gif" border=0 HEIGHT=17 WIDTH=17 alt="">
+<B><FONT SIZE="+1">Updates</FONT></B>
+</A>
+
+<FORM onSubmit="SubmitSearch(this)" method=GET target="display_right" action="">
+
+    <!-- This is needed for the excite search -->
+    <input type=hidden name=trace value=a>
+
+    <IMG SRC="graphics/bullet10.gif" border=0 HEIGHT=17 WIDTH=17 alt="">
+    <B><FONT SIZE="+1"><A HREF="javascript:void(SubmitSearch(document.forms[0]))">
+    Search
+    </A></FONT></B>
+    
+    <BR>
+
+    <INPUT type="radio" name="searchType" value="site"checked> Search Site
+    <INPUT type="radio" name="searchType" value="web"> Search Web
+
+    <BR>
+
+    <INPUT type="radio" name="searchLogic" value="or" checked> Closest Match
+    <INPUT type="radio" name="searchLogic" value="and"> Exact Phrase
+
+    <INPUT type=text name="search" value="" size=20>
+
+    <INPUT type=submit value="Go">
+</FORM>
+
+<SCRIPT LANGUAGE="JavaScript" type="text/javascript">
+<!--
+function ManualSubmit ( formInfo )
+{
+    if ( formInfo.manual[0].selected )
+    {
+        formInfo.action = "manual/sec00.html"
+    }
+    else if ( formInfo.manual[1].selected )
+    {
+        formInfo.action = "manual/sec01.html"
+    }
+    else if ( formInfo.manual[2].selected )
+    {
+        formInfo.action = "manual/sec02.html"
+    }
+    else if ( formInfo.manual[3].selected )
+    {
+        formInfo.action = "manual/sec03.html"
+    }
+    else if ( formInfo.manual[4].selected )
+    {
+        formInfo.action = "manual/sec04.html"
+    }
+    else if ( formInfo.manual[5].selected )
+    {
+        formInfo.action = "manual/sec05.html"
+    }
+    else if ( formInfo.manual[6].selected )
+    {
+        formInfo.action = "manual/sec06.html"
+    }
+    else if ( formInfo.manual[7].selected )
+    {
+        formInfo.action = "manual/sec07.html"
+    }
+    else if ( formInfo.manual[8].selected )
+    {
+        formInfo.action = "manual/sec08.html"
+    }
+    else if ( formInfo.manual[9].selected )
+    {
+        formInfo.action = "manual/sec09.html"
+    }
+    else if ( formInfo.manual[10].selected )
+    {
+        formInfo.action = "manual/sec10.html"
+    }
+    else if ( formInfo.manual[11].selected )
+    {
+        formInfo.action = "manual/sec11.html"
+    }
+    else if ( formInfo.manual[12].selected )
+    {
+        formInfo.action = "manual/sec12.html"
+    }
+    else if ( formInfo.manual[13].selected )
+    {
+        formInfo.action = "manual/sec13.html"
+    }
+    else if ( formInfo.manual[14].selected )
+    {
+        formInfo.action = "manual/sec14.html"
+    }
+    else if ( formInfo.manual[15].selected )
+    {
+        formInfo.action = "manual/sec15.html"
+    }
+    else if ( formInfo.manual[16].selected )
+    {
+        formInfo.action = "manual/appA.html"
+    }
+    else if ( formInfo.manual[17].selected )
+    {
+        formInfo.action = "manual/appB.html"
+    }
+    else if ( formInfo.manual[18].selected )
+    {
+        formInfo.action = "manual/appC.html"
+    }
+    else if ( formInfo.manual[19].selected )
+    {
+        formInfo.action = "manual/appD.html"
+    }
+    else if ( formInfo.manual[20].selected )
+    {
+        formInfo.action = "manual/SeraConvert/convert.html"
+    }
+
+    formInfo.submit()
+}
+//-->
+
+</SCRIPT>
+
+<FORM onSubmit="ManualSubmit(this)" method=GET target="display_right" action="">
+
+    <A HREF="manual/toc.html" TARGET="display_right">
+    <IMG SRC="graphics/bullet10.gif" border=0 HEIGHT=17 WIDTH=17 alt="">
+    <B><FONT SIZE="+1">User Manual</FONT></B>
+    </A>
+
+    <BR>
+
+    <SELECT Name = "manual" >
+        <OPTION selected> Title Page                   </OPTION>
+	<OPTION>          Introduction                 </OPTION>
+	<OPTION>          Concepts & Notations         </OPTION>
+	<OPTION>          Getting Started              </OPTION>
+	<OPTION>          Image Formats                </OPTION>
+	<OPTION>          Image Editor                 </OPTION>
+	<OPTION>          3D Reconstruction            </OPTION>
+	<OPTION>          Transport Modeling           </OPTION>
+	<OPTION>          Statistical Dose Combination </OPTION>
+	<OPTION>          Dose Contouring              </OPTION>
+	<OPTION>          Dose Plotting Tools          </OPTION>
+	<OPTION>          Work in Progress             </OPTION>
+	<OPTION>          System Requirements          </OPTION>
+	<OPTION>          Troubleshooting              </OPTION>
+	<OPTION>          User Support                 </OPTION>
+	<OPTION>          References                   </OPTION>
+	<OPTION>          Appendix A                   </OPTION>
+	<OPTION>          Appendix B                   </OPTION>
+	<OPTION>          Appendix C                   </OPTION>
+	<OPTION>          Appendix D                   </OPTION>
+	<OPTION>          Appendix E                   </OPTION>
+    </SELECT>  
+
+    <INPUT type=submit value="Go">
+
+</FORM>
+
+<SCRIPT LANGUAGE="JavaScript" type="text/javascript">
+<!--
+function BrochureSubmit ( formInfo )
+{
+    if ( formInfo.brochure[0].selected )
+    {
+        formInfo.action = "brochure/Brochure_Frpanel_2page.html"
+    }
+    else if ( formInfo.brochure[1].selected )
+    {
+        formInfo.action = "brochure/Brochure_Frpanel_2page.html"
+    }
+    else if ( formInfo.brochure[2].selected )
+    {
+        formInfo.action = "brochure/Brochure_Frpanel_2page.html"
+    }
+    else if ( formInfo.brochure[3].selected )
+    {
+        formInfo.action = "brochure/Brochure_Frpanel_3page.html"
+    }
+    else if ( formInfo.brochure[4].selected )
+    {
+        formInfo.action = "brochure/Brochure_bkpanel_1page.html"
+    }
+    else if ( formInfo.brochure[5].selected )
+    {
+        formInfo.action = "brochure/Brochure_bkpanel_1page.html"
+    }
+
+    formInfo.submit()
+}
+//-->
+</SCRIPT>
+
+<FORM onSubmit="BrochureSubmit(this)" method=GET target="display_right" action="">
+
+    <A HREF="brochure/Brochure.html" TARGET="display_right">
+    <IMG SRC="graphics/bullet10.gif" border=0 HEIGHT=17 WIDTH=17 alt="">
+    <B><FONT SIZE="+1">Brochure</FONT></B>
+    </A>
+
+    <BR>
+
+    <SELECT Name = "brochure" >
+        <OPTION selected> Image Formatter          </OPTION>
+	<OPTION>          Image Editing            </OPTION>
+	<OPTION>          Geometry Generator       </OPTION>
+	<OPTION>          3D Viewer                </OPTION>
+	<OPTION>          Simulation Control Panal </OPTION>
+	<OPTION>          2D Dose Display          </OPTION>
+    </SELECT>  
+
+    <INPUT type=submit value="Go">
+
+</FORM>
+
+
+<IMG SRC="graphics/bullet10.gif" border=0 HEIGHT=17 WIDTH=17 alt="">
+<B><FONT SIZE="+1">Publications</FONT></B>
+
+<UL>
+<LI><A HREF="publications/mike/thesis3.html" TARGET="display_right">
+Rapid Geometry Interrogation for a Uniform Volume Element-based Monte Carlo Particle Transport Simulation</A></LI>
+<LI><A HREF="publications/cory/thesis.html" TARGET="display_right">
+Visualization of the BNCT Treatment Planning Process</A></LI>
+</UL>
+
+<IMG SRC="graphics/bullet10.gif" border=0 HEIGHT=17 WIDTH=17 alt="">
+<B><FONT SIZE="+1">Feedback</FONT></B>
+
+<UL>
+<LI><A HREF="login.html" TARGET="display_right">SERA Problem Reporting Form</A></LI>
+</UL>
+
+
+<SCRIPT LANGUAGE="JavaScript" type="text/javascript">
+<!--
+function LinkSubmit ( formInfo )
+{
+    if ( formInfo.links[0].selected )
+    {
+        formInfo.action = "http://id.inel.gov/cart/"
+    }
+    else if ( formInfo.links[1].selected )
+    {
+        formInfo.action = "http://www.bnct.bnl.gov/bnct2.htm"
+    }
+    else if ( formInfo.links[2].selected )
+    {
+        formInfo.action = "http://web.chem.ucla.edu/~mfh/"
+    }
+    else if ( formInfo.links[3].selected )
+    {
+        formInfo.action = "http://www.rri.kyoto-u.ac.jp/BNCT/japanbnct.htm"
+    }
+    else if ( formInfo.links[4].selected )
+    {
+        formInfo.action = "http://bnct.bidmc.harvard.edu/"
+    }
+    else if ( formInfo.links[5].selected )
+    {
+        formInfo.action = "http://ehs.lbl.gov/bnct/bnct.html"
+    }
+
+    formInfo.submit()
+}
+//-->
+</SCRIPT>
+
+<FORM onSubmit="LinkSubmit(this)" method=GET target="display_right" action="">
+
+    <A HREF="links.html" TARGET="display_right">
+    <IMG SRC="graphics/bullet10.gif" border=0 HEIGHT=17 WIDTH=17 alt="">
+    <B><FONT SIZE="+1">Links</FONT></B>
+    </A>
+
+    <BR>
+
+    <SELECT Name = "links" >
+        <OPTION selected> INEEL              </OPTION>
+	<OPTION>          BNL BNCT Page      </OPTION>
+	<OPTION>          UCLA BNCT Page     </OPTION>
+	<OPTION>          Japanese BNCT Page </OPTION>
+	<OPTION>          MIT BNCT Page      </OPTION>
+	<OPTION>          LBNL BNCT Page     </OPTION>
+    </SELECT>  
+
+    <INPUT type=submit value="Go">
+
+</FORM>
+
+<CENTER>
+<A HREF="left_noJS.html" TARGET="display_left">Click for non-JavaScript version.</A>
+</CENTER>
+
+</BODY>
+</HTML>

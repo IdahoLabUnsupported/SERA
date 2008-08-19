@@ -1,0 +1,18 @@
+
+
+Reference RBE Values
+
+       __________________________________________________
+
+These are the RBE values for the various dose components
+to be used for the reference dose determination, and only
+the reference dose determination.  The dose components are:
+
+   - B10       - boron dose
+   - Gamma     - gamma dose
+   - N14       - nitrogen dose
+   - H         - fast kerma
+   - Recoil    - proton recoil dose (for ultrafast only)
+   - Other     - dose from reactions with other nuclides
+   - Ultrafast - dose from reactions at over 20MeV with
+                 other nuclides
