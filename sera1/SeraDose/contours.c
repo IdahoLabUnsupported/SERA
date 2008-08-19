@@ -99,7 +99,7 @@ void draw_colorwash_image (XImage *image_to_colorwash, short *colorwash_index,
 void draw_contours (floyd_data_ptr data, int whichDose, Boolean recalculate_contours,
                     Boolean draw_lines, Boolean draw_colorwash, 
                     Boolean draw_large_labels, Boolean draw_preview_labels,
-                    Boolean scale_font)
+                    Boolean scale_font, XImage * image)
 {
    static contour_data_type  *contours;
    contour_data_type         *cp;
@@ -140,7 +140,7 @@ void draw_contours (floyd_data_ptr data, int whichDose, Boolean recalculate_cont
        }
      draw_contour_lines (&contour_lines, &preview_contour_lines, 
 			 data, whichDose, scale_font, draw_large_labels, 
-			 draw_preview_labels, &global_image);    
+			 draw_preview_labels, image);    
      {
        int contour_num;
        for(contour_num = 0; contour_num < contour_levels.number_levels; 
@@ -170,7 +170,7 @@ void draw_contours (floyd_data_ptr data, int whichDose, Boolean recalculate_cont
     */
   
    if (draw_colorwash) 
-     draw_contour_colorwash (data, whichDose, &global_image);
+     draw_contour_colorwash (data, whichDose, image);
 
 
    /*
