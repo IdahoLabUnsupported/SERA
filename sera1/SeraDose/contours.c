@@ -297,8 +297,8 @@ void draw_contour_lines (CONTOUR_LINES_TYPE *contour_lines,
 
    DEBUG_TRACE_IN printf ( "Entering draw_contour_lines\n" );
    
-   width = image.width;
-   height = image.height;
+   width = global_image.width;
+   height = global_image.height;
 
    clear_lines_image (mainWindowDrawingArea, width, height);
 
@@ -343,7 +343,7 @@ void draw_contour_lines (CONTOUR_LINES_TYPE *contour_lines,
     */
     /* Freed with XDestroyImage so don't use Memory tools */
    canvas_data = (char *) MT_malloc (width * height * sizeof (char) * get_num_bytes()); 
-   memcpy (canvas_data, image.data, width * height * sizeof(char) * get_num_bytes());
+   memcpy (canvas_data, global_image.data, width * height * sizeof(char) * get_num_bytes());
    contoured_image = XCreateImage (di, DefaultVisual (di, DefaultScreen (di)), 
                                    get_color_info()->depth, ZPixmap, 0, canvas_data, width,
                                    height, BitmapPad (di), width*get_num_bytes());
@@ -400,7 +400,7 @@ void draw_contour_lines (CONTOUR_LINES_TYPE *contour_lines,
      * image to fit the preview image
      */
     generic_resize_image (mask_pack.buffer, small_mask_data, 
-                          image.width, image.height, width, height);
+                          global_image.width, global_image.height, width, height);
 
     /* MTC added 6/24/98 */
     if (image_matrix.img_arr[image_matrix.active_picture].contoured_image)
@@ -772,8 +772,8 @@ void draw_contour_colorwash (/*CONTOUR_LINES_TYPE *contour_lines,*/
 
    DEBUG_TRACE_IN printf ( "Entering draw_contour_colorwash\n" );
 
-   width = image.width;
-   height = image.height;
+   width = global_image.width;
+   height = global_image.height;
    
    colorwash_index = (short *) MT_malloc (width * height * sizeof (short));
    for (count = 0; count < width * height; count ++)
@@ -783,7 +783,7 @@ void draw_contour_colorwash (/*CONTOUR_LINES_TYPE *contour_lines,*/
                         mainWindowDrawingArea); 
 
    canvas_data = (char *) MT_malloc (width * height * sizeof (char) * get_num_bytes());
-   memcpy (canvas_data, image.data, width * height * sizeof (char) * get_num_bytes());
+   memcpy (canvas_data, global_image.data, width * height * sizeof (char) * get_num_bytes());
 
    /*
     *  MTC 5/25/99
@@ -849,7 +849,7 @@ void draw_contour_colorwash (/*CONTOUR_LINES_TYPE *contour_lines,*/
      * image to fit the preview image
      */
    generic_resize_image (mask_pack.buffer, small_mask_data,
-                          image.width, image.height, width, height);
+                          global_image.width, global_image.height, width, height);
 
    draw_colorwash_image (image_matrix.img_arr[image_matrix.active_picture].
 			 colorwashed_image, 

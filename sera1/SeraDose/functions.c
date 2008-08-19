@@ -411,22 +411,22 @@ void resize_image (unsigned char values[])
       }
   recalc_pixels();
   
-  image.width = WINDOW_WIDTH;
-  image.height = WINDOW_HEIGHT;
-  image.xoffset = 0;
-  image.format = ZPixmap;
-  image.data = (char *)values;
-  image.byte_order = ImageByteOrder(di);
-  image.bitmap_unit = BitmapUnit(di);
-  image.bitmap_bit_order = BitmapBitOrder(di);
-  image.bitmap_pad = BitmapPad(di);
-  image.depth = get_color_info()->depth;
+  global_image.width = WINDOW_WIDTH;
+  global_image.height = WINDOW_HEIGHT;
+  global_image.xoffset = 0;
+  global_image.format = ZPixmap;
+  global_image.data = (char *)values;
+  global_image.byte_order = ImageByteOrder(di);
+  global_image.bitmap_unit = BitmapUnit(di);
+  global_image.bitmap_bit_order = BitmapBitOrder(di);
+  global_image.bitmap_pad = BitmapPad(di);
+  global_image.depth = get_color_info()->depth;
   /* image.depth = 8; */
-  image.bytes_per_line = WINDOW_WIDTH*get_num_bytes();
+  global_image.bytes_per_line = WINDOW_WIDTH*get_num_bytes();
   /* image.bytes_per_line = WINDOW_WIDTH; */
-  image.bits_per_pixel = 8*get_num_bytes();
+  global_image.bits_per_pixel = 8*get_num_bytes();
   /* image.bits_per_pixel = 8; */
-  image.obdata = (char *)NULL;
+  global_image.obdata = (char *)NULL;
 
   DEBUG_TRACE_OUT printf( "Leaving resize_image\n" );
 }
@@ -687,7 +687,7 @@ void draw_large_image (void)
     XPutImageOneByteData (di, wi, gc, colorwashed_image, 0, 0, 0, 0, 
 			  WINDOW_WIDTH, WINDOW_HEIGHT);
   else if (slice_is_there) 
-    XPutImageOneByteData (di, wi, gc, &image, 0, 0, 0, 0, 
+    XPutImageOneByteData (di, wi, gc, &global_image, 0, 0, 0, 0, 
 			  WINDOW_WIDTH, WINDOW_HEIGHT);
 
   DEBUG_TRACE_OUT printf( "Leaving draw_large_image \n");
