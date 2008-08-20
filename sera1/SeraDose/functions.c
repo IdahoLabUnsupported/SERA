@@ -11,6 +11,8 @@
 
 /* XImage global_image; */
 
+void resize_image (unsigned char values[], XImage * image);
+
 /*
  * MAX_LENGTH_CONTOUR_LEVEL_STRING - used by check_contour_level_values.
  * This same constant must also be defined in callbacks.c
@@ -418,6 +420,7 @@ void resize_image (unsigned char values[], XImage * image)
       }
   recalc_pixels();
   
+  /* use_new_color_depth(get_color_info()->depth,values,WINDOW_WIDTH*WINDOW_HEIGHT); */
   image->width = WINDOW_WIDTH;
   image->height = WINDOW_HEIGHT;
   image->xoffset = 0;
