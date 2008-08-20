@@ -78,41 +78,41 @@ char currently_selected_contour_level[MAX_LENGTH_MESSAGE];
 
 static int locate_state = 0;
 
-void FileSelectionCallback(Widget w, XtPointer client, XtPointer call)
-{
-   XmFileSelectionBoxCallbackStruct *fsbcbs =
-      (XmFileSelectionBoxCallbackStruct *) call;
+/* void FileSelectionCallbackXXX(Widget w, XtPointer client, XtPointer call) */
+/* { */
+/*    XmFileSelectionBoxCallbackStruct *fsbcbs = */
+/*       (XmFileSelectionBoxCallbackStruct *) call; */
 
-   DEBUG_TRACE_IN printf( "Entering FileSelectionCallback\n" );
+/*    DEBUG_TRACE_IN printf( "Entering FileSelectionCallback\n" ); */
 
-     /* get the currently selected filename. */
-     if ( !XmStringGetLtoR(fsbcbs->value, XmSTRING_DEFAULT_CHARSET,
-          &image_file_name ) )
-        return;  /* must have been an internal error */
+/*      /\* get the currently selected filename. *\/ */
+/*      if ( !XmStringGetLtoR(fsbcbs->value, XmSTRING_DEFAULT_CHARSET, */
+/*           &image_file_name ) ) */
+/*         return;  /\* must have been an internal error *\/ */
 
-   #if defined (MORE_VERBOSE)
-      printf( "   image_file_name = \"%s\"\n", image_file_name );
-   #endif  /* MORE_VERBOSE */
+/*    #if defined (MORE_VERBOSE) */
+/*       printf( "   image_file_name = \"%s\"\n", image_file_name ); */
+/*    #endif  /\* MORE_VERBOSE *\/ */
 
-      if ((image_file = fopen(image_file_name,"r")) == NULL)
-        {
-	  printf ("Unable to open file!! %s\n", image_file_name);
-	  XBell(di,100);
-        }
-      else
-        {
-	  load_image(image_file, mainWindowDrawingArea);
-	  slice_is_there = TRUE;
-	  contours_are_current = FALSE;
-	  load_imageEH(mainWindowDrawingArea, 0, &SureEvent);
-        }
+/*       if ((image_file = fopen(image_file_name,"r")) == NULL) */
+/*         { */
+/* 	  printf ("Unable to open file!! %s\n", image_file_name); */
+/* 	  XBell(di,100); */
+/*         } */
+/*       else */
+/*         { */
+/* 	  load_image(image_file, mainWindowDrawingArea); */
+/* 	  slice_is_there = TRUE; */
+/* 	  contours_are_current = FALSE; */
+/* 	  load_imageEH(mainWindowDrawingArea, 0, &SureEvent); */
+/*         } */
 
-   #if defined (MORE_VERBOSE)
-      printf( "after FileSelectionCallback\n" );
-   #endif /* MORE_VERBOSE */
+/*    #if defined (MORE_VERBOSE) */
+/*       printf( "after FileSelectionCallback\n" ); */
+/*    #endif /\* MORE_VERBOSE *\/ */
 
-   DEBUG_TRACE_OUT printf( "Leaving FileSelectionCallback\n" );
-}
+/*    DEBUG_TRACE_OUT printf( "Leaving FileSelectionCallback\n" ); */
+/* } */
 
 
 

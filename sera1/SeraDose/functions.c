@@ -437,20 +437,20 @@ void resize_image (unsigned char values[])
 
 /***** Loading image into memory from image file *****/
 
-void load_image (FILE *file, Widget w)
-{
-  int num;
+/* void load_image (FILE *file, Widget w) */
+/* { */
+/*   int num; */
 
-  DEBUG_TRACE_IN printf( "Entering load_image\n" );
+/*   DEBUG_TRACE_IN printf( "Entering load_image\n" ); */
     
-  wi = XtWindow(w);  /* mwf -> why set this? */
-  num = fread(values,1,65536,file);
-  fclose(file);
+/*   wi = XtWindow(w);  /\* mwf -> why set this? *\/ */
+/*   num = fread(values,1,65536,file); */
+/*   fclose(file); */
   
-  resize_image(values);
+/*   resize_image(values); */
 
-  DEBUG_TRACE_OUT printf( "Leaving load_image\n" );
-}
+/*   DEBUG_TRACE_OUT printf( "Leaving load_image\n" ); */
+/* } */
 
 /* reapply expansion / contraction algorithm to image data */
 
