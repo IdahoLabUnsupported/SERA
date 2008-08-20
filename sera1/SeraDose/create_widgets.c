@@ -514,7 +514,8 @@ CreatefileSelectionDialogShell(Widget parent)
 		args,
 		argcnt);
 
-    XtAddCallback(fileSelectionBox, XmNokCallback, FileSelectionCallback, (caddr_t) 0 );
+    /* XXX FileSelectionCallbackXXX scares me. JJC */
+    /*XtAddCallback(fileSelectionBox, XmNokCallback, FileSelectionCallbackXXX, (caddr_t) 0 ); */
     retval = fileSelectionBox;
 
     DEBUG_TRACE_OUT printf("Leaving CreateSelectionDialogShell\n");

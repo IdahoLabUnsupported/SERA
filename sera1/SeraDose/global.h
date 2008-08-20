@@ -591,7 +591,7 @@ externOrNot void ContourColorsPopupCallback(void);
 externOrNot void EditParametersCallback(Widget w, XtPointer client, XtPointer call);
 externOrNot void ExitCallback(Widget w, XtPointer client, XtPointer call);
 externOrNot void FilePopupCallback(Widget w, XtPointer client, XtPointer call);
-externOrNot void FileSelectionCallback(Widget w, XtPointer client, XtPointer call);
+/* externOrNot void FileSelectionCallbackXXX(Widget w, XtPointer client, XtPointer call); */
 externOrNot void FileMaskCallback(Widget w, XtPointer client, XtPointer call);
 externOrNot void FOVchangeCallback(Widget w, char *client_data, XmAnyCallbackStruct *call_data);
 externOrNot void HelpMenuCallback(Widget w, XtPointer client, XtPointer call);
