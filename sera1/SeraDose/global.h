@@ -211,8 +211,8 @@ externOrNot XColor point_color;
 externOrNot Display *di;
 externOrNot Window wi;
 externOrNot GC gc, newGC, drag_gc;
-externOrNot XImage *contoured_image;
-externOrNot XImage *colorwashed_image;
+externOrNot XImage *global_contoured_image;
+externOrNot XImage *global_colorwashed_image;
 externOrNot XEvent SureEvent;
 externOrNot Cursor crosshairCursor;
 
