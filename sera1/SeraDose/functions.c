@@ -9,7 +9,7 @@
 #include "color.h"
 #include "commonfcns.h"
 
-XImage global_image;
+/* XImage global_image; */
 
 /*
  * MAX_LENGTH_CONTOUR_LEVEL_STRING - used by check_contour_level_values.
@@ -109,11 +109,15 @@ void load_imageEH (Widget w, caddr_t client_data, XEvent *event)
                                          w, h);   			      
       
             if ((dosage_is_there) && (!contours_are_current)) {
+	      XImage image;
+	      unsigned char values[WINDOW_HEIGHT*WINDOW_WIDTH*get_num_bytes()];
+	      memcpy(values,image_matrix.img_arr[active].raw_data,65536);
+	      resize_image(values,&image);
                 draw_contours (dose_data, doseFlag, 1, view_contour_lines,
                                view_contour_colorwash, 
                                view_large_image_contour_labels,
                                view_preview_image_contour_labels, scale_font,
-			       &global_image);
+			       &image);
                 contours_are_current = 1;
             }else {
                 draw_preview (active);
@@ -394,7 +398,7 @@ void setup_gc (Widget w)
 }
 
 
-void resize_image (unsigned char values[])        
+void resize_image (unsigned char values[], XImage * image)        
 {
   int i, j;
 
@@ -414,22 +418,22 @@ void resize_image (unsigned char values[])
       }
   recalc_pixels();
   
-  global_image.width = WINDOW_WIDTH;
-  global_image.height = WINDOW_HEIGHT;
-  global_image.xoffset = 0;
-  global_image.format = ZPixmap;
-  global_image.data = (char *)values;
-  global_image.byte_order = ImageByteOrder(di);
-  global_image.bitmap_unit = BitmapUnit(di);
-  global_image.bitmap_bit_order = BitmapBitOrder(di);
-  global_image.bitmap_pad = BitmapPad(di);
-  global_image.depth = get_color_info()->depth;
+  image->width = WINDOW_WIDTH;
+  image->height = WINDOW_HEIGHT;
+  image->xoffset = 0;
+  image->format = ZPixmap;
+  image->data = (char *)values;
+  image->byte_order = ImageByteOrder(di);
+  image->bitmap_unit = BitmapUnit(di);
+  image->bitmap_bit_order = BitmapBitOrder(di);
+  image->bitmap_pad = BitmapPad(di);
+  image->depth = get_color_info()->depth;
   /* image.depth = 8; */
-  global_image.bytes_per_line = WINDOW_WIDTH*get_num_bytes();
+  image->bytes_per_line = WINDOW_WIDTH*get_num_bytes();
   /* image.bytes_per_line = WINDOW_WIDTH; */
-  global_image.bits_per_pixel = 8*get_num_bytes();
+  image->bits_per_pixel = 8*get_num_bytes();
   /* image.bits_per_pixel = 8; */
-  global_image.obdata = (char *)NULL;
+  image->obdata = (char *)NULL;
 
   DEBUG_TRACE_OUT printf( "Leaving resize_image\n" );
 }
@@ -676,12 +680,20 @@ void draw_preview (int ival)
 void draw_large_image (void)
 {
   Boolean view_contour_lines;
+  XImage image;
+  unsigned char values[WINDOW_HEIGHT*WINDOW_WIDTH*get_num_bytes()];
+
   
   DEBUG_TRACE_IN printf( "Entering draw_large_image \n");
 
   XtVaGetValues (view_contour_lines_button,
 		 XmNset, &view_contour_lines, 
 		 NULL);
+
+  memcpy(values,
+	 image_matrix.img_arr[image_matrix.active_picture].raw_data,65536);
+
+  resize_image(values,&image);
   
   if ((dosage_is_there) && (view_contour_lines)) 
     XPutImageOneByteData (di, wi, gc, global_contoured_image, 0, 0, 0, 0, 
@@ -690,7 +702,7 @@ void draw_large_image (void)
     XPutImageOneByteData (di, wi, gc, global_colorwashed_image, 0, 0, 0, 0, 
 			  WINDOW_WIDTH, WINDOW_HEIGHT);
   else if (slice_is_there) 
-    XPutImageOneByteData (di, wi, gc, &global_image, 0, 0, 0, 0, 
+    XPutImageOneByteData (di, wi, gc, &image, 0, 0, 0, 0, 
 			  WINDOW_WIDTH, WINDOW_HEIGHT);
 
   DEBUG_TRACE_OUT printf( "Leaving draw_large_image \n");

@@ -464,9 +464,9 @@ void toggle_on(int i, int dodraw)
         }
     }
     
-    for (j=0; j<65536; j++)
+    /* for (j=0; j<65536; j++)
       values[j]=image_matrix.img_arr[i].raw_data[j];
-    resize_image(values);
+      resize_image(values); */
   }
   slice_is_there = TRUE;
   
