@@ -332,10 +332,10 @@ void draw_contour_lines (CONTOUR_LINES_TYPE *contour_lines,
     }
 
    /* MTC added 6/24/98 */
-    if (contoured_image)
+    if (global_contoured_image)
     {
-        MT_fake_free(contoured_image->data);
-        XDestroyImage (contoured_image);
+        MT_fake_free(global_contoured_image->data);
+        XDestroyImage (global_contoured_image);
         /*MT_free( (void *) NULL );  let memory_tools know that memory was freed */
     }
     
@@ -346,15 +346,15 @@ void draw_contour_lines (CONTOUR_LINES_TYPE *contour_lines,
     /* Freed with XDestroyImage so don't use Memory tools */
    canvas_data = (char *) MT_malloc (width * height * sizeof (char) * get_num_bytes()); 
    memcpy (canvas_data, image->data, width * height * sizeof(char) * get_num_bytes());
-   contoured_image = XCreateImage (di, DefaultVisual (di, DefaultScreen (di)), 
+   global_contoured_image = XCreateImage (di, DefaultVisual (di, DefaultScreen (di)), 
                                    get_color_info()->depth, ZPixmap, 0, canvas_data, width,
                                    height, BitmapPad (di), width*get_num_bytes());
         
    if (draw_large_labels)                              
-      draw_labels_image (contoured_image, mainWindowDrawingArea, width, 
+      draw_labels_image (global_contoured_image, mainWindowDrawingArea, width, 
                          height, mask_pack.buffer);
    else
-      draw_lines_image (contoured_image, mainWindowDrawingArea, width, 
+      draw_lines_image (global_contoured_image, mainWindowDrawingArea, width, 
                         height, mask_pack.buffer);
 
    /*
@@ -792,18 +792,18 @@ void draw_contour_colorwash (/*CONTOUR_LINES_TYPE *contour_lines,*/
     *  Freeing some memory
     */
 
-   if ( colorwashed_image )
+   if ( global_colorwashed_image )
    {
-       MT_fake_free(colorwashed_image->data);
-       XDestroyImage ( colorwashed_image );
+       MT_fake_free(global_colorwashed_image->data);
+       XDestroyImage ( global_colorwashed_image );
        /*MT_free( (void *) NULL );  let memory_tools know memory was freed */
    }
    
-   colorwashed_image = XCreateImage (di, DefaultVisual (di, DefaultScreen (di)), 
+   global_colorwashed_image = XCreateImage (di, DefaultVisual (di, DefaultScreen (di)), 
                                      get_color_info()->depth, ZPixmap, 0, canvas_data, width,
                                      height, BitmapPad (di), width*get_num_bytes());   
         
-   draw_colorwash_image (colorwashed_image, colorwash_index, mainWindowDrawingArea,
+   draw_colorwash_image (global_colorwashed_image, colorwash_index, mainWindowDrawingArea,
                          WINDOW_WIDTH, WINDOW_HEIGHT, NUMBER_SHADES_PER_COLOR,
                          COLORS_STARTING_POSITION_IN_CMAP, 128, 116, mask_pack.buffer);
 

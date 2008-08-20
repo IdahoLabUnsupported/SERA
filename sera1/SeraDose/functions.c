@@ -684,10 +684,10 @@ void draw_large_image (void)
 		 NULL);
   
   if ((dosage_is_there) && (view_contour_lines)) 
-    XPutImageOneByteData (di, wi, gc, contoured_image, 0, 0, 0, 0, 
+    XPutImageOneByteData (di, wi, gc, global_contoured_image, 0, 0, 0, 0, 
 			  WINDOW_WIDTH, WINDOW_HEIGHT);
   else if ((dosage_is_there) && (!view_contour_lines))
-    XPutImageOneByteData (di, wi, gc, colorwashed_image, 0, 0, 0, 0, 
+    XPutImageOneByteData (di, wi, gc, global_colorwashed_image, 0, 0, 0, 0, 
 			  WINDOW_WIDTH, WINDOW_HEIGHT);
   else if (slice_is_there) 
     XPutImageOneByteData (di, wi, gc, &global_image, 0, 0, 0, 0, 
