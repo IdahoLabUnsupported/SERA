@@ -629,7 +629,7 @@ externOrNot void ps_display(WM_WINDOW_T *, int [], float [], unsigned char *, in
 externOrNot void region_selectCB(Widget w, XtPointer client, XmDrawingAreaCallbackStruct *cbs);
 externOrNot void ReportToggleArmCB(Widget w, char *client_data, XmToggleButtonCallbackStruct *call_data);
 externOrNot void ReserveColorCallback(Widget w, XtPointer client, XtPointer call);
-externOrNot void resize_image(unsigned char *values);
+/* externOrNot void resize_image(unsigned char *values); */
 externOrNot void recalc_pixels(void);
 externOrNot void set_masksCB(Widget w, XtPointer client, XmAnyCallbackStruct *cbs);
 externOrNot void setup_gc(Widget w);
