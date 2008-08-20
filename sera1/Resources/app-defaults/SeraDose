@@ -7,21 +7,21 @@
 !
  
 ! global definitions
-! seraDose*textFontList: -adobe-helvetica-bold-r-normal--12-120-75-75-p-70-iso8859-1
-! seraDose*XmPushButton*fontList: -adobe-helvetica-bold-r-normal--12-120-75-75-p-70-iso8859-1
-! seraDose*XmToggleButton*fontList: -adobe-helvetica-bold-r-normal--12-120-75-75-p-70-iso8859-1
+! seraDose*textFontList: -adobe-helvetica-bold-r-normal--12-*-*-*-p-*-iso8859-1
+! seraDose*XmPushButton*fontList: -adobe-helvetica-bold-r-normal--12-*-*-*-p-*-iso8859-1
+! seraDose*XmToggleButton*fontList: -adobe-helvetica-bold-r-normal--12-*-*-*-p-*-iso8859-1
 !seraDose*background: DimGrey
 !seraDose*foreground: SlateGray1
 !seraDose*shadowThickness: 2
-seraDose*buttonFontList: -adobe-helvetica-bold-r-normal--14-140-75-75-p-82-iso8859-1
+seraDose*buttonFontList: -adobe-helvetica-bold-r-normal--14-*-*-*-p-*-iso8859-1
 seraDose*doseDialogShell.title: Dose Options
 seraDose*editColorDialogShell.title: Edit Contour Colors
 seraDose*fileSelectionDialogShell.title: Image File Selection
-seraDose*fontList: -adobe-helvetica-bold-r-normal--12-120-75-75-p-70-iso8859-1
+seraDose*fontList: -adobe-helvetica-bold-r-normal--12-*-*-*-p-*-iso8859-1
 seraDose*helpTopLevelShell.title: seraDose Help Window
-seraDose*labelFontList: -adobe-helvetica-medium-r-normal--12-120-75-75-p-67-iso8859-1
+seraDose*labelFontList: -adobe-helvetica-medium-r-normal--12-*-*-*-p-*-iso8859-1
 seraDose*scaleDialogShell.title: Contour Density
-seraDose*textFontList: -adobe-courier-bold-r-normal--12-120-75-75-m-70-iso8859-1
+seraDose*textFontList: -adobe-courier-bold-r-normal--12-*-*-*-m-*-iso8859-1
 seraDose*seraDoseTopLevelShell.title: seraDose
 seraDose*XmDialogShell*fileSelectionBox.dialogTitle: Image File Selection
 seraDose*XmDialogShell*fileSelectionBox.shadowType: SHADOW_ETCHED_IN
@@ -31,7 +31,7 @@ seraDose*XmDialogShell*doseSelectionBox.okLabelString: Select
 seraDose*XmDialogShell*doseSelectionBox.shadowType: SHADOW_ETCHED_IN
 seraDose*XmDialogShell.XmForm.editColorApplyPushButton.bottomAttachment: ATTACH_FORM
 seraDose*XmDialogShell.XmForm.editColorApplyPushButton.bottomOffset: 10
-seraDose*XmDialogShell.XmForm.editColorApplyPushButton.fontList: -adobe-helvetica-bold-r-normal--14-140-75-75-p-82-iso8859-1
+seraDose*XmDialogShell.XmForm.editColorApplyPushButton.fontList: -adobe-helvetica-bold-r-normal--14-*-*-*-p-*-iso8859-1
 seraDose*XmDialogShell.XmForm.editColorApplyPushButton.labelString: Apply
 seraDose*XmDialogShell.XmForm.editColorApplyPushButton.leftAttachment: ATTACH_FORM
 seraDose*XmDialogShell.XmForm.editColorApplyPushButton.leftOffset: 40
@@ -39,7 +39,7 @@ seraDose*XmDialogShell.XmForm.editColorApplyPushButton.rightAttachment: ATTACH_N
 seraDose*XmDialogShell.XmForm.editColorApplyPushButton.topAttachment: ATTACH_NONE
 seraDose*XmDialogShell.XmForm.editColorDismissPushButton.bottomAttachment: ATTACH_FORM
 seraDose*XmDialogShell.XmForm.editColorDismissPushButton.bottomOffset: 10
-seraDose*XmDialogShell.XmForm.editColorDismissPushButton.fontList: -adobe-helvetica-bold-r-normal--14-140-75-75-p-82-iso8859-1
+seraDose*XmDialogShell.XmForm.editColorDismissPushButton.fontList: -adobe-helvetica-bold-r-normal--14-*-*-*-p-*-iso8859-1
 seraDose*XmDialogShell.XmForm.editColorDismissPushButton.labelString: Dismiss
 seraDose*XmDialogShell.XmForm.editColorDismissPushButton.leftAttachment: ATTACH_NONE
 seraDose*XmDialogShell.XmForm.editColorDismissPushButton.rightAttachment: ATTACH_FORM
@@ -85,7 +85,7 @@ seraDose*XmDialogShell.XmForm.editColorSeparator.topAttachment: ATTACH_NONE
 seraDose*XmDialogShell.XmForm.scaleWidget.bottomAttachment: ATTACH_NONE
 seraDose*XmDialogShell.XmForm.scaleWidgetDismissPushButton.bottomAttachment: ATTACH_FORM
 seraDose*XmDialogShell.XmForm.scaleWidgetDismissPushButton.bottomOffset: 10
-seraDose*XmDialogShell.XmForm.scaleWidgetDismissPushButton.fontList: -adobe-helvetica-bold-r-normal--14-140-75-75-p-82-iso8859-1
+seraDose*XmDialogShell.XmForm.scaleWidgetDismissPushButton.fontList: -adobe-helvetica-bold-r-normal--14-*-*-*-p-*-iso8859-1
 seraDose*XmDialogShell.XmForm.scaleWidgetDismissPushButton.labelString: Dismiss
 seraDose*XmDialogShell.XmForm.scaleWidgetDismissPushButton.leftAttachment: ATTACH_FORM
 seraDose*XmDialogShell.XmForm.scaleWidgetDismissPushButton.leftOffset: 150
@@ -124,25 +124,25 @@ seraDose*XmDialogShell.XmForm.XmRowColumn.XmRowColumn.editColorGreenScale.scaleH
 seraDose*XmDialogShell.XmForm.XmRowColumn.XmRowColumn.editColorRedScale.background: red
 seraDose*XmDialogShell.XmForm.XmRowColumn.XmRowColumn.editColorRedScale.foreground: white
 seraDose*XmDialogShell.XmForm.XmRowColumn.XmRowColumn.editColorRedScale.scaleHeight: 25
-seraDose*XmFrame.XmForm.XmRowColumn.analysisCascadeButton.fontList: -adobe-helvetica-bold-r-normal--14-140-75-75-p-82-iso8859-1
+seraDose*XmFrame.XmForm.XmRowColumn.analysisCascadeButton.fontList: -adobe-helvetica-bold-r-normal--14-*-*-*-p-*-iso8859-1
 seraDose*XmFrame.XmForm.XmRowColumn.analysisCascadeButton.labelString: Analysis
 seraDose*XmFrame.XmForm.XmRowColumn.analysisCascadeButton.mnemonic: A
-seraDose*XmFrame.XmForm.XmRowColumn.colorCascadeButton.fontList: -adobe-helvetica-bold-r-normal--14-140-75-75-p-82-iso8859-1
+seraDose*XmFrame.XmForm.XmRowColumn.colorCascadeButton.fontList: -adobe-helvetica-bold-r-normal--14-*-*-*-p-*-iso8859-1
 seraDose*XmFrame.XmForm.XmRowColumn.colorCascadeButton.labelString: Color
 seraDose*XmFrame.XmForm.XmRowColumn.colorCascadeButton.mnemonic: C
-seraDose*XmFrame.XmForm.XmRowColumn.fileCascadeButton.fontList: -adobe-helvetica-bold-r-normal--14-140-75-75-p-82-iso8859-1
+seraDose*XmFrame.XmForm.XmRowColumn.fileCascadeButton.fontList: -adobe-helvetica-bold-r-normal--14-*-*-*-p-*-iso8859-1
 seraDose*XmFrame.XmForm.XmRowColumn.fileCascadeButton.labelString: File
 seraDose*XmFrame.XmForm.XmRowColumn.fileCascadeButton.mnemonic: F
-seraDose*XmFrame.XmForm.XmRowColumn.formatsCascadeButton.fontList: -adobe-helvetica-bold-r-normal--14-140-75-75-p-82-iso8859-1
+seraDose*XmFrame.XmForm.XmRowColumn.formatsCascadeButton.fontList: -adobe-helvetica-bold-r-normal--14-*-*-*-p-*-iso8859-1
 seraDose*XmFrame.XmForm.XmRowColumn.formatsCascadeButton.labelString: Formats
 seraDose*XmFrame.XmForm.XmRowColumn.formatsCascadeButton.mnemonic: F
-seraDose*XmFrame.XmForm.XmRowColumn.helpCascadeButton.fontList: -adobe-helvetica-bold-r-normal--14-140-75-75-p-82-iso8859-1
+seraDose*XmFrame.XmForm.XmRowColumn.helpCascadeButton.fontList: -adobe-helvetica-bold-r-normal--14-*-*-*-p-*-iso8859-1
 seraDose*XmFrame.XmForm.XmRowColumn.helpCascadeButton.labelString: Help
 seraDose*XmFrame.XmForm.XmRowColumn.helpCascadeButton.mnemonic: H
-seraDose*XmFrame.XmForm.XmRowColumn.helpDismissCascadeButton.fontList: -adobe-helvetica-bold-r-normal--14-140-75-75-p-82-iso8859-1
+seraDose*XmFrame.XmForm.XmRowColumn.helpDismissCascadeButton.fontList: -adobe-helvetica-bold-r-normal--14-*-*-*-p-*-iso8859-1
 seraDose*XmFrame.XmForm.XmRowColumn.helpDismissCascadeButton.labelString: Dismiss
 seraDose*XmFrame.XmForm.XmRowColumn.helpDismissCascadeButton.mnemonic: D
-seraDose*XmFrame.XmForm.XmRowColumn.optionsCascadeButton.fontList: -adobe-helvetica-bold-r-normal--14-140-75-75-p-82-iso8859-1
+seraDose*XmFrame.XmForm.XmRowColumn.optionsCascadeButton.fontList: -adobe-helvetica-bold-r-normal--14-*-*-*-p-*-iso8859-1
 seraDose*XmFrame.XmForm.XmRowColumn.optionsCascadeButton.labelString: Options
 seraDose*XmFrame.XmForm.XmRowColumn.optionsCascadeButton.mnemonic: O
 seraDose*XmFrame.XmForm.XmRowColumn.XmMenuShell.analysisPulldownMenu.marginHeight: 2
@@ -237,7 +237,7 @@ seraDose*XmFrame.XmForm.XmRowColumn.XmMenuShell.XmRowColumn.contour_labels_optio
 seraDose*XmFrame.XmForm.XmRowColumn.XmMenuShell.XmRowColumn.contour_labels_options_pushbutton.mnemonic: a
 seraDose*XmFrame.XmForm.XmRowColumn.XmMenuShell.XmRowColumn.smoothPushButton.labelString: Smooth
 seraDose*XmFrame.XmForm.XmRowColumn.XmMenuShell.XmRowColumn.smoothPushButton.mnemonic: S
-seraDose*XmFrame.XmForm.XmScrolledWindow.helpMainWindowText.fontList: -adobe-courier-bold-r-normal--14-140-75-75-m-90-iso8859-1
+seraDose*XmFrame.XmForm.XmScrolledWindow.helpMainWindowText.fontList: -adobe-courier-bold-r-normal--14-*-*-*-m-*-iso8859-1
 seraDose*XmToggleButton*indicatorSize: 13
 seraDose*XmToggleButton*selectColor: red
 
