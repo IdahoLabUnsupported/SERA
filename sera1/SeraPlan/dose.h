@@ -28,7 +28,7 @@ typedef struct {
 
 typedef struct {
 
-   int       *nset;
+   int       nset;
    int       *nedit, *nedt, *iged;
 
    char      *geomfile, *bsg_file, *matfile, *sigmafile, *code_vers;

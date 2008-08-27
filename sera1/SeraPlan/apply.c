@@ -350,9 +350,9 @@ int initialize_rst ( Widget w, dose_struct *dose, dose_struct *dose_sum, int fra
 
    DEBUG_TRACE_IN printf("Entering initialize_rst\n");
 
-   if ( !*dose_sum->nset ) {
+   if ( !dose_sum->nset ) {
       DEBUG_TRACE_IN printf("First pass through - writing information\n");
-      *dose_sum->nset += *dose->nset;
+      dose_sum->nset += dose->nset;
       strcpy ( dose_sum->vers_stmp, dose->vers_stmp );
       strcpy ( dose_sum->title, dose->title );
       strcpy ( dose_sum->geomfile, dose->geomfile );
@@ -372,7 +372,7 @@ int initialize_rst ( Widget w, dose_struct *dose, dose_struct *dose_sum, int fra
 
    else {
       DEBUG_TRACE_IN printf("Subsequent passes through - comparing information\n");
-      *dose_sum->nset += *dose->nset;
+      dose_sum->nset += dose->nset;
       if ( strcmp (dose_sum->vers_stmp, dose->vers_stmp) ) {
          error = file_error ( w, field, frac, 7, dose_sum->vers_stmp, dose->vers_stmp );
          if ( error )
@@ -450,7 +450,7 @@ void set_rst ( dose_struct *dose, dose_struct *dose_sum, double weight )
 
    DEBUG_TRACE_IN printf("Entering set_rst\n");
 
-   for ( i = 0, j = *dose_sum->nset - *dose->nset; i < *dose->nset; i++, j++ ) {
+   for ( i = 0, j = dose_sum->nset - dose->nset; i < dose->nset; i++, j++ ) {
       strcpy ( dose_sum->sets[j].run_dir, dose->sets[i].run_dir );
       strcpy ( dose_sum->sets[j].date, dose->sets[i].date );
       *dose_sum->sets[j].rel_wt = *dose->sets[i].rel_wt * weight;
