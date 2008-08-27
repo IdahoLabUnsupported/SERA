@@ -228,8 +228,7 @@ void set_up_dose_mem ( dose_struct *dose, int num_sets )
 
    DEBUG_TRACE_IN printf ("Entering set_up_dose_mem\n");
 
-   dose->nset = (int *) MT_malloc ( sizeof ( int ) );
-   *dose->nset = 0;
+   dose->nset = 0;
 
    dose->nedit = (int *) MT_malloc ( sizeof ( int ) );
    dose->nedt = (int *) MT_malloc ( sizeof ( int ) );

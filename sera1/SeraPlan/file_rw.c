@@ -21,7 +21,7 @@ void read_rst_file ( dose_struct *dose, FILE *file, int *irr )
 
    *irr = 0;
 
-   fscanf ( file, "%4d%12s\n", dose->nset, dose->vers_stmp );
+   fscanf ( file, "%4d%12s\n", &dose->nset, dose->vers_stmp );
    fscanf ( file, "%80s\n", dose->plan_file_name );
    fscanf ( file, "%80c\n", dose->title );
    fscanf ( file, "%80s\n", dose->geomfile );
@@ -56,7 +56,7 @@ void read_rst_file ( dose_struct *dose, FILE *file, int *irr )
 
    DEBUG_TRACE_IN printf ("Reading calculation info for each field/fraction\n");
 
-   for ( i = 0; i < *dose->nset; i++ ) {
+   for ( i = 0; i < dose->nset; i++ ) {
       fscanf ( file, "%6c", dose->sets[i].run_dir );
       fscanf ( file, "%15c", dose->sets[i].date );
       fscanf ( file, "%15le", dose->sets[i].rel_wt );
@@ -163,7 +163,7 @@ void write_rst_file ( dose_struct *dose, FILE *file, int irr )
 
    DEBUG_TRACE_IN printf ("Entering write_rst_file\n");
 
-   fprintf ( file, "%4d%12.12s\n", *dose->nset, dose->vers_stmp );
+   fprintf ( file, "%4d%12.12s\n", dose->nset, dose->vers_stmp );
    bsize = strlen ( dose->plan_file_name ) - 1;
    for ( i = 0; i < bsize; i++ )
       fprintf ( file, "%c", dose->plan_file_name[i] );
@@ -231,7 +231,7 @@ void write_rst_file ( dose_struct *dose, FILE *file, int irr )
 
    DEBUG_TRACE_IN printf ("Writing info for each field/fraction\n");
 
-   for ( i = 0; i < *dose->nset; i++ ) {
+   for ( i = 0; i < dose->nset; i++ ) {
       fprintf ( file, "%6.6s", dose->sets[i].run_dir );
       fprintf ( file, "%15.15s", dose->sets[i].date );
       fprintf ( file, "%15e", *dose->sets[i].rel_wt );

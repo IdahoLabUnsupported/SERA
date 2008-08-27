@@ -828,7 +828,7 @@ void create_chd ( int plane, int num_planes, double zval, double *rbe, int ihead
        fprintf (chdfile, "ref_dose_8:      %13.5e\n", results->ref_dose[I_TF]);
  
        phi_old = theta_old = 1.0e+20;
-       for ( j=0, i = 0; i < *edit_dose->nset; i++ ) {
+       for ( j=0, i = 0; i < edit_dose->nset; i++ ) {
           if ( phi_old != *edit_dose->sets[i].phi || theta_old != *edit_dose->sets[i].theta ) {
              ang1[j] = phi_old = *edit_dose->sets[i].phi;
              ang2[j] = theta_old = *edit_dose->sets[i].theta;
@@ -2128,7 +2128,7 @@ void calc_norm_factors ( double *gnorm, double *nnorm, double delw )
  *  also sum weighted beam neutron components
  */
 
-    for ( ix = 0; ix < *edit_dose->nset; ix++ ) {
+    for ( ix = 0; ix < edit_dose->nset; ix++ ) {
        if ( edit_dose->sets[ix].run_dir[0] == 'N' || edit_dose->sets[ix].run_dir[0] == 'U') {
           exposure = *edit_dose->sets[ix].rel_wt;
           s_tot = *edit_dose->sets[ix].s_tot;
@@ -2492,7 +2492,7 @@ int perform_edits ( int isInteractive, Widget parent )
     read_rst_file ( edit_dose, editrst, &irr );
     fclose( editrst );
     nned = ( irr ? MAX_NNED : MAX_NNED-2 );
-    for ( oflag = k = 0; k < *edit_dose->nset; k++ ) {
+    for ( oflag = k = 0; k < edit_dose->nset; k++ ) {
        if ( strchr(edit_dose->sets[k].run_dir, 'U') || strchr(edit_dose->sets[k].run_dir, 'P') )
           oflag = 1;
     }
@@ -2703,7 +2703,7 @@ void calc_entry_points ()
  *  isocenter and the two angles
  */
 
-    for ( i = 0; i < *edit_dose->nset; i++ ) {
+    for ( i = 0; i < edit_dose->nset; i++ ) {
        theta = *edit_dose->sets[i].theta;
        phi = *edit_dose->sets[i].phi;
 
