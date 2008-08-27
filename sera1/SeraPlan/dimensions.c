@@ -230,7 +230,6 @@ void set_up_dose_mem ( dose_struct *dose, int num_sets )
 
    dose->nset = 0;
 
-   dose->nedit = (int *) MT_malloc ( sizeof ( int ) );
    dose->nedt = (int *) MT_malloc ( sizeof ( int ) );
    dose->iged = (int *) MT_malloc ( MAX_GROUPS * sizeof ( int ) );
 

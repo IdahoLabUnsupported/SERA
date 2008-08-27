@@ -283,7 +283,7 @@ float sum_dose ( dose_struct *dose, dose_struct *dose_sum, float exposure,
    float sgc=0.0, sgtot=0.0;
 
    DEBUG_TRACE_IN printf("Entering sum_dose\n");
-   nxyz = *dose->nedit;
+   nxyz = dose->nedit;
 
 /*
  *  Construct the weighting for the gamma dose - have to weight each field by the
@@ -364,7 +364,7 @@ int initialize_rst ( Widget w, dose_struct *dose, dose_struct *dose_sum, int fra
       *dose_sum->y0 = *dose->y0;
       *dose_sum->z0 = *dose->z0;
       *dose_sum->delw = *dose->delw;
-      *dose_sum->nedit = *dose->nedit;
+      dose_sum->nedit = dose->nedit;
       *dose_sum->nedt = *dose->nedt;
       for ( i = 0; i < *dose->nedt; i++ )
          dose_sum->iged[i] = dose->iged[i];
@@ -405,7 +405,7 @@ int initialize_rst ( Widget w, dose_struct *dose, dose_struct *dose_sum, int fra
       }
       if ( (*dose_sum->x0 != *dose->x0) || (*dose_sum->y0 != *dose->y0) ||
            (*dose_sum->z0 != *dose->z0) || (*dose_sum->delw != *dose->delw) ||
-           (*dose_sum->nedit != *dose->nedit) ) {
+           (dose_sum->nedit != dose->nedit) ) {
          error = file_error ( w, field, frac, 5, NULL, NULL );
          if ( error )
             return error;
@@ -746,7 +746,7 @@ void norm_dose ( dose_struct *dose, float gfactor, float factor, int nned )
 
    DEBUG_TRACE_IN printf("Entering norm_gam_dose\n");
 
-   nxyz = *dose->nedit;
+   nxyz = dose->nedit;
 
    for ( addr = 0, ix = 0; ix < nxyz; ix++ ) {
       for ( jy = 0; jy < nxyz; jy++ ) {
@@ -919,7 +919,7 @@ int combine_fields ( int isInteractive, Widget parent )
  *  normally does this (as for field dose) in read_rst_file
  */
             nned = ( irr ? MAX_NNED : MAX_NNED-2 );
-            bsize = *field_dose->nedit * *field_dose->nedit * *field_dose->nedit * nned;
+            bsize = field_dose->nedit * field_dose->nedit * field_dose->nedit * nned;
             if ( !plan_flag ) {
                plan_dose->bflux = (float *) MT_malloc ( bsize * sizeof(float) );
                plan_flag = 1;

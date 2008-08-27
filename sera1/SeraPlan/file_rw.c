@@ -40,7 +40,7 @@ void read_rst_file ( dose_struct *dose, FILE *file, int *irr )
    fscanf ( file, "%15le", dose->y0);
    fscanf ( file, "%15le", dose->z0);
    fscanf ( file, "%15le", dose->delw);
-   fscanf ( file, "%8d", dose->nedit);
+   fscanf ( file, "%8d", &dose->nedit);
    fscanf ( file, "%8d\n", dose->nedt);
    for ( i = 0; i < *dose->nedt; i++ ) {
       if ( (i+1)%10 && (i+1)%*dose->nedt )
@@ -131,7 +131,7 @@ void read_rst_file ( dose_struct *dose, FILE *file, int *irr )
    DEBUG_TRACE_IN printf ("Reading bflux array\n");
 
    nned = ( *irr ? MAX_NNED : MAX_NNED-2 );
-   bsize = *dose->nedit * *dose->nedit * *dose->nedit * nned;
+   bsize = dose->nedit * dose->nedit * dose->nedit * nned;
    dose->bflux = (float *) MT_malloc ( bsize * sizeof ( float ) );
    for ( i = 0; i < bsize; i++ ) {
       if ( (i+1)%6 && (i+1)%bsize )
@@ -215,7 +215,7 @@ void write_rst_file ( dose_struct *dose, FILE *file, int irr )
    fprintf ( file, "%15e", *dose->y0);
    fprintf ( file, "%15e", *dose->z0);
    fprintf ( file, "%15e", *dose->delw);
-   fprintf ( file, "%8d", *dose->nedit);
+   fprintf ( file, "%8d", dose->nedit);
    fprintf ( file, "%8d\n", *dose->nedt);
    for ( i = 0; i < *dose->nedt; i++ ) {
       if ( (i+1)%10 && (i+1)%*dose->nedt )
@@ -316,7 +316,7 @@ void write_rst_file ( dose_struct *dose, FILE *file, int irr )
    DEBUG_TRACE_IN printf ("Writing bflux array\n");
 
    nned = ( irr ? MAX_NNED : MAX_NNED-2 );
-   bsize = *dose->nedit * *dose->nedit * *dose->nedit * nned;
+   bsize = dose->nedit * dose->nedit * dose->nedit * nned;
    for ( i = 0; i < bsize; i++ ) {
       if ( (i+1)%6 && (i+1)%bsize )
          fprintf ( file, "%15e", dose->bflux[i] );
