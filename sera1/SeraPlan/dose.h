@@ -29,7 +29,7 @@ typedef struct {
 typedef struct {
 
    int       nset;
-   int       *nedit, *nedt, *iged;
+   int       nedit, *nedt, *iged;
 
    char      *geomfile, *bsg_file, *matfile, *sigmafile, *code_vers;
    char      *plan_file_name, *title, *vers_stmp;

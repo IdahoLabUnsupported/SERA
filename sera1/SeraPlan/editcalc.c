@@ -1395,7 +1395,7 @@ void compute_n_avg ( int num, double gnorm, double nnorm, body_struct *body, FIL
  */
 
     delw = *edit_dose->delw;
-    nedit = *edit_dose->nedit;
+    nedit = edit_dose->nedit;
     xmin = *edit_dose->x0 + 0.5*delw;
     xmax = *edit_dose->x0 + nedit*delw;
     ymin = *edit_dose->y0 + 0.5*delw;
@@ -1529,11 +1529,11 @@ int find_reference ( body_struct *body, double gnorm, double nnorm, FILE *fptr )
 
           delw = *edit_dose->delw;
           xmin = *edit_dose->x0 + 0.5 * delw;
-          xmax = xmin + *edit_dose->nedit * delw;
+          xmax = xmin + edit_dose->nedit * delw;
           ymin = *edit_dose->y0 + 0.5 * delw;
-          ymax = ymin + *edit_dose->nedit * delw;
+          ymax = ymin + edit_dose->nedit * delw;
           zmin = *edit_dose->z0 + 0.5 * delw;
-          zmax = zmin + *edit_dose->nedit * delw;
+          zmax = zmin + edit_dose->nedit * delw;
 
           rbe = assemble_rbe ( REF_RBE, 0 );
           boron = edit_data.ref_b10;
@@ -1729,7 +1729,7 @@ double *dose_interp ( double x, double y, double z, FILE *fptr, int iprt )
  *  Local copy of stuff used repeatedly
  */
     delw = *edit_dose->delw;
-    nedit = *edit_dose->nedit;
+    nedit = edit_dose->nedit;
 
 /*
  *  Find voxel containing (x,y,z) and check for existance in subelement mesh
@@ -2113,7 +2113,7 @@ void calc_norm_factors ( double *gnorm, double *nnorm, double delw )
  *  Sum gamma production over all voxels
  */
 
-    nxyz = *edit_dose->nedit;
+    nxyz = edit_dose->nedit;
     for ( addr = 0, ix = 0; ix < nxyz; ix++ ) {
        for ( jy = 0; jy < nxyz; jy++ ) {
           for ( kz = 0; kz < nxyz; addr += nned, kz++ ) {
