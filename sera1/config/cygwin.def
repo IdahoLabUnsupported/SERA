@@ -1,0 +1,24 @@
+#define FortranDebugFlags -O1
+#define StandardIncludes  -I/usr/X11R6/include -I$(TOP)/Shared/include
+#define ExtraLibraries    -L/usr/X11R6/lib -L$(TOP)/Shared/lib
+EXTRA_X_LIBS        = -lXmu -lXt -lSM -lICE -lXext -lXp -lXi -lX11
+
+XCOMM Location for libraries built withing the project.
+SERA_LIB_LOCATION   = $(TOP)/Shared/lib
+
+XCOMM Dependencies for the project libraries
+D_COMMON = $(SERA_LIB_LOCATION)/libcommon.a
+D_QSH    = $(SERA_LIB_LOCATION)/libqsh.a
+D_UV     = $(SERA_LIB_LOCATION)/libuv.a
+D_SZ     = $(SERA_LIB_LOCATION)/libsz.a
+D_NURB   = $(SERA_LIB_LOCATION)/libnurb.a
+D_DCM   = $(SERA_LIB_LOCATION)/libdcm.a
+
+DEFAULT_X_LIBS      = -lXm
+XCOMM DEFAULT_X_LIBS      = /usr/X11R6/lib/libXm.a
+
+GL_INCLUDES = -I/usr/include
+GL_LIBS             = -lGLwM -lGLU -lGL -lstdc++
+
+
+LIBUV_FLAGS         = -DTWO_UNDERSCORE
