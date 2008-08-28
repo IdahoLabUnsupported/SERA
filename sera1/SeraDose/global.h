@@ -298,7 +298,7 @@ externOrNot float CurConcs[];
 
 
 #ifdef DECLARATION
-  char scalable_font_name[50] = "-*-*-medium-r-normal-*-0-0-*-*-*-0-*-*";
+  char scalable_font_name[50] = "-*-*-medium-r-normal-*-0-0-*-*-*-0-*-1";
 #else
   extern char scalable_font_name[50];
 #endif /* DECLARATION */
