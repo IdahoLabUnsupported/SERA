@@ -6,7 +6,10 @@
  * ====================================================================
  */
 
-#include <values.h>
+/* #include <values.h> */
+#include <limits.h>
+
+#define MAXSHORT SHRT_MAX
 
 #define FALSE     0
 #define TRUE      ~FALSE
