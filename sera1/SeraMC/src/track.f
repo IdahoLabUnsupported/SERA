@@ -4643,7 +4643,7 @@ c-----------------------------------------------------------------------Glossary
       ELSE
          area = 0.04*ssize*srec
       ENDIF
-      nbatch1 = MAX(nbatch,nbatch*5*area)
+      nbatch1 = MAX(nbatch*5*area,real(nbatch))
       e_ult_low = 16.9D+06
       nlost = 0                                                         ver 1.17
       IF(inog .EQ. 12) GO TO 30                                         trac  23
