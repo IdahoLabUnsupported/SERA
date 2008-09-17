@@ -2135,7 +2135,7 @@ c used here is to preserve slope of the voxel values
 c  check to see if rate in bounds for iact = 2,12,n_act+1
       IF(iact .EQ. 2 .OR. iact .EQ. (n_act+1) .OR. iact .EQ. 12) THEN   27May98
         rate_max = 0.0                                                  27May98
-        rate_min = 1.0E99                                               27May98
+        rate_min = huge(rate_min)                                       27May98
         DO 29 ii = i1,i2                                                27May98
         DO 29 jj = j1,j2                                                27May98
         DO 29 kk = k1,k2                                                27May98
