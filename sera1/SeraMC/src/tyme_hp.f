@@ -7,7 +7,7 @@ C RETURN ELAPSED TIME SINCE PROBLEM START                               TIMS   3
 C INITIALIZE THE TIMER                                                  TIMS   4
       COMMON /tyme/ time1,time2                                         TIMS   5
                                                                         TIMS   6
-      tnow = cputime()                                                  TIMS   7
+      call cpu_time(tnow)                                               TIMS   7
       time1 = tnow                                                      TIMS   8
       PRINT *,' in timset time1 = ',time1                               TIMS   9
       time2 = 0.0                                                       TIMS  10
@@ -21,7 +21,7 @@ c RETURN DELTA TIME SINCE LAST CALL (SECONDS)                           time   2
       IMPLICIT DOUBLE PRECISION(a-h,o-z)                                time   3
                                                                         time   4
       COMMON /tyme/ time1,time2                                         time   5
-      tnow = cputime()                                                  time   6
+      call cpu_time(tnow)                                               time   6
       time2 = tnow                                                      time   7
       xtime = time2 - time1                                             time   8
       time1 = time2                                                     time   9
