@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #define OP_CREATE	0	/* open the file by truncation or creation */
 #define OP_APPEND	1	/* just append (don't open or close) */
