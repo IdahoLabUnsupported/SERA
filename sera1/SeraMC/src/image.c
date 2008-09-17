@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 /*****************************************************************
  *			N U L L _ F77_ S T R I N G
