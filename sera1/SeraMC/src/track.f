@@ -447,7 +447,7 @@ c-----------------------------------------------------------------------Glossary
       DO 900 ihist=1,nhist                                              trac  31
 c reinitialize random no. generator to minimize correlation
       DO 11 i=1,nrejec
-  11  CALL randii(k,9)
+  11  CALL randii(k)
                                                                         trac  32
 c Retrieve source parameters                                            trac  33
         j = 1 + len_one*(ihist-1)                                       trac  34
@@ -1120,7 +1120,7 @@ c-----------------------------------------------------------------------Glossary
       DO 900 ihist=1,nhist                                              trac  31
 c reinitialize random no. generator to minimize correlation
       DO 11 i=1,nrejec
-  11  CALL randii(k,9)
+  11  CALL randii(k)
                                                                         trac  32
 c Retrieve source parameters                                            trac  33
         j = 1 + len_one*(ihist-1)                                       trac  34
@@ -2120,7 +2120,7 @@ c-----------------------------------------------------------------------Glossary
       DO 900 ihist=1,nhist2                                             
 c reinitialize random no. generator to minimize correlation
       DO 11 i=1,nrejec
-  11  CALL randii(k,9)
+  11  CALL randii(k)
                                                                         
 c Retrieve source parameters                                            
         j = 1 + len_one*(ihist-1)                                       
@@ -3961,7 +3961,7 @@ c     WRITE(6,9000)                                                      DEBUG
       DO 900 ihist=1,nhist
 c reinitialize random no. generator to minimize correlation
       DO 11 i=1,nrejec
-  11  CALL randii(k,9)
+  11  CALL randii(k)
 c reset inog to ultrafast mode
         inog = 11
         ig = 0
@@ -4946,7 +4946,7 @@ c-----------------------------------------------------------------------Glossary
       DO 900 ihist=1,nhist
 c reinitialize random no. generator to minimize correlation
       DO 11 i=1,nrejec
-  11  CALL randii(k,9)
+  11  CALL randii(k)
 
 c Retrieve source parameters
         j = 1 + len_one*(ihist-1)

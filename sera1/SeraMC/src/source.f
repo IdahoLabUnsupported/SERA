@@ -102,7 +102,7 @@ c only use last digit of irand_num for rejec scheme
       nrejec = irand_num -10*nrejec
 c     PRINT *,' nrejec = ',nrejec
       DO 7000 i=1,nrejec
-      CALL randii(k,mexp)                                               read  12
+      CALL randii(k)                                                    read  12
       CALL randr(ra)                                                    read  13
  7000 CONTINUE                                                          read  14
 c-INITIALIZE TO REDUCE CORRELATION                                      read  15
