@@ -835,7 +835,7 @@ c                                                                       part   1
      * ,xfield(7,nfmax)
 
                                                                         outp  17
-       COMMON /RANVAR/ cons,icon2, iy, numran                           outp  18
+c      COMMON /RANVAR/ cons,icon2, iy, numran                           outp  18
 
 c-----------------------------------------------------------------------Glossary
 c        b10_dens   booron-10 density (atoms/cc) 1ppm= 6.01436E-08      Glossary
@@ -877,8 +877,9 @@ c        zp         target point                                        Glossary
 c-----------------------------------------------------------------------Glossary
  
 c Determine next seed in random no. generator                           outp  19
-         CALL randr(ra)                                                 outp  20
-         irand_num = iy                                                 outp  21
+c        CALL randr(ra)                                                 outp  20
+c        irand_num = iy                                                 outp  21
+         call randi(irand_num)
                                                                         outp  22
 c Normalize fluxes and write remainder of .rst file                     outp  23
                                                                         outp  24
@@ -899,7 +900,7 @@ c Normalize fluxes and write remainder of .rst file                     outp  23
 
          WRITE(6,100) run_dir,run_date,rel_weight,wn0,s_tot             outp  36
      *   ,num_neut_hist,num_gam_hist,num_fast_hist,num_prot_hist        outp  37
-     *   ,gam_ratio,sourcefile,irand_num,numran                         outp  38
+     *   ,gam_ratio,sourcefile,irand_num,0                              outp  38
   100   FORMAT(//,5X,'run_dir             = ',A6                        outp  39
      *         //,5X,'run_date            = ',A15                       outp  40
      *         //,5X,'rel_weight          = ',1P,D15.5                  outp  41
