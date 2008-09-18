@@ -39,12 +39,10 @@ c*************************************************************
 c-RANDOM NUMBER GENERATOR BASED ON F. JAMES PRESCRIPTION (Rep. Prog. PhyRAND   7
 c Vol. 43, 1980)                                                        RAND   8
        COMMON /RANVAR/ cons,icon2, iy                                   RAND   9
-        DATA mask/O'17777777777'/                                       RAND  10
-        iy = iy*69069                                                   RAND  11
-        iy = IAND(iy,mask)                                              RAND  12
 c-ZERO OUT LAST 8 BITS FOR FLOATING POINT CONVERSION CAN PROBABLY USE   RAND  13
 c FLOAT FUNCTION TO SAVE TIME                                           RAND  14
-        jy = (iy/256)*256                                               RAND  15
+        CALL randi(jy)
+        jy = (jy/256)*256                                               RAND  15
         yfl = jy                                                        RAND  16
         ra = yfl*cons                                                   RAND  17
         RETURN                                                          RAND  18
@@ -56,10 +54,8 @@ c-RETURN RANDOM INTEGER FROM 1 TO 2**NR                                 RAND  22
       IMPLICIT INTEGER*4 (i-n)                                          RAND  24
                                                                         RAND  25
        COMMON /RANVAR/ cons,icon2, iy                                   RAND  26
-        DATA mask/O'17777777777'/                                       RAND  27
-        iy = iy*69069                                                   RAND  28
-        iy = IAND(iy,mask)                                              RAND  29
-        in = iy/icon2                                                   RAND  30
+        CALL randi(in)
+        in = in/icon2                                                   RAND  30
          RETURN                                                         RAND  31
          END                                                            RAND  32
 c*************************************************************          RAND  33
@@ -73,7 +69,7 @@ c-RETURN RANDOM INTEGER FROM 1 TO 2**31-1                               RAND  35
         iy = iy*69069                                                   RAND  41
         iy = IAND(iy,mask)                                              RAND  42
         in = iy                                                         RAND  43
-        print*,'random seed from RANDI = ',in                           RAND  44
+c       print*,'random seed from RANDI = ',in                           RAND  44
          RETURN                                                         RAND  45
          END                                                            RAND  46
 c*************************************************************          RAND  47
