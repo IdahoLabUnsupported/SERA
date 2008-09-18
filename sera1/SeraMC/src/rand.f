@@ -50,7 +50,7 @@ c FLOAT FUNCTION TO SAVE TIME                                           RAND  14
         RETURN                                                          RAND  18
         END                                                             RAND  19
 c*************************************************************          RAND  20
-      SUBROUTINE RANDII(in,nr)                                          RAND  21
+      SUBROUTINE RANDII(in)                                             RAND  21
 c-RETURN RANDOM INTEGER FROM 1 TO 2**NR                                 RAND  22
       IMPLICIT REAL*4 (a-h,o-z)                                         RAND  23
       IMPLICIT INTEGER*4 (i-n)                                          RAND  24
