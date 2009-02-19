@@ -1,0 +1,12 @@
+Optic_chiasm
+Skin_center_beam
+Skin_edge1_beam
+Skin_edge2_beam
+Left_ear
+Right_ear
+Left_eye
+Right_eye
+Pituitary_gland
+Left_salivary_gland
+Right_salivary_gland
+
