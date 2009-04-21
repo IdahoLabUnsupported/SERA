@@ -1,0 +1,251 @@
+* 11 Jan 1999: body_data for some ICRU46 materials for BPA
+
+begin: brain
+ matname: brain_ICRU_46_adult_10ppm
+ boron_CF:          1.3
+ gamma_RBE:         1.0
+ nitrogen_RBE:      3.2
+ nitrogen_DENS:     2.2
+ recoil_RBE:        1.0
+ hydrogen_RBE:      3.2
+ hydrogen_DENS:     10.7
+ other_RBE:         1.0
+ ultrafast_RBE:     1.0
+ carbon_DENS:       14.5
+ oxygen_DENS:       71.2
+ tissue_to_blood:   1.0
+ maximum_dose:      12.6
+ constraint_dose:   7.5
+end: brain
+
+begin: brain_left
+ matname: brain_ICRU_46_adult_10ppm
+ boron_CF:          1.3
+ gamma_RBE:         1.0
+ nitrogen_RBE:      3.2
+ nitrogen_DENS:     2.2
+ recoil_RBE:        1.0
+ hydrogen_RBE:      3.2
+ hydrogen_DENS:     10.7
+ other_RBE:         1.0
+ ultrafast_RBE:     1.0
+ carbon_DENS:       14.5
+ oxygen_DENS:       71.2
+ tissue_to_blood:   1.0
+ maximum_dose:      12.6
+ constraint_dose:   7.5
+end: brain_left
+
+begin: brain_right
+ matname: brain_ICRU_46_adult_10ppm
+ boron_CF:          1.3
+ gamma_RBE:         1.0
+ nitrogen_RBE:      3.2
+ nitrogen_DENS:     2.2
+ recoil_RBE:        1.0
+ hydrogen_RBE:      3.2
+ hydrogen_DENS:     10.7
+ other_RBE:         1.0
+ ultrafast_RBE:     1.0
+ carbon_DENS:       14.5
+ oxygen_DENS:       71.2
+ tissue_to_blood:   1.0
+ maximum_dose:      12.6
+ constraint_dose:   7.5
+end: brain_right
+
+begin: target
+ matname: brain_ICRU_46_adult_10ppm
+ boron_CF:          3.8
+ gamma_RBE:         1.0
+ nitrogen_RBE:      3.2
+ nitrogen_DENS:     2.2
+ recoil_RBE:        1.0
+ hydrogen_RBE:      3.2
+ hydrogen_DENS:     10.7
+ other_RBE:         1.0
+ ultrafast_RBE:     1.0
+ carbon_DENS:       14.5
+ oxygen_DENS:       71.2
+ tissue_to_blood:   3.5
+ maximum_dose:    999.9
+ constraint_dose:  17.0
+end: target
+
+begin: tumor
+ matname: brain_ICRU_46_adult_10ppm
+ boron_CF:          3.8
+ gamma_RBE:         1.0
+ nitrogen_RBE:      3.2
+ nitrogen_DENS:     2.2
+ recoil_RBE:        1.0
+ hydrogen_RBE:      3.2
+ hydrogen_DENS:     10.7
+ other_RBE:         1.0
+ ultrafast_RBE:     1.0
+ carbon_DENS:       14.5
+ oxygen_DENS:       71.2
+ tissue_to_blood:   3.5
+ maximum_dose:    999.9
+ constraint_dose:  30.0
+end: tumor
+
+begin: edema
+ matname: brain_ICRU_46_adult_10ppm
+ boron_CF:          3.8
+ gamma_RBE:         1.0
+ nitrogen_RBE:      3.2
+ nitrogen_DENS:     2.2
+ recoil_RBE:        1.0
+ hydrogen_RBE:      3.2
+ hydrogen_DENS:     10.7
+ other_RBE:         1.0
+ ultrafast_RBE:     1.0
+ carbon_DENS:       14.5
+ oxygen_DENS:       71.2
+ tissue_to_blood:   3.5
+ maximum_dose:    999.9
+ constraint_dose:  30.0
+end: edema
+
+begin: sinus
+ matname: void_edit
+ boron_CF:          1.0
+ gamma_RBE:         1.0
+ nitrogen_RBE:      3.2
+ nitrogen_DENS:     0.0
+ recoil_RBE:        1.0
+ hydrogen_RBE:      3.2
+ hydrogen_DENS:     0.0
+ other_RBE:         1.0
+ ultrafast_RBE:     1.0
+ carbon_DENS:       0.0
+ oxygen_DENS:       0.0
+ tissue_to_blood:   0.0
+ maximum_dose:    999.9
+end: sinus
+
+begin: ventricles
+ matname: H2O
+ boron_CF:          1.0
+ gamma_RBE:         1.0
+ nitrogen_RBE:      3.2
+ nitrogen_DENS:     0.0
+ recoil_RBE:        1.0
+ hydrogen_RBE:      3.2
+ hydrogen_DENS:     10.7
+ other_RBE:         1.0
+ ultrafast_RBE:     1.0
+ carbon_DENS:       14.5
+ oxygen_DENS:       71.2
+ tissue_to_blood:   0.0
+ maximum_dose:    999.9
+end: ventricles
+
+begin: eye_left
+ matname: eye_lens_ICRU46_adult
+ boron_CF:          1.3
+ gamma_RBE:         1.0
+ nitrogen_RBE:      3.2
+ nitrogen_DENS:     5.7
+ recoil_RBE:        1.0
+ hydrogen_RBE:      3.2
+ hydrogen_DENS:     9.6 
+ other_RBE:         1.0
+ ultrafast_RBE:     1.0
+ carbon_DENS:       19.5
+ oxygen_DENS:       64.6
+ tissue_to_blood:   1.0
+ maximum_dose:     20.0
+ constraint_dose:  20.0
+end: eye_left
+
+begin: eye_right
+ matname: eye_lens_ICRU46_adult
+ boron_CF:          1.3
+ gamma_RBE:         1.0
+ nitrogen_RBE:      3.2
+ nitrogen_DENS:     5.7
+ recoil_RBE:        1.0
+ hydrogen_RBE:      3.2
+ hydrogen_DENS:     9.6 
+ other_RBE:         1.0
+ ultrafast_RBE:     1.0
+ carbon_DENS:       19.5
+ oxygen_DENS:       64.6
+ tissue_to_blood:   1.0
+ maximum_dose:     20.0
+ constraint_dose:  20.0
+end: eye_right
+
+begin: skull
+ matname: skeleton-cranium_ICRU_46
+ boron_CF:          1.0
+ gamma_RBE:         1.0
+ nitrogen_RBE:      3.2
+ nitrogen_DENS:     4.0  
+ recoil_RBE:        1.0
+ hydrogen_RBE:      3.2
+ hydrogen_DENS:     5.00
+ other_RBE:         1.0
+ ultrafast_RBE:     1.0
+ carbon_DENS:       21.2
+ oxygen_DENS:       43.5
+ tissue_to_blood:   0.0
+ maximum_dose:     20.0
+ constraint_dose:  20.0
+end: skull
+
+begin: scalp
+ matname: skin_ICRU_46_adult_10ppm
+ boron_CF:          1.3
+ gamma_RBE:         1.0
+ nitrogen_RBE:      3.2
+ nitrogen_DENS:     4.20
+ recoil_RBE:        1.0
+ hydrogen_RBE:      3.2
+ hydrogen_DENS:     10.00
+ other_RBE:         1.0
+ ultrafast_RBE:     1.0
+ carbon_DENS:       20.4
+ oxygen_DENS:       64.5
+ tissue_to_blood:   1.0
+ maximum_dose:     20.0
+ constraint_dose:  20.0
+end: scalp
+
+begin: optical_chiasm
+ matname: brain_ICRU_46_adult_10ppm
+ boron_CF:          1.3
+ gamma_RBE:         1.0
+ nitrogen_RBE:      3.2
+ nitrogen_DENS:     2.2
+ recoil_RBE:        1.0
+ hydrogen_RBE:      3.2
+ hydrogen_DENS:     10.7
+ other_RBE:         1.0
+ ultrafast_RBE:     1.0
+ carbon_DENS:       14.5
+ oxygen_DENS:       71.2
+ tissue_to_blood:   1.0
+ maximum_dose:      12.6
+ constraint_dose:   7.5
+end: optical_chiasm
+
+begin: Basal_Ganglia
+ matname: brain_ICRU_46_adult_10ppm
+ boron_CF:          1.3
+ gamma_RBE:         1.0
+ nitrogen_RBE:      3.2
+ nitrogen_DENS:     2.2
+ recoil_RBE:        1.0
+ hydrogen_RBE:      3.2
+ hydrogen_DENS:     10.7
+ other_RBE:         1.0
+ ultrafast_RBE:     1.0
+ carbon_DENS:       14.5
+ oxygen_DENS:       71.2
+ tissue_to_blood:   1.0
+ maximum_dose:      12.6
+ constraint_dose:   7.5
+end: Basal_Ganglia
