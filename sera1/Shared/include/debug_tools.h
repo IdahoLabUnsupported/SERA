@@ -108,7 +108,7 @@ typedef struct {
     Boolean debugMemory;
 
 } DebugOptionsStruct;
-DebugOptionsStruct debugData;
+extern DebugOptionsStruct debugData;
 
 /* Create the debugging resources */
 static XtResource resources[] = 

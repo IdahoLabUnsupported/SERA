@@ -12,6 +12,8 @@
 #include "keyval_tools.h"
 #include "debug_tools.h"
 
+
+DebugOptionsStruct debugData;
 /*
  * sets the values in the structure debugData by calling
  * XtGetApplicationResources.  If -debug_all is set, then

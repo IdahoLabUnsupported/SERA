@@ -22,6 +22,7 @@
 
 #include "libhelp.h"
 
+char pref_string[256];
 /*** Bitmap Question Mark ***/
 #define question_width 60
 #define question_height 60
