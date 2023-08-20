@@ -64,6 +64,6 @@
 void ContextHelpCallback( Widget w, XtPointer clientData, XtPointer callData );
 void set_preference_directory( char * pref );
 
-char pref_string[256];
+extern char pref_string[256];
 
 #endif
