@@ -107,7 +107,7 @@ c
       dimension sigsin(nhen,nmix), sigabs(nhen,nmix), ener(nhen,niso)
       dimension aa(niso), skerma(nhen,nmix), xs(lenxs,niso)
       dimension tot(nhen,niso), sct(nhen,niso), sin(nhen,niso)
-      dimension aw(16), ukerma(nhen,nmix)
+      dimension aw(16), ukerma(nhen,nmix), dens(niso,nmix)
       dimension abs(nnen,nniso), ht(nnen,nniso)
       character*10 hz, hd, hm, hname
       character*70 hk
