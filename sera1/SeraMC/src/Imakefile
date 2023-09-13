@@ -4,7 +4,7 @@ LIBS = $(TOP)/Shared/lib/libuv.a $(TOP)/Shared/lib/libsz.a
 SRCS = \
 cg.f scatter.f rand.f source.f  epmc.f \
 image.c Tlook.f DoseOpt.f ultraxs.f \
-tyme_hp.f cputime.c envr.c mod_date.f \
+tyme_hp.f envr.c mod_date.f \
 track.f locate.f rtt_MC.f rst_edit.f volume.f \
 libin.f fund.f gampro.f proptd.f write_row.c \
 read_row.c file.c blkdata.f
@@ -12,7 +12,7 @@ read_row.c file.c blkdata.f
 OBJS = \
 cg.o scatter.o rand.o source.o  epmc.o \
 image.o Tlook.o DoseOpt.o ultraxs.o \
-tyme_hp.o cputime.o envr.o mod_date.o \
+tyme_hp.o envr.o mod_date.o \
 track.o locate.o rtt_MC.o rst_edit.o volume.o \
 libin.o fund.o gampro.o proptd.o write_row.o \
 read_row.o file.o blkdata.o
