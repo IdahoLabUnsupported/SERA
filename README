@@ -1,0 +1,47 @@
+Simulation Environment for Radiotherapy Applications
+
+This version of SERA is based on the Sera 1C1 release with changes to
+only include code that can be open sourced.
+
+WARNING:
+
+SERA was last tested over a decade ago with 32 bit machines and the
+compilers at the time. SERA also has had changes to remove previous
+versions of xmgr and libnurb from brlcad as the previous versions
+could not be distributed as open source. Use with current compilers
+has not been tested.
+
+Included code Authored by Others:
+
+
+SeraDose/convenience.c
+
+Written by GROUPE BULL with license in file.
+
+
+Shared/include/Zlib
+Shared/lib/libSZ
+
+Written by Jean-loup Gailly and Mark Adler with license in files.
+
+
+Docs/Manuals/cgi-bin/cgi-lib.pl
+Docs/Manuals/search/cgi-bin/cgi-lib.pl
+Docs/Manuals/sera1/FeedBack/cgi-bin/cgi-lib.pl
+
+Written by Steven E. Brenner with license in files.
+
+
+SeraModel/MenuSupport.c
+SeraModel/MenuSupport.h
+
+Include code written by Douglas Young with license in files.
+
+
+SeraPlan/pixmaps/xm_hour32
+SeraPlan/pixmaps/xm_hour32m
+config/Motif.rules
+config/Motif.tmpl
+
+Include code written by Open Software Foundation, Inc under the Open
+Motif license http://www.opengroup.org/openmotif/license
