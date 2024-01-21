@@ -1,0 +1,21 @@
+SRCS = nurb_knot.c nurb_refine.c oslo_calc.c nurb_util.c badmagic.c bomb.c \
+oslo_map.c
+
+
+OBJS = nurb_knot.o nurb_refine.o oslo_calc.o nurb_util.o badmagic.o bomb.o \
+oslo_map.o
+
+# 
+# The DSINGLE flag triggers single precision usage for the "fastest
+# float" (fastf_t) data type defined by the ARL libraries.
+#
+DEFINES     = -DDOUBLE
+LIBLOCATION = $(SERA_LIB_LOCATION)
+LIB_NAME    = nurb
+
+SYS_LIBRARIES = MathLibrary
+
+NormalLibraryObjectRule()
+NormalLibraryTarget($(LIB_NAME),$(OBJS))
+InstallLibrary($(LIB_NAME),$(LIBLOCATION))
+DependTarget()
