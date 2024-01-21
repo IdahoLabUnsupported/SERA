@@ -640,8 +640,8 @@ int readSplinesForUnivels ( main_gui_t *gui, geom_info_t *geom_ptr, char *fname_
     float *ctl_pts;
     struct knot_vector refine_kv;
 
-    struct cnurb curve;
-    struct cnurb *new_curve;
+    struct edge_g_cnurb curve;
+    struct edge_g_cnurb *new_curve;
     int curve_order, curve_type;
 
     /*** for reading unwanted info ***/
@@ -797,20 +797,20 @@ int readSplinesForUnivels ( main_gui_t *gui, geom_info_t *geom_ptr, char *fname_
 
 	    /*** init the # of knots ***/
 	   
-      	    curve.knot.k_size = (num_ctlpts+1)+(curve.order -1)*2;
-	    curve.knot.knots = (fastf_t *)malloc(sizeof(fastf_t)*
-						 curve.knot.k_size);
+      	    curve.k.k_size = (num_ctlpts+1)+(curve.order -1)*2;
+	    curve.k.knots = (fastf_t *)malloc(sizeof(fastf_t)*
+						 curve.k.k_size);
 	    /** make room for the knots **/
 
 	    /*** first build the knot vector (rebuild) ***/
-            for ( k = 0; k < curve.knot.k_size; k++ )
+            for ( k = 0; k < curve.k.k_size; k++ )
             { 
-                curve.knot.knots[k] = knots[k] = (float) (k-2);
+                curve.k.knots[k] = knots[k] = (float) (k-2);
             }
 
 	    /** next  build the new knot_vector **/
             rt_nurb_kvknot ( &refine_kv, curve.order, 0.0,
-                             curve.knot.knots[curve.knot.k_size - curve.order],
+                             curve.k.knots[curve.k.k_size - curve.order],
                              num_knots * fineness );
 
             /***** refine the curve *****/
@@ -878,10 +878,10 @@ int readSplinesForUnivels ( main_gui_t *gui, geom_info_t *geom_ptr, char *fname_
       	    free ( knots );
 
             free ( curve.ctl_points);
-            free ( curve.knot.knots);
+            free ( curve.k.knots);
 
             free ( new_curve->ctl_points );
-            free ( new_curve->knot.knots );
+            free ( new_curve->k.knots );
 
             free ( new_curve );
 
