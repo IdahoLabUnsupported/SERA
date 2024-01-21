@@ -1,7 +1,7 @@
 #define IHaveSubdirs
 #define PassCDebugFlags 'CDEBUGFLAGS=$(CDEBUGFLAGS)'
 
-SUBDIRS = DVall SeraConvert Simplot display position xmgr-3.01
+SUBDIRS = DVall SeraConvert Simplot display position
 
 MakeSubdirs($(SUBDIRS))
 DependSubdirs($(SUBDIRS))
