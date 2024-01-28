@@ -100,52 +100,6 @@ bu_bomb(const char *str)
 	fprintf(stderr, "\n");
 	fflush(stderr);
 
-	/* MGED would like to be able to additional logging, do callbacks. */
-	if (BU_LIST_NON_EMPTY(&bu_bomb_hook_list.l)) {
-		bu_call_hook(&bu_bomb_hook_list, (genptr_t)str);
-	}
-
-	if( bu_setjmp_valid )  {
-		/* Application is catching fatal errors */
-		if( bu_is_parallel() )  {
-			fprintf(stderr,"bu_bomb(): in parallel mode, could not longjmp up to application handler\n");
-		} else {
-			/* Application is non-parallel, so this is safe */
-			fprintf(stderr,"bu_bomb(): taking longjmp up to application handler\n");
-#if __STDC__
-			longjmp( (void *)(bu_jmpbuf), 1 );
-#else
-			longjmp( (int *)(bu_jmpbuf), 1 );
-#endif
-			/* NOTREACHED */
-		}
-	}
-
-#if defined(HAVE_UNIX_IO)
-	/*
-	 * No application level error handling,
-	 * go to extra pains to ensure that user gets to see this message.
-	 * For example, mged hijacks output sent to stderr.
-	 */
-	{
-		int	fd = open("/dev/tty", 1);
-		if( fd >= 0 )  {
-			write( fd, str, strlen(str) );
-			close(fd);
-		}
-	}
-#endif
-
-	/* If in parallel mode, try to signal the leader to die. */
-	bu_kill_parallel();
-
-	if( bu_debug & BU_DEBUG_COREDUMP )  {
-		fprintf(stderr,"bu_bomb causing intentional core dump due to debug flag\n");
-		fflush(stdout);
-		fflush(stderr);
-		abort();	/* should dump if ulimit is non-zero */
-	}
-
 	exit(12);
 }
 /** @} */

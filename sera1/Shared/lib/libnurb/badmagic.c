@@ -68,10 +68,10 @@ bu_badmagic(const long int *ptr, unsigned long int magic, const char *str, const
 		bu_bomb(buf);
 	}
 	if( *(ptr) != (long int)(magic) )  {
-		sprintf(buf, "ERROR: bad pointer x%lx: s/b %s(x%lx), was %s(x%lx), file %s, line %d\n",
+		sprintf(buf, "ERROR: bad pointer x%lx: s/b %s(x%lx), was (x%lx), file %s, line %d\n",
 			(long)ptr,
 			str, magic,
-			bu_identify_magic( *(ptr) ), *(ptr),
+			*(ptr),
 			file, line );
 		bu_bomb(buf);
 	}
