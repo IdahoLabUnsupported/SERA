@@ -67,6 +67,7 @@ __BEGIN_DECLS
 
 /* interface headers */
 #include <setjmp.h>
+#include <stdlib.h>
 #include "machine.h"	/* required for fastf_t, genptr_t */
 #include "tcl.h"	/* Included for Tcl_Interp definition */
 
@@ -1966,6 +1967,7 @@ BU_EXPORT BU_EXTERN(const char *bu_identify_magic,
 /** @{ */
 
 /* malloc.c */
+/*
 BU_EXPORT extern long		bu_n_malloc;
 BU_EXPORT extern long		bu_n_free;
 BU_EXPORT extern long		bu_n_realloc;
@@ -2001,6 +2003,9 @@ BU_EXPORT BU_EXTERN(void bu_ck_malloc_ptr,
 		    (genptr_t ptr, const char *str));
 BU_EXPORT BU_EXTERN(int	bu_mem_barriercheck,
 		    ());
+*/
+#define bu_malloc(size, text) malloc((size))
+#define bu_free(ptr, text) free((ptr))
 
 /** @} */
 /** @addtogroup mf */
