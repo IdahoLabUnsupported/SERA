@@ -2006,6 +2006,9 @@ BU_EXPORT BU_EXTERN(int	bu_mem_barriercheck,
 */
 #define bu_malloc(size, text) malloc((size))
 #define bu_free(ptr, text) free((ptr))
+#define bu_calloc(nmemb, size, text) calloc((nmemb), (size))
+#define rt_bomb bu_bomb
+#define bu_log(...) 
 
 /** @} */
 /** @addtogroup mf */
