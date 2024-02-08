@@ -53,3 +53,15 @@ cd /usr/local/mesa4/include
 ln -s GL GLw
 
 #All done.
+
+
+#Notes for compiling with newer compiler (circa 2024)
+
+For SeraModel, add -fcommon to CCOPTIONS
+
+For SeraMC, Change FC to gfortran,
+and add compiler flags to FDEBUGFLAGS:
+--d-lines-as-comments -std=legacy
+
+Adjust LIBUV_FLAGS in Shared/lib/libuv/Makefile
+to -DONE_UNDERSCORE if needed.
