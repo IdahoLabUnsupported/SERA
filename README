@@ -13,6 +13,12 @@ has not been tested.
 
 Included code Authored by Others:
 
+Shared/lib/libnurb
+
+Code written by U.S. Army Research Laboratory
+licensed under the terms of the GNU Lesser General Public License
+version 2.1 as published by the Free Software Foundation.
+
 
 SeraDose/convenience.c
 
