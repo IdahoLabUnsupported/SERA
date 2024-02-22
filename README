@@ -11,6 +11,11 @@ versions of xmgr and libnurb from brlcad as the previous versions
 could not be distributed as open source. Use with current compilers
 has not been tested.
 
+This repository is not being developed.
+Check the forks https://github.com/IdahoLabUnsupported/SERA/forks
+and the wiki https://github.com/IdahoLabUnsupported/SERA/wiki
+for possible new development.
+
 Included code Authored by Others:
 
 Shared/lib/libnurb
