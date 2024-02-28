@@ -16,6 +16,13 @@ Check the forks https://github.com/IdahoLabUnsupported/SERA/forks
 and the forked repository https://github.com/jrincayc/SERA
 for possible new development.
 
+Some compiling documentation is available in:
+sera1/Readme.build and sera1/ImakeREADME
+
+The user manual is:
+sera1/Docs/Manuals/Sera1C0_manual.pdf
+
+
 Included code Authored by Others:
 
 Shared/lib/libnurb
